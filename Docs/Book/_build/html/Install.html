@@ -1,0 +1,613 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Installation &#8212; The RDKit 2017.09.2 ドキュメント</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.09.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Getting Started with the RDKit in Python" href="GettingStartedInPython.html" />
+    <link rel="prev" title="An overview of the RDKit" href="Overview.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="GettingStartedInPython.html" title="Getting Started with the RDKit in Python"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="Overview.html" title="An overview of the RDKit"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">目次</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">An overview of the RDKit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cross-platform-under-anaconda-python-fastest-install">Cross-platform under anaconda python (fastest install)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction-to-anaconda">Introduction to anaconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-get-conda">How to get conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-install-rdkit-with-conda">How to install RDKit with Conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-build-from-source-with-conda">How to build from source with Conda</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#macos-10-12-sierra-python-3-environment">macOS 10.12 (Sierra): Python 3 environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-and-using-postgresql-and-the-rdkit-postgresql-cartridge-from-a-conda-environment">Installing and using PostgreSQL and the RDKit PostgreSQL cartridge from a conda environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linux-and-os-x">Linux and OS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-from-repositories">Installation from repositories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ubuntu-12-04-and-later">Ubuntu 12.04 and later</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fedora-centos-and-rhel">Fedora, CentOS, and RHEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#os-x">OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-from-source">Building from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-rdkit">Building the RDKit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-build-optional-but-recommended">Testing the build (optional, but recommended)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced">Advanced</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frequently-encountered-problems">Frequently Encountered Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#recommended-extras">Recommended extras</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-of-rdkit-binaries">Installation of RDKit binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-from-source">Installation from source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#extra-software-to-install">Extra software to install</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-and-preparation">Setup and Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-from-the-command-line-recommended">Building from the command line (recommended)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-build-optional-but-recommended">Testing the Build (optional, but recommended)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RDKit_Book.html">The RDKit Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cookbook.html">RDKit Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a></li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="Overview.html"
+                        title="前の章へ">An overview of the RDKit</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="GettingStartedInPython.html"
+                        title="次の章へ">Getting Started with the RDKit in Python</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Install.md.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<span id="installation"></span><h1>Installation<a class="headerlink" href="#installation" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>Below a number of installation recipes is presented, with varying degree of complexity.</p>
+<div class="section" id="cross-platform-under-anaconda-python-fastest-install">
+<span id="cross-platform-under-anaconda-python-fastest-install"></span><h2>Cross-platform under anaconda python (fastest install)<a class="headerlink" href="#cross-platform-under-anaconda-python-fastest-install" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="introduction-to-anaconda">
+<span id="introduction-to-anaconda"></span><h3>Introduction to anaconda<a class="headerlink" href="#introduction-to-anaconda" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Conda is an open-source, cross-platform, software package manager. It supports the packaging and distribution of software components, and manages their installation inside isolated execution environments. It has several analogies with pip and virtualenv, but it is designed to be more 「python-agnostic」 and more suitable for the distribution of binary packages and their dependencies.</p>
+</div>
+<div class="section" id="how-to-get-conda">
+<span id="how-to-get-conda"></span><h3>How to get conda<a class="headerlink" href="#how-to-get-conda" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>The easiest way to get Conda is having it installed as part of the <a class="reference external" href="http://docs.continuum.io/anaconda/install.html">Anaconda Python distribution</a>. A possible (but a bit more complex to use) alternative is provided with the smaller and more self-contained <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a>. The conda source code repository is available on <a class="reference external" href="https://github.com/conda">github</a> and additional documentation is provided by the project <a class="reference external" href="http://conda.pydata.org/">website</a>.</p>
+</div>
+<div class="section" id="how-to-install-rdkit-with-conda">
+<span id="how-to-install-rdkit-with-conda"></span><h3>How to install RDKit with Conda<a class="headerlink" href="#how-to-install-rdkit-with-conda" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Creating a new conda environment with the RDKit installed using these  packages requires one single command similar to the following::</p>
+<p>$ conda create -c rdkit -n my-rdkit-env rdkit</p>
+<p>Finally, the new environment must be activated, so that the corresponding python interpreter becomes available in the same shell:</p>
+<p>$ source activate my-rdkit-env</p>
+<p>If for some reason this does not work, try:</p>
+<p>$ cd [anaconda folder]/bin
+$ source activate my-rdkit-env</p>
+<p>Windows users will use a slightly different command:</p>
+<p>C:&gt; activate my-rdkit-env</p>
+</div>
+<div class="section" id="how-to-build-from-source-with-conda">
+<span id="how-to-build-from-source-with-conda"></span><h3>How to build from source with Conda<a class="headerlink" href="#how-to-build-from-source-with-conda" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>For more details on building from source with Conda, see the <a class="reference external" href="https://github.com/rdkit/conda-rdkit">conda-rdkit repository</a>.</p>
+<div class="section" id="macos-10-12-sierra-python-3-environment">
+<span id="macos-10-12-sierra-python-3-environment"></span><h4>macOS 10.12 (Sierra): Python 3 environment<a class="headerlink" href="#macos-10-12-sierra-python-3-environment" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>The following commands will create a development environment for macOS Sierra and Python 3. Download
+Miniconda3-latest-MacOSX-x86_64.sh from <a class="reference external" href="http://conda.pydata.org/miniconda.html">Conda</a> and run these
+following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">MacOSX</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">matplotlib</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">cmake</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">rdkit</span> <span class="n">boost</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">rdkit</span> <span class="n">nox</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">rdkit</span> <span class="n">cairo</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pillow</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">anaconda</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">eigen</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">channel</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pkg</span><span class="o">-</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>Optionally, add the following packages to your environment as useful development tools.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">yapf</span><span class="o">==</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">1</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">coverage</span><span class="o">==</span><span class="mf">3.7</span><span class="o">.</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Then follow the usual build instructions. The PYTHON_INCLUDE_DIR must be set in the
+cmake command.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>PYROOT=&lt;path to miniconda3&gt;
+cmake -DPYTHON_INCLUDE_DIR=$PYROOT/include/python3.5m  \
+  -DRDK_BUILD_AVALON_SUPPORT=ON \
+  -DRDK_BUILD_CAIRO_SUPPORT=ON \
+  -DRDK_BUILD_INCHI_SUPPORT=ON \
+  ..
+</pre></div>
+</div>
+<p>Once 「make」 and 「make install」 completed successfully, use the following command to run the tests:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>RDBASE=$RDBASE DYLD_FALLBACK_LIBRARY_PATH=&quot;$RDBASE/lib:$PYROOT/lib&quot; PYTHONPATH=$RDBASE ctest
+</pre></div>
+</div>
+<p>This is required due to the <a class="reference external" href="https://en.wikipedia.org/wiki/System_Integrity_Protection">System Integrity Protection SIP</a>
+introduced in more recent macOS versions.</p>
+</div>
+</div>
+<div class="section" id="installing-and-using-postgresql-and-the-rdkit-postgresql-cartridge-from-a-conda-environment">
+<span id="installing-and-using-postgresql-and-the-rdkit-postgresql-cartridge-from-a-conda-environment"></span><h3>Installing and using PostgreSQL and the RDKit PostgreSQL cartridge from a conda environment<a class="headerlink" href="#installing-and-using-postgresql-and-the-rdkit-postgresql-cartridge-from-a-conda-environment" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Due to the conda python distribution being a different version to the system python, it is easiest to install PostgreSQL and the PostgreSQL python client via conda.</p>
+<p>With your environment activated, this is done simply by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">rdkit</span> <span class="n">rdkit</span><span class="o">-</span><span class="n">postgresql</span>
+</pre></div>
+</div>
+<p>The conda packages PostgreSQL version needs to be initialized by running the initdb command found in [conda folder]/envs/my-rdkit-env/bin</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">conda</span> <span class="n">folder</span><span class="p">]</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">rdkit</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">initdb</span> <span class="o">-</span><span class="n">D</span> <span class="o">/</span><span class="n">folder</span><span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">should</span><span class="o">/</span><span class="n">be</span><span class="o">/</span><span class="n">stored</span>
+</pre></div>
+</div>
+<p>PostgreSQL can then be run from the terminal with the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">conda</span> <span class="n">folder</span><span class="p">]</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">rdkit</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">postgres</span> <span class="o">-</span><span class="n">D</span> <span class="o">/</span><span class="n">folder</span><span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">should</span><span class="o">/</span><span class="n">be</span><span class="o">/</span><span class="n">stored</span>
+</pre></div>
+</div>
+<p>For most use cases you will instead need to run PostgreSQL as a daemon, one way to do this is using supervisor. You can find out more and how to install supervisor <a class="reference external" href="http://supervisord.org/">here</a>. The required configuration file will look something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">program</span><span class="p">:</span><span class="n">postgresql</span><span class="p">]</span>
+<span class="n">command</span><span class="o">=</span><span class="p">[</span><span class="n">conda</span> <span class="n">folder</span><span class="p">]</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">rdkit</span><span class="o">-</span><span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">postgres</span> <span class="o">-</span><span class="n">D</span> <span class="o">/</span><span class="n">folder</span><span class="o">/</span><span class="n">where</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">should</span><span class="o">/</span><span class="n">be</span><span class="o">/</span><span class="n">stored</span>
+<span class="n">user</span><span class="o">=</span><span class="p">[</span><span class="n">your</span> <span class="n">username</span><span class="p">]</span>
+<span class="n">autorestart</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>Once PostgreSQL is up and running, all of the normal PostgreSQL commands can then be run when your conda environment is activated. Therefore to create a database you can run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">createdb</span> <span class="n">my_rdkit_db</span>
+<span class="n">psql</span> <span class="n">my_rdkit_db</span>
+<span class="c1"># create extension rdkit;</span>
+</pre></div>
+</div>
+<p>If you are trying to use multiple installations of PostgreSQL in different environments, you will need to setup different pid files, unix sockets and ports by <a class="reference external" href="https://opensourcedbms.com/dbms/running-multiple-postgresql-9-2-instances-on-one-server-in-centos-6rhel-6fedora/">editing the PostgreSQL config files</a>. With the above configurations these files can be found in /folder/where/data/should/be/stored.</p>
+</div>
+</div>
+<div class="section" id="linux-and-os-x">
+<span id="linux-and-os-x"></span><h2>Linux and OS X<a class="headerlink" href="#linux-and-os-x" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="installation-from-repositories">
+<span id="installation-from-repositories"></span><h3>Installation from repositories<a class="headerlink" href="#installation-from-repositories" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="ubuntu-12-04-and-later">
+<span id="ubuntu-12-04-and-later"></span><h4>Ubuntu 12.04 and later<a class="headerlink" href="#ubuntu-12-04-and-later" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Thanks to the efforts of the Debichem team, RDKit is available via the Ubuntu repositories. To install:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">rdkit</span> <span class="n">librdkit1</span> <span class="n">rdkit</span><span class="o">-</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fedora-centos-and-rhel">
+<span id="fedora-centos-and-rhel"></span><h4>Fedora, CentOS, and RHEL<a class="headerlink" href="#fedora-centos-and-rhel" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Thanks to Gianluca Sforna’s work, binary RPMs for the RDKit are now part of the official Fedora repositories:
+https://admin.fedoraproject.org/pkgdb/package/rpms/rdkit/</p>
+</div>
+<div class="section" id="os-x">
+<span id="os-x"></span><h4>OS X<a class="headerlink" href="#os-x" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Eddie Cao has produced a homebrew formula that can be used to easily build the RDKit <a class="reference external" href="https://github.com/rdkit/homebrew-rdkit">https://github.com/rdkit/homebrew-rdkit</a></p>
+</div>
+</div>
+<div class="section" id="building-from-source">
+<span id="building-from-source"></span><h3>Building from Source<a class="headerlink" href="#building-from-source" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="prerequisites">
+<span id="prerequisites"></span><h4>Prerequisites<a class="headerlink" href="#prerequisites" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="section" id="installing-prerequisites-as-packages">
+<span id="installing-prerequisites-as-packages"></span><h5>Installing prerequisites as packages<a class="headerlink" href="#installing-prerequisites-as-packages" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<div class="section" id="ubuntu-and-other-debian-derived-systems">
+<span id="ubuntu-and-other-debian-derived-systems"></span><h6>Ubuntu and other debian-derived systems<a class="headerlink" href="#ubuntu-and-other-debian-derived-systems" title="このヘッドラインへのパーマリンク">¶</a></h6>
+<p>Install the following packages using apt-get:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">python</span><span class="o">-</span><span class="n">numpy</span> <span class="n">cmake</span> <span class="n">python</span><span class="o">-</span><span class="n">dev</span> <span class="n">sqlite3</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">system</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">serialization</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">python</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">regex</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fedora-centos-5-7-and-rhel">
+<span id="fedora-centos-5-7-and-rhel"></span><h6>Fedora, CentOS (5.7+), and RHEL<a class="headerlink" href="#fedora-centos-5-7-and-rhel" title="このヘッドラインへのパーマリンク">¶</a></h6>
+<p>Install the following packages using yum:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="n">tk</span><span class="o">-</span><span class="n">devel</span> <span class="n">readline</span><span class="o">-</span><span class="n">devel</span> <span class="n">zlib</span><span class="o">-</span><span class="n">devel</span> <span class="n">bzip2</span><span class="o">-</span><span class="n">devel</span> <span class="n">sqlite</span><span class="o">-</span><span class="n">devel</span> <span class="nd">@development</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+<p>Packages to install from source (not required on RHEL/CentOS 6.x):</p>
+<ul class="simple">
+<li>python 2.7 : use <code class="docutils literal"><span class="pre">./configure</span> <span class="pre">CFLAGS=-fPIC</span> <span class="pre">--enable-unicode=ucs4</span> <span class="pre">--enable-shared</span></code></li>
+<li>numpy : do <code class="docutils literal"><span class="pre">export</span> <span class="pre">LD\_LIBRARY\_PATH=&quot;/usr/local/lib&quot;</span></code> before <code class="docutils literal"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code></li>
+<li>boost 1.48.0 or later: do <code class="docutils literal"><span class="pre">./bootstrap.sh</span> <span class="pre">--with-libraries=python,regex;</span> <span class="pre">./b2;</span> <span class="pre">./b2</span> <span class="pre">install</span></code></li>
+</ul>
+</div>
+<div class="section" id="older-versions-of-centos">
+<span id="older-versions-of-centos"></span><h6>Older versions of CentOS<a class="headerlink" href="#older-versions-of-centos" title="このヘッドラインへのパーマリンク">¶</a></h6>
+<p>Here things are more difficult. Check this wiki page for information: https://code.google.com/p/rdkit/wiki/BuildingOnCentOS</p>
+</div>
+</div>
+<div class="section" id="installing-prerequisites-from-source">
+<span id="installing-prerequisites-from-source"></span><h5>Installing prerequisites from source<a class="headerlink" href="#installing-prerequisites-from-source" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<ul>
+<li><p class="first">Required packages:</p>
+</li>
+<li><p class="first">cmake. You need version 2.6 (or more recent). http://www.cmake.org if your linux distribution doesn’t have an appropriate package.</p>
+<blockquote>
+<div><p><strong>note</strong></p>
+<p>It seems that v2.8 is a better bet than v2.6. It might be worth compiling your own copy of v2.8 even if v2.6 is already installed.</p>
+</div></blockquote>
+</li>
+<li><p class="first">The following are required if you are planning on using the Python wrappers</p>
+<ul>
+<li><p class="first">The python headers. This probably means that you need to install the python-dev package (or whatever it’s called) for your linux distribution.</p>
+</li>
+<li><p class="first">sqlite3. You also need the shared libraries. This may require that you install a sqlite3-dev package.</p>
+</li>
+<li><p class="first">You need to have numpy (http://www.scipy.org/NumPy) installed.</p>
+<blockquote>
+<div><p><strong>note</strong></p>
+<p>for building with XCode4 on OS X there seems to be a problem with the version of numpy that comes with XCode4. Please see below in the (see faq) section for a workaround.</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="installing-boost">
+<span id="installing-boost"></span><h6>Installing Boost<a class="headerlink" href="#installing-boost" title="このヘッドラインへのパーマリンク">¶</a></h6>
+<p>If your linux distribution has a boost-devel package including the python, regex, threading, and serialization libraries, you can use that and save yourself the steps below.</p>
+<blockquote>
+<div><p><strong>note</strong></p>
+<p>if you <em>do</em> have a version of the boost libraries pre-installed and you want to use your own version, be careful when you build the code. We’ve seen at least one example on a Fedora system where cmake compiled using a user-installed version of boost and then linked against the system version. This led to segmentation faults. There is a workaround for this below in the (see FAQ) section.</p>
+</div></blockquote>
+<ul class="simple">
+<li>download the boost source distribution from <a class="reference external" href="http://www.boost.org">the boost web site</a></li>
+<li>extract the source somewhere on your machine (e.g. <code class="docutils literal"><span class="pre">/usr/local/src/boost_1_58_0</span></code>)</li>
+<li>build the required boost libraries. The boost site has <a class="reference external" href="http://www.boost.org/doc/libs/1_58_0/more/getting_started/index.html">detailed instructions</a> for this, but here’s an overview:</li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">$BOOST</span></code></li>
+<li>If you want to use the python wrappers: <code class="docutils literal"><span class="pre">./bootstrap.sh</span> <span class="pre">--with-libraries=python,regex,thread,serialization</span></code></li>
+<li>If not using the python wrappers: <code class="docutils literal"><span class="pre">./bootstrap.sh</span> <span class="pre">--with-libraries=regex,thread,serialization</span></code></li>
+<li><code class="docutils literal"><span class="pre">./b2</span> <span class="pre">install</span></code></li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span> <span class="n">If</span> <span class="n">you</span> <span class="n">have</span> <span class="nb">any</span> <span class="n">problems</span> <span class="k">with</span> <span class="n">this</span> <span class="n">step</span><span class="p">,</span> <span class="n">check</span> <span class="n">the</span> <span class="n">boost</span> <span class="p">[</span><span class="n">installation</span> <span class="n">instructions</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">boost</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">more</span><span class="o">/</span><span class="n">getting_started</span><span class="o">/</span><span class="n">unix</span><span class="o">-</span><span class="n">variants</span><span class="o">.</span><span class="n">html</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="building-the-rdkit">
+<span id="building-the-rdkit"></span><h4>Building the RDKit<a class="headerlink" href="#building-the-rdkit" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Fetch the source, here as tar.gz but you could use git as well:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rdkit</span><span class="o">/</span><span class="n">rdkit</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">Release_XXXX_XX_X</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Ensure that the prerequisites are installed</li>
+<li>environment variables:<ul>
+<li>RDBASE: the root directory of the RDKit distribution (e.g. ~/RDKit)</li>
+<li><em>Linux:</em> LD_LIBRARY_PATH: make sure it includes $RDBASE/lib and wherever the boost shared libraries were installed</li>
+<li><em>OS X:</em> DYLD_LIBRARY_PATH: make sure it includes $RDBASE/lib and wherever the boost shared libraries were installed</li>
+<li>The following are required if you are planning on using the Python wrappers:<ul>
+<li>PYTHONPATH: make sure it includes $RDBASE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Building:</li>
+<li>cd to $RDBASE</li>
+<li><code class="docutils literal"><span class="pre">mkdir</span> <span class="pre">build</span></code></li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">build</span></code></li>
+<li><code class="docutils literal"><span class="pre">cmake</span> <span class="pre">..</span></code> : See the section below on configuring the build if you need to specify a non-default version of python or if you have boost in a non-standard location</li>
+<li><code class="docutils literal"><span class="pre">make</span></code> : this builds all libraries, regression tests, and wrappers (by default).</li>
+<li><code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code></li>
+</ul>
+<p>See below for a list of FAQ and solutions.</p>
+</div>
+<div class="section" id="testing-the-build-optional-but-recommended">
+<span id="testing-the-build-optional-but-recommended"></span><h4>Testing the build (optional, but recommended)<a class="headerlink" href="#testing-the-build-optional-but-recommended" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li>cd to $RDBASE/build and do <code class="docutils literal"><span class="pre">ctest</span></code></li>
+<li>you’re done!</li>
+</ul>
+</div>
+<div class="section" id="advanced">
+<span id="advanced"></span><h4>Advanced<a class="headerlink" href="#advanced" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="section" id="specifying-an-alternate-boost-installation">
+<span id="specifying-an-alternate-boost-installation"></span><h5>Specifying an alternate Boost installation<a class="headerlink" href="#specifying-an-alternate-boost-installation" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<p>You need to tell cmake where to find the boost libraries and header files:</p>
+<p>If you have put boost in /opt/local, the cmake invocation would look like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DBOOST_ROOT</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p><em>Note</em> that if you are using your own boost install on a system with a system install, it’s normally a good idea to also include the argument <code class="docutils literal"><span class="pre">-D</span> <span class="pre">Boost_NO_SYSTEM_PATHS=ON</span></code> in your cmake command.</p>
+</div>
+<div class="section" id="specifying-an-alternate-python-installation">
+<span id="specifying-an-alternate-python-installation"></span><h5>Specifying an alternate Python installation<a class="headerlink" href="#specifying-an-alternate-python-installation" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<p>If you aren’t using the default python installation for your computer, You need to tell cmake where to find the python library it should link against and the python header files.</p>
+<p>Here’s a sample command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">D</span> <span class="n">PYTHON_LIBRARY</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">libpython2</span><span class="o">.</span><span class="mf">7.</span><span class="n">a</span> <span class="o">-</span><span class="n">D</span> <span class="n">PYTHON_INCLUDE_DIR</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span> <span class="o">-</span><span class="n">D</span> <span class="n">PYTHON_EXECUTABLE</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">PYTHON_EXECUTABLE</span></code> part is optional if the correct python is the first version in your PATH.</p>
+</div>
+<div class="section" id="disabling-the-python-wrappers">
+<span id="disabling-the-python-wrappers"></span><h5>Disabling the Python wrappers<a class="headerlink" href="#disabling-the-python-wrappers" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<p>You can completely disable building of the python wrappers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DRDK_BUILD_PYTHON_WRAPPERS</span><span class="o">=</span><span class="n">OFF</span> <span class="o">..</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recommended-extras">
+<span id="recommended-extras"></span><h5>Recommended extras<a class="headerlink" href="#recommended-extras" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<ul class="simple">
+<li>You can enable support for generating InChI strings and InChI keys by adding the argument <code class="docutils literal"><span class="pre">-DRDK_BUILD_INCHI_SUPPORT=ON</span></code> to your cmake command line.</li>
+<li>You can enable support for the Avalon toolkit by adding the argument <code class="docutils literal"><span class="pre">-DRDK_BUILD_AVALON_SUPPORT=ON</span></code> to your cmake command line.</li>
+<li>If you’d like to be able to generate high-quality PNGs for structure depiction cairo (for use with Python2) or cairocffi (for use with Python3) and their respective Python bindings are recommended.</li>
+</ul>
+</div>
+<div class="section" id="building-the-java-wrappers">
+<span id="building-the-java-wrappers"></span><h5>Building the Java wrappers<a class="headerlink" href="#building-the-java-wrappers" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<p><em>Additional Requirements</em></p>
+<ul class="simple">
+<li>SWIG v2.0.x: http://www.swig.org</li>
+</ul>
+<p><em>Building</em></p>
+<ul class="simple">
+<li>When you invoke cmake add <code class="docutils literal"><span class="pre">-D</span> <span class="pre">RDK_BUILD_SWIG_WRAPPERS=ON</span></code> to the arguments. For example: <code class="docutils literal"><span class="pre">cmake</span> <span class="pre">-D</span> <span class="pre">RDK_BUILD_SWIG_WRAPPERS=ON</span> <span class="pre">..</span></code></li>
+<li>Build and install normally using make. The directory <code class="docutils literal"><span class="pre">$RDBASE/Code/JavaWrappers/gmwrapper</span></code> will contain the three required files: libGraphMolWrap.so (libGraphMolWrap.jnilib on OS X), org.RDKit.jar, and org.RDKitDoc.jar.</li>
+</ul>
+<p><em>Using the wrappers</em></p>
+<p>To use the wrappers, the three files need to be in the same directory, and that should be on your CLASSPATH and in the java.library.path. An example using jython:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>% CLASSPATH=$CLASSPATH:$RDBASE/Code/JavaWrappers/gmwrapper/org.RDKit.jar; jython -Djava.library.path=$RDBASE/Code/JavaWrappers/gmwrapper
+Jython 2.2.1 on java1.6.0_20
+Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; from org.RDKit import *
+&gt;&gt;&gt; from java import lang
+&gt;&gt;&gt; lang.System.loadLibrary(&#39;GraphMolWrap&#39;)
+&gt;&gt;&gt; m = RWMol.MolFromSmiles(&#39;c1ccccc1&#39;)
+&gt;&gt;&gt; m.getNumAtoms()
+6L
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional-packages">
+<span id="optional-packages"></span><h5>Optional packages<a class="headerlink" href="#optional-packages" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<ul class="simple">
+<li>If you would like to install the RDKit InChI support, follow the instructions in <code class="docutils literal"><span class="pre">$RDBASE/External/INCHI-API/README</span></code>.</li>
+<li>If you would like to install the RDKit Avalon toolkit support, follow the instructions in <code class="docutils literal"><span class="pre">$RDBASE/External/AvalonTool/README</span></code>.</li>
+<li>If you would like to build and install the PostgreSQL cartridge, follow the instructions in <code class="docutils literal"><span class="pre">$RDBASE/Code/PgSQL/rdkit/README</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="frequently-encountered-problems">
+<span id="frequently-encountered-problems"></span><h4>Frequently Encountered Problems<a class="headerlink" href="#frequently-encountered-problems" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>In each case I’ve replaced specific pieces of the path with <code class="docutils literal"><span class="pre">...</span></code>.</p>
+<p><em>Problem:</em> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Linking CXX shared library libSLNParse.so
+/usr/bin/ld: .../libboost_regex.a(cpp_regex_traits.o): relocation R_X86_64_32S against `std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::_Rep::_S_empty_rep_storage&#39; can not be used when making a shared object; recompile with -fPIC
+.../libboost_regex.a: could not read symbols: Bad value
+collect2: ld returned 1 exit status
+make[2]: *** [Code/GraphMol/SLNParse/libSLNParse.so] Error 1
+make[1]: *** [Code/GraphMol/SLNParse/CMakeFiles/SLNParse.dir/all] Error 2
+make: *** [all] Error 2
+</pre></div>
+</div>
+<p><em>Solution:</em></p>
+<p>Add this to the arguments when you call cmake: <code class="docutils literal"><span class="pre">-DBoost_USE_STATIC_LIBS=OFF</span></code></p>
+<p>More information here: http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01119.html</p>
+<hr class="docutils" />
+<p><em>Problem:</em> :</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">.../</span><span class="n">Code</span><span class="o">/</span><span class="n">GraphMol</span><span class="o">/</span><span class="n">Wrap</span><span class="o">/</span><span class="n">EditableMol</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">114</span><span class="p">:</span>   <span class="n">instantiated</span> <span class="kn">from</span> <span class="nn">here</span>
+<span class="o">.../</span><span class="n">boost</span><span class="o">/</span><span class="n">type_traits</span><span class="o">/</span><span class="n">detail</span><span class="o">/</span><span class="n">cv_traits_impl</span><span class="o">.</span><span class="n">hpp</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span> <span class="n">internal</span> <span class="n">compiler</span> <span class="n">error</span><span class="p">:</span> <span class="ow">in</span> <span class="n">make_rtl_for_nonlocal_decl</span><span class="p">,</span> <span class="n">at</span> <span class="n">cp</span><span class="o">/</span><span class="n">decl</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">5067</span>
+
+<span class="n">Please</span> <span class="n">submit</span> <span class="n">a</span> <span class="n">full</span> <span class="n">bug</span> <span class="n">report</span><span class="p">,</span> <span class="k">with</span> <span class="n">preprocessed</span> <span class="n">source</span> <span class="k">if</span> <span class="n">appropriate</span><span class="o">.</span> <span class="n">See</span> \<span class="o">&lt;</span><span class="n">URL</span><span class="p">:</span><span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">bugzilla</span><span class="o">.</span><span class="n">redhat</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bugzilla</span><span class="o">&gt;</span>\<span class="o">&gt;</span> <span class="k">for</span> <span class="n">instructions</span><span class="o">.</span> <span class="n">Preprocessed</span> <span class="n">source</span> <span class="n">stored</span> <span class="n">into</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ccgSaXge</span><span class="o">.</span><span class="n">out</span> <span class="n">file</span><span class="p">,</span> <span class="n">please</span> <span class="n">attach</span> <span class="n">this</span> <span class="n">to</span> <span class="n">your</span> <span class="n">bugreport</span><span class="o">.</span> <span class="n">make</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="o">**</span>\<span class="o">*</span> <span class="p">[</span><span class="n">Code</span><span class="o">/</span><span class="n">GraphMol</span><span class="o">/</span><span class="n">Wrap</span><span class="o">/</span><span class="n">CMakeFiles</span><span class="o">/</span><span class="n">rdchem</span><span class="o">.</span><span class="n">dir</span><span class="o">/</span><span class="n">EditableMol</span><span class="o">.</span><span class="n">cpp</span><span class="o">.</span><span class="n">o</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">1</span> <span class="n">make</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="o">**</span>\<span class="o">*</span> <span class="p">[</span><span class="n">Code</span><span class="o">/</span><span class="n">GraphMol</span><span class="o">/</span><span class="n">Wrap</span><span class="o">/</span><span class="n">CMakeFiles</span><span class="o">/</span><span class="n">rdchem</span><span class="o">.</span><span class="n">dir</span><span class="o">/</span><span class="nb">all</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">2</span> <span class="n">make</span><span class="p">:</span> <span class="o">*</span>\<span class="o">**</span> <span class="p">[</span><span class="nb">all</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p><em>Solution:</em></p>
+<p>Add <code class="docutils literal"><span class="pre">#define</span> <span class="pre">BOOST_PYTHON_NO_PY_SIGNATURES</span></code> at the top of <code class="docutils literal"><span class="pre">Code/GraphMol/Wrap/EditableMol.cpp</span></code></p>
+<p>More information here: http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01178.html</p>
+<hr class="docutils" />
+<p><em>Problem:</em></p>
+<p>Your system has a version of boost installed in /usr/lib, but you would like to force the RDKit to use a more recent one.</p>
+<p><em>Solution:</em></p>
+<p>This can be solved by using cmake version 2.8.3 (or more recent) and providing the <code class="docutils literal"><span class="pre">-D</span> <span class="pre">Boost_NO_SYSTEM_PATHS=ON</span></code> argument:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">D</span> <span class="n">BOOST_ROOT</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span> <span class="o">-</span><span class="n">D</span> <span class="n">Boost_NO_SYSTEM_PATHS</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><em>Problem:</em></p>
+<p>Building on OS X with XCode 4</p>
+<p>The problem seems to be caused by the version of numpy that is distributed with XCode 4, so you need to build a fresh copy.</p>
+<p><em>Solution:</em> Get a copy of numpy and build it like this as root: as root:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MACOSX_DEPLOYMENT_TARGET</span><span class="o">=</span><span class="mf">10.6</span>
+<span class="n">export</span> <span class="n">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wall -undefined dynamic_lookup -bundle -arch x86_64&quot;</span>
+<span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-arch x86_64&quot;</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gcc</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gcc</span><span class="o">-</span><span class="mf">4.2</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">g</span><span class="o">++</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">g</span><span class="o">++-</span><span class="mf">4.2</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Be sure that the new numpy is used in the build:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">PYTHON_NUMPY_INCLUDE_PATH</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">2.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">include</span>
+</pre></div>
+</div>
+<p>and is at the beginning of the PYTHONPATH:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;/Library/Python/2.6/site-packages:$PYTHONPATH&quot;</span>
+</pre></div>
+</div>
+<p>Now it’s safe to build boost and the RDKit.</p>
+</div>
+</div>
+</div>
+<div class="section" id="windows">
+<span id="windows"></span><h2>Windows<a class="headerlink" href="#windows" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="prerequisites">
+<span id="id1"></span><h3>Prerequisites<a class="headerlink" href="#prerequisites" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>Python 2.7 or 3.4+ (from http://www.python.org/)</li>
+<li>numpy (from http://numpy.scipy.org/ or use <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span></code>). Binaries for win64 are available here: http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy</li>
+<li>Pillow: (from https://python-pillow.github.io/&gt; or use <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Pillow</span></code>)</li>
+</ul>
+<div class="section" id="recommended-extras">
+<span id="id2"></span><h4>Recommended extras<a class="headerlink" href="#recommended-extras" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li>aggdraw: a library for high-quality drawing in Python. Instructions for downloading are here: <a class="reference external" href="http://effbot.org/zone/aggdraw-index.htm">http://effbot.org/zone/aggdraw-index.htm</a> The new (as of May 2008) drawing code has been tested with v1.2a3 of aggdraw. Despite the alpha label, the code is stable and functional.</li>
+<li>matplotlib: a library for scientific plotting from Python. <a class="reference external" href="http://matplotlib.sourceforge.net/">http://matplotlib.sourceforge.net/</a></li>
+<li>ipython : a very useful interactive shell (and much more) for Python. <a class="reference external" href="http://ipython.scipy.org/dist/">http://ipython.scipy.org/dist/</a></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>win32all: Windows extensions for Python. <a class="reference external" href="http://sourceforge.net/projects/pywin32/">http://sourceforge.net/projects/pywin32/</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="installation-of-rdkit-binaries">
+<span id="installation-of-rdkit-binaries"></span><h3>Installation of RDKit binaries<a class="headerlink" href="#installation-of-rdkit-binaries" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>Get the appropriate windows binary build from: https://github.com/rdkit/rdkit/releases</li>
+<li>Extract the zip file somewhere without a space in the name, i.e. <code class="docutils literal"><span class="pre">C:\</span></code></li>
+<li>The rest of this will assume that the installation is in <code class="docutils literal"><span class="pre">C:\RDKit_2015_09_2</span></code></li>
+<li>Set the following environment variables:</li>
+<li>RDBASE: <code class="docutils literal"><span class="pre">C:\RDKit_2015_09_2</span></code></li>
+<li>PYTHONPATH: <code class="docutils literal"><span class="pre">%RDBASE%</span></code> if there is already a PYTHONPATH, put <code class="docutils literal"><span class="pre">;%RDBASE%</span></code> at the end.</li>
+<li>PATH: add <code class="docutils literal"><span class="pre">;%RDBASE%\lib</span></code> to the end</li>
+</ul>
+<p>In Win7 systems, you may run into trouble due to missing DLLs, see one thread from the mailing list: http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01632.html You can download the missing DLLs from here: http://www.microsoft.com/en-us/download/details.aspx?id=5555</p>
+</div>
+<div class="section" id="installation-from-source">
+<span id="installation-from-source"></span><h3>Installation from source<a class="headerlink" href="#installation-from-source" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="extra-software-to-install">
+<span id="extra-software-to-install"></span><h4>Extra software to install<a class="headerlink" href="#extra-software-to-install" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li>Microsoft Visual C++ : The Community version has everything necessary and can be downloaded for free (<a class="reference external" href="https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx">https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx</a>). This is a big installation and will take a while. The RDKit has been successfully built with all version of Visual C++ since 6.0, so the current version of VC++ (2015 as of this writing) should be fine.</li>
+<li>cmake : (<a class="reference external" href="http://www.cmake.org/cmake/resources/software.html">http://www.cmake.org/cmake/resources/software.html</a>) should be installed.</li>
+<li>boost : It is strongly recommended to download and use a precompiled version of the boost libraries from <a class="reference external" href="http://sourceforge.net/projects/boost/files/boost-binaries/">http://sourceforge.net/projects/boost/files/boost-binaries/</a> . When you run the installer, the only binary libraries you need are python, regex, and system. If you want to install boost from source, download a copy from <a class="reference external" href="http://www.boost.org">http://www.boost.org</a> and follow the instructions in the 「Getting Started」 section of the documentation. Make sure the libraries and headers are installed to C:\boost</li>
+<li>a git client : <em>This is only necessary if you are planning on building development versions of the RDKit.</em> This can be downloaded from <a class="reference external" href="http://git-scm.com/downloads">http://git-scm.com/downloads</a>; git is also included as an optional add-on of Microsoft Visual Studio 2015.</li>
+</ul>
+</div>
+<div class="section" id="setup-and-preparation">
+<span id="setup-and-preparation"></span><h4>Setup and Preparation<a class="headerlink" href="#setup-and-preparation" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>This section assumes that python is installed in <code class="docutils literal"><span class="pre">C:\Python27</span></code>, that the boost libraries have been installed to <code class="docutils literal"><span class="pre">C:\boost</span></code>, and that you will build the RDKit from a directory named <code class="docutils literal"><span class="pre">C:\RDKit</span></code>. If any of these conditions is not true, just change the corresponding paths.</p>
+<ul class="simple">
+<li>If you install things in paths that have spaces in their names, be sure to use quotes properly in your environment variable definitions.</li>
+<li>If you are planning on using a development version of the RDKit: get a copy of the current RDKit source using git. If you’re using the command-line client the command is: <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/rdkit/rdkit.git</span> <span class="pre">C:\RDKit</span></code></li>
+<li>If you are planning on using a released version of the RDKit: get a copy of the most recent release and extract it into the directory <code class="docutils literal"><span class="pre">C:\RDKit</span></code></li>
+<li>Set the required environment variables:</li>
+<li><code class="docutils literal"><span class="pre">RDBASE</span> <span class="pre">=</span> <span class="pre">C:\RDKit</span></code></li>
+<li>Make sure <code class="docutils literal"><span class="pre">C:\Python27</span></code> is in your PATH</li>
+<li>Make sure <code class="docutils literal"><span class="pre">C:\RDKit\lib</span></code> is in your PATH</li>
+<li>Make sure <code class="docutils literal"><span class="pre">C:\boost\lib</span></code> is in your PATH.</li>
+<li>Make sure <code class="docutils literal"><span class="pre">C:\RDKit</span> <span class="pre">is</span></code> in your PYTHONPATH</li>
+</ul>
+</div>
+<div class="section" id="building-from-the-command-line-recommended">
+<span id="building-from-the-command-line-recommended"></span><h4>Building from the command line (recommended)<a class="headerlink" href="#building-from-the-command-line-recommended" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li>Create a directory <code class="docutils literal"><span class="pre">C:\RDKit\build</span></code> and cd into it</li>
+<li>Run cmake. Here’s an example basic command line for 64bit windows that will download the InChI and Avalon toolkit sources from the InChI Trust and SourceForge repositories, respectively, and build the PostgreSQL cartridge for the installed version of PostgreSQL:
+<code class="docutils literal"><span class="pre">cmake</span> <span class="pre">-DRDK_BUILD_PYTHON_WRAPPERS=ON</span> <span class="pre">-DBOOST_ROOT=C:/boost</span> <span class="pre">-DRDK_BUILD_INCHI_SUPPORT=ON</span> <span class="pre">-DRDK_BUILD_AVALON_SUPPORT=ON</span> <span class="pre">-DRDK_BUILD_PGSQL=ON</span> <span class="pre">-DPostgreSQL_ROOT=&quot;C:\Program</span> <span class="pre">Files\PostgreSQL\9.5&quot;</span> <span class="pre">-G&quot;Visual</span> <span class="pre">Studio</span> <span class="pre">14</span> <span class="pre">2015</span> <span class="pre">Win64&quot;</span> <span class="pre">..</span></code></li>
+<li>Build the code. Here’s an example command line: <code class="docutils literal"><span class="pre">C:/Windows/Microsoft.NET/Framework64/v4.0.30319/MSBuild.exe</span> <span class="pre">/m:4</span> <span class="pre">/p:Configuration=Release</span> <span class="pre">INSTALL.vcxproj</span></code></li>
+<li>If you have built in PostgreSQL support, you will need to open a shell with administrator privileges, stop the PostgreSQL service, run the <code class="docutils literal"><span class="pre">pgsql_install.bat</span></code> installation script, then restart the PostgreSQL service (please refer to <code class="docutils literal"><span class="pre">%RDBASE%\Code\PgSQL\rdkit\README</span></code> for further details):<ul>
+<li><code class="docutils literal"><span class="pre">&quot;C:\Program</span> <span class="pre">Files\PostgreSQL\9.5\bin\pg_ctl.exe&quot;</span> <span class="pre">-N</span> <span class="pre">&quot;postgresql-9.5&quot;</span> <span class="pre">-D</span> <span class="pre">&quot;C:\Program</span> <span class="pre">Files\PostgreSQL\9.5\data&quot;</span> <span class="pre">-w</span> <span class="pre">stop</span></code></li>
+<li><code class="docutils literal"><span class="pre">C:\RDKit\build\Code\PgSQL\rdkit\pgsql_install.bat</span></code></li>
+<li><code class="docutils literal"><span class="pre">&quot;C:\Program</span> <span class="pre">Files\PostgreSQL\9.5\bin\pg_ctl.exe&quot;</span> <span class="pre">-N</span> <span class="pre">&quot;postgresql-9.5&quot;</span> <span class="pre">-D</span> <span class="pre">&quot;C:\Program</span> <span class="pre">Files\PostgreSQL\9.5\data&quot;</span> <span class="pre">-w</span> <span class="pre">start</span></code></li>
+<li>Before restarting the PostgreSQL service, make sure that the Boost libraries the RDKit was built against are in the system PATH, or PostgreSQL will fail to create the <code class="docutils literal"><span class="pre">rdkit</span></code> extension with a deceptive error message such as: <code class="docutils literal"><span class="pre">ERROR:</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">load</span> <span class="pre">library</span> <span class="pre">&quot;C:/Program</span> <span class="pre">Files/PostgreSQL/9.5/lib/rdkit.dll&quot;:</span> <span class="pre">The</span> <span class="pre">specified</span> <span class="pre">module</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">found.</span></code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="testing-the-build-optional-but-recommended">
+<span id="id3"></span><h4>Testing the Build (optional, but recommended)<a class="headerlink" href="#testing-the-build-optional-but-recommended" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul class="simple">
+<li>cd to <code class="docutils literal"><span class="pre">C:\RDKit\build</span></code> and run ctest. Please note that if you have built in PostgreSQL support, the current logged in user needs to be a PostgreSQL user with database creation and superuser privileges, or the PostgreSQL test will fail. A convenient option to authenticate will be to set the <code class="docutils literal"><span class="pre">PGPASSWORD</span></code> environment variable to the PostgreSQL password of the current logged in user in the shell from which you are running ctest.</li>
+<li>You’re done!</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="license">
+<span id="license"></span><h2>License<a class="headerlink" href="#license" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>This document is copyright (C) 2012-2016 by Greg Landrum</p>
+<p>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 License. To view a copy of this license, visit <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a> or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA.</p>
+<p>The intent of this license is similar to that of the RDKit itself. In simple words: 「Do whatever you want with it, but please give us some credit.」</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="GettingStartedInPython.html" title="Getting Started with the RDKit in Python"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="Overview.html" title="An overview of the RDKit"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Greg Landrum.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
+    </div>
+  </body>
+</html>

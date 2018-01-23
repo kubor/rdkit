@@ -1,0 +1,25 @@
+var Stereo_8h =
+[
+    [ "AtomClash", "Stereo_8h.html#aa0e8eda0575a4e122b70c86d42e15782", null ],
+    [ "AtomParity", "Stereo_8h.html#ab22a86ff0fac4228c43ddfbabee445ef", null ],
+    [ "CheckStereo", "Stereo_8h.html#a1e233f5a113b3755fd54fb06df33e35b", null ],
+    [ "CisTransPerception", "Stereo_8h.html#ac72f83b4c6ad8d81e96f820a96a35201", null ],
+    [ "DubiousStereochemistry", "Stereo_8h.html#aee375efda8a6c696988c21402f200d19", null ],
+    [ "FixDubious3DMolecule", "Stereo_8h.html#afcfc469431173b14b77dc6935b315b94", null ],
+    [ "INVERT_PARITY", "Stereo_8h.html#af812c5f35973264e232e253bec428033", null ],
+    [ "RemoveDubiousStereochemistry", "Stereo_8h.html#a7198411d73328ed10b149ecfd0f26f4d", null ],
+    [ "ALLENE_PARITY", "Stereo_8h.html#a59cd72a3a61c285d7c464412a4d2a13b", null ],
+    [ "CIS", "Stereo_8h.html#a31afa273d88720e916edcf9420db01bc", null ],
+    [ "CONVERTED_TO_2D", "Stereo_8h.html#adec64a192a186492ee3e0a058ef14dd2", null ],
+    [ "EITHER_BOND_FOUND", "Stereo_8h.html#aba5021856ad1a0a26e12917c654363a3", null ],
+    [ "EVEN", "Stereo_8h.html#abadb2cc05f855a9401a707cb92a86bbb", null ],
+    [ "EVEN_PARITY", "Stereo_8h.html#ac153acbd0e672496321cf05ac8418c30", null ],
+    [ "ILLEGAL_REPRESENTATION", "Stereo_8h.html#a69b46747fce4373b8f758c04ab5ae7e1", null ],
+    [ "ODD", "Stereo_8h.html#adbb40b05178a42e55ecfcb72f368b7b8", null ],
+    [ "ODD_PARITY", "Stereo_8h.html#a009230a35ea946d02515a9ba146f33d3", null ],
+    [ "STEREO_BOND_AT_NON_STEREO_ATOM", "Stereo_8h.html#a089d263f7555ae80a70227885948a647", null ],
+    [ "TRANS", "Stereo_8h.html#a721c7fa81145f2ba8acaebb715d662ba", null ],
+    [ "UNDEFINED_PARITY", "Stereo_8h.html#ad44e31d0895544823627d3ea8e7cf207", null ],
+    [ "UNMARKED", "Stereo_8h.html#ae9df273c303468aa2e7c05fcbccfc03e", null ],
+    [ "ZEROED_Z_COORDINATES", "Stereo_8h.html#aa7da2c5dac2594b26d0e72754dd2d8c6", null ]
+];

@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Cluster.Clusters</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Cluster-module.html">Package&nbsp;Cluster</a> ::
+        Module&nbsp;Clusters
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Cluster.Clusters-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.Cluster.Clusters-module.html">Module rdkit.ML.Cluster.Clusters</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2001-2008  greg Landrum</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">""" contains the Cluster class for representing hierarchical cluster trees</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt class="py-name">six</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Function rdkit.ML.EnrichPlot.cmp()=rdkit.ML.EnrichPlot-module.html#cmp"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-0', 'cmp', 'link-0');">cmp</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable rdkit.ML.Cluster.Clusters.CMPTOL=rdkit.ML.Cluster.Clusters-module.html#CMPTOL"><a title="rdkit.ML.Cluster.Clusters.CMPTOL" class="py-name" href="#" onclick="return doclink('link-1', 'CMPTOL', 'link-1');">CMPTOL</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1e-6</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="Cluster"></a><div id="Cluster-def"><a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="Cluster-toggle" onclick="return toggle('Cluster');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html">Cluster</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Cluster-expanded"><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">  <tt class="py-docstring">"""a class for storing clusters/data</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    **General Remarks**</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">     - It is assumed that the bottom of any cluster hierarchy tree is composed of</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">       the individual data points which were clustered.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">     - Clusters objects store the following pieces of data, most are</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        accessible via standard Setters/Getters:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">       - Children: *Not Settable*, the list of children.  You can add children</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">         with the _AddChild()_ and _AddChildren()_ methods.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">         **Note** this can be of arbitrary length,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">         but the current algorithms I have only produce trees with two children</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">         per cluster</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">       - Metric: the metric for this cluster (i.e. how far apart its children are)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">       - Index: the order in which this cluster was generated</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">       - Points: *Not Settable*, the list of original points in this cluster</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">            (calculated recursively from the children)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">       - PointsPositions: *Not Settable*, the list of positions of the original</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">          points in this cluster (calculated recursively from the children)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">       - Position: the location of the cluster **Note** for a cluster this</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">         probably means the location of the average of all the Points which are</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">         its children.</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">       - Data: a data field.  This is used with the original points to store their</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">         data value (i.e. the value we're using to classify)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">       - Name: the name of this cluster</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.__init__"></a><div id="Cluster.__init__-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="Cluster.__init__-toggle" onclick="return toggle('Cluster.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">metric</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">,</tt> <tt class="py-param">children</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">position</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.__init__-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-docstring">"""Constructor</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        see the class documentation for the meanings of these arguments</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        *my wrists are tired*</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-2" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.children=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#children,Variable rdkit.Chem.Recap.RecapHierarchyNode.children=rdkit.Chem.Recap.RecapHierarchyNode-class.html#children"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-2', 'children', 'link-2');">children</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">      <tt id="link-3" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-3', 'children', 'link-2');">children</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">position</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">      <tt class="py-name">position</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">metric</tt> <tt class="py-op">=</tt> <tt class="py-name">metric</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-4', 'children', 'link-2');">children</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-5', 'children', 'link-2');">children</a></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster._UpdateLength()=rdkit.ML.Cluster.Clusters.Cluster-class.html#_UpdateLength"><a title="rdkit.ML.Cluster.Clusters.Cluster._UpdateLength" class="py-name" href="#" onclick="return doclink('link-6', '_UpdateLength', 'link-6');">_UpdateLength</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-name">position</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">index</tt> <tt class="py-op">=</tt> <tt class="py-name">index</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.name=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-7', 'name', 'link-7');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-8', 'name', 'link-7');">name</a></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-9', 'data', 'link-9');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-10', 'data', 'link-9');">data</a></tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.SetMetric"></a><div id="Cluster.SetMetric-def"><a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="Cluster.SetMetric-toggle" onclick="return toggle('Cluster.SetMetric');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#SetMetric">SetMetric</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">metric</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.SetMetric-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.SetMetric-expanded"><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">metric</tt> <tt class="py-op">=</tt> <tt class="py-name">metric</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetMetric"></a><div id="Cluster.GetMetric-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="Cluster.GetMetric-toggle" onclick="return toggle('Cluster.GetMetric');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetMetric">GetMetric</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetMetric-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetMetric-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">metric</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.SetIndex"></a><div id="Cluster.SetIndex-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="Cluster.SetIndex-toggle" onclick="return toggle('Cluster.SetIndex');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#SetIndex">SetIndex</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.SetIndex-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.SetIndex-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">index</tt> <tt class="py-op">=</tt> <tt class="py-name">index</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetIndex"></a><div id="Cluster.GetIndex-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="Cluster.GetIndex-toggle" onclick="return toggle('Cluster.GetIndex');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetIndex">GetIndex</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetIndex-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetIndex-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">index</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.SetPosition"></a><div id="Cluster.SetPosition-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="Cluster.SetPosition-toggle" onclick="return toggle('Cluster.SetPosition');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#SetPosition">SetPosition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pos</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.SetPosition-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.SetPosition-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-name">pos</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetPosition"></a><div id="Cluster.GetPosition-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="Cluster.GetPosition-toggle" onclick="return toggle('Cluster.GetPosition');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPosition">GetPosition</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetPosition-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetPosition-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pos</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetPointsPositions"></a><div id="Cluster.GetPointsPositions-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="Cluster.GetPointsPositions-toggle" onclick="return toggle('Cluster.GetPointsPositions');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPointsPositions">GetPointsPositions</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetPointsPositions-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetPointsPositions-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster._GenPoints()=rdkit.ML.Cluster.Clusters.Cluster-class.html#_GenPoints"><a title="rdkit.ML.Cluster.Clusters.Cluster._GenPoints" class="py-name" href="#" onclick="return doclink('link-11', '_GenPoints', 'link-11');">_GenPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetPoints"></a><div id="Cluster.GetPoints-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="Cluster.GetPoints-toggle" onclick="return toggle('Cluster.GetPoints');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPoints">GetPoints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetPoints-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetPoints-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._GenPoints" class="py-name" href="#" onclick="return doclink('link-12', '_GenPoints', 'link-11');">_GenPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.FindSubtree"></a><div id="Cluster.FindSubtree-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="Cluster.FindSubtree-toggle" onclick="return toggle('Cluster.FindSubtree');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#FindSubtree">FindSubtree</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.FindSubtree-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.FindSubtree-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-docstring">""" finds and returns the subtree with a particular index</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">index</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">      <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">child</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-13', 'children', 'link-2');">children</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">child</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.FindSubtree()=rdkit.ML.Cluster.Clusters.Cluster-class.html#FindSubtree"><a title="rdkit.ML.Cluster.Clusters.Cluster.FindSubtree" class="py-name" href="#" onclick="return doclink('link-14', 'FindSubtree', 'link-14');">FindSubtree</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">res</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">          <tt class="py-keyword">break</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="Cluster._GenPoints"></a><div id="Cluster._GenPoints-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="Cluster._GenPoints-toggle" onclick="return toggle('Cluster._GenPoints');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#_GenPoints">_GenPoints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster._GenPoints-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster._GenPoints-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-docstring">""" Generates the _Points_ and _PointsPositions_ lists</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">     *intended for internal use*</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">]</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetPosition()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPosition"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPosition" class="py-name" href="#" onclick="return doclink('link-15', 'GetPosition', 'link-15');">GetPosition</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">      <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">      <tt id="link-16" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-16', 'children', 'link-2');">children</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method rdkit.DataStructs.VectCollection.VectCollection.GetChildren()=rdkit.DataStructs.VectCollection.VectCollection-class.html#GetChildren,Method rdkit.ML.Cluster.Clusters.Cluster.GetChildren()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetChildren,Method rdkit.ML.DecTree.Tree.TreeNode.GetChildren()=rdkit.ML.DecTree.Tree.TreeNode-class.html#GetChildren,Method rdkit.VLib.Node.VLibNode.GetChildren()=rdkit.VLib.Node.VLibNode-class.html#GetChildren"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-17', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">      <tt id="link-18" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-18', 'children', 'link-2');">children</a></tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name" targets="Method rdkit.DataStructs.TopNContainer.TopNContainer.reverse()=rdkit.DataStructs.TopNContainer.TopNContainer-class.html#reverse"><a title="rdkit.DataStructs.TopNContainer.TopNContainer.reverse" class="py-name" href="#" onclick="return doclink('link-19', 'reverse', 'link-19');">reverse</a></tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">child</tt> <tt class="py-keyword">in</tt> <tt id="link-20" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-20', 'children', 'link-2');">children</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">res</tt> <tt class="py-op">+=</tt> <tt class="py-name">child</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetPoints()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPoints"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPoints" class="py-name" href="#" onclick="return doclink('link-21', 'GetPoints', 'link-21');">GetPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_points</tt> <tt class="py-op">=</tt> <tt class="py-name">res</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pointsPositions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPosition" class="py-name" href="#" onclick="return doclink('link-22', 'GetPosition', 'link-15');">GetPosition</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">res</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.AddChild"></a><div id="Cluster.AddChild-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="Cluster.AddChild-toggle" onclick="return toggle('Cluster.AddChild');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#AddChild">AddChild</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">child</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.AddChild-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.AddChild-expanded"><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-docstring">"""Adds a child to our list</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">        - child: a Cluster</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-23', 'children', 'link-2');">children</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">child</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._GenPoints" class="py-name" href="#" onclick="return doclink('link-24', '_GenPoints', 'link-11');">_GenPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._UpdateLength" class="py-name" href="#" onclick="return doclink('link-25', '_UpdateLength', 'link-6');">_UpdateLength</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.AddChildren"></a><div id="Cluster.AddChildren-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="Cluster.AddChildren-toggle" onclick="return toggle('Cluster.AddChildren');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#AddChildren">AddChildren</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">children</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.AddChildren-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.AddChildren-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-docstring">"""Adds a bunch of children to our list</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        - children: a list of Clusters</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-26', 'children', 'link-2');">children</a></tt> <tt class="py-op">+=</tt> <tt id="link-27" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-27', 'children', 'link-2');">children</a></tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._GenPoints" class="py-name" href="#" onclick="return doclink('link-28', '_GenPoints', 'link-11');">_GenPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._UpdateLength" class="py-name" href="#" onclick="return doclink('link-29', '_UpdateLength', 'link-6');">_UpdateLength</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.RemoveChild"></a><div id="Cluster.RemoveChild-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="Cluster.RemoveChild-toggle" onclick="return toggle('Cluster.RemoveChild');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#RemoveChild">RemoveChild</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">child</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.RemoveChild-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.RemoveChild-expanded"><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-docstring">"""Removes a child from our list</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        - child: a Cluster</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-30', 'children', 'link-2');">children</a></tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">child</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster._UpdateLength" class="py-name" href="#" onclick="return doclink('link-31', '_UpdateLength', 'link-6');">_UpdateLength</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetChildren"></a><div id="Cluster.GetChildren-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="Cluster.GetChildren-toggle" onclick="return toggle('Cluster.GetChildren');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetChildren">GetChildren</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetChildren-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetChildren-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-32', 'children', 'link-2');">children</a></tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetMetric()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetMetric"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-33', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-34', 'children', 'link-2');">children</a></tt> </tt>
+</div><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.SetData"></a><div id="Cluster.SetData-def"><a name="L187"></a><tt class="py-lineno">187</tt> <a class="py-toggle" href="#" id="Cluster.SetData-toggle" onclick="return toggle('Cluster.SetData');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#SetData">SetData</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.SetData-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.SetData-expanded"><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-35', 'data', 'link-9');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-36', 'data', 'link-9');">data</a></tt> </tt>
+</div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetData"></a><div id="Cluster.GetData-def"><a name="L190"></a><tt class="py-lineno">190</tt> <a class="py-toggle" href="#" id="Cluster.GetData-toggle" onclick="return toggle('Cluster.GetData');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetData">GetData</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetData-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetData-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-37', 'data', 'link-9');">data</a></tt> </tt>
+</div><a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.SetName"></a><div id="Cluster.SetName-def"><a name="L193"></a><tt class="py-lineno">193</tt> <a class="py-toggle" href="#" id="Cluster.SetName-toggle" onclick="return toggle('Cluster.SetName');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#SetName">SetName</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.SetName-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.SetName-expanded"><a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-38', 'name', 'link-7');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-39', 'name', 'link-7');">name</a></tt> </tt>
+</div><a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.GetName"></a><div id="Cluster.GetName-def"><a name="L196"></a><tt class="py-lineno">196</tt> <a class="py-toggle" href="#" id="Cluster.GetName-toggle" onclick="return toggle('Cluster.GetName');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#GetName">GetName</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.GetName-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.GetName-expanded"><a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-40', 'name', 'link-7');">name</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-string">'Cluster(%d)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetIndex()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetIndex"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetIndex" class="py-name" href="#" onclick="return doclink('link-41', 'GetIndex', 'link-41');">GetIndex</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-42', 'name', 'link-7');">name</a></tt> </tt>
+</div><a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.Print"></a><div id="Cluster.Print-def"><a name="L202"></a><tt class="py-lineno">202</tt> <a class="py-toggle" href="#" id="Cluster.Print-toggle" onclick="return toggle('Cluster.Print');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#Print">Print</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">level</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">showData</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">offset</tt><tt class="py-op">=</tt><tt class="py-string">'\t'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.Print-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.Print-expanded"><a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">showData</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.GetData()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetData,Function rdkit.Dbase.DbUtils.GetData()=rdkit.Dbase.DbUtils-module.html#GetData,Method rdkit.ML.Cluster.Clusters.Cluster.GetData()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetData,Method rdkit.ML.DecTree.Tree.TreeNode.GetData()=rdkit.ML.DecTree.Tree.TreeNode-class.html#GetData"><a title="rdkit.Dbase.DbConnection.DbConnect.GetData
+rdkit.Dbase.DbUtils.GetData
+rdkit.ML.Cluster.Clusters.Cluster.GetData
+rdkit.ML.DecTree.Tree.TreeNode.GetData" class="py-name" href="#" onclick="return doclink('link-43', 'GetData', 'link-43');">GetData</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">      <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'%s%s%s Metric: %f'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">'  '</tt> <tt class="py-op">*</tt> <tt class="py-name">level</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method rdkit.Chem.FilterCatalog.FilterMatcher.GetName()=rdkit.Chem.FilterCatalog.FilterMatcher-class.html#GetName,Method rdkit.ML.Cluster.Clusters.Cluster.GetName()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetName,Method rdkit.ML.DecTree.Tree.TreeNode.GetName()=rdkit.ML.DecTree.Tree.TreeNode-class.html#GetName,Method rdkit.ML.KNN.KNNModel.KNNModel.GetName()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#GetName,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#GetName"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-44', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">offset</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-45', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">      <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'%s%s%s Data: %f\t Metric: %f'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">'  '</tt> <tt class="py-op">*</tt> <tt class="py-name">level</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-46', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">offset</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetData
+rdkit.Dbase.DbUtils.GetData
+rdkit.ML.Cluster.Clusters.Cluster.GetData
+rdkit.ML.DecTree.Tree.TreeNode.GetData" class="py-name" href="#" onclick="return doclink('link-47', 'GetData', 'link-43');">GetData</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-48', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">child</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-49', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">      <tt class="py-name">child</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.Print()=rdkit.ML.Cluster.Clusters.Cluster-class.html#Print,Method rdkit.ML.DecTree.Tree.TreeNode.Print()=rdkit.ML.DecTree.Tree.TreeNode-class.html#Print"><a title="rdkit.ML.Cluster.Clusters.Cluster.Print
+rdkit.ML.DecTree.Tree.TreeNode.Print" class="py-name" href="#" onclick="return doclink('link-50', 'Print', 'link-50');">Print</a></tt><tt class="py-op">(</tt><tt class="py-name">level</tt><tt class="py-op">=</tt><tt class="py-name">level</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">showData</tt><tt class="py-op">=</tt><tt class="py-name">showData</tt><tt class="py-op">,</tt> <tt class="py-name">offset</tt><tt class="py-op">=</tt><tt class="py-name">offset</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.Compare"></a><div id="Cluster.Compare-def"><a name="L212"></a><tt class="py-lineno">212</tt> <a class="py-toggle" href="#" id="Cluster.Compare-toggle" onclick="return toggle('Cluster.Compare');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#Compare">Compare</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">,</tt> <tt class="py-param">ignoreExtras</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.Compare-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.Compare-expanded"><a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-docstring">""" not as choosy as self==other</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-name">tv1</tt><tt class="py-op">,</tt> <tt class="py-name">tv2</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-51" class="py-name" targets="Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#type,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#type"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-51', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-52', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-name">tv</tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-53', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">tv1</tt><tt class="py-op">,</tt> <tt class="py-name">tv2</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">tv</tt><tt class="py-op">:</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">tv</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-name">tv1</tt><tt class="py-op">,</tt> <tt class="py-name">tv2</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">)</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-name">tv</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-54', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">tv1</tt><tt class="py-op">,</tt> <tt class="py-name">tv2</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">tv</tt><tt class="py-op">:</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">tv</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ignoreExtras</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">      <tt class="py-name">m1</tt><tt class="py-op">,</tt> <tt class="py-name">m2</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-55', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-56', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">m1</tt> <tt class="py-op">-</tt> <tt class="py-name">m2</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt id="link-57" class="py-name"><a title="rdkit.ML.Cluster.Clusters.CMPTOL" class="py-name" href="#" onclick="return doclink('link-57', 'CMPTOL', 'link-1');">CMPTOL</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-58" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-58', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">m1</tt><tt class="py-op">,</tt> <tt class="py-name">m2</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-59" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-59', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-60', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-61', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-62" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-62', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-63', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-64', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">      <tt class="py-name">sP</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPosition" class="py-name" href="#" onclick="return doclink('link-65', 'GetPosition', 'link-15');">GetPosition</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">      <tt class="py-name">oP</tt> <tt class="py-op">=</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPosition" class="py-name" href="#" onclick="return doclink('link-66', 'GetPosition', 'link-15');">GetPosition</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt id="link-67" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-67', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sP</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">oP</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">          <tt class="py-keyword">return</tt> <tt class="py-name">r</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-68', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">sP</tt><tt class="py-op">,</tt> <tt class="py-name">oP</tt><tt class="py-op">)</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">sP</tt> <tt class="py-op">-</tt> <tt class="py-name">oP</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">r</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">    <tt class="py-name">c1</tt><tt class="py-op">,</tt> <tt class="py-name">c2</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-69', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-70', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-71" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-71', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt id="link-72" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-72', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">      <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">c1</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.Compare()=rdkit.ML.Cluster.Clusters.Cluster-class.html#Compare"><a title="rdkit.ML.Cluster.Clusters.Cluster.Compare" class="py-name" href="#" onclick="return doclink('link-73', 'Compare', 'link-73');">Compare</a></tt><tt class="py-op">(</tt><tt class="py-name">c2</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">ignoreExtras</tt><tt class="py-op">=</tt><tt class="py-name">ignoreExtras</tt><tt class="py-op">)</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">t</tt><tt class="py-op">:</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">t</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"> </tt>
+<a name="Cluster._UpdateLength"></a><div id="Cluster._UpdateLength-def"><a name="L260"></a><tt class="py-lineno">260</tt> <a class="py-toggle" href="#" id="Cluster._UpdateLength-toggle" onclick="return toggle('Cluster._UpdateLength');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#_UpdateLength">_UpdateLength</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster._UpdateLength-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster._UpdateLength-expanded"><a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">    <tt class="py-docstring">""" updates our length</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-docstring">     *intended for internal use*</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_len</tt> <tt class="py-op">=</tt> <tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-74', 'children', 'link-2');">children</a></tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt> </tt>
+</div><a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.IsTerminal"></a><div id="Cluster.IsTerminal-def"><a name="L268"></a><tt class="py-lineno">268</tt> <a class="py-toggle" href="#" id="Cluster.IsTerminal-toggle" onclick="return toggle('Cluster.IsTerminal');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#IsTerminal">IsTerminal</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.IsTerminal-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.IsTerminal-expanded"><a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_len</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">1</tt> </tt>
+</div><a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.__len__"></a><div id="Cluster.__len__-def"><a name="L271"></a><tt class="py-lineno">271</tt> <a class="py-toggle" href="#" id="Cluster.__len__-toggle" onclick="return toggle('Cluster.__len__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.__len__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.__len__-expanded"><a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">    <tt class="py-docstring">""" allows _len(cluster)_ to work</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_len</tt> </tt>
+</div><a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"> </tt>
+<a name="Cluster.__cmp__"></a><div id="Cluster.__cmp__-def"><a name="L277"></a><tt class="py-lineno">277</tt> <a class="py-toggle" href="#" id="Cluster.__cmp__-toggle" onclick="return toggle('Cluster.__cmp__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Clusters.Cluster-class.html#__cmp__">__cmp__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cluster.__cmp__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Cluster.__cmp__-expanded"><a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">    <tt class="py-docstring">""" allows _cluster1 == cluster2_ to work</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-75" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-75', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt id="link-76" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-76', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-77" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-77', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt id="link-78" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-78', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt id="link-79" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-79', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-80', 'type', 'link-51');">type</a></tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">    <tt class="py-name">m1</tt><tt class="py-op">,</tt> <tt class="py-name">m2</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-81', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetMetric" class="py-name" href="#" onclick="return doclink('link-82', 'GetMetric', 'link-33');">GetMetric</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">m1</tt> <tt class="py-op">-</tt> <tt class="py-name">m2</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt id="link-83" class="py-name"><a title="rdkit.ML.Cluster.Clusters.CMPTOL" class="py-name" href="#" onclick="return doclink('link-83', 'CMPTOL', 'link-1');">CMPTOL</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt id="link-84" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-84', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">m1</tt><tt class="py-op">,</tt> <tt class="py-name">m2</tt><tt class="py-op">)</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-85" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-85', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-86', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-87', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt id="link-88" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-88', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-89', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="rdkit.Chem.FilterCatalog.FilterMatcher.GetName
+rdkit.ML.Cluster.Clusters.Cluster.GetName
+rdkit.ML.DecTree.Tree.TreeNode.GetName
+rdkit.ML.KNN.KNNModel.KNNModel.GetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.GetName" class="py-name" href="#" onclick="return doclink('link-90', 'GetName', 'link-44');">GetName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line"> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">    <tt class="py-name">c1</tt><tt class="py-op">,</tt> <tt class="py-name">c2</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-91', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-92', 'GetChildren', 'link-17');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-93" class="py-name"><a title="rdkit.ML.EnrichPlot.cmp" class="py-name" href="#" onclick="return doclink('link-93', 'cmp', 'link-0');">cmp</a></tt><tt class="py-op">(</tt><tt class="py-name">c1</tt><tt class="py-op">,</tt> <tt class="py-name">c2</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line"> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-94', 'ML', 'link-94');">ML</a></tt><tt class="py-op">.</tt><tt id="link-95" class="py-name" targets="Package rdkit.ML.Cluster=rdkit.ML.Cluster-module.html,Class rdkit.ML.Cluster.Clusters.Cluster=rdkit.ML.Cluster.Clusters.Cluster-class.html"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-95', 'Cluster', 'link-95');">Cluster</a></tt> <tt class="py-keyword">import</tt> <tt id="link-96" class="py-name" targets="Module rdkit.ML.Cluster.ClusterUtils=rdkit.ML.Cluster.ClusterUtils-module.html"><a title="rdkit.ML.Cluster.ClusterUtils" class="py-name" href="#" onclick="return doclink('link-96', 'ClusterUtils', 'link-96');">ClusterUtils</a></tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">  <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt id="link-97" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-97', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">  <tt class="py-name">c1</tt> <tt class="py-op">=</tt> <tt id="link-98" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-98', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">  <tt class="py-name">c1</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.AddChild()=rdkit.ML.Cluster.Clusters.Cluster-class.html#AddChild,Method rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#AddChild,Method rdkit.ML.DecTree.Tree.TreeNode.AddChild()=rdkit.ML.DecTree.Tree.TreeNode-class.html#AddChild,Method rdkit.VLib.Node.VLibNode.AddChild()=rdkit.VLib.Node.VLibNode-class.html#AddChild"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-99', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt id="link-100" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-100', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">30</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">  <tt class="py-name">c1</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-101', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt id="link-102" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-102', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">31</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">  <tt class="py-name">c1</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-103', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt id="link-104" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-104', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">32</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">  <tt class="py-name">c2</tt> <tt class="py-op">=</tt> <tt id="link-105" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-105', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">11</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">100</tt><tt class="py-op">)</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">  <tt class="py-name">c2</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-106', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt id="link-107" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-107', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">40</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">  <tt class="py-name">c2</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-108', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt id="link-109" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-109', 'Cluster', 'link-95');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-number">41</tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line"> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">  <tt class="py-name">root</tt><tt class="py-op">.</tt><tt id="link-110" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-110', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt class="py-name">c1</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">  <tt class="py-name">root</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-111', 'AddChild', 'link-99');">AddChild</a></tt><tt class="py-op">(</tt><tt class="py-name">c2</tt><tt class="py-op">)</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line"> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">  <tt class="py-name">nodes</tt> <tt class="py-op">=</tt> <tt id="link-112" class="py-name"><a title="rdkit.ML.Cluster.ClusterUtils" class="py-name" href="#" onclick="return doclink('link-112', 'ClusterUtils', 'link-96');">ClusterUtils</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name" targets="Function rdkit.ML.Cluster.ClusterUtils.GetNodeList()=rdkit.ML.Cluster.ClusterUtils-module.html#GetNodeList"><a title="rdkit.ML.Cluster.ClusterUtils.GetNodeList" class="py-name" href="#" onclick="return doclink('link-113', 'GetNodeList', 'link-113');">GetNodeList</a></tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">)</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line"> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">  <tt class="py-name">indices</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetIndex" class="py-name" href="#" onclick="return doclink('link-114', 'GetIndex', 'link-41');">GetIndex</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">nodes</tt><tt class="py-op">]</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'XXX:'</tt><tt class="py-op">,</tt> <tt class="py-name">indices</tt><tt class="py-op">)</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Lipinski</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;Lipinski
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Lipinski-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.Lipinski-module.html">Module rdkit.Chem.Lipinski</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2001-2006 greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">""" Calculation of Lipinski parameters for molecules</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-0');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">rdMolDescriptors</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment"># -----------------------------------</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment"># on import build the SMARTS patterns so we only have to do it once</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-comment"># -----------------------------------</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment"># The Daylight SMARTS expressions for</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-comment"># recognizing H-bond donors and acceptors in the Lipinski scheme.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># HDonor     '[!#6;!H0;-0]'</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment"># HAcceptor  '[$([!#6;+0]);!$([F,Cl,Br,I]);</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment">#             !$([o,s,nX3]);!$([Nv5,Pv5,Sv4,Sv6])]'</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"># Heteroatom '[B,N,O,P,S,F,Cl,Br,I]'</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># 2 definitions adapted from those in the Gobbi Paper</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment">#  NOTE: if you want traditional Lipinski numbers, you</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment">#  should use NOCounts (below) instead of HAcceptor</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable rdkit.Chem.Lipinski.HDonorSmarts=rdkit.Chem.Lipinski-module.html#HDonorSmarts"><a title="rdkit.Chem.Lipinski.HDonorSmarts" class="py-name" href="#" onclick="return doclink('link-2', 'HDonorSmarts', 'link-2');">HDonorSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-3', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[$([N;!H0;v3]),$([N;!H0;+1;v4]),$([O,S;H1;+0]),$([n;H1;+0])]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-comment"># changes log for HAcceptorSmarts:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-comment">#  v2, 1-Nov-2008, GL : fix amide-N exclusion; remove Fs from definition</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable rdkit.Chem.Lipinski.HAcceptorSmarts=rdkit.Chem.Lipinski-module.html#HAcceptorSmarts"><a title="rdkit.Chem.Lipinski.HAcceptorSmarts" class="py-name" href="#" onclick="return doclink('link-4', 'HAcceptorSmarts', 'link-4');">HAcceptorSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-5', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[$([O,S;H1;v2]-[!$(*=[O,N,P,S])]),'</tt> <tt class="py-op">+</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                                     <tt class="py-string">'$([O,S;H0;v2]),$([O,S;-]),$([N;v3;!$(N-*=!@[O,N,P,S])]),'</tt> <tt class="py-op">+</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                                     <tt class="py-string">'$([nH0,o,s;+0])]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable rdkit.Chem.Lipinski.HeteroatomSmarts=rdkit.Chem.Lipinski-module.html#HeteroatomSmarts"><a title="rdkit.Chem.Lipinski.HeteroatomSmarts" class="py-name" href="#" onclick="return doclink('link-6', 'HeteroatomSmarts', 'link-6');">HeteroatomSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-7', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[!#6;!#1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-comment">#  NOTE: the Rotatable bond smarts here doesn't treat deuteriums (which are left in the graph</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-comment">#  and therefore contribute to the degree of a carbon) the same as hydrogens (which are removed</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-comment">#  from the graph). So the bond in [2H]C([2H])([2H])C([2H])([2H])[2H] *is* considered</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-comment">#  rotatable.</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable rdkit.Chem.Lipinski.RotatableBondSmarts=rdkit.Chem.Lipinski-module.html#RotatableBondSmarts"><a title="rdkit.Chem.Lipinski.RotatableBondSmarts" class="py-name" href="#" onclick="return doclink('link-8', 'RotatableBondSmarts', 'link-8');">RotatableBondSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-9', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[!$(*#*)&amp;!D1]-&amp;!@[!$(*#*)&amp;!D1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable rdkit.Chem.Lipinski.NHOHSmarts=rdkit.Chem.Lipinski-module.html#NHOHSmarts"><a title="rdkit.Chem.Lipinski.NHOHSmarts" class="py-name" href="#" onclick="return doclink('link-10', 'NHOHSmarts', 'link-10');">NHOHSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-11', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[#8H1,#7H1,#7H2,#7H3]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable rdkit.Chem.Lipinski.NOCountSmarts=rdkit.Chem.Lipinski-module.html#NOCountSmarts"><a title="rdkit.Chem.Lipinski.NOCountSmarts" class="py-name" href="#" onclick="return doclink('link-12', 'NOCountSmarts', 'link-12');">NOCountSmarts</a></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-13', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[#7,#8]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-comment"># # this little trick saves duplicated code</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-comment"># def _NumMatches(mol, smarts):</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-comment">#   return len(mol.GetSubstructMatches(smarts, uniquify=1))</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable rdkit.Chem.Lipinski.NumHDonors=rdkit.Chem.Lipinski-module.html#NumHDonors"><a title="rdkit.Chem.Lipinski.NumHDonors" class="py-name" href="#" onclick="return doclink('link-14', 'NumHDonors', 'link-14');">NumHDonors</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumHBD</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt id="link-15" class="py-name"><a title="rdkit.Chem.Lipinski.NumHDonors" class="py-name" href="#" onclick="return doclink('link-15', 'NumHDonors', 'link-14');">NumHDonors</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable rdkit.DataStructs.__doc__=rdkit.DataStructs-module.html#__doc__"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-16', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of Hydrogen Bond Donors"</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-17" class="py-name"><a title="rdkit.Chem.Lipinski.NumHDonors" class="py-name" href="#" onclick="return doclink('link-17', 'NumHDonors', 'link-14');">NumHDonors</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.0"</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-name">_HDonors</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">=</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem.Lipinski.HDonorSmarts" class="py-name" href="#" onclick="return doclink('link-18', 'HDonorSmarts', 'link-2');">HDonorSmarts</a></tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">uniquify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable rdkit.Chem.Lipinski.NumHAcceptors=rdkit.Chem.Lipinski-module.html#NumHAcceptors"><a title="rdkit.Chem.Lipinski.NumHAcceptors" class="py-name" href="#" onclick="return doclink('link-19', 'NumHAcceptors', 'link-19');">NumHAcceptors</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumHBA</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt id="link-20" class="py-name"><a title="rdkit.Chem.Lipinski.NumHAcceptors" class="py-name" href="#" onclick="return doclink('link-20', 'NumHAcceptors', 'link-19');">NumHAcceptors</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-21', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of Hydrogen Bond Acceptors"</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt id="link-22" class="py-name"><a title="rdkit.Chem.Lipinski.NumHAcceptors" class="py-name" href="#" onclick="return doclink('link-22', 'NumHAcceptors', 'link-19');">NumHAcceptors</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"2.0.0"</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-name">_HAcceptors</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">=</tt><tt id="link-23" class="py-name"><a title="rdkit.Chem.Lipinski.HAcceptorSmarts" class="py-name" href="#" onclick="return doclink('link-23', 'HAcceptorSmarts', 'link-4');">HAcceptorSmarts</a></tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">uniquify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable rdkit.Chem.Lipinski.NumHeteroatoms=rdkit.Chem.Lipinski-module.html#NumHeteroatoms"><a title="rdkit.Chem.Lipinski.NumHeteroatoms" class="py-name" href="#" onclick="return doclink('link-24', 'NumHeteroatoms', 'link-24');">NumHeteroatoms</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumHeteroatoms</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt id="link-25" class="py-name"><a title="rdkit.Chem.Lipinski.NumHeteroatoms" class="py-name" href="#" onclick="return doclink('link-25', 'NumHeteroatoms', 'link-24');">NumHeteroatoms</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-26', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of Heteroatoms"</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt id="link-27" class="py-name"><a title="rdkit.Chem.Lipinski.NumHeteroatoms" class="py-name" href="#" onclick="return doclink('link-27', 'NumHeteroatoms', 'link-24');">NumHeteroatoms</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.0"</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-name">_Heteroatoms</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">=</tt><tt id="link-28" class="py-name"><a title="rdkit.Chem.Lipinski.HeteroatomSmarts" class="py-name" href="#" onclick="return doclink('link-28', 'HeteroatomSmarts', 'link-6');">HeteroatomSmarts</a></tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">uniquify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable rdkit.Chem.Lipinski.NumRotatableBonds=rdkit.Chem.Lipinski-module.html#NumRotatableBonds"><a title="rdkit.Chem.Lipinski.NumRotatableBonds" class="py-name" href="#" onclick="return doclink('link-29', 'NumRotatableBonds', 'link-29');">NumRotatableBonds</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumRotatableBonds</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"><tt id="link-30" class="py-name"><a title="rdkit.Chem.Lipinski.NumRotatableBonds" class="py-name" href="#" onclick="return doclink('link-30', 'NumRotatableBonds', 'link-29');">NumRotatableBonds</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-31', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of Rotatable Bonds"</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt id="link-32" class="py-name"><a title="rdkit.Chem.Lipinski.NumRotatableBonds" class="py-name" href="#" onclick="return doclink('link-32', 'NumRotatableBonds', 'link-29');">NumRotatableBonds</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.0"</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-name">_RotatableBonds</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">=</tt><tt id="link-33" class="py-name"><a title="rdkit.Chem.Lipinski.RotatableBondSmarts" class="py-name" href="#" onclick="return doclink('link-33', 'RotatableBondSmarts', 'link-8');">RotatableBondSmarts</a></tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">uniquify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt id="link-34" class="py-name" targets="Variable rdkit.Chem.Lipinski.NOCount=rdkit.Chem.Lipinski-module.html#NOCount"><a title="rdkit.Chem.Lipinski.NOCount" class="py-name" href="#" onclick="return doclink('link-34', 'NOCount', 'link-34');">NOCount</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumLipinskiHBA</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt id="link-35" class="py-name"><a title="rdkit.Chem.Lipinski.NOCount" class="py-name" href="#" onclick="return doclink('link-35', 'NOCount', 'link-34');">NOCount</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-36', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of Nitrogens and Oxygens"</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt id="link-37" class="py-name"><a title="rdkit.Chem.Lipinski.NOCount" class="py-name" href="#" onclick="return doclink('link-37', 'NOCount', 'link-34');">NOCount</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.0"</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt id="link-38" class="py-name" targets="Variable rdkit.Chem.Lipinski.NHOHCount=rdkit.Chem.Lipinski-module.html#NHOHCount"><a title="rdkit.Chem.Lipinski.NHOHCount" class="py-name" href="#" onclick="return doclink('link-38', 'NHOHCount', 'link-38');">NHOHCount</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumLipinskiHBD</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt id="link-39" class="py-name"><a title="rdkit.Chem.Lipinski.NHOHCount" class="py-name" href="#" onclick="return doclink('link-39', 'NHOHCount', 'link-38');">NHOHCount</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-40', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Number of NHs or OHs"</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt id="link-41" class="py-name"><a title="rdkit.Chem.Lipinski.NHOHCount" class="py-name" href="#" onclick="return doclink('link-41', 'NHOHCount', 'link-38');">NHOHCount</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"2.0.0"</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable rdkit.Chem.Lipinski.RingCount=rdkit.Chem.Lipinski-module.html#RingCount"><a title="rdkit.Chem.Lipinski.RingCount" class="py-name" href="#" onclick="return doclink('link-42', 'RingCount', 'link-42');">RingCount</a></tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">rdMolDescriptors</tt><tt class="py-op">.</tt><tt class="py-name">CalcNumRings</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"><tt id="link-43" class="py-name"><a title="rdkit.Chem.Lipinski.RingCount" class="py-name" href="#" onclick="return doclink('link-43', 'RingCount', 'link-42');">RingCount</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.0"</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="HeavyAtomCount"></a><div id="HeavyAtomCount-def"><a name="L76"></a><tt class="py-lineno">76</tt> <a class="py-toggle" href="#" id="HeavyAtomCount-toggle" onclick="return toggle('HeavyAtomCount');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Lipinski-module.html#HeavyAtomCount">HeavyAtomCount</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HeavyAtomCount-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="HeavyAtomCount-expanded"><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">  <tt class="py-docstring">" Number of heavy atoms a molecule."</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-44" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-44', 'mol', 'link-44');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumHeavyAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"><tt id="link-45" class="py-name" targets="Function rdkit.Chem.Lipinski.HeavyAtomCount()=rdkit.Chem.Lipinski-module.html#HeavyAtomCount"><a title="rdkit.Chem.Lipinski.HeavyAtomCount" class="py-name" href="#" onclick="return doclink('link-45', 'HeavyAtomCount', 'link-45');">HeavyAtomCount</a></tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0.1"</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"><tt id="link-46" class="py-name" targets="Variable rdkit.Chem.Lipinski._bulkConvert=rdkit.Chem.Lipinski-module.html#_bulkConvert"><a title="rdkit.Chem.Lipinski._bulkConvert" class="py-name" href="#" onclick="return doclink('link-46', '_bulkConvert', 'link-46');">_bulkConvert</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">"CalcFractionCSP3"</tt><tt class="py-op">,</tt> <tt class="py-string">"CalcNumAromaticRings"</tt><tt class="py-op">,</tt> <tt class="py-string">"CalcNumSaturatedRings"</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">                <tt class="py-string">"CalcNumAromaticHeterocycles"</tt><tt class="py-op">,</tt> <tt class="py-string">"CalcNumAromaticCarbocycles"</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">                <tt class="py-string">"CalcNumSaturatedHeterocycles"</tt><tt class="py-op">,</tt> <tt class="py-string">"CalcNumSaturatedCarbocycles"</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">                <tt class="py-string">"CalcNumAliphaticRings"</tt><tt class="py-op">,</tt> <tt class="py-string">"CalcNumAliphaticHeterocycles"</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">                <tt class="py-string">"CalcNumAliphaticCarbocycles"</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"><tt class="py-keyword">for</tt> <tt class="py-name">txt</tt> <tt class="py-keyword">in</tt> <tt id="link-47" class="py-name"><a title="rdkit.Chem.Lipinski._bulkConvert" class="py-name" href="#" onclick="return doclink('link-47', '_bulkConvert', 'link-46');">_bulkConvert</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">  <tt class="py-name">_cfn</tt> <tt class="py-op">=</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">rdMolDescriptors</tt><tt class="py-op">,</tt> <tt class="py-name">txt</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">  <tt class="py-name">_fn</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">=</tt><tt class="py-name">_cfn</tt><tt class="py-op">:</tt> <tt class="py-name">y</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">    <tt class="py-name">_fn</tt><tt class="py-op">.</tt><tt class="py-name">version</tt> <tt class="py-op">=</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">rdMolDescriptors</tt><tt class="py-op">,</tt> <tt class="py-string">"_"</tt> <tt class="py-op">+</tt> <tt class="py-name">txt</tt> <tt class="py-op">+</tt> <tt class="py-string">"_version"</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt> <tt class="py-name">AttributeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line">  <tt class="py-name">_fn</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-48', '__doc__', 'link-16');">__doc__</a></tt> <tt class="py-op">=</tt> <tt class="py-name">_cfn</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="rdkit.DataStructs.__doc__" class="py-name" href="#" onclick="return doclink('link-49', '__doc__', 'link-16');">__doc__</a></tt> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line">  <tt class="py-name">nm</tt> <tt class="py-op">=</tt> <tt class="py-name">txt</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">"Calc"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line">  <tt class="py-name">locals</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-name">nm</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">_fn</tt> </tt>
+<a name="L98"></a><tt class="py-lineno">98</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

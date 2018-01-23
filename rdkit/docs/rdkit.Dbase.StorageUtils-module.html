@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Dbase.StorageUtils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Dbase-module.html">Package&nbsp;Dbase</a> ::
+        Module&nbsp;StorageUtils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Dbase.StorageUtils-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module StorageUtils</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Various storage (molecular and otherwise) functionality
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#ValidateRDId" class="summary-sig-name">ValidateRDId</a>(<span class="summary-sig-arg">ID</span>)</span><br />
+      returns whether or not an RDId is valid</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#ValidateRDId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#RDIdToInt" class="summary-sig-name">RDIdToInt</a>(<span class="summary-sig-arg">ID</span>,
+        <span class="summary-sig-arg">validate</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the integer index for a given RDId
+Throws a ValueError on error</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#RDIdToInt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#IndexToRDId" class="summary-sig-name">IndexToRDId</a>(<span class="summary-sig-arg">idx</span>,
+        <span class="summary-sig-arg">leadText</span>=<span class="summary-sig-default">'RDCmpd'</span>)</span><br />
+      Converts an integer index into an RDId</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#IndexToRDId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#GetNextId" class="summary-sig-name">GetNextId</a>(<span class="summary-sig-arg">conn</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">idColName</span>=<span class="summary-sig-default">'Id'</span>)</span><br />
+      returns the next available Id in the database</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#GetNextId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#GetNextRDId" class="summary-sig-name">GetNextRDId</a>(<span class="summary-sig-arg">conn</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">idColName</span>=<span class="summary-sig-default">'Id'</span>,
+        <span class="summary-sig-arg">leadText</span>=<span class="summary-sig-default">''</span>)</span><br />
+      returns the next available RDId in the database</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#GetNextRDId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Dbase.StorageUtils-module.html#RegisterItem" class="summary-sig-name">RegisterItem</a>(<span class="summary-sig-arg">conn</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">columnName</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">idColName</span>=<span class="summary-sig-default">'Id'</span>,
+        <span class="summary-sig-arg">leadText</span>=<span class="summary-sig-default">'RDCmpd'</span>)</span><br />
+      &gt;&gt;&gt; from rdkit.Dbase.DbConnection import DbConnect
+&gt;&gt;&gt; conn = DbConnect(tempDbName)
+&gt;&gt;&gt; tblName = 'StorageTest'
+&gt;&gt;&gt; conn.AddTable(tblName,'id varchar(32) not null primary key,label varchar(40),val int')
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label1','label',['label1',1])==(1, 'RDCmpd-000-001-1')
+True
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label2','label',['label2',1])==(1, 'RDCmpd-000-002-2')
+True
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label1','label',['label1',1])==(0, 'RDCmpd-000-001-1')
+True
+&gt;&gt;&gt; str(GetNextRDId(conn,tblName))
+'RDCmpd-000-003-3'
+&gt;&gt;&gt; tuple(conn.GetData(table=tblName)[0])==('RDCmpd-000-001-1', 'label1', 1)
+True</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#RegisterItem">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RegisterItems"></a><span class="summary-sig-name">RegisterItems</span>(<span class="summary-sig-arg">conn</span>,
+        <span class="summary-sig-arg">table</span>,
+        <span class="summary-sig-arg">values</span>,
+        <span class="summary-sig-arg">columnName</span>,
+        <span class="summary-sig-arg">rows</span>,
+        <span class="summary-sig-arg">startId</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">idColName</span>=<span class="summary-sig-default">'Id'</span>,
+        <span class="summary-sig-arg">leadText</span>=<span class="summary-sig-default">'RDCmpd'</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#RegisterItems">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_test"></a><span class="summary-sig-name">_test</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#_test">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Dbase.StorageUtils-module.html#_roundtripTests" class="summary-name" onclick="show_private();">_roundtripTests</a> = <code title="&quot;&quot;&quot;
+&gt;&gt;&gt; ValidateRDId(IndexToRDId(100))
+1
+&gt;&gt;&gt; ValidateRDId(IndexToRDId(10000,leadText='foo'))
+1
+&gt;&gt;&gt; indices = [1,100,1000,1000000]
+&gt;&gt;&gt; vals = []
+&gt;&gt;&gt; for idx in indices:
+..."><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__test__"></a><span class="summary-name">__test__</span> = <code title="{&quot;roundtrip&quot;: _roundtripTests}">{&quot;roundtrip&quot;: _roundtripTests}</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <a href="rdkit.Dbase.DbModule-module.html" title="rdkit.Dbase.DbModule">DbModule</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="ValidateRDId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ValidateRDId</span>(<span class="sig-arg">ID</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#ValidateRDId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns whether or not an RDId is valid
+
+&gt;&gt;&gt; ValidateRDId('RDCmpd-000-009-9')
+1
+&gt;&gt;&gt; ValidateRDId('RDCmpd-009-000-009-8')
+1
+&gt;&gt;&gt; ValidateRDId('RDCmpd-009-000-109-8')
+0
+&gt;&gt;&gt; ValidateRDId('bogus')
+0
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RDIdToInt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RDIdToInt</span>(<span class="sig-arg">ID</span>,
+        <span class="sig-arg">validate</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#RDIdToInt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns the integer index for a given RDId
+Throws a ValueError on error
+
+&gt;&gt;&gt; RDIdToInt('RDCmpd-000-009-9')
+9
+&gt;&gt;&gt; RDIdToInt('RDCmpd-009-000-009-8')
+9000009
+&gt;&gt;&gt; RDIdToInt('RDData_000_009_9')
+9
+&gt;&gt;&gt; try:
+...   RDIdToInt('RDCmpd-009-000-109-8')
+... except ValueError:
+...   print('ok')
+... else:
+...   print('failed')
+ok
+&gt;&gt;&gt; try:
+...   RDIdToInt('bogus')
+... except ValueError:
+...   print('ok')
+... else:
+...   print('failed')
+ok
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IndexToRDId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IndexToRDId</span>(<span class="sig-arg">idx</span>,
+        <span class="sig-arg">leadText</span>=<span class="sig-default">'RDCmpd'</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#IndexToRDId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Converts an integer index into an RDId
+
+The format of the ID is:
+  leadText-xxx-xxx-xxx-y
+The number blocks are zero padded and the the final digit (y)
+is a checksum:
+&gt;&gt;&gt; str(IndexToRDId(9))
+'RDCmpd-000-009-9'
+&gt;&gt;&gt; str(IndexToRDId(9009))
+'RDCmpd-009-009-8'
+
+A millions block is included if it's nonzero:
+&gt;&gt;&gt; str(IndexToRDId(9000009))
+'RDCmpd-009-000-009-8'
+
+The text at the beginning can be altered:
+&gt;&gt;&gt; str(IndexToRDId(9,leadText='RDAlt'))
+'RDAlt-000-009-9'
+
+Negative indices are errors:
+&gt;&gt;&gt; try:
+...   IndexToRDId(-1)
+... except ValueError:
+...   print('ok')
+... else:
+...   print('failed')
+ok
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetNextId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetNextId</span>(<span class="sig-arg">conn</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">idColName</span>=<span class="sig-default">'Id'</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#GetNextId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the next available Id in the database
+
+see RegisterItem for testing/documentation
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetNextRDId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetNextRDId</span>(<span class="sig-arg">conn</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">idColName</span>=<span class="sig-default">'Id'</span>,
+        <span class="sig-arg">leadText</span>=<span class="sig-default">''</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#GetNextRDId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the next available RDId in the database
+
+see RegisterItem for testing/documentation
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RegisterItem"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RegisterItem</span>(<span class="sig-arg">conn</span>,
+        <span class="sig-arg">table</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">columnName</span>,
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">idColName</span>=<span class="sig-default">'Id'</span>,
+        <span class="sig-arg">leadText</span>=<span class="sig-default">'RDCmpd'</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Dbase.StorageUtils-pysrc.html#RegisterItem">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+&gt;&gt;&gt; from rdkit.Dbase.DbConnection import DbConnect
+&gt;&gt;&gt; conn = DbConnect(tempDbName)
+&gt;&gt;&gt; tblName = 'StorageTest'
+&gt;&gt;&gt; conn.AddTable(tblName,'id varchar(32) not null primary key,label varchar(40),val int')
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label1','label',['label1',1])==(1, 'RDCmpd-000-001-1')
+True
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label2','label',['label2',1])==(1, 'RDCmpd-000-002-2')
+True
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label1','label',['label1',1])==(0, 'RDCmpd-000-001-1')
+True
+&gt;&gt;&gt; str(GetNextRDId(conn,tblName))
+'RDCmpd-000-003-3'
+&gt;&gt;&gt; tuple(conn.GetData(table=tblName)[0])==('RDCmpd-000-001-1', 'label1', 1)
+True
+
+It's also possible to provide ids by hand:
+&gt;&gt;&gt; RegisterItem(conn,tblName,'label10','label',['label10',1],
+...              id='RDCmpd-000-010-1')==(1, 'RDCmpd-000-010-1')
+True
+&gt;&gt;&gt; str(GetNextRDId(conn,tblName))
+'RDCmpd-000-011-2'
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_roundtripTests"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_roundtripTests</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&quot;&quot;&quot;
+&gt;&gt;&gt; ValidateRDId(IndexToRDId(100))
+1
+&gt;&gt;&gt; ValidateRDId(IndexToRDId(10000,leadText='foo'))
+1
+&gt;&gt;&gt; indices = [1,100,1000,1000000]
+&gt;&gt;&gt; vals = []
+&gt;&gt;&gt; for idx in indices:
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

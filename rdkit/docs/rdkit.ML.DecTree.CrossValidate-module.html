@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.DecTree.CrossValidate</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.DecTree-module.html">Package&nbsp;DecTree</a> ::
+        Module&nbsp;CrossValidate
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.DecTree.CrossValidate-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module CrossValidate</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+handles doing cross validation with decision trees
+
+This is, perhaps, a little misleading.  For the purposes of this module,
+cross validation == evaluating the accuracy of a tree.
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.CrossValidate-module.html#ChooseOptimalRoot" class="summary-sig-name">ChooseOptimalRoot</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">trainExamples</span>,
+        <span class="summary-sig-arg">testExamples</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">treeBuilder</span>,
+        <span class="summary-sig-arg">nQuantBounds</span>=<span class="summary-sig-default">[]</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      loops through all possible tree roots and chooses the one which produces the best tree</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#ChooseOptimalRoot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.CrossValidate-module.html#CrossValidate" class="summary-sig-name">CrossValidate</a>(<span class="summary-sig-arg">tree</span>,
+        <span class="summary-sig-arg">testExamples</span>,
+        <span class="summary-sig-arg">appendExamples</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Determines the classification error for the testExamples</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#CrossValidate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.CrossValidate-module.html#CrossValidationDriver" class="summary-sig-name">CrossValidationDriver</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">holdOutFrac</span>=<span class="summary-sig-default">.3</span>,
+        <span class="summary-sig-arg">silent</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">calcTotalError</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">treeBuilder</span>=<span class="summary-sig-default">ID3.ID3Boot</span>,
+        <span class="summary-sig-arg">lessGreedy</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">startAt</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nQuantBounds</span>=<span class="summary-sig-default">[]</span>,
+        <span class="summary-sig-arg">maxDepth</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Driver function for building trees and doing cross validation</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#CrossValidationDriver">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="TestRun"></a><span class="summary-sig-name">TestRun</span>()</span><br />
+      testing code</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#TestRun">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.ML.Data.SplitData-module.html" title="rdkit.ML.Data.SplitData">SplitData</a>,
+  <a href="rdkit.ML.DecTree.ID3-module.html" title="rdkit.ML.DecTree.ID3">ID3</a>,
+  <span title="rdkit.ML.DecTree.randomtest">randomtest</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="ChooseOptimalRoot"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ChooseOptimalRoot</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">trainExamples</span>,
+        <span class="sig-arg">testExamples</span>,
+        <span class="sig-arg">attrs</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">treeBuilder</span>,
+        <span class="sig-arg">nQuantBounds</span>=<span class="sig-default">[]</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#ChooseOptimalRoot">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+loops through all possible tree roots and chooses the one which produces the best tree
+
+**Arguments**
+
+  - examples: the full set of examples
+
+  - trainExamples: the training examples
+
+  - testExamples: the testing examples
+
+  - attrs: a list of attributes to consider in the tree building
+
+  - nPossibleVals: a list of the number of possible values each variable can adopt
+
+  - treeBuilder: the function to be used to actually build the tree
+
+  - nQuantBounds: an optional list.  If present, it's assumed that the builder
+    algorithm takes this argument as well (for building QuantTrees)
+
+**Returns**
+
+  The best tree found
+
+**Notes**
+
+  1) Trees are built using _trainExamples_
+
+  2) Testing of each tree (to determine which is best) is done using _CrossValidate_ and
+     the entire set of data (i.e. all of _examples_)
+
+  3) _trainExamples_ is not used at all, which immediately raises the question of
+     why it's even being passed in
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CrossValidate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CrossValidate</span>(<span class="sig-arg">tree</span>,
+        <span class="sig-arg">testExamples</span>,
+        <span class="sig-arg">appendExamples</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#CrossValidate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Determines the classification error for the testExamples
+
+**Arguments**
+
+  - tree: a decision tree (or anything supporting a _ClassifyExample()_ method)
+
+  - testExamples: a list of examples to be used for testing
+
+  - appendExamples: a toggle which is passed along to the tree as it does
+    the classification. The trees can use this to store the examples they
+    classify locally.
+
+**Returns**
+
+  a 2-tuple consisting of:
+
+    1) the percent error of the tree
+
+    2) a list of misclassified examples
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CrossValidationDriver"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CrossValidationDriver</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">attrs</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">holdOutFrac</span>=<span class="sig-default">.3</span>,
+        <span class="sig-arg">silent</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">calcTotalError</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">treeBuilder</span>=<span class="sig-default">ID3.ID3Boot</span>,
+        <span class="sig-arg">lessGreedy</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">startAt</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nQuantBounds</span>=<span class="sig-default">[]</span>,
+        <span class="sig-arg">maxDepth</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.CrossValidate-pysrc.html#CrossValidationDriver">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Driver function for building trees and doing cross validation
+
+**Arguments**
+
+  - examples: the full set of examples
+
+  - attrs: a list of attributes to consider in the tree building
+
+  - nPossibleVals: a list of the number of possible values each variable can adopt
+
+  - holdOutFrac: the fraction of the data which should be reserved for the hold-out set
+     (used to calculate the error)
+
+  - silent: a toggle used to control how much visual noise this makes as it goes.
+
+  - calcTotalError: a toggle used to indicate whether the classification error
+    of the tree should be calculated using the entire data set (when true) or just
+    the training hold out set (when false)
+
+  - treeBuilder: the function to call to build the tree
+
+  - lessGreedy: toggles use of the less greedy tree growth algorithm (see
+    _ChooseOptimalRoot_).
+
+  - startAt: forces the tree to be rooted at this descriptor
+
+  - nQuantBounds: an optional list.  If present, it's assumed that the builder
+    algorithm takes this argument as well (for building QuantTrees)
+
+  - maxDepth: an optional integer.  If present, it's assumed that the builder
+    algorithm takes this argument as well
+
+**Returns**
+
+   a 2-tuple containing:
+
+     1) the tree
+
+     2) the cross-validation error of the tree
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

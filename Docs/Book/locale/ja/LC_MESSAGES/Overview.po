@@ -1,0 +1,242 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Greg Landrum
+# This file is distributed under the same license as the The RDKit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: The RDKit 2017.09\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-23 11:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: ../../Overview.md:123
+msgid ""
+"The Contrib directory, part of the standard RDKit distribution, includes "
+"code that has been contributed by members of the community."
+msgstr ""
+
+#: ../../Overview.md:127
+msgid "Contains python source code from the publications:"
+msgstr ""
+
+#: ../../Overview.md:132
+msgid "Contribution from Anna Vulpetti"
+msgstr ""
+
+#: ../../Overview.md:136
+msgid ""
+"Contains a set of pharmacophoric feature definitions as well as code for "
+"finding molecular frameworks."
+msgstr ""
+
+#: ../../Overview.md:138
+msgid "Contribution from Markus Kossner"
+msgstr ""
+
+#: ../../Overview.md:142
+msgid "Contribution from Nicholas Firth"
+msgstr ""
+
+#: ../../Overview.md:144 ../../Overview.md:185
+msgid ""
+"Note as of the 2016.09.1 release this functionality is part of the RDKit "
+"core."
+msgstr ""
+
+#: ../../Overview.md:146
+msgid "Contains C++ source code and sample data from the publication:"
+msgstr ""
+
+#: ../../Overview.md:148
+msgid ""
+"Firth, N. Brown, and J. Blagg, \"Plane of Best Fit: A Novel Method to "
+"Characterize the Three-Dimensionality of Molecules\" Journal of Chemical "
+"Information and Modeling 52 2516-2525 (2012). "
+"http://pubs.acs.org/doi/abs/10.1021/ci300293f"
+msgstr ""
+
+#: ../../Overview.md:153
+msgid ""
+"Python source and sample data for an implementation of the matched-"
+"molecular pair algorithm described in the publication:"
+msgstr ""
+
+#: ../../Overview.md:155
+msgid ""
+"Hussain, J., & Rea, C. \"Computationally efficient algorithm to identify "
+"matched molecular pairs (MMPs) in large data sets.\" Journal of chemical "
+"information and modeling 50 339-348 (2010). "
+"http://dx.doi.org/10.1021/ci900450m"
+msgstr ""
+
+#: ../../Overview.md:157
+msgid "Includes a fragment indexing algorithm from the publication:"
+msgstr ""
+
+#: ../../Overview.md:159
+msgid ""
+"Wagener, M., & Lommerse, J. P. \"The quest for bioisosteric "
+"replacements.\" Journal of chemical information and modeling 46 677-685 "
+"(2006)."
+msgstr ""
+
+#: ../../Overview.md:161
+msgid "Contribution from Jameed Hussain."
+msgstr ""
+
+#: ../../Overview.md:165
+msgid ""
+"Python source for an implementation of the SA score algorithm described "
+"in the publication:"
+msgstr ""
+
+#: ../../Overview.md:167
+msgid ""
+"Ertl, P. and Schuffenhauer A. \"Estimation of Synthetic Accessibility "
+"Score of Drug-like Molecules based on Molecular Complexity and Fragment "
+"Contributions\" Journal of Cheminformatics 1:8 (2009)"
+msgstr ""
+
+#: ../../Overview.md:169 ../../Overview.md:196
+msgid "Contribution from Peter Ertl"
+msgstr ""
+
+#: ../../Overview.md:173
+msgid ""
+"Python source for an implementation of the fraggle similarity algorithm "
+"developed at GSK and described in this RDKit UGM presentation: "
+"https://github.com/rdkit/UGM_2013/blob/master/Presentations/Hussain.Fraggle.pdf"
+msgstr ""
+
+#: ../../Overview.md:175
+msgid "Contribution from Jameed Hussain"
+msgstr ""
+
+#: ../../Overview.md:179
+msgid "Contribution from Paul Czodrowski"
+msgstr ""
+
+#: ../../Overview.md:183
+msgid "Contribution from Sereina Riniker"
+msgstr ""
+
+#: ../../Overview.md:189
+msgid ""
+"Python source for an implementation of the NP score algorithm described "
+"in the publication:"
+msgstr ""
+
+#: ../../Overview.md:191
+msgid ""
+"\"Natural Product Likeness Score and Its Application for Prioritization "
+"of Compound Libraries\" Peter Ertl, Silvio Roggo, and Ansgar "
+"Schuffenhauer Journal of Chemical Information and Modeling 48:68-74 "
+"(2008) http://pubs.acs.org/doi/abs/10.1021/ci700286x"
+msgstr ""
+
+#: ../../Overview.md:200
+msgid ""
+"Python source for an implementation of the Atom-Atom-Path similarity "
+"method for fragments described in the publication:"
+msgstr ""
+
+#: ../../Overview.md:202
+msgid ""
+"Gobbi, A., Giannetti, A. M., Chen, H. & Lee, M.-L. \"Atom-Atom-Path "
+"similarity and Sphere Exclusion clustering: tools for prioritizing "
+"fragment hits.\" J. Cheminformatics 7 11 (2015). "
+"http://dx.doi.org10.1186/s13321-015-0056-8"
+msgstr ""
+
+#: ../../Overview.md:204
+msgid "Contribution from Richard Hall"
+msgstr ""
+
+#: ../../Overview.md:208
+msgid ""
+"<a name=\"footnote1\">1</a>: These implementations are functional but are"
+" not necessarily the best, fastest, or most complete."
+msgstr ""
+
+#: ../../Overview.md:210
+msgid "<a name=\"footnote2\">2</a>: Originally contributed by Andrew Dalke"
+msgstr ""
+
+#: ../../Overview.md:212
+msgid ""
+"<a name=\"footnote3\">3</a>: Putta, S., Eksterowicz, J., Lemmen, C. & "
+"Stanton, R. \"A Novel Subshape Molecular Descriptor\" Journal of Chemical"
+" Information and Computer Sciences 43:1623–35 (2003)."
+msgstr ""
+
+#: ../../Overview.md:214
+msgid ""
+"<a name=\"footnote4\">4</a>: Tosco, P., Balle, T. & Shiri, F. "
+"\"Open3DALIGN: an open-source software aimed at unsupervised ligand "
+"alignment.\" J Comput Aided Mol Des 25:777–83 (2011)."
+msgstr ""
+
+#: ../../Overview.md:216
+msgid ""
+"<a name=\"footnote5\">5</a>: Landrum, G., Penzotti, J. & Putta, S. "
+"\"Feature-map vectors: a new class of informative descriptors for "
+"computational drug discovery\" Journal of Computer-Aided Molecular Design"
+" 20:751–62 (2006)."
+msgstr ""
+
+#: ../../Overview.md:218
+msgid ""
+"<a name=\"footnote6\">6</a>: Nguyen, K. T., Blum, L. C., van Deursen, R. "
+"& Reymond, J.-L. \"Classification of Organic Molecules by Molecular "
+"Quantum Numbers.\" ChemMedChem 4:1803–5 (2009)."
+msgstr ""
+
+#: ../../Overview.md:220
+msgid ""
+"<a name=\"footnote7\">7</a>: Riniker, S. & Landrum, G. A. \"Similarity "
+"maps - a visualization strategy for molecular fingerprints and machine-"
+"learning methods.\" Journal of Cheminformatics 5:43 (2013)."
+msgstr ""
+
+#: ../../Overview.md:222
+msgid ""
+"<a name=\"footnote8\">8</a>: Schulz-Gasch, T., Schärfer, C., Guba, W. & "
+"Rarey, M. \"TFD: Torsion Fingerprints As a New Measure To Compare Small "
+"Molecule Conformations.\" J. Chem. Inf. Model. 52:1499–1512 (2012)."
+msgstr ""
+
+#: ../../Overview.md:224
+msgid ""
+"<a name=\"footnote9\">9</a>: Riniker, S. & Landrum, G. A. \"Better "
+"informed distance geometry: Using what we know to improve conformation "
+"generation.\" J. Chem. Inf. Model. 55:2562–74 (2015)."
+msgstr ""
+
+#: ../../Overview.md:228
+msgid "This document is copyright (C) 2013-2016 by Greg Landrum"
+msgstr ""
+
+#: ../../Overview.md:230
+msgid ""
+"This work is licensed under the Creative Commons Attribution-ShareAlike "
+"4.0 License. To view a copy of this license, visit "
+"http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to "
+"Creative Commons, 543 Howard Street, 5th Floor, San Francisco, "
+"California, 94105, USA."
+msgstr ""
+
+#: ../../Overview.md:232
+msgid ""
+"The intent of this license is similar to that of the RDKit itself. In "
+"simple words: “Do whatever you want with it, but please give us some "
+"credit.”"
+msgstr ""
+

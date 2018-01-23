@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>An overview of the RDKit &#8212; The RDKit 2017.09.2 ドキュメント</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.09.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="Installation" href="Install.html" />
+    <link rel="prev" title="The RDKit Documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Install.html" title="Installation"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The RDKit Documentation"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">目次</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">An overview of the RDKit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#open-source-toolkit-for-cheminformatics">Open source toolkit for cheminformatics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operational">Operational:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functionality-overview">Functionality overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basics">Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d">2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d">3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-with-other-open-source-projects">Integration with other open-source projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-by-other-open-source-projects">Usage by other open-source projects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-contrib-directory">The Contrib Directory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lef-local-environment-fingerprints">LEF: Local Environment Fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#m-kossner">M_Kossner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pbf-plane-of-best-fit">PBF: Plane of best fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mmpa-matched-molecular-pairs">mmpa: Matched molecular pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sa-score-synthetic-assessibility-score">SA_Score: Synthetic assessibility score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fraggle-a-fragment-based-molecular-similarity-algorithm">fraggle: A fragment-based molecular similarity algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pzc-tools-for-building-and-validating-classifiers">pzc: Tools for building and validating classifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conformerparser-parser-for-amber-trajectory-files">ConformerParser: parser for Amber trajectory files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#np-score-natural-product-likeness-score">NP_Score: Natural-product likeness score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atomatomsimilarity-atom-atom-path-method-for-fragment-similarity">AtomAtomSimilarity: atom-atom-path method for fragment similarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#footnotes">Footnotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RDKit_Book.html">The RDKit Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cookbook.html">RDKit Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a></li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="index.html"
+                        title="前の章へ">The RDKit Documentation</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Install.html"
+                        title="次の章へ">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Overview.md.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="an-overview-of-the-rdkit">
+<span id="an-overview-of-the-rdkit"></span><h1>An overview of the RDKit<a class="headerlink" href="#an-overview-of-the-rdkit" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="what-is-it">
+<span id="what-is-it"></span><h2>What is it?<a class="headerlink" href="#what-is-it" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="open-source-toolkit-for-cheminformatics">
+<span id="open-source-toolkit-for-cheminformatics"></span><h3>Open source toolkit for cheminformatics<a class="headerlink" href="#open-source-toolkit-for-cheminformatics" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>Business-friendly BSD license</li>
+<li>Core data structures and algorithms in C++</li>
+<li>Python (2.x and 3.x) wrapper generated using Boost.Python</li>
+<li>Java and C# wrappers generated with SWIG</li>
+<li>2D and 3D molecular operations</li>
+<li>Descriptor generation for machine learning</li>
+<li>Molecular database cartridge for PostgreSQL</li>
+<li>Cheminformatics nodes for KNIME (distributed from the KNIME community site: http://tech.knime.org/community/rdkit)</li>
+</ul>
+</div>
+<div class="section" id="operational">
+<span id="operational"></span><h3>Operational:<a class="headerlink" href="#operational" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>http://www.rdkit.org</li>
+<li>Supports Mac/Windows/Linux</li>
+<li>Releases every 6 months</li>
+<li>Web presence:<ul>
+<li>Homepage: http://www.rdkit.org
+Documentation, links</li>
+<li>Github (https://github.com/rdkit)
+Downloads, bug tracker, git repository</li>
+<li>Sourceforge (http://sourceforge.net/projects/rdkit)
+Mailing lists</li>
+<li>Blog (https://rdkit.blogspot.com)
+Tips, tricks, random stuff</li>
+<li>Tutorials (https://github.com/rdkit/rdkit-tutorials)
+Jupyter-based tutorials for using the RDKit</li>
+<li>KNIME integration (https://github.com/rdkit/knime-rdkit)
+RDKit nodes for KNIME</li>
+</ul>
+</li>
+<li>Mailing lists at https://sourceforge.net/p/rdkit/mailman/, searchable archives available for <a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/">rdkit-discuss</a> and <a class="reference external" href="http://www.mail-archive.com/rdkit-devel&#64;lists.sourceforge.net/">rdkit-devel</a></li>
+<li>Social media:<ul>
+<li>Twitter: &#64;RDKit_org</li>
+<li>LinkedIn: https://www.linkedin.com/groups/8192558</li>
+<li>Google+: https://plus.google.com/u/0/116996224395614252219</li>
+<li>Slack: https://rdkit.slack.com (invite required, contact Greg)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="history">
+<span id="history"></span><h3>History:<a class="headerlink" href="#history" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>2000-2006: Developed and used at Rational Discovery for building predictive models for ADME, Tox, biological activity</li>
+<li>June 2006: Open-source (BSD license) release of software, Rational Discovery shuts down</li>
+<li>to present: Open-source development continues, use within Novartis, contributions from Novartis back to open-source version</li>
+</ul>
+</div>
+</div>
+<div class="section" id="functionality-overview">
+<span id="functionality-overview"></span><h2>Functionality overview<a class="headerlink" href="#functionality-overview" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+<div class="section" id="basics">
+<span id="basics"></span><h2>Basics<a class="headerlink" href="#basics" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li>Input/Output: SMILES/SMARTS, SDF, TDT, SLN <a class="reference external" href="#footnote1">1</a>, Corina mol2 <a class="reference external" href="#footnote1">1</a>, PDB, sequence notation, FASTA (peptides only), HELM (peptides only)</li>
+<li>Substructure searching</li>
+<li>Canonical SMILES</li>
+<li>Chirality support (i.e. R/S or E/Z labeling)</li>
+<li>Chemical transformations (e.g. remove matching substructures)</li>
+<li>Chemical reactions</li>
+<li>Molecular serialization (e.g. mol &lt;-&gt; text)</li>
+<li>2D depiction, including constrained depiction</li>
+<li>Fingerprinting: Daylight-like, atom pairs, topological torsions, Morgan algorithm, “MACCS keys”, extended reduced graphs, etc.</li>
+<li>Similarity/diversity picking</li>
+<li>Gasteiger-Marsili charges</li>
+<li>Bemis and Murcko scaffold determination</li>
+<li>Salt stripping</li>
+<li>Functional-group filters</li>
+</ul>
+<div class="section" id="d">
+<span id="d"></span><h3>2D<a class="headerlink" href="#d" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>2D pharmacophores <a class="reference external" href="#footnote1">1</a></li>
+<li>Hierarchical subgraph/fragment analysis</li>
+<li>RECAP and BRICS implementations</li>
+<li>Multi-molecule maximum common substructure <a class="reference external" href="#footnote2">2</a></li>
+<li>Enumeration of molecular resonance structures</li>
+<li>Molecular descriptor library:<ul>
+<li>Topological (κ3, Balaban J, etc.)</li>
+<li>Compositional (Number of Rings, Number of Aromatic Heterocycles, etc.)</li>
+<li>Electrotopological state (Estate)</li>
+<li>clogP, MR (Wildman and Crippen approach)</li>
+<li>“MOE like” VSA descriptors</li>
+<li>MQN <a class="reference external" href="#footnote6">6</a></li>
+</ul>
+</li>
+<li>Similarity Maps <a class="reference external" href="#footnote7">7</a></li>
+<li>Machine Learning:<ul>
+<li>Clustering (hierarchical, Butina)</li>
+<li>Information theory (Shannon entropy, information gain, etc.)</li>
+</ul>
+</li>
+<li>Tight integration with the <a class="reference external" href="http://jupyter.org">Jupyter</a> notebook (formerly the IPython notebook) and <a class="reference external" href="http://pandas.pydata.org/">Pandas</a>.</li>
+</ul>
+</div>
+<div class="section" id="d">
+<span id="id1"></span><h3>3D<a class="headerlink" href="#d" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li>2D-&gt;3D conversion/conformational analysis via distance geometry, including optional use of experimental torsion angle potentials <a class="reference external" href="#footnote9">9</a></li>
+<li>UFF and MMFF94/MMFF94S implementations for cleaning up structures</li>
+<li>Pharmacophore embedding (generate a pose of a molecule that matches a 3D pharmacophore) <a class="reference external" href="#footnote1">1</a></li>
+<li>Feature maps</li>
+<li>Shape-based similarity</li>
+<li>RMSD-based molecule-molecule alignment</li>
+<li>Shape-based alignment (subshape alignment <a class="reference external" href="#footnote3">3</a>) <a class="reference external" href="#footnote1">1</a></li>
+<li>Unsupervised molecule-molecule alignment using the Open3DAlign algorithm <a class="reference external" href="#footnote4">4</a></li>
+<li>Integration with PyMOL for 3D visualization</li>
+<li>Molecular descriptor library:<ul>
+<li>Moments-of-inertia based descriptors: PMI, NPR, PBF, etc.</li>
+<li>Feature-map vectors <a class="reference external" href="#footnote5">5</a></li>
+</ul>
+</li>
+<li>Torsion Fingerprint Differences for comparing conformations <a class="reference external" href="#footnote8">8</a></li>
+</ul>
+</div>
+<div class="section" id="integration-with-other-open-source-projects">
+<span id="integration-with-other-open-source-projects"></span><h3>Integration with other open-source projects<a class="headerlink" href="#integration-with-other-open-source-projects" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://tech.knime.org/community/rdkit">KNIME</a>: Workflow and analytics tool</li>
+<li><a class="reference external" href="http://django-rdkit.readthedocs.org/en/latest/">Django</a>: 「The web framework for perfectionists with deadlines」</li>
+<li><a class="reference external" href="https://github.com/rdkit/rdkit/blob/master/Docs/Book/Cartridge.rst">PostgreSQL</a>: Extensible relational database</li>
+<li><a class="reference external" href="https://github.com/rdkit/org.rdkit.lucene">Lucene</a>: Text-search engine <a class="reference external" href="#footnote1">1</a></li>
+</ul>
+</div>
+<div class="section" id="usage-by-other-open-source-projects">
+<span id="usage-by-other-open-source-projects"></span><h3>Usage by other open-source projects<a class="headerlink" href="#usage-by-other-open-source-projects" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/mnowotka/chembl_beaker">ChEMBL Beaker</a> - standalone web server wrapper for RDKit and OSRA</li>
+<li><a class="reference external" href="https://github.com/chembl/mychembl">myChEMBL</a> (<a class="reference external" href="http://chembl.blogspot.de/2013/10/chembl-virtual-machine-aka-mychembl.html">blog post</a>, <a class="reference external" href="http://bioinformatics.oxfordjournals.org/content/early/2013/11/20/bioinformatics.btt666">paper</a>) - A virtual machine implementation of open data and cheminformatics tools</li>
+<li><a class="reference external" href="http://zinc15.docking.org">ZINC</a> - Free database of commercially-available compounds for virtual screening</li>
+<li><a class="reference external" href="https://github.com/apahl/sdf_viewer">sdf_viewer.py</a> - an interactive SDF viewer</li>
+<li><a class="reference external" href="https://github.com/dkuhn/sdf2ppt">sdf2ppt</a> - Reads an SDFile and displays molecules as image grid in powerpoint/openoffice presentation.</li>
+<li><a class="reference external" href="https://github.com/admed/molgears">MolGears</a> - A cheminformatics tool for bioactive molecules</li>
+<li><a class="reference external" href="http://www.biochemfusion.com/downloads/#OracleUtilities">PYPL</a> - Simple cartridge that lets you call Python scripts from Oracle PL/SQL.</li>
+<li><a class="reference external" href="https://github.com/jandom/shape-it-rdkit">shape-it-rdkit</a> - Gaussian molecular overlap code shape-it (from silicos it) ported to RDKit backend</li>
+<li><a class="reference external" href="http://wonka.sgc.ox.ac.uk/WONKA/">WONKA</a> - Tool for analysis and interrogation of protein-ligand crystal structures</li>
+<li><a class="reference external" href="http://oommppaa.sgc.ox.ac.uk/OOMMPPAA/">OOMMPPAA</a> - Tool for directed synthesis and data analysis based on protein-ligand crystal structures</li>
+<li><a class="reference external" href="https://github.com/rdkit/OCEAN">OCEAN</a> - web-tool for target-prediction of chemical structures which uses ChEMBL as datasource</li>
+<li><a class="reference external" href="http://chemfp.com">chemfp</a> - very fast fingerprint searching</li>
+<li><a class="reference external" href="https://github.com/apahl/rdkit_ipynb_tools">rdkit_ipynb_tools</a> - RDKit Tools for the IPython Notebook</li>
+<li><a class="reference external" href="https://github.com/rvianello/chemicalite">chemicalite</a> - SQLite integration for the RDKit</li>
+<li><a class="reference external" href="https://tech.knime.org/book/vernalis-nodes-for-knime-trusted-extension">Vernalis KNIME nodes</a></li>
+<li><a class="reference external" href="https://tech.knime.org/community/erlwood">Erlwood KNIME nodes</a></li>
+<li><a class="reference external" href="https://github.com/AZcompTox/AZOrange">AZOrange</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-contrib-directory">
+<span id="the-contrib-directory"></span><h2>The Contrib Directory<a class="headerlink" href="#the-contrib-directory" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>The Contrib directory, part of the standard RDKit distribution, includes code that has been contributed by members of the community.</p>
+<div class="section" id="lef-local-environment-fingerprints">
+<span id="lef-local-environment-fingerprints"></span><h3>LEF: Local Environment Fingerprints<a class="headerlink" href="#lef-local-environment-fingerprints" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Contains python source code from the publications:</p>
+<ul class="simple">
+<li>A. Vulpetti, U. Hommel, G. Landrum, R. Lewis and C. Dalvit, 「Design and NMR-based screening of LEF, a library of chemical fragments with different Local Environment of Fluorine」 <em>J. Am. Chem. Soc.</em> <strong>131</strong> (2009) 12949-12959. http://dx.doi.org/10.1021/ja905207t</li>
+<li>Vulpetti, G. Landrum, S. Ruedisser, P. Erbel and C. Dalvit, 「19F NMR Chemical Shift Prediction with Fluorine Fingerprint Descriptor」 <em>J. of Fluorine Chemistry</em> <strong>131</strong> (2010) 570-577. http://dx.doi.org/10.1016/j.jfluchem.2009.12.024</li>
+</ul>
+<p>Contribution from Anna Vulpetti</p>
+</div>
+<div class="section" id="m-kossner">
+<span id="m-kossner"></span><h3>M_Kossner<a class="headerlink" href="#m-kossner" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Contains a set of pharmacophoric feature definitions as well as code for finding molecular frameworks.</p>
+<p>Contribution from Markus Kossner</p>
+</div>
+<div class="section" id="pbf-plane-of-best-fit">
+<span id="pbf-plane-of-best-fit"></span><h3>PBF: Plane of best fit<a class="headerlink" href="#pbf-plane-of-best-fit" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Contribution from Nicholas Firth</p>
+<p><em>Note</em> as of the 2016.09.1 release this functionality is part of the RDKit core.</p>
+<p>Contains C++ source code and sample data from the publication:</p>
+<p>Firth, N. Brown, and J. Blagg, 「Plane of Best Fit: A Novel Method to Characterize the Three-Dimensionality of Molecules」 <em>Journal of Chemical Information and Modeling</em> <strong>52</strong> 2516-2525 (2012). http://pubs.acs.org/doi/abs/10.1021/ci300293f</p>
+</div>
+<div class="section" id="mmpa-matched-molecular-pairs">
+<span id="mmpa-matched-molecular-pairs"></span><h3>mmpa: Matched molecular pairs<a class="headerlink" href="#mmpa-matched-molecular-pairs" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Python source and sample data for an implementation of the matched-molecular pair algorithm described in the publication:</p>
+<p>Hussain, J., &amp; Rea, C. 「Computationally efficient algorithm to identify matched molecular pairs (MMPs) in large data sets.」 <em>Journal of chemical information and modeling</em> <strong>50</strong> 339-348 (2010). http://dx.doi.org/10.1021/ci900450m</p>
+<p>Includes a fragment indexing algorithm from the publication:</p>
+<p>Wagener, M., &amp; Lommerse, J. P. 「The quest for bioisosteric replacements.」 <em>Journal of chemical information and modeling</em> <strong>46</strong> 677-685 (2006).</p>
+<p>Contribution from Jameed Hussain.</p>
+</div>
+<div class="section" id="sa-score-synthetic-assessibility-score">
+<span id="sa-score-synthetic-assessibility-score"></span><h3>SA_Score: Synthetic assessibility score<a class="headerlink" href="#sa-score-synthetic-assessibility-score" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Python source for an implementation of the SA score algorithm described in the publication:</p>
+<p>Ertl, P. and Schuffenhauer A. 「Estimation of Synthetic Accessibility Score of Drug-like Molecules based on Molecular Complexity and Fragment Contributions」 <em>Journal of Cheminformatics</em> <strong>1:8</strong> (2009)</p>
+<p>Contribution from Peter Ertl</p>
+</div>
+<div class="section" id="fraggle-a-fragment-based-molecular-similarity-algorithm">
+<span id="fraggle-a-fragment-based-molecular-similarity-algorithm"></span><h3>fraggle: A fragment-based molecular similarity algorithm<a class="headerlink" href="#fraggle-a-fragment-based-molecular-similarity-algorithm" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Python source for an implementation of the fraggle similarity algorithm developed at GSK and described in this RDKit UGM presentation: https://github.com/rdkit/UGM_2013/blob/master/Presentations/Hussain.Fraggle.pdf</p>
+<p>Contribution from Jameed Hussain</p>
+</div>
+<div class="section" id="pzc-tools-for-building-and-validating-classifiers">
+<span id="pzc-tools-for-building-and-validating-classifiers"></span><h3>pzc: Tools for building and validating classifiers<a class="headerlink" href="#pzc-tools-for-building-and-validating-classifiers" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Contribution from Paul Czodrowski</p>
+</div>
+<div class="section" id="conformerparser-parser-for-amber-trajectory-files">
+<span id="conformerparser-parser-for-amber-trajectory-files"></span><h3>ConformerParser: parser for Amber trajectory files<a class="headerlink" href="#conformerparser-parser-for-amber-trajectory-files" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Contribution from Sereina Riniker</p>
+<p><em>Note</em> as of the 2016.09.1 release this functionality is part of the RDKit core.</p>
+</div>
+<div class="section" id="np-score-natural-product-likeness-score">
+<span id="np-score-natural-product-likeness-score"></span><h3>NP_Score: Natural-product likeness score<a class="headerlink" href="#np-score-natural-product-likeness-score" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Python source for an implementation of the NP score algorithm described in the publication:</p>
+<p>「Natural Product Likeness Score and Its Application for Prioritization of Compound Libraries」
+Peter Ertl, Silvio Roggo, and Ansgar Schuffenhauer
+<em>Journal of Chemical Information and Modeling</em> <strong>48:68-74</strong> (2008)
+http://pubs.acs.org/doi/abs/10.1021/ci700286x</p>
+<p>Contribution from Peter Ertl</p>
+</div>
+<div class="section" id="atomatomsimilarity-atom-atom-path-method-for-fragment-similarity">
+<span id="atomatomsimilarity-atom-atom-path-method-for-fragment-similarity"></span><h3>AtomAtomSimilarity: atom-atom-path method for fragment similarity<a class="headerlink" href="#atomatomsimilarity-atom-atom-path-method-for-fragment-similarity" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Python source for an implementation of the Atom-Atom-Path similarity method for fragments described in the publication:</p>
+<p>Gobbi, A., Giannetti, A. M., Chen, H. &amp; Lee, M.-L. 「Atom-Atom-Path similarity and Sphere Exclusion clustering: tools for prioritizing fragment hits.」 <em>J. Cheminformatics</em> <strong>7</strong> 11 (2015). http://dx.doi.org10.1186/s13321-015-0056-8</p>
+<p>Contribution from Richard Hall</p>
+</div>
+</div>
+<div class="section" id="footnotes">
+<span id="footnotes"></span><h2>Footnotes<a class="headerlink" href="#footnotes" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><a name="footnote1">1</a>: These implementations are functional but are not necessarily the best, fastest, or most complete.</p>
+<p><a name="footnote2">2</a>: Originally contributed by Andrew Dalke</p>
+<p><a name="footnote3">3</a>: Putta, S., Eksterowicz, J., Lemmen, C. &amp; Stanton, R. 「A Novel Subshape Molecular Descriptor」 <em>Journal of Chemical Information and Computer Sciences</em> <strong>43:1623–35</strong> (2003).</p>
+<p><a name="footnote4">4</a>: Tosco, P., Balle, T. &amp; Shiri, F. 「Open3DALIGN: an open-source software aimed at unsupervised ligand alignment.」 <em>J Comput Aided Mol Des</em> <strong>25:777–83</strong> (2011).</p>
+<p><a name="footnote5">5</a>: Landrum, G., Penzotti, J. &amp; Putta, S. 「Feature-map vectors: a new class of informative descriptors for computational drug discovery」 <em>Journal of Computer-Aided Molecular Design</em> <strong>20:751–62</strong> (2006).</p>
+<p><a name="footnote6">6</a>: Nguyen, K. T., Blum, L. C., van Deursen, R. &amp; Reymond, J.-L. 「Classification of Organic Molecules by Molecular Quantum Numbers.」 <em>ChemMedChem</em> <strong>4:1803–5</strong> (2009).</p>
+<p><a name="footnote7">7</a>: Riniker, S. &amp; Landrum, G. A. 「Similarity maps - a visualization strategy for molecular fingerprints and machine-learning methods.」 <em>Journal of Cheminformatics</em> <strong>5:43</strong> (2013).</p>
+<p><a name="footnote8">8</a>: Schulz-Gasch, T., Schärfer, C., Guba, W. &amp; Rarey, M. 「TFD: Torsion Fingerprints As a New Measure To Compare Small Molecule Conformations.」 <em>J. Chem. Inf. Model.</em> <strong>52:1499–1512</strong> (2012).</p>
+<p><a name="footnote9">9</a>: Riniker, S. &amp; Landrum, G. A. 「Better informed distance geometry: Using what we know to improve conformation generation.」 <em>J. Chem. Inf. Model.</em> <strong>55:2562–74</strong> (2015).</p>
+</div>
+<div class="section" id="license">
+<span id="license"></span><h2>License<a class="headerlink" href="#license" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>This document is copyright (C) 2013-2016 by Greg Landrum</p>
+<p>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 License. To view a copy of this license, visit <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a> or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA.</p>
+<p>The intent of this license is similar to that of the RDKit itself. In simple words: “Do whatever you want with it, but please give us some credit.”</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Install.html" title="Installation"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="The RDKit Documentation"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Greg Landrum.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
+    </div>
+  </body>
+</html>

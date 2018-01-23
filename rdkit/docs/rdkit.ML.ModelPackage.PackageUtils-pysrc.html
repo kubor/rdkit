@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.ModelPackage.PackageUtils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.ModelPackage-module.html">Package&nbsp;ModelPackage</a> ::
+        Module&nbsp;PackageUtils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.ModelPackage.PackageUtils-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.ModelPackage.PackageUtils-module.html">Module rdkit.ML.ModelPackage.PackageUtils</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2003 Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># All rights are reserved.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># from elementtree.ElementTree import ElementTree, Element, SubElement</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ElementTree</tt><tt class="py-op">,</tt> <tt class="py-name">Element</tt><tt class="py-op">,</tt> <tt class="py-name">SubElement</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="_ConvertModelPerformance"></a><div id="_ConvertModelPerformance-def"><a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="_ConvertModelPerformance-toggle" onclick="return toggle('_ConvertModelPerformance');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.PackageUtils-module.html#_ConvertModelPerformance">_ConvertModelPerformance</a><tt class="py-op">(</tt><tt class="py-param">perf</tt><tt class="py-op">,</tt> <tt class="py-param">modelPerf</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_ConvertModelPerformance-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_ConvertModelPerformance-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-name">confMat</tt> <tt class="py-op">=</tt> <tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-name">accum</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">row</tt> <tt class="py-keyword">in</tt> <tt class="py-name">confMat</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">entry</tt> <tt class="py-keyword">in</tt> <tt class="py-name">row</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-name">accum</tt> <tt class="py-op">+=</tt> <tt class="py-name">entry</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">accum</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">accum</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">confMat</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">accum</tt> <tt class="py-op">=</tt> <tt class="py-string">'N/A'</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"ScreenThreshold"</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"NumScreened"</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">accum</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"NumSkipped"</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">6</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"Accuracy"</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"AvgCorrectConf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"AvgIncorrectConf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"AvgSkipConf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">modelPerf</tt><tt class="py-op">[</tt><tt class="py-number">5</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">confMat</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-string">"ConfusionMatrix"</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">confMat</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="PackageToXml"></a><div id="PackageToXml-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="PackageToXml-toggle" onclick="return toggle('PackageToXml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.PackageUtils-module.html#PackageToXml">PackageToXml</a><tt class="py-op">(</tt><tt class="py-param">pkg</tt><tt class="py-op">,</tt> <tt class="py-param">summary</tt><tt class="py-op">=</tt><tt class="py-string">"N/A"</tt><tt class="py-op">,</tt> <tt class="py-param">trainingDataId</tt><tt class="py-op">=</tt><tt class="py-string">'N/A'</tt><tt class="py-op">,</tt> <tt class="py-param">dataPerformance</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                 <tt class="py-param">recommendedThreshold</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">classDescriptions</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">modelType</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                 <tt class="py-param">modelOrganism</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PackageToXml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PackageToXml-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">  <tt class="py-docstring">""" generates XML for a package that follows the RD_Model.dtd</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">  If provided, dataPerformance should be a sequence of 2-tuples:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">    ( note, performance )</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">  where performance is of the form:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    ( accuracy, avgCorrectConf, avgIncorrectConf, confusionMatrix, thresh, avgSkipConf, nSkipped )</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    the last four elements are optional</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">  <tt class="py-name">head</tt> <tt class="py-op">=</tt> <tt class="py-name">Element</tt><tt class="py-op">(</tt><tt class="py-string">"RDModelInfo"</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">  <tt id="link-0" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.name=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-0', 'name', 'link-0');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelName"</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">  <tt class="py-name">notes</tt> <tt class="py-op">=</tt> <tt class="py-name">pkg</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Method rdkit.ML.ModelPackage.Packager.ModelPackage.GetNotes()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetNotes"><a title="rdkit.ML.ModelPackage.Packager.ModelPackage.GetNotes" class="py-name" href="#" onclick="return doclink('link-1', 'GetNotes', 'link-1');">GetNotes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">notes</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-name">notes</tt> <tt class="py-op">=</tt> <tt class="py-string">"Unnamed model"</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">  <tt id="link-2" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-2', 'name', 'link-0');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">notes</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">  <tt class="py-name">summ</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelSummary"</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">  <tt class="py-name">summ</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">summary</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-name">calc</tt> <tt class="py-op">=</tt> <tt class="py-name">pkg</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method rdkit.ML.ModelPackage.Packager.ModelPackage.GetCalculator()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetCalculator"><a title="rdkit.ML.ModelPackage.Packager.ModelPackage.GetCalculator" class="py-name" href="#" onclick="return doclink('link-3', 'GetCalculator', 'link-3');">GetCalculator</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-name">descrs</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelDescriptors"</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt id="link-4" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-4', 'name', 'link-0');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">summary</tt><tt class="py-op">,</tt> <tt class="py-name">func</tt> <tt class="py-keyword">in</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">calc</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.ML.Composite.Composite.Composite.GetDescriptorNames()=rdkit.ML.Composite.Composite.Composite-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#GetDescriptorNames"><a title="rdkit.ML.Composite.Composite.Composite.GetDescriptorNames
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorNames" class="py-name" href="#" onclick="return doclink('link-5', 'GetDescriptorNames', 'link-5');">GetDescriptorNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">calc</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorSummaries()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#GetDescriptorSummaries"><a title="rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorSummaries" class="py-name" href="#" onclick="return doclink('link-6', 'GetDescriptorSummaries', 'link-6');">GetDescriptorSummaries</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                                 <tt class="py-name">calc</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorFuncs()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#GetDescriptorFuncs"><a title="rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorFuncs" class="py-name" href="#" onclick="return doclink('link-7', 'GetDescriptorFuncs', 'link-7');">GetDescriptorFuncs</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">descr</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descrs</tt><tt class="py-op">,</tt> <tt class="py-string">"Descriptor"</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descr</tt><tt class="py-op">,</tt> <tt class="py-string">"DescriptorName"</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-8', 'name', 'link-0');">name</a></tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descr</tt><tt class="py-op">,</tt> <tt class="py-string">"DescriptorDetail"</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">summary</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">func</tt><tt class="py-op">,</tt> <tt class="py-string">'version'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-name">vers</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descr</tt><tt class="py-op">,</tt> <tt class="py-string">"DescriptorVersion"</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">      <tt class="py-name">major</tt><tt class="py-op">,</tt> <tt class="py-name">minor</tt><tt class="py-op">,</tt> <tt class="py-name">patch</tt> <tt class="py-op">=</tt> <tt class="py-name">func</tt><tt class="py-op">.</tt><tt class="py-name">version</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">      <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">vers</tt><tt class="py-op">,</tt> <tt class="py-string">"VersionMajor"</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">      <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">major</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">      <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">vers</tt><tt class="py-op">,</tt> <tt class="py-string">"VersionMinor"</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">      <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">minor</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">      <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">vers</tt><tt class="py-op">,</tt> <tt class="py-string">"VersionPatch"</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">      <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">patch</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"TrainingDataId"</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">trainingDataId</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt id="link-9" class="py-name" targets="Variable rdkit.Chem.FragmentCatalog.BitGainsInfo.description=rdkit.Chem.FragmentCatalog.BitGainsInfo-class.html#description"><a title="rdkit.Chem.FragmentCatalog.BitGainsInfo.description" class="py-name" href="#" onclick="return doclink('link-9', 'description', 'link-9');">description</a></tt><tt class="py-op">,</tt> <tt class="py-name">perfData</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dataPerformance</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">dataNode</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ValidationData"</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-name">note</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">dataNode</tt><tt class="py-op">,</tt> <tt class="py-string">'ScreenNote'</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-name">note</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem.FragmentCatalog.BitGainsInfo.description" class="py-name" href="#" onclick="return doclink('link-10', 'description', 'link-9');">description</a></tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">perf</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">dataNode</tt><tt class="py-op">,</tt> <tt class="py-string">"PerformanceData"</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Function rdkit.ML.ModelPackage.PackageUtils._ConvertModelPerformance()=rdkit.ML.ModelPackage.PackageUtils-module.html#_ConvertModelPerformance"><a title="rdkit.ML.ModelPackage.PackageUtils._ConvertModelPerformance" class="py-name" href="#" onclick="return doclink('link-11', '_ConvertModelPerformance', 'link-11');">_ConvertModelPerformance</a></tt><tt class="py-op">(</tt><tt class="py-name">perf</tt><tt class="py-op">,</tt> <tt class="py-name">perfData</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">recommendedThreshold</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"RecommendedThreshold"</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">recommendedThreshold</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">classDescriptions</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ClassDescriptions"</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">val</tt><tt class="py-op">,</tt> <tt class="py-name">text</tt> <tt class="py-keyword">in</tt> <tt class="py-name">classDescriptions</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">      <tt class="py-name">descr</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">elem</tt><tt class="py-op">,</tt> <tt class="py-string">'ClassDescription'</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">      <tt class="py-name">valElem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descr</tt><tt class="py-op">,</tt> <tt class="py-string">'ClassVal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">      <tt class="py-name">valElem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">val</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-name">valText</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">descr</tt><tt class="py-op">,</tt> <tt class="py-string">'ClassText'</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">      <tt class="py-name">valText</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">modelType</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelType"</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">modelType</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">modelOrganism</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelOrganism"</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">modelOrganism</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">  <tt class="py-name">hist</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">,</tt> <tt class="py-string">"ModelHistory"</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">  <tt class="py-name">revision</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">hist</tt><tt class="py-op">,</tt> <tt class="py-string">"Revision"</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">  <tt class="py-name">tm</tt> <tt class="py-op">=</tt> <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">localtime</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">  <tt class="py-name">date</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">revision</tt><tt class="py-op">,</tt> <tt class="py-string">"RevisionDate"</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">date</tt><tt class="py-op">,</tt> <tt class="py-string">"Year"</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">tm</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">date</tt><tt class="py-op">,</tt> <tt class="py-string">"Month"</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">tm</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">  <tt class="py-name">elem</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">date</tt><tt class="py-op">,</tt> <tt class="py-string">"Day"</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">  <tt class="py-name">elem</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">tm</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">  <tt class="py-name">note</tt> <tt class="py-op">=</tt> <tt class="py-name">SubElement</tt><tt class="py-op">(</tt><tt class="py-name">revision</tt><tt class="py-op">,</tt> <tt class="py-string">"RevisionNote"</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">  <tt class="py-name">note</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-string">"Created"</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">ElementTree</tt><tt class="py-op">(</tt><tt class="py-name">head</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt class="py-name">six</tt><tt class="py-op">.</tt><tt class="py-name">moves</tt> <tt class="py-keyword">import</tt> <tt class="py-name">cPickle</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt class="py-name">six</tt> <tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">  <tt class="py-name">pkg</tt> <tt class="py-op">=</tt> <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt class="py-name">load</tt><tt class="py-op">(</tt><tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'rb'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">  <tt class="py-name">perf</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">.80</tt><tt class="py-op">,</tt> <tt class="py-number">.95</tt><tt class="py-op">,</tt> <tt class="py-number">.70</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">  <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name" targets="Function rdkit.ML.ModelPackage.PackageUtils.PackageToXml()=rdkit.ML.ModelPackage.PackageUtils-module.html#PackageToXml"><a title="rdkit.ML.ModelPackage.PackageUtils.PackageToXml" class="py-name" href="#" onclick="return doclink('link-12', 'PackageToXml', 'link-12');">PackageToXml</a></tt><tt class="py-op">(</tt><tt class="py-name">pkg</tt><tt class="py-op">,</tt> <tt class="py-name">dataPerformance</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'training data performance'</tt><tt class="py-op">,</tt> <tt class="py-name">perf</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">  <tt id="link-13" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.io=rdkit.VLib.NodeLib.demo-module.html#io"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-13', 'io', 'link-13');">io</a></tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">  <tt class="py-name">tree</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-14', 'io', 'link-13');">io</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">  <tt class="py-name">txt</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-15', 'io', 'link-13');">io</a></tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">  <tt class="py-name">header</tt> <tt class="py-op">=</tt> <tt class="py-string">"""&lt;?xml version="1.0"?&gt;</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-string">&lt;!DOCTYPE RDModelInfo PUBLIC "-//RD//DTD RDModelInfo //EN" "RD_Model.dtd"&gt;</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">header</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">txt</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'&gt;&lt;'</tt><tt class="py-op">,</tt> <tt class="py-string">'&gt;\n&lt;'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

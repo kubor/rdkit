@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.FeatFinderCLI</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;FeatFinderCLI
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.FeatFinderCLI-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.FeatFinderCLI-module.html">Module rdkit.Chem.FeatFinderCLI</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2005-2006 Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">argparse</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RDLogger</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-0');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module rdkit.Chem.ChemicalFeatures=rdkit.Chem.ChemicalFeatures-module.html"><a title="rdkit.Chem.ChemicalFeatures" class="py-name" href="#" onclick="return doclink('link-2', 'ChemicalFeatures', 'link-2');">ChemicalFeatures</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable rdkit.Chem.AllChem.logger=rdkit.Chem.AllChem-module.html#logger,Variable rdkit.Chem.ChemUtils.TemplateExpand.logger=rdkit.Chem.ChemUtils.TemplateExpand-module.html#logger,Variable rdkit.Chem.FeatFinderCLI.logger=rdkit.Chem.FeatFinderCLI-module.html#logger,Variable rdkit.Chem.Features.ShowFeats.logger=rdkit.Chem.Features.ShowFeats-module.html#logger,Variable rdkit.Chem.MolDb.Loader_orig.logger=rdkit.Chem.MolDb.Loader_orig-module.html#logger,Variable rdkit.Chem.MolDb.Loader_sa.logger=rdkit.Chem.MolDb.Loader_sa-module.html#logger,Variable rdkit.Chem.Pharm2D.Generate.logger=rdkit.Chem.Pharm2D.Generate-module.html#logger,Variable rdkit.Chem.Pharm3D.EmbedLib.logger=rdkit.Chem.Pharm3D.EmbedLib-module.html#logger,Variable rdkit.Chem.Pharm3D.Pharmacophore.logger=rdkit.Chem.Pharm3D.Pharmacophore-module.html#logger,Variable rdkit.Chem.Subshape.SubshapeAligner.logger=rdkit.Chem.Subshape.SubshapeAligner-module.html#logger,Variable rdkit.ML.Cluster.Butina.logger=rdkit.ML.Cluster.Butina-module.html#logger,Variable rdkit.ML.Descriptors.MoleculeDescriptors.logger=rdkit.ML.Descriptors.MoleculeDescriptors-module.html#logger"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-3', 'logger', 'link-3');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">RDLogger</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-4', 'logger', 'link-3');">logger</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable rdkit.Chem.FeatFinderCLI.splitExpr=rdkit.Chem.FeatFinderCLI-module.html#splitExpr"><a title="rdkit.Chem.FeatFinderCLI.splitExpr" class="py-name" href="#" onclick="return doclink('link-5', 'splitExpr', 'link-5');">splitExpr</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">r'[ \t,]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="GetAtomFeatInfo"></a><div id="GetAtomFeatInfo-def"><a name="L24"></a><tt class="py-lineno"> 24</tt> <a class="py-toggle" href="#" id="GetAtomFeatInfo-toggle" onclick="return toggle('GetAtomFeatInfo');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.FeatFinderCLI-module.html#GetAtomFeatInfo">GetAtomFeatInfo</a><tt class="py-op">(</tt><tt class="py-param">factory</tt><tt class="py-op">,</tt> <tt class="py-param">mol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetAtomFeatInfo-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetAtomFeatInfo-expanded"><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt id="link-6" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-6', 'mol', 'link-6');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">  <tt class="py-name">feats</tt> <tt class="py-op">=</tt> <tt class="py-name">factory</tt><tt class="py-op">.</tt><tt class="py-name">GetFeaturesForMol</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-7', 'mol', 'link-6');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">feat</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feats</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-name">ids</tt> <tt class="py-op">=</tt> <tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomIds</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">feature</tt> <tt class="py-op">=</tt> <tt class="py-string">"%s-%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetFamily</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetType</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">id_</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ids</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">res</tt><tt class="py-op">[</tt><tt class="py-name">id_</tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">res</tt><tt class="py-op">[</tt><tt class="py-name">id_</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">      <tt class="py-name">res</tt><tt class="py-op">[</tt><tt class="py-name">id_</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">feature</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="initParser"></a><div id="initParser-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="initParser-toggle" onclick="return toggle('initParser');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.FeatFinderCLI-module.html#initParser">initParser</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="initParser-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="initParser-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">  <tt class="py-docstring">""" Initialize the parser """</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">  <tt id="link-8" class="py-name" targets="Variable rdkit.Chem.Features.ShowFeats.parser=rdkit.Chem.Features.ShowFeats-module.html#parser"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-8', 'parser', 'link-8');">parser</a></tt> <tt class="py-op">=</tt> <tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">ArgumentParser</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name" targets="Variable rdkit.Chem.FragmentCatalog.BitGainsInfo.description=rdkit.Chem.FragmentCatalog.BitGainsInfo-class.html#description"><a title="rdkit.Chem.FragmentCatalog.BitGainsInfo.description" class="py-name" href="#" onclick="return doclink('link-9', 'description', 'link-9');">description</a></tt><tt class="py-op">=</tt><tt class="py-string">'Determine pharmacophore features of molecules'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                                   <tt class="py-name">epilog</tt><tt class="py-op">=</tt><tt id="link-10" class="py-name" targets="Variable rdkit.Chem.FeatFinderCLI._splashMessage=rdkit.Chem.FeatFinderCLI-module.html#_splashMessage"><a title="rdkit.Chem.FeatFinderCLI._splashMessage" class="py-name" href="#" onclick="return doclink('link-10', '_splashMessage', 'link-10');">_splashMessage</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                                   <tt class="py-name">formatter_class</tt><tt class="py-op">=</tt><tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">RawDescriptionHelpFormatter</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">  <tt id="link-11" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-11', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-r'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'reverseIt'</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Function rdkit.Chem.QED.default()=rdkit.Chem.QED-module.html#default"><a title="rdkit.Chem.QED.default" class="py-name" href="#" onclick="return doclink('link-12', 'default', 'link-12');">default</a></tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'Set to get atoms lists for each feature.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">  <tt id="link-13" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-13', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-n'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'maxLines'</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="rdkit.Chem.QED.default" class="py-name" href="#" onclick="return doclink('link-14', 'default', 'link-12');">default</a></tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">SUPPRESS</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name" targets="Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#type,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#type"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-15', 'type', 'link-15');">type</a></tt><tt class="py-op">=</tt><tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">  <tt id="link-16" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-16', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'fdefFilename'</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-17', 'type', 'link-15');">type</a></tt><tt class="py-op">=</tt><tt id="link-18" class="py-name" targets="Function rdkit.Chem.ChemUtils.SDFToCSV.existingFile()=rdkit.Chem.ChemUtils.SDFToCSV-module.html#existingFile,Function rdkit.Chem.FeatFinderCLI.existingFile()=rdkit.Chem.FeatFinderCLI-module.html#existingFile"><a title="rdkit.Chem.ChemUtils.SDFToCSV.existingFile
+rdkit.Chem.FeatFinderCLI.existingFile" class="py-name" href="#" onclick="return doclink('link-18', 'existingFile', 'link-18');">existingFile</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'Pharmacophore feature definition file'</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">  <tt id="link-19" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-19', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'smilesFilename'</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-20', 'type', 'link-15');">type</a></tt><tt class="py-op">=</tt><tt id="link-21" class="py-name"><a title="rdkit.Chem.ChemUtils.SDFToCSV.existingFile
+rdkit.Chem.FeatFinderCLI.existingFile" class="py-name" href="#" onclick="return doclink('link-21', 'existingFile', 'link-18');">existingFile</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">'The smiles file should have SMILES in the first column'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-22', 'parser', 'link-8');">parser</a></tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-23" class="py-name"><a title="rdkit.Chem.FeatFinderCLI._splashMessage" class="py-name" href="#" onclick="return doclink('link-23', '_splashMessage', 'link-10');">_splashMessage</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-string">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-string">  FeatFinderCLI</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-string">  Part of the RDKit (http://www.rdkit.org)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-string">-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="existingFile"></a><div id="existingFile-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="existingFile-toggle" onclick="return toggle('existingFile');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.FeatFinderCLI-module.html#existingFile">existingFile</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="existingFile-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="existingFile-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">  <tt class="py-docstring">""" 'type' for argparse - check that filename exists """</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">ArgumentTypeError</tt><tt class="py-op">(</tt><tt class="py-string">"{0} does not exist"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">filename</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="processArgs"></a><div id="processArgs-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="processArgs-toggle" onclick="return toggle('processArgs');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.FeatFinderCLI-module.html#processArgs">processArgs</a><tt class="py-op">(</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-param">parser</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="processArgs-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="processArgs-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">factory</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="rdkit.Chem.ChemicalFeatures" class="py-name" href="#" onclick="return doclink('link-24', 'ChemicalFeatures', 'link-2');">ChemicalFeatures</a></tt><tt class="py-op">.</tt><tt class="py-name">BuildFeatureFactory</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">fdefFilename</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt id="link-25" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-25', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Function rdkit.Chem.Fingerprints.FingerprintMols.error()=rdkit.Chem.Fingerprints.FingerprintMols-module.html#error,Function rdkit.ML.EnrichPlot.error()=rdkit.ML.EnrichPlot-module.html#error,Function rdkit.ML.ScreenComposite.error()=rdkit.ML.ScreenComposite-module.html#error"><a title="rdkit.Chem.Fingerprints.FingerprintMols.error
+rdkit.ML.EnrichPlot.error
+rdkit.ML.ScreenComposite.error" class="py-name" href="#" onclick="return doclink('link-26', 'error', 'link-26');">error</a></tt><tt class="py-op">(</tt><tt class="py-string">"Could not parse Fdef file {0.fdefFilename}."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">  <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">smilesFilename</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">inF</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">lineNo</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">inF</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">lineNo</tt> <tt class="py-op">==</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">maxLines</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">break</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">      <tt class="py-name">smi</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="rdkit.Chem.FeatFinderCLI.splitExpr" class="py-name" href="#" onclick="return doclink('link-27', 'splitExpr', 'link-5');">splitExpr</a></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">      <tt id="link-28" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-28', 'mol', 'link-6');">mol</a></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-29', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmiles</tt><tt class="py-op">(</tt><tt class="py-name">smi</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-30" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-30', 'mol', 'link-6');">mol</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt id="link-31" class="py-name"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-31', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Function rdkit.Chem.Suppliers.DbMolSupplier.warning()=rdkit.Chem.Suppliers.DbMolSupplier-module.html#warning"><a title="rdkit.Chem.Suppliers.DbMolSupplier.warning" class="py-name" href="#" onclick="return doclink('link-32', 'warning', 'link-32');">warning</a></tt><tt class="py-op">(</tt><tt class="py-string">"Could not process smiles '%s' on line %d."</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">smi</tt><tt class="py-op">,</tt> <tt class="py-name">lineNo</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">      <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Mol-%d\t%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">lineNo</tt><tt class="py-op">,</tt> <tt class="py-name">smi</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">reverseIt</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">feats</tt> <tt class="py-op">=</tt> <tt class="py-name">factory</tt><tt class="py-op">.</tt><tt class="py-name">GetFeaturesForMol</tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-33', 'mol', 'link-6');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">feat</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feats</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">          <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t%s-%s: '</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetFamily</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetType</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">end</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">          <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">', '</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">feat</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomIds</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">featInfo</tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name" targets="Function rdkit.Chem.FeatFinderCLI.GetAtomFeatInfo()=rdkit.Chem.FeatFinderCLI-module.html#GetAtomFeatInfo"><a title="rdkit.Chem.FeatFinderCLI.GetAtomFeatInfo" class="py-name" href="#" onclick="return doclink('link-34', 'GetAtomFeatInfo', 'link-34');">GetAtomFeatInfo</a></tt><tt class="py-op">(</tt><tt class="py-name">factory</tt><tt class="py-op">,</tt> <tt id="link-35" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-35', 'mol', 'link-6');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">featInfo</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">          <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t% 2s(%d)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-36', 'mol', 'link-6');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">GetSymbol</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">end</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">v</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t'</tt><tt class="py-op">,</tt> <tt class="py-string">', '</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">          <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.FeatFinderCLI-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">  <tt class="py-docstring">""" Main application """</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">  <tt id="link-37" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-37', 'parser', 'link-8');">parser</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name" targets="Function rdkit.Chem.ChemUtils.AlignDepict.initParser()=rdkit.Chem.ChemUtils.AlignDepict-module.html#initParser,Function rdkit.Chem.ChemUtils.SDFToCSV.initParser()=rdkit.Chem.ChemUtils.SDFToCSV-module.html#initParser,Function rdkit.Chem.FeatFinderCLI.initParser()=rdkit.Chem.FeatFinderCLI-module.html#initParser"><a title="rdkit.Chem.ChemUtils.AlignDepict.initParser
+rdkit.Chem.ChemUtils.SDFToCSV.initParser
+rdkit.Chem.FeatFinderCLI.initParser" class="py-name" href="#" onclick="return doclink('link-38', 'initParser', 'link-38');">initParser</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-39', 'parser', 'link-8');">parser</a></tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">  <tt id="link-40" class="py-name" targets="Function rdkit.Chem.ChemUtils.AlignDepict.processArgs()=rdkit.Chem.ChemUtils.AlignDepict-module.html#processArgs,Function rdkit.Chem.FeatFinderCLI.processArgs()=rdkit.Chem.FeatFinderCLI-module.html#processArgs"><a title="rdkit.Chem.ChemUtils.AlignDepict.processArgs
+rdkit.Chem.FeatFinderCLI.processArgs" class="py-name" href="#" onclick="return doclink('link-40', 'processArgs', 'link-40');">processArgs</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name"><a title="rdkit.Chem.Features.ShowFeats.parser" class="py-name" href="#" onclick="return doclink('link-41', 'parser', 'link-8');">parser</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">  <tt id="link-42" class="py-name" targets="Function rdkit.Chem.ChemUtils.AlignDepict.main()=rdkit.Chem.ChemUtils.AlignDepict-module.html#main,Function rdkit.Chem.ChemUtils.SDFToCSV.main()=rdkit.Chem.ChemUtils.SDFToCSV-module.html#main,Function rdkit.Chem.FeatFinderCLI.main()=rdkit.Chem.FeatFinderCLI-module.html#main,Function rdkit.Chem.fmcs.fmcs.main()=rdkit.Chem.fmcs.fmcs-module.html#main"><a title="rdkit.Chem.ChemUtils.AlignDepict.main
+rdkit.Chem.ChemUtils.SDFToCSV.main
+rdkit.Chem.FeatFinderCLI.main
+rdkit.Chem.fmcs.fmcs.main" class="py-name" href="#" onclick="return doclink('link-42', 'main', 'link-42');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Fraggle.FraggleSim</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Fraggle-module.html">Package&nbsp;Fraggle</a> ::
+        Module&nbsp;FraggleSim
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.Fraggle.FraggleSim-module.html">Module rdkit.Chem.Fraggle.FraggleSim</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2013, GlaxoSmithKline Research &amp; Development Ltd.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># All rights reserved.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># Redistribution and use in source and binary forms, with or without</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># modification, are permitted provided that the following conditions are</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># met:</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#     * Redistributions of source code must retain the above copyright</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#       notice, this list of conditions and the following disclaimer.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#     * Redistributions in binary form must reproduce the above</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#       copyright notice, this list of conditions and the following</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#       disclaimer in the documentation and/or other materials provided</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#       with the distribution.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">#     * Neither the name of GlaxoSmithKline Research &amp; Development Ltd.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#       nor the names of its contributors may be used to endorse or promote</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#       products derived from this software without specific prior written</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#       permission.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment"># Created by Jameed Hussain, May 2013</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">Fragmentation algorithm</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">-----------------------</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">identify acyclic bonds</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">enumerate all single cuts</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">make sure you chop off more that 1 atom</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">keeps bits which are &gt;60% query mol</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">enumerate all double cuts</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">keeps bits with 1 attachment point (i.e throw middle bit away)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">need to be &gt;60% query mol</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">identify exocyclic bonds</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">enumerate all single "ring" cuts</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">Check if it results in more that one component</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">keep correct bit if &gt;40% query mol</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">enumerate successful "rings" cuts with an acyclic cut</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">Check if it results in more that one component</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">keep correct if &gt;60% query mol</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">itertools</tt> <tt class="py-keyword">import</tt> <tt class="py-name">combinations</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Package rdkit.DataStructs=rdkit.DataStructs-module.html"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-1', 'DataStructs', 'link-1');">DataStructs</a></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-2', 'Chem', 'link-0');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">rdqueries</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-comment"># our default rdkit fingerprinter parameters:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams=rdkit.Chem.Fraggle.FraggleSim-module.html#rdkitFpParams"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-3', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'maxPath'</tt><tt class="py-op">:</tt> <tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-string">'fpSize'</tt><tt class="py-op">:</tt> <tt class="py-number">1024</tt><tt class="py-op">,</tt> <tt class="py-string">'nBitsPerHash'</tt><tt class="py-op">:</tt> <tt class="py-number">2</tt><tt class="py-op">}</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-comment"># Considered fragment types</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.FTYPE_ACYCLIC=rdkit.Chem.Fraggle.FraggleSim-module.html#FTYPE_ACYCLIC"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-4', 'FTYPE_ACYCLIC', 'link-4');">FTYPE_ACYCLIC</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'acyclic'</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC=rdkit.Chem.Fraggle.FraggleSim-module.html#FTYPE_CYCLIC"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC" class="py-name" href="#" onclick="return doclink('link-5', 'FTYPE_CYCLIC', 'link-5');">FTYPE_CYCLIC</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'cyclic'</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC_ACYCLIC=rdkit.Chem.Fraggle.FraggleSim-module.html#FTYPE_CYCLIC_ACYCLIC"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-6', 'FTYPE_CYCLIC_ACYCLIC', 'link-6');">FTYPE_CYCLIC_ACYCLIC</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'cyclic_and_acyclic'</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-comment"># Global SMARTS used by the program</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-comment"># acyclic bond smarts</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.ACYC_SMARTS=rdkit.Chem.Fraggle.FraggleSim-module.html#ACYC_SMARTS"><a title="rdkit.Chem.Fraggle.FraggleSim.ACYC_SMARTS" class="py-name" href="#" onclick="return doclink('link-7', 'ACYC_SMARTS', 'link-7');">ACYC_SMARTS</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-8', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">"[*]!@!=!#[*]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-comment"># exocyclic/fused exocyclic bond smarts</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.CYC_SMARTS=rdkit.Chem.Fraggle.FraggleSim-module.html#CYC_SMARTS"><a title="rdkit.Chem.Fraggle.FraggleSim.CYC_SMARTS" class="py-name" href="#" onclick="return doclink('link-9', 'CYC_SMARTS', 'link-9');">CYC_SMARTS</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-10', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">"[R1,R2]@[r;!R1]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-comment"># smarts used to find appropriate fragment for</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-comment"># would use SMARTS: [$([#0][r].[r][#0]),$([#0][r][#0])]</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-comment"># but RDkit doesn't support component SMARTS in recursive one - $([#0][r].[r][#0])</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-comment"># hence split into two</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.cSma1=rdkit.Chem.Fraggle.FraggleSim-module.html#cSma1"><a title="rdkit.Chem.Fraggle.FraggleSim.cSma1" class="py-name" href="#" onclick="return doclink('link-11', 'cSma1', 'link-11');">cSma1</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-12', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">"[#0][r].[r][#0]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.cSma2=rdkit.Chem.Fraggle.FraggleSim-module.html#cSma2"><a title="rdkit.Chem.Fraggle.FraggleSim.cSma2" class="py-name" href="#" onclick="return doclink('link-13', 'cSma2', 'link-13');">cSma2</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-14', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">"[#0][r][#0]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.dummyAtomQuery=rdkit.Chem.Fraggle.FraggleSim-module.html#dummyAtomQuery"><a title="rdkit.Chem.Fraggle.FraggleSim.dummyAtomQuery" class="py-name" href="#" onclick="return doclink('link-15', 'dummyAtomQuery', 'link-15');">dummyAtomQuery</a></tt> <tt class="py-op">=</tt> <tt class="py-name">rdqueries</tt><tt class="py-op">.</tt><tt class="py-name">AtomNumEqualsQueryAtom</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="delete_bonds"></a><div id="delete_bonds-def"><a name="L85"></a><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="delete_bonds-toggle" onclick="return toggle('delete_bonds');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#delete_bonds">delete_bonds</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">bonds</tt><tt class="py-op">,</tt> <tt class="py-param">ftype</tt><tt class="py-op">,</tt> <tt class="py-param">hac</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="delete_bonds-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="delete_bonds-expanded"><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">  <tt class="py-docstring">""" Fragment molecule on bonds and reduce to fraggle fragmentation SMILES.</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">  If none exists, returns None """</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">  <tt class="py-comment"># Replace the given bonds with attachment points (B1-B2 -&gt; B1-[*].[*]-B2)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">  <tt class="py-name">bondIdx</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-16" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-16', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetBondBetweenAtoms</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">bond</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">bond</tt> <tt class="py-keyword">in</tt> <tt class="py-name">bonds</tt><tt class="py-op">]</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">  <tt class="py-name">modifiedMol</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-17', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">FragmentOnBonds</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-18', 'mol', 'link-16');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">bondIdx</tt><tt class="py-op">,</tt> <tt class="py-name">dummyLabels</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">bondIdx</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">  <tt class="py-comment"># should be able to get away without sanitising mol as the valencies should be okay</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">  <tt class="py-comment"># do not do a full sanitization, but do find rings and calculate valences:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">  <tt id="link-19" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-19', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeMol</tt><tt class="py-op">(</tt><tt class="py-name">modifiedMol</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-20', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeFlags</tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_PROPERTIES</tt> <tt class="py-op">|</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                   <tt id="link-21" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-21', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeFlags</tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_SYMMRINGS</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">  <tt class="py-name">fragments</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-22', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">GetMolFrags</tt><tt class="py-op">(</tt><tt class="py-name">modifiedMol</tt><tt class="py-op">,</tt> <tt class="py-name">asMols</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">sanitizeFrags</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-23" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.select_fragments()=rdkit.Chem.Fraggle.FraggleSim-module.html#select_fragments"><a title="rdkit.Chem.Fraggle.FraggleSim.select_fragments" class="py-name" href="#" onclick="return doclink('link-23', 'select_fragments', 'link-23');">select_fragments</a></tt><tt class="py-op">(</tt><tt class="py-name">fragments</tt><tt class="py-op">,</tt> <tt class="py-name">ftype</tt><tt class="py-op">,</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="select_fragments"></a><div id="select_fragments-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="select_fragments-toggle" onclick="return toggle('select_fragments');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#select_fragments">select_fragments</a><tt class="py-op">(</tt><tt class="py-param">fragments</tt><tt class="py-op">,</tt> <tt class="py-param">ftype</tt><tt class="py-op">,</tt> <tt class="py-param">hac</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="select_fragments-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="select_fragments-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">ftype</tt> <tt class="py-op">==</tt> <tt id="link-24" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-24', 'FTYPE_ACYCLIC', 'link-4');">FTYPE_ACYCLIC</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-name">result_hcount</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">fMol</tt> <tt class="py-keyword">in</tt> <tt class="py-name">fragments</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">      <tt class="py-name">nAttachments</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomsMatchingQuery</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.dummyAtomQuery" class="py-name" href="#" onclick="return doclink('link-25', 'dummyAtomQuery', 'link-15');">dummyAtomQuery</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">      <tt class="py-comment"># check if terminal fragment</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">nAttachments</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">fhac</tt> <tt class="py-op">=</tt> <tt class="py-name">fMol</tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-comment"># if the fragment is 2 atoms (or less - includes attachment) it is too small</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-comment"># to be interesting. This check has the additional benefit</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-comment"># of pulling out the relevant single cuts as it discards</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-comment"># fragments where we only chop off a small part of the input cmpd</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">fhac</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">          <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-26', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">          <tt class="py-name">result_hcount</tt> <tt class="py-op">+=</tt> <tt class="py-name">fhac</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-comment"># needs to be greater than 60% of parent mol</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">result_hcount</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0.6</tt> <tt class="py-op">*</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">      <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-string">'.'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">      <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">ftype</tt> <tt class="py-op">==</tt> <tt id="link-27" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC" class="py-name" href="#" onclick="return doclink('link-27', 'FTYPE_CYCLIC', 'link-5');">FTYPE_CYCLIC</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-comment"># make sure it is 2 components</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">fragments</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">fMol</tt> <tt class="py-keyword">in</tt> <tt class="py-name">fragments</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">      <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-28', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">      <tt class="py-comment"># check if a valid cut</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">      <tt class="py-comment"># needs to be greater 3 heavy atoms and greater than 40% of parent mol</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-29" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.isValidRingCut()=rdkit.Chem.Fraggle.FraggleSim-module.html#isValidRingCut"><a title="rdkit.Chem.Fraggle.FraggleSim.isValidRingCut" class="py-name" href="#" onclick="return doclink('link-29', 'isValidRingCut', 'link-29');">isValidRingCut</a></tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">result_hcount</tt> <tt class="py-op">=</tt> <tt class="py-name">fMol</tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">result_hcount</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">3</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">result_hcount</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0.4</tt> <tt class="py-op">*</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">          <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-op">(</tt><tt class="py-name">ftype</tt> <tt class="py-op">==</tt> <tt id="link-30" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-30', 'FTYPE_CYCLIC_ACYCLIC', 'link-6');">FTYPE_CYCLIC_ACYCLIC</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-comment"># need to find the fragments which are valid which means they must be:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-comment">#  Terminal (one attachment point) or valid ring cut</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-name">result_hcount</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">fMol</tt> <tt class="py-keyword">in</tt> <tt class="py-name">fragments</tt><tt class="py-op">:</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">      <tt class="py-name">nAttachments</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomsMatchingQuery</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.dummyAtomQuery" class="py-name" href="#" onclick="return doclink('link-31', 'dummyAtomQuery', 'link-15');">dummyAtomQuery</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">      <tt class="py-comment"># We need to have a fragment that has 1 or 2 attachment points and that has more than 3 atoms</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">nAttachments</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">      <tt class="py-name">fhac</tt> <tt class="py-op">=</tt> <tt class="py-name">fMol</tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">fhac</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">nAttachments</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-comment"># check if a valid cut</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-32" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.isValidRingCut" class="py-name" href="#" onclick="return doclink('link-32', 'isValidRingCut', 'link-29');">isValidRingCut</a></tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">          <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-33', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">          <tt class="py-name">result_hcount</tt> <tt class="py-op">+=</tt> <tt class="py-name">fhac</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">      <tt class="py-keyword">elif</tt> <tt class="py-name">nAttachments</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-34', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">fMol</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">result_hcount</tt> <tt class="py-op">+=</tt> <tt class="py-name">fhac</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-comment"># appropriate fragmentation must have 2 components and needs to be greater than 60% of</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-comment"># parent mol</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt> <tt class="py-keyword">and</tt> <tt class="py-name">result_hcount</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0.6</tt> <tt class="py-op">*</tt> <tt class="py-name">hac</tt><tt class="py-op">:</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">      <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-string">'.'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">result</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">      <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">result</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-string">'Invalid fragmentation type {0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">ftype</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="isValidRingCut"></a><div id="isValidRingCut-def"><a name="L177"></a><tt class="py-lineno">177</tt> <a class="py-toggle" href="#" id="isValidRingCut-toggle" onclick="return toggle('isValidRingCut');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#isValidRingCut">isValidRingCut</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="isValidRingCut-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="isValidRingCut-expanded"><a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">  <tt class="py-docstring">""" to check is a fragment is a valid ring cut, it needs to match the</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">  SMARTS: [$([#0][r].[r][#0]),$([#0][r][#0])] """</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">  <tt class="py-comment"># At this point, the molecule requires the identification of rings, so we need to sanitize</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">  <tt id="link-35" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-35', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeMol</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-36', 'mol', 'link-16');">mol</a></tt><tt class="py-op">,</tt> <tt id="link-37" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-37', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeFlags</tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_SYMMRINGS</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-38" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-38', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">HasSubstructMatch</tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.cSma1" class="py-name" href="#" onclick="return doclink('link-39', 'cSma1', 'link-11');">cSma1</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt id="link-40" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-40', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">HasSubstructMatch</tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.cSma2" class="py-name" href="#" onclick="return doclink('link-41', 'cSma2', 'link-13');">cSma2</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"> </tt>
+<a name="generate_fraggle_fragmentation"></a><div id="generate_fraggle_fragmentation-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="generate_fraggle_fragmentation-toggle" onclick="return toggle('generate_fraggle_fragmentation');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#generate_fraggle_fragmentation">generate_fraggle_fragmentation</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="generate_fraggle_fragmentation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="generate_fraggle_fragmentation-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">  <tt class="py-docstring">""" Create all possible fragmentations for molecule</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; q = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12')</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; fragments = generate_fraggle_fragmentation(q)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; fragments = sorted(['.'.join(sorted(s.split('.'))) for s in fragments])</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; fragments</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring">     ['[*]C(=O)NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]C(=O)c1cncc(C)c1.[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]C(=O)c1cncc(C)c1.[*]Cc1cc(OC)c2ccccc2c1OC',</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]C(=O)c1cncc(C)c1.[*]c1cc(OC)c2ccccc2c1OC',</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1.[*]c1cncc(C)c1',</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]Cc1cc(OC)c2ccccc2c1OC.[*]NC(=O)c1cncc(C)c1',</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]Cc1cc(OC)c2ccccc2c1OC.[*]c1cncc(C)c1',</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]N1CCC(NC(=O)c2cncc(C)c2)CC1.[*]c1cc(OC)c2ccccc2c1OC',</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]NC(=O)c1cncc(C)c1.[*]c1cc(OC)c2ccccc2c1OC',</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1.[*]c1cncc(C)c1',</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]c1c(CN2CCC(NC(=O)c3cncc(C)c3)CC2)cc(OC)c2ccccc12',</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]c1c(OC)cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c1[*]',</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]c1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12',</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">      '[*]c1cc(OC)c2ccccc2c1OC.[*]c1cncc(C)c1']</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">  <tt class="py-comment"># query mol heavy atom count</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">  <tt class="py-name">hac</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-42', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">  <tt class="py-comment"># find the relevant bonds to break</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">  <tt class="py-name">acyclic_matching_atoms</tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-43', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.ACYC_SMARTS" class="py-name" href="#" onclick="return doclink('link-44', 'ACYC_SMARTS', 'link-7');">ACYC_SMARTS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">  <tt class="py-name">cyclic_matching_atoms</tt> <tt class="py-op">=</tt> <tt id="link-45" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-45', 'mol', 'link-16');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.CYC_SMARTS" class="py-name" href="#" onclick="return doclink('link-46', 'CYC_SMARTS', 'link-9');">CYC_SMARTS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">verbose</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"Matching Atoms:"</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"acyclic matching atoms: "</tt><tt class="py-op">,</tt> <tt class="py-name">acyclic_matching_atoms</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"cyclic matching atoms: "</tt><tt class="py-op">,</tt> <tt class="py-name">cyclic_matching_atoms</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">  <tt class="py-comment"># different cuts can give the same fragments</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">  <tt class="py-comment"># to use out_fragments to remove them</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">  <tt class="py-name">out_fragments</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">  <tt class="py-comment">######################</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">  <tt class="py-comment"># Single acyclic Cuts</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">  <tt class="py-comment">######################</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">  <tt class="py-comment"># loop to generate every single and double cut in the molecule</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">  <tt class="py-comment"># single cuts are not required as relevant single cut fragments can be found</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">  <tt class="py-comment"># from the double cuts. For explanation see check_fragments method</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">bond1</tt><tt class="py-op">,</tt> <tt class="py-name">bond2</tt> <tt class="py-keyword">in</tt> <tt class="py-name">combinations</tt><tt class="py-op">(</tt><tt class="py-name">acyclic_matching_atoms</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">    <tt class="py-name">fragment</tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.delete_bonds()=rdkit.Chem.Fraggle.FraggleSim-module.html#delete_bonds"><a title="rdkit.Chem.Fraggle.FraggleSim.delete_bonds" class="py-name" href="#" onclick="return doclink('link-47', 'delete_bonds', 'link-47');">delete_bonds</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-48', 'mol', 'link-16');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">bond1</tt><tt class="py-op">,</tt> <tt class="py-name">bond2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-49" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-49', 'FTYPE_ACYCLIC', 'link-4');">FTYPE_ACYCLIC</a></tt><tt class="py-op">,</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">fragment</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">      <tt class="py-name">out_fragments</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">fragment</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">  <tt class="py-comment">##################################</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">  <tt class="py-comment"># Fused/Spiro exocyclic bond Cuts</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">  <tt class="py-comment">##################################</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">bond1</tt><tt class="py-op">,</tt> <tt class="py-name">bond2</tt> <tt class="py-keyword">in</tt> <tt class="py-name">combinations</tt><tt class="py-op">(</tt><tt class="py-name">cyclic_matching_atoms</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt class="py-name">fragment</tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.delete_bonds" class="py-name" href="#" onclick="return doclink('link-50', 'delete_bonds', 'link-47');">delete_bonds</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-51', 'mol', 'link-16');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">bond1</tt><tt class="py-op">,</tt> <tt class="py-name">bond2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-52" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC" class="py-name" href="#" onclick="return doclink('link-52', 'FTYPE_CYCLIC', 'link-5');">FTYPE_CYCLIC</a></tt><tt class="py-op">,</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">fragment</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">      <tt class="py-keyword">continue</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-name">out_fragments</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">fragment</tt><tt class="py-op">)</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-comment"># now do an acyclic cut with the successful cyclic cut</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">abond</tt> <tt class="py-keyword">in</tt> <tt class="py-name">acyclic_matching_atoms</tt><tt class="py-op">:</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">      <tt class="py-name">fragment</tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.delete_bonds" class="py-name" href="#" onclick="return doclink('link-53', 'delete_bonds', 'link-47');">delete_bonds</a></tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-54', 'mol', 'link-16');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">bond1</tt><tt class="py-op">,</tt> <tt class="py-name">bond2</tt><tt class="py-op">,</tt> <tt class="py-name">abond</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-55" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.FTYPE_CYCLIC_ACYCLIC" class="py-name" href="#" onclick="return doclink('link-55', 'FTYPE_CYCLIC_ACYCLIC', 'link-6');">FTYPE_CYCLIC_ACYCLIC</a></tt><tt class="py-op">,</tt> <tt class="py-name">hac</tt><tt class="py-op">)</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">fragment</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt class="py-name">out_fragments</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">fragment</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-name">out_fragments</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"> </tt>
+<a name="atomContrib"></a><div id="atomContrib-def"><a name="L251"></a><tt class="py-lineno">251</tt> <a class="py-toggle" href="#" id="atomContrib-toggle" onclick="return toggle('atomContrib');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#atomContrib">atomContrib</a><tt class="py-op">(</tt><tt class="py-param">subs</tt><tt class="py-op">,</tt> <tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">tverskyThresh</tt><tt class="py-op">=</tt><tt class="py-number">0.8</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="atomContrib-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="atomContrib-expanded"><a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">  <tt class="py-docstring">""" atomContrib algorithm</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-docstring">  generate fp of query_substructs (qfp)</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">  loop through atoms of smiles</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring">    For each atom</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring">    Generate partial fp of the atom (pfp)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-docstring">    Find Tversky sim of pfp in qfp</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-docstring">    If Tversky &lt; 0.8, mark atom in smiles</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-docstring">  Loop through marked atoms</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-docstring">    If marked atom in ring - turn all atoms in that ring to * (aromatic) or Sc (aliphatic)</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-docstring">    For each marked atom</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring">      If aromatic turn to a *</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-docstring">      If aliphatic turn to a Sc</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-docstring">  Return modified smiles</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">  <tt class="py-keyword">def</tt> <tt class="py-def-name">partialSimilarity</tt><tt class="py-op">(</tt><tt class="py-param">atomID</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">    <tt class="py-docstring">""" Determine similarity for the atoms set by atomID """</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">    <tt class="py-comment"># create empty fp</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">    <tt class="py-name">modifiedFP</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-56', 'DataStructs', 'link-1');">DataStructs</a></tt><tt class="py-op">.</tt><tt class="py-name">ExplicitBitVect</tt><tt class="py-op">(</tt><tt class="py-number">1024</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">    <tt class="py-name">modifiedFP</tt><tt class="py-op">.</tt><tt class="py-name">SetBitsFromList</tt><tt class="py-op">(</tt><tt class="py-name">aBits</tt><tt class="py-op">[</tt><tt class="py-name">atomID</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-57" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-57', 'DataStructs', 'link-1');">DataStructs</a></tt><tt class="py-op">.</tt><tt class="py-name">TverskySimilarity</tt><tt class="py-op">(</tt><tt class="py-name">subsFp</tt><tt class="py-op">,</tt> <tt class="py-name">modifiedFP</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">  <tt class="py-comment"># generate mol object &amp; fp for input mol (we are interested in the bits each atom sets)</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">  <tt class="py-name">pMol</tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-58', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-59', 'mol', 'link-16');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">  <tt class="py-name">aBits</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">  <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-60', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">pMol</tt><tt class="py-op">,</tt> <tt class="py-name">atomBits</tt><tt class="py-op">=</tt><tt class="py-name">aBits</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-61" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-61', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line"> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">  <tt class="py-comment"># generate fp of query_substructs</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">  <tt class="py-name">qsMol</tt> <tt class="py-op">=</tt> <tt id="link-62" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-62', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmiles</tt><tt class="py-op">(</tt><tt class="py-name">subs</tt><tt class="py-op">)</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">  <tt class="py-name">subsFp</tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-63', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">qsMol</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-64" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-64', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line"> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">  <tt class="py-comment"># loop through atoms of smiles get atoms that have a high similarity with substructure</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">  <tt class="py-name">marked</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">atom</tt> <tt class="py-keyword">in</tt> <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">partialSimilarity</tt><tt class="py-op">(</tt><tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">tverskyThresh</tt><tt class="py-op">:</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">      <tt class="py-name">marked</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">  <tt class="py-comment"># get rings to change</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line"> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">  <tt class="py-comment"># If a marked atom is within a ring, mark the whole ring</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">  <tt class="py-name">markRingAtoms</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">ring</tt> <tt class="py-keyword">in</tt> <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetRingInfo</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">AtomRings</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">any</tt><tt class="py-op">(</tt><tt class="py-name">ringAtom</tt> <tt class="py-keyword">in</tt> <tt class="py-name">marked</tt> <tt class="py-keyword">for</tt> <tt class="py-name">ringAtom</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ring</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">      <tt class="py-name">markRingAtoms</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-name">ring</tt><tt class="py-op">)</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">  <tt class="py-name">marked</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-name">markRingAtoms</tt><tt class="py-op">)</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">marked</tt><tt class="py-op">:</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">    <tt class="py-comment"># now mutate the marked atoms</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">idx</tt> <tt class="py-keyword">in</tt> <tt class="py-name">marked</tt><tt class="py-op">:</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">GetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">        <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">SetAtomicNum</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">        <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">SetNoImplicit</tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">        <tt class="py-comment"># gives best sim</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">        <tt class="py-name">pMol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">SetAtomicNum</tt><tt class="py-op">(</tt><tt class="py-number">21</tt><tt class="py-op">)</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">        <tt class="py-comment"># works better but when replace S it fails due to valency</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">        <tt class="py-comment"># pMol.GetAtomWithIdx(idx).SetAtomicNum(6)</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line"> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">      <tt id="link-65" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-65', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SanitizeMol</tt><tt class="py-op">(</tt><tt class="py-name">pMol</tt><tt class="py-op">,</tt> <tt class="py-name">sanitizeOps</tt><tt class="py-op">=</tt><tt id="link-66" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-66', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_ALL</tt> <tt class="py-op">^</tt> <tt id="link-67" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-67', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_KEKULIZE</tt> <tt class="py-op">^</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">                       <tt id="link-68" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-68', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">SANITIZE_SETAROMATICITY</tt><tt class="py-op">)</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">      <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"Can't parse smiles: %s\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-69" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-69', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">pMol</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">      <tt class="py-name">pMol</tt> <tt class="py-op">=</tt> <tt id="link-70" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-70', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt id="link-71" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-71', 'mol', 'link-16');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line"> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">pMol</tt> </tt>
+</div><a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line"> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line"> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line"><tt id="link-72" class="py-name" targets="Variable rdkit.Chem.Fraggle.FraggleSim.modified_query_fps=rdkit.Chem.Fraggle.FraggleSim-module.html#modified_query_fps"><a title="rdkit.Chem.Fraggle.FraggleSim.modified_query_fps" class="py-name" href="#" onclick="return doclink('link-72', 'modified_query_fps', 'link-72');">modified_query_fps</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"> </tt>
+<a name="compute_fraggle_similarity_for_subs"></a><div id="compute_fraggle_similarity_for_subs-def"><a name="L326"></a><tt class="py-lineno">326</tt> <a class="py-toggle" href="#" id="compute_fraggle_similarity_for_subs-toggle" onclick="return toggle('compute_fraggle_similarity_for_subs');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#compute_fraggle_similarity_for_subs">compute_fraggle_similarity_for_subs</a><tt class="py-op">(</tt><tt class="py-param">inMol</tt><tt class="py-op">,</tt> <tt class="py-param">qMol</tt><tt class="py-op">,</tt> <tt class="py-param">qSmi</tt><tt class="py-op">,</tt> <tt class="py-param">qSubs</tt><tt class="py-op">,</tt> <tt class="py-param">tverskyThresh</tt><tt class="py-op">=</tt><tt class="py-number">0.8</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="compute_fraggle_similarity_for_subs-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="compute_fraggle_similarity_for_subs-expanded"><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">  <tt class="py-name">qFP</tt> <tt class="py-op">=</tt> <tt id="link-73" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-73', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">qMol</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-74" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-74', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">  <tt class="py-name">iFP</tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-75', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">inMol</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-76" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-76', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">  <tt class="py-name">rdkit_sim</tt> <tt class="py-op">=</tt> <tt id="link-77" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-77', 'DataStructs', 'link-1');">DataStructs</a></tt><tt class="py-op">.</tt><tt id="link-78" class="py-name" targets="Function rdkit.Chem.ReducedGraphs.TanimotoSimilarity()=rdkit.Chem.ReducedGraphs-module.html#TanimotoSimilarity"><a title="rdkit.Chem.ReducedGraphs.TanimotoSimilarity" class="py-name" href="#" onclick="return doclink('link-78', 'TanimotoSimilarity', 'link-78');">TanimotoSimilarity</a></tt><tt class="py-op">(</tt><tt class="py-name">qFP</tt><tt class="py-op">,</tt> <tt class="py-name">iFP</tt><tt class="py-op">)</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line"> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">  <tt class="py-name">qm_key</tt> <tt class="py-op">=</tt> <tt class="py-string">"%s_%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">qSubs</tt><tt class="py-op">,</tt> <tt class="py-name">qSmi</tt><tt class="py-op">)</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">qm_key</tt> <tt class="py-keyword">in</tt> <tt id="link-79" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.modified_query_fps" class="py-name" href="#" onclick="return doclink('link-79', 'modified_query_fps', 'link-72');">modified_query_fps</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">    <tt class="py-name">qmMolFp</tt> <tt class="py-op">=</tt> <tt id="link-80" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.modified_query_fps" class="py-name" href="#" onclick="return doclink('link-80', 'modified_query_fps', 'link-72');">modified_query_fps</a></tt><tt class="py-op">[</tt><tt class="py-name">qm_key</tt><tt class="py-op">]</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">    <tt class="py-name">qmMol</tt> <tt class="py-op">=</tt> <tt id="link-81" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.atomContrib()=rdkit.Chem.Fraggle.FraggleSim-module.html#atomContrib"><a title="rdkit.Chem.Fraggle.FraggleSim.atomContrib" class="py-name" href="#" onclick="return doclink('link-81', 'atomContrib', 'link-81');">atomContrib</a></tt><tt class="py-op">(</tt><tt class="py-name">qSubs</tt><tt class="py-op">,</tt> <tt class="py-name">qMol</tt><tt class="py-op">,</tt> <tt class="py-name">tverskyThresh</tt><tt class="py-op">)</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">    <tt class="py-name">qmMolFp</tt> <tt class="py-op">=</tt> <tt id="link-82" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-82', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">qmMol</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-83" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-83', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">    <tt id="link-84" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.modified_query_fps" class="py-name" href="#" onclick="return doclink('link-84', 'modified_query_fps', 'link-72');">modified_query_fps</a></tt><tt class="py-op">[</tt><tt class="py-name">qm_key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">qmMolFp</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">  <tt class="py-name">rmMol</tt> <tt class="py-op">=</tt> <tt id="link-85" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.atomContrib" class="py-name" href="#" onclick="return doclink('link-85', 'atomContrib', 'link-81');">atomContrib</a></tt><tt class="py-op">(</tt><tt class="py-name">qSubs</tt><tt class="py-op">,</tt> <tt class="py-name">inMol</tt><tt class="py-op">,</tt> <tt class="py-name">tverskyThresh</tt><tt class="py-op">)</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">  <tt class="py-comment"># wrap in a try, catch</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">    <tt class="py-name">rmMolFp</tt> <tt class="py-op">=</tt> <tt id="link-86" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-86', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">RDKFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">rmMol</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt id="link-87" class="py-name"><a title="rdkit.Chem.Fraggle.FraggleSim.rdkitFpParams" class="py-name" href="#" onclick="return doclink('link-87', 'rdkitFpParams', 'link-3');">rdkitFpParams</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">    <tt class="py-name">fraggle_sim</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt id="link-88" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-88', 'DataStructs', 'link-1');">DataStructs</a></tt><tt class="py-op">.</tt><tt id="link-89" class="py-name" targets="Function rdkit.DataStructs.FingerprintSimilarity()=rdkit.DataStructs-module.html#FingerprintSimilarity"><a title="rdkit.DataStructs.FingerprintSimilarity" class="py-name" href="#" onclick="return doclink('link-89', 'FingerprintSimilarity', 'link-89');">FingerprintSimilarity</a></tt><tt class="py-op">(</tt><tt class="py-name">qmMolFp</tt><tt class="py-op">,</tt> <tt class="py-name">rmMolFp</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">rdkit_sim</tt><tt class="py-op">)</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"Can't generate fp for: %s\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-90" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-90', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">rmMol</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">    <tt class="py-name">fraggle_sim</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">rdkit_sim</tt><tt class="py-op">,</tt> <tt class="py-name">fraggle_sim</tt> </tt>
+</div><a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"> </tt>
+<a name="GetFraggleSimilarity"></a><div id="GetFraggleSimilarity-def"><a name="L353"></a><tt class="py-lineno">353</tt> <a class="py-toggle" href="#" id="GetFraggleSimilarity-toggle" onclick="return toggle('GetFraggleSimilarity');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#GetFraggleSimilarity">GetFraggleSimilarity</a><tt class="py-op">(</tt><tt class="py-param">queryMol</tt><tt class="py-op">,</tt> <tt class="py-param">refMol</tt><tt class="py-op">,</tt> <tt class="py-param">tverskyThresh</tt><tt class="py-op">=</tt><tt class="py-number">0.8</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetFraggleSimilarity-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetFraggleSimilarity-expanded"><a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">  <tt class="py-docstring">""" return the Fraggle similarity between two molecules</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; q = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12')</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; m = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3ccccc3)CC2)c(OC)c2ccccc12')</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-docstring">    0.980...</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; match</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-docstring">    '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1'</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; m = Chem.MolFromSmiles('COc1cc(CN2CCC(Nc3nc4ccccc4s3)CC2)c(OC)c2ccccc12')</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line"><tt class="py-docstring">    0.794...</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; match</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"><tt class="py-docstring">    '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1'</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; q = Chem.MolFromSmiles('COc1ccccc1')</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; sim</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line"><tt class="py-docstring">    0.347...</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; match</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line"><tt class="py-docstring">    '[*]c1ccccc1'</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">queryMol</tt><tt class="py-op">,</tt> <tt class="py-string">'_fraggleDecomp'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">    <tt class="py-name">frags</tt> <tt class="py-op">=</tt> <tt class="py-name">queryMol</tt><tt class="py-op">.</tt><tt class="py-name">_fraggleDecomp</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line">    <tt class="py-name">frags</tt> <tt class="py-op">=</tt> <tt id="link-91" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.generate_fraggle_fragmentation()=rdkit.Chem.Fraggle.FraggleSim-module.html#generate_fraggle_fragmentation"><a title="rdkit.Chem.Fraggle.FraggleSim.generate_fraggle_fragmentation" class="py-name" href="#" onclick="return doclink('link-91', 'generate_fraggle_fragmentation', 'link-91');">generate_fraggle_fragmentation</a></tt><tt class="py-op">(</tt><tt class="py-name">queryMol</tt><tt class="py-op">)</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">    <tt class="py-name">queryMol</tt><tt class="py-op">.</tt><tt class="py-name">_fraggleDecomp</tt> <tt class="py-op">=</tt> <tt class="py-name">frags</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">  <tt class="py-name">qSmi</tt> <tt class="py-op">=</tt> <tt id="link-92" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-92', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">queryMol</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">  <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">  <tt class="py-name">bestMatch</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">frag</tt> <tt class="py-keyword">in</tt> <tt class="py-name">frags</tt><tt class="py-op">:</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">    <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">fragsim</tt> <tt class="py-op">=</tt> <tt id="link-93" class="py-name" targets="Function rdkit.Chem.Fraggle.FraggleSim.compute_fraggle_similarity_for_subs()=rdkit.Chem.Fraggle.FraggleSim-module.html#compute_fraggle_similarity_for_subs"><a title="rdkit.Chem.Fraggle.FraggleSim.compute_fraggle_similarity_for_subs" class="py-name" href="#" onclick="return doclink('link-93', 'compute_fraggle_similarity_for_subs', 'link-93');">compute_fraggle_similarity_for_subs</a></tt><tt class="py-op">(</tt><tt class="py-name">refMol</tt><tt class="py-op">,</tt> <tt class="py-name">queryMol</tt><tt class="py-op">,</tt> <tt class="py-name">qSmi</tt><tt class="py-op">,</tt> <tt class="py-name">frag</tt><tt class="py-op">,</tt> <tt class="py-name">tverskyThresh</tt><tt class="py-op">)</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">fragsim</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">result</tt><tt class="py-op">:</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">      <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">fragsim</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">      <tt class="py-name">bestMatch</tt> <tt class="py-op">=</tt> <tt class="py-name">frag</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">result</tt><tt class="py-op">,</tt> <tt class="py-name">bestMatch</tt> </tt>
+</div><a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line"> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line"> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line"><tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-comment">#  doctest boilerplate</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="_runDoctests"></a><div id="_runDoctests-def"><a name="L399"></a><tt class="py-lineno">399</tt> <a class="py-toggle" href="#" id="_runDoctests-toggle" onclick="return toggle('_runDoctests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fraggle.FraggleSim-module.html#_runDoctests">_runDoctests</a><tt class="py-op">(</tt><tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+</div><a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">  <tt class="py-name">failed</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">testmod</tt><tt class="py-op">(</tt><tt class="py-name">optionflags</tt><tt class="py-op">=</tt><tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">ELLIPSIS</tt> <tt class="py-op">+</tt> <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">NORMALIZE_WHITESPACE</tt><tt class="py-op">,</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line">                              <tt class="py-name">verbose</tt><tt class="py-op">=</tt><tt class="py-name">verbose</tt><tt class="py-op">)</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">  <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-name">failed</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line"> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line"> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">  <tt id="link-94" class="py-name" targets="Function rdkit.Chem.AllChem._runDoctests()=rdkit.Chem.AllChem-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Pairs._runDoctests()=rdkit.Chem.AtomPairs.Pairs-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Sheridan._runDoctests()=rdkit.Chem.AtomPairs.Sheridan-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Torsions._runDoctests()=rdkit.Chem.AtomPairs.Torsions-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Utils._runDoctests()=rdkit.Chem.AtomPairs.Utils-module.html#_runDoctests,Function rdkit.Chem.Descriptors._runDoctests()=rdkit.Chem.Descriptors-module.html#_runDoctests,Function rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests()=rdkit.Chem.FeatMaps.FeatMapPoint-module.html#_runDoctests,Function rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests()=rdkit.Chem.Fingerprints.DbFpSupplier-module.html#_runDoctests,Function rdkit.Chem.Fraggle.FraggleSim._runDoctests()=rdkit.Chem.Fraggle.FraggleSim-module.html#_runDoctests,Function rdkit.Chem.MolKey.MolKey._runDoctests()=rdkit.Chem.MolKey.MolKey-module.html#_runDoctests,Function rdkit.Chem.PandasTools._runDoctests()=rdkit.Chem.PandasTools-module.html#_runDoctests,Function rdkit.Chem.Pharm2D.Utils._runDoctests()=rdkit.Chem.Pharm2D.Utils-module.html#_runDoctests,Function rdkit.Chem.Pharm3D.EmbedLib._runDoctests()=rdkit.Chem.Pharm3D.EmbedLib-module.html#_runDoctests,Function rdkit.Chem.QED._runDoctests()=rdkit.Chem.QED-module.html#_runDoctests,Function rdkit.Chem.SaltRemover._runDoctests()=rdkit.Chem.SaltRemover-module.html#_runDoctests,Function rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests()=rdkit.Chem.Scaffolds.MurckoScaffold-module.html#_runDoctests,Function rdkit.Chem.SimpleEnum.Enumerator._runDoctests()=rdkit.Chem.SimpleEnum.Enumerator-module.html#_runDoctests,Function rdkit.DataStructs.BitUtils._runDoctests()=rdkit.DataStructs.BitUtils-module.html#_runDoctests,Function rdkit.DataStructs.LazySignature._runDoctests()=rdkit.DataStructs.LazySignature-module.html#_runDoctests,Function rdkit.DataStructs.VectCollection._runDoctests()=rdkit.DataStructs.VectCollection-module.html#_runDoctests,Function rdkit.ML.Data.DataUtils._runDoctests()=rdkit.ML.Data.DataUtils-module.html#_runDoctests,Function rdkit.ML.Data.SplitData._runDoctests()=rdkit.ML.Data.SplitData-module.html#_runDoctests,Function rdkit.ML.KNN.DistFunctions._runDoctests()=rdkit.ML.KNN.DistFunctions-module.html#_runDoctests,Function rdkit.SimDivFilters.SimilarityPickers._runDoctests()=rdkit.SimDivFilters.SimilarityPickers-module.html#_runDoctests,Function rdkit.VLib.Filter._runDoctests()=rdkit.VLib.Filter-module.html#_runDoctests,Function rdkit.VLib.Node._runDoctests()=rdkit.VLib.Node-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SDSupply._runDoctests()=rdkit.VLib.NodeLib.SDSupply-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests()=rdkit.VLib.NodeLib.SmartsMolFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsRemover._runDoctests()=rdkit.VLib.NodeLib.SmartsRemover-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests()=rdkit.VLib.NodeLib.SmilesDupeFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesOutput._runDoctests()=rdkit.VLib.NodeLib.SmilesOutput-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesSupply._runDoctests()=rdkit.VLib.NodeLib.SmilesSupply-module.html#_runDoctests,Function rdkit.VLib.Output._runDoctests()=rdkit.VLib.Output-module.html#_runDoctests,Function rdkit.VLib.Supply._runDoctests()=rdkit.VLib.Supply-module.html#_runDoctests,Function rdkit.VLib.Transform._runDoctests()=rdkit.VLib.Transform-module.html#_runDoctests"><a title="rdkit.Chem.AllChem._runDoctests
+rdkit.Chem.AtomPairs.Pairs._runDoctests
+rdkit.Chem.AtomPairs.Sheridan._runDoctests
+rdkit.Chem.AtomPairs.Torsions._runDoctests
+rdkit.Chem.AtomPairs.Utils._runDoctests
+rdkit.Chem.Descriptors._runDoctests
+rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests
+rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests
+rdkit.Chem.Fraggle.FraggleSim._runDoctests
+rdkit.Chem.MolKey.MolKey._runDoctests
+rdkit.Chem.PandasTools._runDoctests
+rdkit.Chem.Pharm2D.Utils._runDoctests
+rdkit.Chem.Pharm3D.EmbedLib._runDoctests
+rdkit.Chem.QED._runDoctests
+rdkit.Chem.SaltRemover._runDoctests
+rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests
+rdkit.Chem.SimpleEnum.Enumerator._runDoctests
+rdkit.DataStructs.BitUtils._runDoctests
+rdkit.DataStructs.LazySignature._runDoctests
+rdkit.DataStructs.VectCollection._runDoctests
+rdkit.ML.Data.DataUtils._runDoctests
+rdkit.ML.Data.SplitData._runDoctests
+rdkit.ML.KNN.DistFunctions._runDoctests
+rdkit.SimDivFilters.SimilarityPickers._runDoctests
+rdkit.VLib.Filter._runDoctests
+rdkit.VLib.Node._runDoctests
+rdkit.VLib.NodeLib.SDSupply._runDoctests
+rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests
+rdkit.VLib.NodeLib.SmartsRemover._runDoctests
+rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests
+rdkit.VLib.NodeLib.SmilesOutput._runDoctests
+rdkit.VLib.NodeLib.SmilesSupply._runDoctests
+rdkit.VLib.Output._runDoctests
+rdkit.VLib.Supply._runDoctests
+rdkit.VLib.Transform._runDoctests" class="py-name" href="#" onclick="return doclink('link-94', '_runDoctests', 'link-94');">_runDoctests</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

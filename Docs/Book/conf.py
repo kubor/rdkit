@@ -208,3 +208,7 @@ latex_documents = [('index', 'RDKit.tex', u'RDKit Documentation', u'Greg Landrum
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [('index', 'rdkit', u'RDKit Documentation', [u'Greg Landrum'], 1)]
+
+# rdkit-users-jp
+locale_dirs = ['locale/']   # path is example but recommended.
+gettext_compact = False     # optional.

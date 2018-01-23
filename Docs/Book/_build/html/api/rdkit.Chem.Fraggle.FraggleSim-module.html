@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Fraggle.FraggleSim</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Fraggle-module.html">Package&nbsp;Fraggle</a> ::
+        Module&nbsp;FraggleSim
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Fraggle.FraggleSim-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module FraggleSim</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+Fragmentation algorithm
+-----------------------
+
+identify acyclic bonds
+enumerate all single cuts
+make sure you chop off more that 1 atom
+keeps bits which are &gt;60% query mol
+enumerate all double cuts
+keeps bits with 1 attachment point (i.e throw middle bit away)
+need to be &gt;60% query mol
+
+identify exocyclic bonds
+enumerate all single &quot;ring&quot; cuts
+Check if it results in more that one component
+keep correct bit if &gt;40% query mol
+
+enumerate successful &quot;rings&quot; cuts with an acyclic cut
+Check if it results in more that one component
+keep correct if &gt;60% query mol
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fraggle.FraggleSim-module.html#delete_bonds" class="summary-sig-name">delete_bonds</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">bonds</span>,
+        <span class="summary-sig-arg">ftype</span>,
+        <span class="summary-sig-arg">hac</span>)</span><br />
+      Fragment molecule on bonds and reduce to fraggle fragmentation SMILES.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#delete_bonds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="select_fragments"></a><span class="summary-sig-name">select_fragments</span>(<span class="summary-sig-arg">fragments</span>,
+        <span class="summary-sig-arg">ftype</span>,
+        <span class="summary-sig-arg">hac</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#select_fragments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fraggle.FraggleSim-module.html#isValidRingCut" class="summary-sig-name">isValidRingCut</a>(<span class="summary-sig-arg">mol</span>)</span><br />
+      to check is a fragment is a valid ring cut, it needs to match the...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#isValidRingCut">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fraggle.FraggleSim-module.html#generate_fraggle_fragmentation" class="summary-sig-name">generate_fraggle_fragmentation</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Create all possible fragmentations for molecule...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#generate_fraggle_fragmentation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fraggle.FraggleSim-module.html#atomContrib" class="summary-sig-name">atomContrib</a>(<span class="summary-sig-arg">subs</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">tverskyThresh</span>=<span class="summary-sig-default">0.8</span>)</span><br />
+      atomContrib algorithm
+generate fp of query_substructs (qfp)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#atomContrib">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compute_fraggle_similarity_for_subs"></a><span class="summary-sig-name">compute_fraggle_similarity_for_subs</span>(<span class="summary-sig-arg">inMol</span>,
+        <span class="summary-sig-arg">qMol</span>,
+        <span class="summary-sig-arg">qSmi</span>,
+        <span class="summary-sig-arg">qSubs</span>,
+        <span class="summary-sig-arg">tverskyThresh</span>=<span class="summary-sig-default">0.8</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#compute_fraggle_similarity_for_subs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fraggle.FraggleSim-module.html#GetFraggleSimilarity" class="summary-sig-name">GetFraggleSimilarity</a>(<span class="summary-sig-arg">queryMol</span>,
+        <span class="summary-sig-arg">refMol</span>,
+        <span class="summary-sig-arg">tverskyThresh</span>=<span class="summary-sig-default">0.8</span>)</span><br />
+      return the Fraggle similarity between two molecules</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#GetFraggleSimilarity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_runDoctests"></a><span class="summary-sig-name">_runDoctests</span>(<span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#_runDoctests">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="rdkitFpParams"></a><span class="summary-name">rdkitFpParams</span> = <code title="{'maxPath': 5, 'fpSize': 1024, 'nBitsPerHash': 2}">{'maxPath': 5, 'fpSize': 1024, 'nBitsPerHash': 2}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FTYPE_ACYCLIC"></a><span class="summary-name">FTYPE_ACYCLIC</span> = <code title="'acyclic'">'acyclic'</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FTYPE_CYCLIC"></a><span class="summary-name">FTYPE_CYCLIC</span> = <code title="'cyclic'">'cyclic'</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FTYPE_CYCLIC_ACYCLIC"></a><span class="summary-name">FTYPE_CYCLIC_ACYCLIC</span> = <code title="'cyclic_and_acyclic'">'cyclic_and_acyclic'</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ACYC_SMARTS"></a><span class="summary-name">ACYC_SMARTS</span> = <code title="Chem.MolFromSmarts(&quot;[*]!@!=!#[*]&quot;)">Chem.MolFromSmarts(&quot;[*]!@!=!#[*]&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="CYC_SMARTS"></a><span class="summary-name">CYC_SMARTS</span> = <code title="Chem.MolFromSmarts(&quot;[R1,R2]@[r;!R1]&quot;)">Chem.MolFromSmarts(&quot;[R1,R2]@[r;!R1]&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cSma1"></a><span class="summary-name">cSma1</span> = <code title="Chem.MolFromSmarts(&quot;[#0][r].[r][#0]&quot;)">Chem.MolFromSmarts(&quot;[#0][r].[r][#0]&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="cSma2"></a><span class="summary-name">cSma2</span> = <code title="Chem.MolFromSmarts(&quot;[#0][r][#0]&quot;)">Chem.MolFromSmarts(&quot;[#0][r][#0]&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="dummyAtomQuery"></a><span class="summary-name">dummyAtomQuery</span> = <code title="rdqueries.AtomNumEqualsQueryAtom(0)">rdqueries.AtomNumEqualsQueryAtom(0)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="modified_query_fps"></a><span class="summary-name">modified_query_fps</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="itertools.combinations">combinations</span>,
+  <span title="sys">sys</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <span title="rdkit.Chem.rdqueries">rdqueries</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="delete_bonds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">delete_bonds</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">bonds</span>,
+        <span class="sig-arg">ftype</span>,
+        <span class="sig-arg">hac</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#delete_bonds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Fragment molecule on bonds and reduce to fraggle fragmentation SMILES.
+If none exists, returns None 
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="isValidRingCut"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isValidRingCut</span>(<span class="sig-arg">mol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#isValidRingCut">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+to check is a fragment is a valid ring cut, it needs to match the
+SMARTS: [$([#0][r].[r][#0]),$([#0][r][#0])] 
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="generate_fraggle_fragmentation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">generate_fraggle_fragmentation</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#generate_fraggle_fragmentation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Create all possible fragmentations for molecule
+&gt;&gt;&gt; q = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12')
+&gt;&gt;&gt; fragments = generate_fraggle_fragmentation(q)
+&gt;&gt;&gt; fragments = sorted(['.'.join(sorted(s.split('.'))) for s in fragments])
+&gt;&gt;&gt; fragments
+ ['[*]C(=O)NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',
+  '[*]C(=O)c1cncc(C)c1.[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',
+  '[*]C(=O)c1cncc(C)c1.[*]Cc1cc(OC)c2ccccc2c1OC',
+  '[*]C(=O)c1cncc(C)c1.[*]c1cc(OC)c2ccccc2c1OC',
+  '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',
+  '[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1.[*]c1cncc(C)c1',
+  '[*]Cc1cc(OC)c2ccccc2c1OC.[*]NC(=O)c1cncc(C)c1',
+  '[*]Cc1cc(OC)c2ccccc2c1OC.[*]c1cncc(C)c1',
+  '[*]N1CCC(NC(=O)c2cncc(C)c2)CC1.[*]c1cc(OC)c2ccccc2c1OC',
+  '[*]NC(=O)c1cncc(C)c1.[*]c1cc(OC)c2ccccc2c1OC',
+  '[*]NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1',
+  '[*]NC1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1.[*]c1cncc(C)c1',
+  '[*]c1c(CN2CCC(NC(=O)c3cncc(C)c3)CC2)cc(OC)c2ccccc12',
+  '[*]c1c(OC)cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c1[*]',
+  '[*]c1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12',
+  '[*]c1cc(OC)c2ccccc2c1OC.[*]c1cncc(C)c1']
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="atomContrib"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">atomContrib</span>(<span class="sig-arg">subs</span>,
+        <span class="sig-arg">mol</span>,
+        <span class="sig-arg">tverskyThresh</span>=<span class="sig-default">0.8</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#atomContrib">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+atomContrib algorithm
+generate fp of query_substructs (qfp)
+
+loop through atoms of smiles
+  For each atom
+  Generate partial fp of the atom (pfp)
+  Find Tversky sim of pfp in qfp
+  If Tversky &lt; 0.8, mark atom in smiles
+
+Loop through marked atoms
+  If marked atom in ring - turn all atoms in that ring to * (aromatic) or Sc (aliphatic)
+  For each marked atom
+    If aromatic turn to a *
+    If aliphatic turn to a Sc
+
+Return modified smiles
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetFraggleSimilarity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetFraggleSimilarity</span>(<span class="sig-arg">queryMol</span>,
+        <span class="sig-arg">refMol</span>,
+        <span class="sig-arg">tverskyThresh</span>=<span class="sig-default">0.8</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fraggle.FraggleSim-pysrc.html#GetFraggleSimilarity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+return the Fraggle similarity between two molecules
+
+&gt;&gt;&gt; q = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3cncc(C)c3)CC2)c(OC)c2ccccc12')
+&gt;&gt;&gt; m = Chem.MolFromSmiles('COc1cc(CN2CCC(NC(=O)c3ccccc3)CC2)c(OC)c2ccccc12')
+&gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)
+&gt;&gt;&gt; sim
+0.980...
+&gt;&gt;&gt; match
+'[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1'
+
+&gt;&gt;&gt; m = Chem.MolFromSmiles('COc1cc(CN2CCC(Nc3nc4ccccc4s3)CC2)c(OC)c2ccccc12')
+&gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)
+&gt;&gt;&gt; sim
+0.794...
+&gt;&gt;&gt; match
+'[*]C1CCN(Cc2cc(OC)c3ccccc3c2OC)CC1'
+
+&gt;&gt;&gt; q = Chem.MolFromSmiles('COc1ccccc1')
+&gt;&gt;&gt; sim,match = GetFraggleSimilarity(q,m)
+&gt;&gt;&gt; sim
+0.347...
+&gt;&gt;&gt; match
+'[*]c1ccccc1'
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

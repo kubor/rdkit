@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Neural.Network</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Neural-module.html">Package&nbsp;Neural</a> ::
+        Module&nbsp;Network
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Neural.Network-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.Neural.Network-module.html">Module rdkit.ML.Neural.Network</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2000-2008  greg Landrum</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">""" Contains the class _Network_ which is used to represent neural nets</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">**Network Architecture:**</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">  A tacit assumption in all of this stuff is that we're dealing with</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">  feedforward networks.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">  The network itself is stored as a list of _NetNode_ objects.  The list</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">  is ordered in the sense that nodes in earlier/later layers than a</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">  given node are guaranteed to come before/after that node in the list.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">  This way we can easily generate the values of each node by moving</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">  sequentially through the list, we're guaranteed that every input for a</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">  node has already been filled in.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">  Each node stores a list (_inputNodes_) of indices of its inputs in the</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">  main node list.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Function RDRandom.random()=RDRandom-module.html#random"><a title="RDRandom.random" class="py-name" href="#" onclick="return doclink('link-0', 'random', 'link-0');">random</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-1', 'ML', 'link-1');">ML</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.ML.Neural=rdkit.ML.Neural-module.html"><a title="rdkit.ML.Neural" class="py-name" href="#" onclick="return doclink('link-2', 'Neural', 'link-2');">Neural</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module rdkit.ML.Neural.NetNode=rdkit.ML.Neural.NetNode-module.html,Class rdkit.ML.Neural.NetNode.NetNode=rdkit.ML.Neural.NetNode.NetNode-class.html"><a title="rdkit.ML.Neural.NetNode
+rdkit.ML.Neural.NetNode.NetNode" class="py-name" href="#" onclick="return doclink('link-3', 'NetNode', 'link-3');">NetNode</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Module rdkit.ML.Neural.ActFuncs=rdkit.ML.Neural.ActFuncs-module.html"><a title="rdkit.ML.Neural.ActFuncs" class="py-name" href="#" onclick="return doclink('link-4', 'ActFuncs', 'link-4');">ActFuncs</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># FIX: this class has not been updated to new-style classes</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment"># (RD Issue380) because that would break all of our legacy pickled</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment"># data. Until a solution is found for this breakage, an update is</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment"># impossible.</tt> </tt>
+<a name="Network"></a><div id="Network-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="Network-toggle" onclick="return toggle('Network');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html">Network</a><tt class="py-op">:</tt> </tt>
+</div><div id="Network-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Network-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-docstring">""" a neural network</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="Network.ConstructRandomWeights"></a><div id="Network.ConstructRandomWeights-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="Network.ConstructRandomWeights-toggle" onclick="return toggle('Network.ConstructRandomWeights');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#ConstructRandomWeights">ConstructRandomWeights</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">minWeight</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">maxWeight</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.ConstructRandomWeights-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.ConstructRandomWeights-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-docstring">"""initialize all the weights in the network to random numbers</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        - minWeight: the minimum value a weight can take</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        - maxWeight: the maximum value a weight can take</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">node</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">      <tt class="py-name">inputs</tt> <tt class="py-op">=</tt> <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.ML.Neural.NetNode.NetNode.GetInputs()=rdkit.ML.Neural.NetNode.NetNode-class.html#GetInputs"><a title="rdkit.ML.Neural.NetNode.NetNode.GetInputs" class="py-name" href="#" onclick="return doclink('link-5', 'GetInputs', 'link-5');">GetInputs</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">inputs</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">weights</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-6" class="py-name"><a title="RDRandom.random" class="py-name" href="#" onclick="return doclink('link-6', 'random', 'link-0');">random</a></tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-name">minWeight</tt><tt class="py-op">,</tt> <tt class="py-name">maxWeight</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">inputs</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">node</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rdkit.ML.Neural.NetNode.NetNode.SetWeights()=rdkit.ML.Neural.NetNode.NetNode-class.html#SetWeights"><a title="rdkit.ML.Neural.NetNode.NetNode.SetWeights" class="py-name" href="#" onclick="return doclink('link-7', 'SetWeights', 'link-7');">SetWeights</a></tt><tt class="py-op">(</tt><tt class="py-name">weights</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="Network.FullyConnectNodes"></a><div id="Network.FullyConnectNodes-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="Network.FullyConnectNodes-toggle" onclick="return toggle('Network.FullyConnectNodes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#FullyConnectNodes">FullyConnectNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.FullyConnectNodes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.FullyConnectNodes-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-docstring">""" Fully connects each layer in the network to the one above it</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">     **Note**</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">       this sets the connections, but does not assign weights</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-name">nodeList</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">nConnections</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numHiddenLayers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-name">layer</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method rdkit.ML.Neural.NetNode.NetNode.SetInputs()=rdkit.ML.Neural.NetNode.NetNode-class.html#SetInputs"><a title="rdkit.ML.Neural.NetNode.NetNode.SetInputs" class="py-name" href="#" onclick="return doclink('link-8', 'SetInputs', 'link-8');">SetInputs</a></tt><tt class="py-op">(</tt><tt class="py-name">nodeList</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">nConnections</tt> <tt class="py-op">=</tt> <tt class="py-name">nConnections</tt> <tt class="py-op">+</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">nodeList</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">      <tt class="py-name">nodeList</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-name">layer</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="rdkit.ML.Neural.NetNode.NetNode.SetInputs" class="py-name" href="#" onclick="return doclink('link-9', 'SetInputs', 'link-8');">SetInputs</a></tt><tt class="py-op">(</tt><tt class="py-name">nodeList</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">      <tt class="py-name">nConnections</tt> <tt class="py-op">=</tt> <tt class="py-name">nConnections</tt> <tt class="py-op">+</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">nodeList</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nConnections</tt> <tt class="py-op">=</tt> <tt class="py-name">nConnections</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="Network.ConstructNodes"></a><div id="Network.ConstructNodes-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="Network.ConstructNodes-toggle" onclick="return toggle('Network.ConstructNodes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#ConstructNodes">ConstructNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeCounts</tt><tt class="py-op">,</tt> <tt class="py-param">actFunc</tt><tt class="py-op">,</tt> <tt class="py-param">actFuncParms</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.ConstructNodes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.ConstructNodes-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-docstring">""" build an unconnected network and set node counts</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        - nodeCounts: a list containing the number of nodes to be in each layer.</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">           the ordering is:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">            (nInput,nHidden1,nHidden2, ... , nHiddenN, nOutput)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeCounts</tt> <tt class="py-op">=</tt> <tt class="py-name">nodeCounts</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt> <tt class="py-op">=</tt> <tt class="py-name">nodeCounts</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numOutputNodes</tt> <tt class="py-op">=</tt> <tt class="py-name">nodeCounts</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numHiddenLayers</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">2</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInHidden</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numHiddenLayers</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numHiddenLayers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInHidden</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">nodeCounts</tt><tt class="py-op">[</tt><tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">numNodes</tt> <tt class="py-op">=</tt> <tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">numNodes</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">numNodes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.ML.Neural.NetNode
+rdkit.ML.Neural.NetNode.NetNode" class="py-name" href="#" onclick="return doclink('link-10', 'NetNode', 'link-3');">NetNode</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rdkit.ML.Neural.NetNode
+rdkit.ML.Neural.NetNode.NetNode" class="py-name" href="#" onclick="return doclink('link-11', 'NetNode', 'link-3');">NetNode</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">,</tt> <tt class="py-name">actFunc</tt><tt class="py-op">=</tt><tt class="py-name">actFunc</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                                         <tt class="py-name">actFuncParms</tt><tt class="py-op">=</tt><tt class="py-name">actFuncParms</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">start</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">      <tt class="py-name">end</tt> <tt class="py-op">=</tt> <tt class="py-name">start</tt> <tt class="py-op">+</tt> <tt class="py-name">nodeCounts</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">start</tt><tt class="py-op">,</tt> <tt class="py-name">end</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-name">start</tt> <tt class="py-op">=</tt> <tt class="py-name">end</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetInputNodeList"></a><div id="Network.GetInputNodeList-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Network.GetInputNodeList-toggle" onclick="return toggle('Network.GetInputNodeList');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetInputNodeList">GetInputNodeList</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetInputNodeList-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetInputNodeList-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns a list of input node indices</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetOutputNodeList"></a><div id="Network.GetOutputNodeList-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="Network.GetOutputNodeList-toggle" onclick="return toggle('Network.GetOutputNodeList');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetOutputNodeList">GetOutputNodeList</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetOutputNodeList-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetOutputNodeList-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns a list of output node indices</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetHiddenLayerNodeList"></a><div id="Network.GetHiddenLayerNodeList-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="Network.GetHiddenLayerNodeList-toggle" onclick="return toggle('Network.GetHiddenLayerNodeList');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetHiddenLayerNodeList">GetHiddenLayerNodeList</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">which</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetHiddenLayerNodeList-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetHiddenLayerNodeList-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns a list of hidden nodes in the specified layer</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerIndices</tt><tt class="py-op">[</tt><tt class="py-name">which</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetNumNodes"></a><div id="Network.GetNumNodes-def"><a name="L121"></a><tt class="py-lineno">121</tt> <a class="py-toggle" href="#" id="Network.GetNumNodes-toggle" onclick="return toggle('Network.GetNumNodes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetNumNodes">GetNumNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetNumNodes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetNumNodes-expanded"><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns the total number of nodes</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetNumHidden"></a><div id="Network.GetNumHidden-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="Network.GetNumHidden-toggle" onclick="return toggle('Network.GetNumHidden');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetNumHidden">GetNumHidden</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetNumHidden-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetNumHidden-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns the number of hidden layers</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numHiddenLayers</tt> </tt>
+</div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetNode"></a><div id="Network.GetNode-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="Network.GetNode-toggle" onclick="return toggle('Network.GetNode');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetNode">GetNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">which</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetNode-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetNode-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns a particular node</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">which</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetAllNodes"></a><div id="Network.GetAllNodes-def"><a name="L136"></a><tt class="py-lineno">136</tt> <a class="py-toggle" href="#" id="Network.GetAllNodes-toggle" onclick="return toggle('Network.GetAllNodes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetAllNodes">GetAllNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetAllNodes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetAllNodes-expanded"><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns a list of all nodes</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt> </tt>
+</div><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="Network.ClassifyExample"></a><div id="Network.ClassifyExample-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="Network.ClassifyExample-toggle" onclick="return toggle('Network.ClassifyExample');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#ClassifyExample">ClassifyExample</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">example</tt><tt class="py-op">,</tt> <tt class="py-param">appendExamples</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.ClassifyExample-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.ClassifyExample-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-docstring">""" classifies a given example and returns the results of the output layer.</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        - example: the example to be classified</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">      **NOTE:**</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">        if the output layer is only one element long,</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">        a scalar (not a list) will be returned.  This is why a lot of the other</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">        network code claims to only support single valued outputs.</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">example</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">example</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numOutputNodes</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">example</tt> <tt class="py-op">=</tt> <tt class="py-name">example</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numOutputNodes</tt><tt class="py-op">]</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-name">example</tt> <tt class="py-op">=</tt> <tt class="py-name">example</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numOutputNodes</tt><tt class="py-op">]</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">assert</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">example</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-name">totNumNodes</tt> <tt class="py-op">=</tt> <tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-name">totNumNodes</tt><tt class="py-op">,</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">float64</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">      <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">example</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numInputNodes</tt><tt class="py-op">,</tt> <tt class="py-name">totNumNodes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method rdkit.ML.Neural.ActFuncs.Sigmoid.Eval()=rdkit.ML.Neural.ActFuncs.Sigmoid-class.html#Eval,Method rdkit.ML.Neural.ActFuncs.TanH.Eval()=rdkit.ML.Neural.ActFuncs.TanH-class.html#Eval,Method rdkit.ML.Neural.NetNode.NetNode.Eval()=rdkit.ML.Neural.NetNode.NetNode-class.html#Eval"><a title="rdkit.ML.Neural.ActFuncs.Sigmoid.Eval
+rdkit.ML.Neural.ActFuncs.TanH.Eval
+rdkit.ML.Neural.NetNode.NetNode.Eval" class="py-name" href="#" onclick="return doclink('link-12', 'Eval', 'link-12');">Eval</a></tt><tt class="py-op">(</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastResults</tt> <tt class="py-op">=</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">numOutputNodes</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">results</tt> </tt>
+</div><a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"> </tt>
+<a name="Network.GetLastOutputs"></a><div id="Network.GetLastOutputs-def"><a name="L173"></a><tt class="py-lineno">173</tt> <a class="py-toggle" href="#" id="Network.GetLastOutputs-toggle" onclick="return toggle('Network.GetLastOutputs');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#GetLastOutputs">GetLastOutputs</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.GetLastOutputs-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.GetLastOutputs-expanded"><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-docstring">""" returns the complete list of output layer values from the last time this node</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">    classified anything"""</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastResults</tt> </tt>
+</div><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"> </tt>
+<a name="Network.__str__"></a><div id="Network.__str__-def"><a name="L178"></a><tt class="py-lineno">178</tt> <a class="py-toggle" href="#" id="Network.__str__-toggle" onclick="return toggle('Network.__str__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.__str__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.__str__-expanded"><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt class="py-docstring">""" provides a string representation of the network """</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt class="py-name">outStr</tt> <tt class="py-op">=</tt> <tt class="py-string">'Network:\n'</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">      <tt class="py-name">outStr</tt> <tt class="py-op">=</tt> <tt class="py-name">outStr</tt> <tt class="py-op">+</tt> <tt class="py-string">'\tnode(% 3d):\n'</tt> <tt class="py-op">%</tt> <tt class="py-name">i</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">      <tt class="py-name">outStr</tt> <tt class="py-op">=</tt> <tt class="py-name">outStr</tt> <tt class="py-op">+</tt> <tt class="py-string">'\t\tinputs:  %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.ML.Neural.NetNode.NetNode.GetInputs" class="py-name" href="#" onclick="return doclink('link-13', 'GetInputs', 'link-5');">GetInputs</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">      <tt class="py-name">outStr</tt> <tt class="py-op">=</tt> <tt class="py-name">outStr</tt> <tt class="py-op">+</tt> <tt class="py-string">'\t\tweights: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nodeList</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method rdkit.ML.Neural.NetNode.NetNode.GetWeights()=rdkit.ML.Neural.NetNode.NetNode-class.html#GetWeights"><a title="rdkit.ML.Neural.NetNode.NetNode.GetWeights" class="py-name" href="#" onclick="return doclink('link-14', 'GetWeights', 'link-14');">GetWeights</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-name">outStr</tt> <tt class="py-op">=</tt> <tt class="py-name">outStr</tt> <tt class="py-op">+</tt> <tt class="py-string">'Total Number of Connections: % 4d'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nConnections</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">outStr</tt> </tt>
+</div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="Network.__init__"></a><div id="Network.__init__-def"><a name="L189"></a><tt class="py-lineno">189</tt> <a class="py-toggle" href="#" id="Network.__init__-toggle" onclick="return toggle('Network.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.Network.Network-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeCounts</tt><tt class="py-op">,</tt> <tt class="py-param">nodeConnections</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">actFunc</tt><tt class="py-op">=</tt><tt id="link-15" class="py-name"><a title="rdkit.ML.Neural.ActFuncs" class="py-name" href="#" onclick="return doclink('link-15', 'ActFuncs', 'link-4');">ActFuncs</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Class rdkit.ML.Neural.ActFuncs.Sigmoid=rdkit.ML.Neural.ActFuncs.Sigmoid-class.html"><a title="rdkit.ML.Neural.ActFuncs.Sigmoid" class="py-name" href="#" onclick="return doclink('link-16', 'Sigmoid', 'link-16');">Sigmoid</a></tt><tt class="py-op">,</tt> <tt class="py-param">actFuncParms</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">               <tt class="py-param">weightBounds</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Network.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="Network.__init__-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-docstring">""" Constructor</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">      This constructs and initializes the network based upon the specified</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">      node counts.</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">      A fully connected network with random weights is constructed.</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        - nodeCounts: a list containing the number of nodes to be in each layer.</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">           the ordering is:</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">            (nInput,nHidden1,nHidden2, ... , nHiddenN, nOutput)</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">        - nodeConnections: I don't know why this is here, but it's optional.  ;-)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">        - actFunc: the activation function to be used here.  Must support the API</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">            of _ActFuncs.ActFunc_.</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">        - actFuncParms: a tuple of extra arguments to be passed to the activation function</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">            constructor.</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-docstring">        - weightBounds:  a float which provides the boundary on the random initial weights</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method rdkit.ML.Neural.Network.Network.ConstructNodes()=rdkit.ML.Neural.Network.Network-class.html#ConstructNodes"><a title="rdkit.ML.Neural.Network.Network.ConstructNodes" class="py-name" href="#" onclick="return doclink('link-17', 'ConstructNodes', 'link-17');">ConstructNodes</a></tt><tt class="py-op">(</tt><tt class="py-name">nodeCounts</tt><tt class="py-op">,</tt> <tt class="py-name">actFunc</tt><tt class="py-op">,</tt> <tt class="py-name">actFuncParms</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method rdkit.ML.Neural.Network.Network.FullyConnectNodes()=rdkit.ML.Neural.Network.Network-class.html#FullyConnectNodes"><a title="rdkit.ML.Neural.Network.Network.FullyConnectNodes" class="py-name" href="#" onclick="return doclink('link-18', 'FullyConnectNodes', 'link-18');">FullyConnectNodes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method rdkit.ML.Neural.Network.Network.ConstructRandomWeights()=rdkit.ML.Neural.Network.Network-class.html#ConstructRandomWeights"><a title="rdkit.ML.Neural.Network.Network.ConstructRandomWeights" class="py-name" href="#" onclick="return doclink('link-19', 'ConstructRandomWeights', 'link-19');">ConstructRandomWeights</a></tt><tt class="py-op">(</tt><tt class="py-name">minWeight</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-name">weightBounds</tt><tt class="py-op">,</tt> <tt class="py-name">maxWeight</tt><tt class="py-op">=</tt><tt class="py-name">weightBounds</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lastResults</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'[2,2,2]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">  <tt class="py-name">net</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name" targets="Module rdkit.ML.Neural.Network=rdkit.ML.Neural.Network-module.html,Class rdkit.ML.Neural.Network.Network=rdkit.ML.Neural.Network.Network-class.html"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-20', 'Network', 'link-20');">Network</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">net</tt><tt class="py-op">)</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'[2,4,1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">  <tt class="py-name">net</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-21', 'Network', 'link-20');">Network</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">net</tt><tt class="py-op">)</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'[2,2]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">  <tt class="py-name">net</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-22', 'Network', 'link-20');">Network</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">net</tt><tt class="py-op">)</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">  <tt class="py-name">inp</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">net</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#ClassifyExample,Method rdkit.ML.Composite.Composite.Composite.ClassifyExample()=rdkit.ML.Composite.Composite.Composite-class.html#ClassifyExample,Method rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.Forest.Forest.ClassifyExample()=rdkit.ML.DecTree.Forest.Forest-class.html#ClassifyExample,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#ClassifyExample,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#ClassifyExample,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#ClassifyExample,Method rdkit.ML.Neural.Network.Network.ClassifyExample()=rdkit.ML.Neural.Network.Network-class.html#ClassifyExample"><a title="rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample
+rdkit.ML.Composite.Composite.Composite.ClassifyExample
+rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample
+rdkit.ML.DecTree.Forest.Forest.ClassifyExample
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample
+rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample
+rdkit.ML.Neural.Network.Network.ClassifyExample" class="py-name" href="#" onclick="return doclink('link-23', 'ClassifyExample', 'link-23');">ClassifyExample</a></tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">,</tt> <tt class="py-string">'-&gt;'</tt><tt class="py-op">,</tt> <tt class="py-name">res</tt><tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">  <tt class="py-name">inp</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">net</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample
+rdkit.ML.Composite.Composite.Composite.ClassifyExample
+rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample
+rdkit.ML.DecTree.Forest.Forest.ClassifyExample
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample
+rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample
+rdkit.ML.Neural.Network.Network.ClassifyExample" class="py-name" href="#" onclick="return doclink('link-24', 'ClassifyExample', 'link-23');">ClassifyExample</a></tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">,</tt> <tt class="py-string">'-&gt;'</tt><tt class="py-op">,</tt> <tt class="py-name">res</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">  <tt class="py-name">inp</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">.5</tt><tt class="py-op">,</tt> <tt class="py-number">.5</tt><tt class="py-op">]</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">net</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample
+rdkit.ML.Composite.Composite.Composite.ClassifyExample
+rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample
+rdkit.ML.DecTree.Forest.Forest.ClassifyExample
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample
+rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample
+rdkit.ML.Neural.Network.Network.ClassifyExample" class="py-name" href="#" onclick="return doclink('link-25', 'ClassifyExample', 'link-23');">ClassifyExample</a></tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">)</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">inp</tt><tt class="py-op">,</tt> <tt class="py-string">'-&gt;'</tt><tt class="py-op">,</tt> <tt class="py-name">res</tt><tt class="py-op">)</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

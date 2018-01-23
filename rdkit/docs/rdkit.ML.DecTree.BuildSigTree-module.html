@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.DecTree.BuildSigTree</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.DecTree-module.html">Package&nbsp;DecTree</a> ::
+        Module&nbsp;BuildSigTree
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.DecTree.BuildSigTree-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module BuildSigTree</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.BuildSigTree-module.html#_GenerateRandomEnsemble" class="summary-sig-name" onclick="show_private();">_GenerateRandomEnsemble</a>(<span class="summary-sig-arg">nToInclude</span>,
+        <span class="summary-sig-arg">nBits</span>)</span><br />
+      Generates a random subset of a group of indices</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html#_GenerateRandomEnsemble">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.BuildSigTree-module.html#BuildSigTree" class="summary-sig-name">BuildSigTree</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">nPossibleRes</span>,
+        <span class="summary-sig-arg">ensemble</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">random</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">metric</span>=<span class="summary-sig-default">InfoTheory.InfoType.BIASENTROPY</span>,
+        <span class="summary-sig-arg">biasList</span>=<span class="summary-sig-default">[1]</span>,
+        <span class="summary-sig-arg">depth</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">maxDepth</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">useCMIM</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">allowCollections</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      **Arguments**</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html#BuildSigTree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SigTreeBuilder"></a><span class="summary-sig-name">SigTreeBuilder</span>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">initialVar</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ensemble</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">randomDescriptors</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html#SigTreeBuilder">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="CMIM"></a><span class="summary-name">CMIM</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="copy">copy</span>,
+  <span title="random">random</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.DataStructs.VectCollection.VectCollection-class.html" title="rdkit.DataStructs.VectCollection.VectCollection">VectCollection</a>,
+  <a href="rdkit.ML.InfoTheory-module.html" title="rdkit.ML.InfoTheory">InfoTheory</a>,
+  <a href="rdkit.ML.DecTree.SigTree-module.html" title="rdkit.ML.DecTree.SigTree">SigTree</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_GenerateRandomEnsemble"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_GenerateRandomEnsemble</span>(<span class="sig-arg">nToInclude</span>,
+        <span class="sig-arg">nBits</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html#_GenerateRandomEnsemble">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generates a random subset of a group of indices
+
+**Arguments**
+
+  - nToInclude: the size of the desired set
+
+  - nBits: the maximum index to be included in the set
+
+ **Returns**
+
+   a list of indices
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BuildSigTree"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BuildSigTree</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">nPossibleRes</span>,
+        <span class="sig-arg">ensemble</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">random</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">metric</span>=<span class="sig-default">InfoTheory.InfoType.BIASENTROPY</span>,
+        <span class="sig-arg">biasList</span>=<span class="sig-default">[1]</span>,
+        <span class="sig-arg">depth</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">maxDepth</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">useCMIM</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">allowCollections</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.BuildSigTree-pysrc.html#BuildSigTree">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+**Arguments**
+
+  - examples: the examples to be classified.  Each example
+    should be a sequence at least three entries long, with
+    entry 0 being a label, entry 1 a BitVector and entry -1
+    an activity value
+
+  - nPossibleRes: the number of result codes possible
+
+  - ensemble: (optional) if this argument is provided, it
+    should be a sequence which is used to limit the bits
+    which are actually considered as potential descriptors.
+    The default is None (use all bits).
+
+  - random: (optional) If this argument is nonzero, it
+    specifies the number of bits to be randomly selected
+    for consideration at this node (i.e. this toggles the
+    growth of Random Trees).
+    The default is 0 (no random descriptor selection)
+
+  - metric: (optional) This is an _InfoTheory.InfoType_ and
+    sets the metric used to rank the bits.
+    The default is _InfoTheory.InfoType.BIASENTROPY_
+
+  - biasList: (optional) If provided, this provides a bias
+    list for the bit ranker.
+    See the _InfoTheory.InfoBitRanker_ docs for an explanation
+    of bias.
+    The default value is [1], which biases towards actives.
+
+  - maxDepth: (optional) the maximum depth to which the tree
+               will be grown
+    The default is -1 (no depth limit).
+
+  - useCMIM: (optional) if this is &gt;0, the CMIM algorithm
+      (conditional mutual information maximization) will be
+      used to select the descriptors used to build the trees.
+      The value of the variable should be set to the number
+      of descriptors to be used.  This option and the
+      ensemble option are mutually exclusive (CMIM will not be
+      used if the ensemble is set), but it happily coexsts
+      with the random argument (to only consider random subsets
+      of the top N CMIM bits)
+    The default is 0 (do not use CMIM)
+
+  - depth: (optional) the current depth in the tree
+    This is used in the recursion and should not be set
+    by the client.
+
+**Returns**
+
+ a SigTree.SigTreeNode with the root of the decision tree
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

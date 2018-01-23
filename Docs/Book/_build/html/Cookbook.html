@@ -1,0 +1,769 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RDKit Cookbook &#8212; The RDKit 2017.09.2 ドキュメント</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.09.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="The RDKit database cartridge" href="Cartridge.html" />
+    <link rel="prev" title="The RDKit Book" href="RDKit_Book.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Cartridge.html" title="The RDKit database cartridge"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="RDKit_Book.html" title="The RDKit Book"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">目次</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">An overview of the RDKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RDKit_Book.html">The RDKit Book</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">RDKit Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-this">What is this?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#miscellaneous-topics">Miscellaneous Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-different-aromaticity-model">Using a different aromaticity model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manipulating-molecules">Manipulating Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cleaning-up-heterocycles">Cleaning up heterocycles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-conformation-generation">Parallel conformation generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#neutralizing-charged-molecules">Neutralizing Charged Molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#d-functionality-in-the-rdkit">3D functionality in the RDKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-scikit-learn-with-rdkit">Using scikit-learn with RDKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-custom-mcs-atom-types">Using custom MCS atom types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clustering-molecules">Clustering molecules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rmsd-calculation-between-n-molecules">RMSD Calculation between N molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a></li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="RDKit_Book.html"
+                        title="前の章へ">The RDKit Book</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Cartridge.html"
+                        title="次の章へ">The RDKit database cartridge</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Cookbook.md.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rdkit-cookbook">
+<span id="rdkit-cookbook"></span><h1>RDKit Cookbook<a class="headerlink" href="#rdkit-cookbook" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="what-is-this">
+<span id="what-is-this"></span><h2>What is this?<a class="headerlink" href="#what-is-this" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>This document provides examples of how to carry out particular tasks using the RDKit functionality from Python. The contents have been contributed by the RDKit community.</p>
+<p>If you find mistakes, or have suggestions for improvements, please either fix them yourselves in the source document (the .rst file) or send them to the mailing list: <a class="reference external" href="mailto:rdkit-discuss&#37;&#52;&#48;lists&#46;sourceforge&#46;net">rdkit-discuss<span>&#64;</span>lists<span>&#46;</span>sourceforge<span>&#46;</span>net</a> (you will need to subscribe first)</p>
+</div>
+<div class="section" id="miscellaneous-topics">
+<span id="miscellaneous-topics"></span><h2>Miscellaneous Topics<a class="headerlink" href="#miscellaneous-topics" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="using-a-different-aromaticity-model">
+<span id="using-a-different-aromaticity-model"></span><h3>Using a different aromaticity model<a class="headerlink" href="#using-a-different-aromaticity-model" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>By default, the RDKit applies its own model of aromaticity (explained in the RDKit Theory Book) when it reads in molecules. It is, however, fairly easy to override this and use your own aromaticity model.</p>
+<p>The easiest way to do this is it provide the molecules as SMILES with the aromaticity set as you would prefer to have it. For example, consider indole:</p>
+<p><img alt="image" src="_images/indole1.png" /></p>
+<p>By default the RDKit considers both rings to be aromatic:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;N1C=Cc2ccccc12&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">))</span>
+<span class="go">((1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,))</span>
+</pre></div>
+</div>
+<p>If you’d prefer to treat the five-membered ring as aliphatic, which is how the input SMILES is written, you just need to do a partial sanitization that skips the kekulization and aromaticity perception steps:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;N1C=Cc2ccccc12&#39;</span><span class="p">,</span><span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeMol</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span><span class="n">sanitizeOps</span><span class="o">=</span><span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeFlags</span><span class="o">.</span><span class="n">SANITIZE_ALL</span><span class="o">^</span><span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeFlags</span><span class="o">.</span><span class="n">SANITIZE_KEKULIZE</span><span class="o">^</span><span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeFlags</span><span class="o">.</span><span class="n">SANITIZE_SETAROMATICITY</span><span class="p">)</span>
+<span class="go">  rdkit.Chem.rdmolops.SanitizeFlags.SANITIZE_NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">))</span>
+<span class="go">((3,), (4,), (5,), (6,), (7,), (8,))</span>
+</pre></div>
+</div>
+<p>It is, of course, also possible to write your own aromaticity perception function, but that is beyond the scope of this document.</p>
+</div>
+</div>
+<div class="section" id="manipulating-molecules">
+<span id="manipulating-molecules"></span><h2>Manipulating Molecules<a class="headerlink" href="#manipulating-molecules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="cleaning-up-heterocycles">
+<span id="cleaning-up-heterocycles"></span><h3>Cleaning up heterocycles<a class="headerlink" href="#cleaning-up-heterocycles" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Mailing list discussions:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01185.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01185.html</a></li>
+<li><a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01162.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01162.html</a></li>
+<li><a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01900.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01900.html</a></li>
+<li><a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01901.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg01901.html</a></li>
+</ul>
+<p>The code:</p>
+<p>Examples of using it:</p>
+<p>This produces:</p>
+</div>
+<div class="section" id="parallel-conformation-generation">
+<span id="parallel-conformation-generation"></span><h3>Parallel conformation generation<a class="headerlink" href="#parallel-conformation-generation" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Mailing list discussion: <a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg02648.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg02648.html</a></p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; contribution from Andrew Dalke &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+
+<span class="c1"># Download this from http://pypi.python.org/pypi/futures</span>
+<span class="kn">from</span> <span class="nn">concurrent</span> <span class="k">import</span> <span class="n">futures</span>
+
+<span class="c1"># Download this from http://pypi.python.org/pypi/progressbar</span>
+<span class="kn">import</span> <span class="nn">progressbar</span>
+
+<span class="c1">## On my machine, it takes 39 seconds with 1 worker and 10 seconds with 4.</span>
+<span class="c1">## 29.055u 0.102s 0:28.68 101.6%   0+0k 0+3io 0pf+0w</span>
+<span class="c1">#max_workers=1</span>
+
+<span class="c1">## With 4 threads it takes 11 seconds.</span>
+<span class="c1">## 34.933u 0.188s 0:10.89 322.4%   0+0k 125+1io 0pf+0w</span>
+<span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="c1"># (The &quot;u&quot;ser time includes time spend in the children processes.</span>
+<span class="c1">#  The wall-clock time is 28.68 and 10.89 seconds, respectively.)</span>
+
+<span class="c1"># This function is called in the subprocess.</span>
+<span class="c1"># The parameters (molecule and number of conformers) are passed via a Python</span>
+<span class="k">def</span> <span class="nf">generateconformations</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">ids</span><span class="o">=</span><span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+        <span class="n">AllChem</span><span class="o">.</span><span class="n">UFFOptimizeMolecule</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+    <span class="c1"># EmbedMultipleConfs returns a Boost-wrapped type which</span>
+    <span class="c1"># cannot be pickled. Convert it to a Python list, which can.</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+
+<span class="n">smi_input_file</span><span class="p">,</span> <span class="n">sdf_output_file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">sdf_output_file</span><span class="p">)</span>
+
+<span class="n">suppl</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SmilesMolSupplier</span><span class="p">(</span><span class="n">smi_input_file</span><span class="p">,</span> <span class="n">titleLine</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="c1"># Submit a set of asynchronous jobs</span>
+    <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">suppl</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mol</span><span class="p">:</span>
+            <span class="n">job</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">generateconformations</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+
+    <span class="n">widgets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Generating conformations; &quot;</span><span class="p">,</span> <span class="n">progressbar</span><span class="o">.</span><span class="n">Percentage</span><span class="p">(),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span>
+               <span class="n">progressbar</span><span class="o">.</span><span class="n">ETA</span><span class="p">(),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">progressbar</span><span class="o">.</span><span class="n">Bar</span><span class="p">()]</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">progressbar</span><span class="o">.</span><span class="n">ProgressBar</span><span class="p">(</span><span class="n">widgets</span><span class="o">=</span><span class="n">widgets</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">jobs</span><span class="p">)):</span>
+        <span class="n">mol</span><span class="p">,</span><span class="n">ids</span><span class="o">=</span><span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="neutralizing-charged-molecules">
+<span id="neutralizing-charged-molecules"></span><h3>Neutralizing Charged Molecules<a class="headerlink" href="#neutralizing-charged-molecules" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Mailing list discussion: <a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg02648.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg02648.html</a></p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; contribution from Hans de Winter &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+
+<span class="k">def</span> <span class="nf">_InitialiseNeutralisationReactions</span><span class="p">():</span>
+    <span class="n">patts</span><span class="o">=</span> <span class="p">(</span>
+        <span class="c1"># Imidazoles</span>
+        <span class="p">(</span><span class="s1">&#39;[n+;H]&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">),</span>
+        <span class="c1"># Amines</span>
+        <span class="p">(</span><span class="s1">&#39;[N+;!H0]&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">),</span>
+        <span class="c1"># Carboxylic acids and alcohols</span>
+        <span class="p">(</span><span class="s1">&#39;[$([O-]);!$([O-][#7])]&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">),</span>
+        <span class="c1"># Thiols</span>
+        <span class="p">(</span><span class="s1">&#39;[S-;X1]&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">),</span>
+        <span class="c1"># Sulfonamides</span>
+        <span class="p">(</span><span class="s1">&#39;[$([N-;X2]S(=O)=O)]&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">),</span>
+        <span class="c1"># Enamines</span>
+        <span class="p">(</span><span class="s1">&#39;[$([N-;X2][C,N]=C)]&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">),</span>
+        <span class="c1"># Tetrazoles</span>
+        <span class="p">(</span><span class="s1">&#39;[n-]&#39;</span><span class="p">,</span><span class="s1">&#39;[nH]&#39;</span><span class="p">),</span>
+        <span class="c1"># Sulfoxides</span>
+        <span class="p">(</span><span class="s1">&#39;[$([S-]=O)]&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">),</span>
+        <span class="c1"># Amides</span>
+        <span class="p">(</span><span class="s1">&#39;[$([N-]C=O)]&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="kc">False</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="n">patts</span><span class="p">]</span>
+
+<span class="n">_reactions</span><span class="o">=</span><span class="kc">None</span>
+<span class="k">def</span> <span class="nf">NeutraliseCharges</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">reactions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">_reactions</span>
+    <span class="k">if</span> <span class="n">reactions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_reactions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_reactions</span><span class="o">=</span><span class="n">_InitialiseNeutralisationReactions</span><span class="p">()</span>
+        <span class="n">reactions</span><span class="o">=</span><span class="n">_reactions</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">replaced</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">reactant</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reactions</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">mol</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">reactant</span><span class="p">):</span>
+            <span class="n">replaced</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">rms</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">reactant</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">rms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">replaced</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="kc">True</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">smis</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;c1cccc[nH+]1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;C[N+](C)(C)C&quot;</span><span class="p">,</span><span class="s2">&quot;c1ccccc1[NH3+]&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;CC(=O)[O-]&quot;</span><span class="p">,</span><span class="s2">&quot;c1ccccc1[O-]&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;CCS&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;C[N-]S(=O)(=O)C&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;C[N-]C=C&quot;</span><span class="p">,</span><span class="s2">&quot;C[N-]N=C&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;c1ccc[n-]1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;CC[N-]C(=O)CC&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">smis</span><span class="p">:</span>
+    <span class="p">(</span><span class="n">molSmiles</span><span class="p">,</span> <span class="n">neutralised</span><span class="p">)</span> <span class="o">=</span> <span class="n">NeutraliseCharges</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">smi</span> <span class="o">+</span> <span class="s2">&quot;-&gt;&quot;</span> <span class="o">+</span> <span class="n">molSmiles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c1cccc</span><span class="p">[</span><span class="n">nH</span><span class="o">+</span><span class="p">]</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">c1ccncc1</span>
+<span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="o">+</span><span class="p">](</span><span class="n">C</span><span class="p">)(</span><span class="n">C</span><span class="p">)</span><span class="n">C</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="o">+</span><span class="p">](</span><span class="n">C</span><span class="p">)(</span><span class="n">C</span><span class="p">)</span><span class="n">C</span>
+<span class="n">c1ccccc1</span><span class="p">[</span><span class="n">NH3</span><span class="o">+</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">Nc1ccccc1</span>
+<span class="n">CC</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)[</span><span class="n">O</span><span class="o">-</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">CC</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)</span><span class="n">O</span>
+<span class="n">c1ccccc1</span><span class="p">[</span><span class="n">O</span><span class="o">-</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">Oc1ccccc1</span>
+<span class="n">CCS</span> <span class="o">-&gt;</span> <span class="n">CCS</span>
+<span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="p">]</span><span class="n">S</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)(</span><span class="o">=</span><span class="n">O</span><span class="p">)</span><span class="n">C</span> <span class="o">-&gt;</span> <span class="n">CNS</span><span class="p">(</span><span class="n">C</span><span class="p">)(</span><span class="o">=</span><span class="n">O</span><span class="p">)</span><span class="o">=</span><span class="n">O</span>
+<span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="p">]</span><span class="n">C</span><span class="o">=</span><span class="n">C</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="o">=</span><span class="n">CNC</span>
+<span class="n">C</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="p">]</span><span class="n">N</span><span class="o">=</span><span class="n">C</span> <span class="o">-&gt;</span> <span class="n">C</span><span class="o">=</span><span class="n">NNC</span>
+<span class="n">c1ccc</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="p">]</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="n">c1cc</span><span class="p">[</span><span class="n">nH</span><span class="p">]</span><span class="n">c1</span>
+<span class="n">CC</span><span class="p">[</span><span class="n">N</span><span class="o">-</span><span class="p">]</span><span class="n">C</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)</span><span class="n">CC</span> <span class="o">-&gt;</span> <span class="n">CCNC</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)</span><span class="n">CC</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="d-functionality-in-the-rdkit">
+<span id="d-functionality-in-the-rdkit"></span><h2>3D functionality in the RDKit<a class="headerlink" href="#d-functionality-in-the-rdkit" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>The RDKit contains a range of 3D functionalities such as:</p>
+<ul class="simple">
+<li>Shape alignment</li>
+<li>RMS calculation</li>
+<li>Shape Tanimoto Distance</li>
+<li>Shape Protrude Distance</li>
+<li>3D pharmacophore fingerprint</li>
+<li>Torsion fingerprint (deviation)</li>
+</ul>
+<p>There are two alignment methods currently available in the RDKit. As an example we use two crystal structures from the PDB of the same molecule.</p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">RDConfig</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">rdMolAlign</span>
+<span class="c1"># The reference molecule</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="c1"># The PDB conformations</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1DWD_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol1</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1PPC_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="c1"># Align them</span>
+<span class="n">rms</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMol</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rms</span><span class="p">)</span>
+<span class="c1"># Align them with OPEN3DAlign</span>
+<span class="n">pyO3A</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">GetO3A</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">pyO3A</span><span class="o">.</span><span class="n">Align</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.55001955728</span>
+<span class="mf">0.376459885045</span>
+</pre></div>
+</div>
+<p>If a molecule contains more than one conformer, they can be aligned with respect to the first conformer. If a list is provided to the option RMSlist, the RMS value from the alignment are stored. The RMS value of two conformers of a molecule can also be calculated separately, either with or without alignment (using the flag prealigned).</p>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">cids</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">maxAttempts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">pruneRmsThresh</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">))</span>
+<span class="c1"># align the conformers</span>
+<span class="n">rmslist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">AllChem</span><span class="o">.</span><span class="n">AlignMolConformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">RMSlist</span><span class="o">=</span><span class="n">rmslist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rmslist</span><span class="p">))</span>
+<span class="c1"># calculate RMS of confomers 1 and 9 separately</span>
+<span class="n">rms</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">GetConformerRMS</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">prealigned</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">50</span>
+<span class="mi">49</span>
+</pre></div>
+</div>
+<p>For shape comparison, the RDKit provides two Shape-based distances that can be calculated for two prealigned molecules or conformers. Shape protrude distance focusses on the volume mismatch, while Shape Tanimoto distance takes the volume overlay overall into account.</p>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">RDConfig</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">rdMolAlign</span><span class="p">,</span> <span class="n">rdShapeHelpers</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1DWD_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol1</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1PPC_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">rms</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMol</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">tani</span> <span class="o">=</span> <span class="n">rdShapeHelpers</span><span class="o">.</span><span class="n">ShapeTanimotoDist</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">prtr</span> <span class="o">=</span> <span class="n">rdShapeHelpers</span><span class="o">.</span><span class="n">ShapeProtrudeDist</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rms</span><span class="p">,</span> <span class="n">tani</span><span class="p">,</span> <span class="n">prtr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.55001955728</span> <span class="mf">0.18069102331</span> <span class="mf">0.0962800875274</span>
+</pre></div>
+</div>
+<p>A 3D pharmacophore fingerprint can be calculated using the RDKit by feeding a 3D distance matrix to the 2D-pharmacophore machinery.</p>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">DataStructs</span><span class="p">,</span> <span class="n">RDConfig</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Pharm2D</span> <span class="k">import</span> <span class="n">Gobbi_Pharm2D</span><span class="p">,</span> <span class="n">Generate</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1DWD_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol1</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1PPC_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="c1"># pharmacophore fingerprint</span>
+<span class="n">factory</span> <span class="o">=</span> <span class="n">Gobbi_Pharm2D</span><span class="o">.</span><span class="n">factory</span>
+<span class="n">fp1</span> <span class="o">=</span> <span class="n">Generate</span><span class="o">.</span><span class="n">Gen2DFingerprint</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">factory</span><span class="p">,</span> <span class="n">dMat</span><span class="o">=</span><span class="n">Chem</span><span class="o">.</span><span class="n">Get3DDistanceMatrix</span><span class="p">(</span><span class="n">mol1</span><span class="p">))</span>
+<span class="n">fp2</span> <span class="o">=</span> <span class="n">Generate</span><span class="o">.</span><span class="n">Gen2DFingerprint</span><span class="p">(</span><span class="n">mol2</span><span class="p">,</span> <span class="n">factory</span><span class="p">,</span> <span class="n">dMat</span><span class="o">=</span><span class="n">Chem</span><span class="o">.</span><span class="n">Get3DDistanceMatrix</span><span class="p">(</span><span class="n">mol2</span><span class="p">))</span>
+<span class="c1"># Tanimoto similarity</span>
+<span class="n">tani</span> <span class="o">=</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="n">fp2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tani</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.451665312754</span>
+</pre></div>
+</div>
+<p>The RDKit provides an implementation of the torsion fingerprint deviation (TFD) approach developed by Schulz-Gasch et al. (J. Chem. Inf. Model, 52, 1499, 2012). For a pair of conformations of a molecule, the torsional angles of the rotatable bonds and the ring systems are recorded in a torsion fingerprint (TF), and the deviations between the TFs calculated, normalized and summed up. For each torsion, a set of four atoms a-b-c-d are selected.</p>
+<p>The RDKit implementation allows the user to customize the torsion fingerprints as described in the following.</p>
+<ul class="simple">
+<li>In the original approach, the torsions are weighted based on their distance to the center of the molecule. By default, this weighting is performed, but can be turned off using the flag useWeights=False</li>
+<li>If symmetric atoms a and/or d exist, all possible torsional angles are calculated. To determine if two atoms are symmetric, the hash codes from the Morgan algorithm at a given radius are used (default: radius = 2).</li>
+<li>In the original approach, the maximal deviation used for normalization is 180.0 degrees for all torsions (default). If maxDev=』spec』, a torsion-type dependent maximal deviation is used for the normalization.</li>
+<li>In the original approach, single bonds adjacent to triple bonds and allenes are ignored (default). If ignoreColinearBonds=』False』, a 「combined」 torsion is used</li>
+</ul>
+<p>In addition there are a few differences to the implementation by Schulz-Gasch et al.:</p>
+<ul class="simple">
+<li>Hydrogens are never considered.</li>
+<li>In the original approach, atoms a and/or d are chosen randomly if atom b and/or c have multiple non-symmetric neighbors. The RDKit implementation picks the atom with the smallest Morgan invariant. This way the choice is independent of the atom order in the molecule.</li>
+<li>In the case of symmetric atoms a and/or d, the RDKit implementation stores all possible torsional angles in the TF instead of only storing the smallest one as in the original approach. Subsequently, all possible deviations are determined and the smallest one used for the TFD calculation. This procedure guarantees that the smallest deviations enter the TFD.</li>
+</ul>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">RDConfig</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">TorsionFingerprints</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1DWD_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol1</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1PPC_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">tfd1</span> <span class="o">=</span> <span class="n">TorsionFingerprints</span><span class="o">.</span><span class="n">GetTFDBetweenMolecules</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span>
+<span class="n">tfd2</span> <span class="o">=</span> <span class="n">TorsionFingerprints</span><span class="o">.</span><span class="n">GetTFDBetweenMolecules</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">useWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">tfd3</span> <span class="o">=</span> <span class="n">TorsionFingerprints</span><span class="o">.</span><span class="n">GetTFDBetweenMolecules</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">maxDev</span><span class="o">=</span><span class="s1">&#39;spec&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfd1</span><span class="p">,</span> <span class="n">tfd2</span><span class="p">,</span> <span class="n">tfd3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">0.0691236990428</span> <span class="mf">0.111475253992</span> <span class="mf">0.0716255058804</span>
+</pre></div>
+</div>
+<p>If the TFD between conformers of the same molecule is to be calculated, the function GetTFDBetweenConformers() should be used for performance reasons.</p>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">RDConfig</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">TorsionFingerprints</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1DWD_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">AssignBondOrdersFromTemplate</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">mol1</span><span class="p">)</span>
+<span class="n">mol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromPDBFile</span><span class="p">(</span><span class="n">RDConfig</span><span class="o">.</span><span class="n">RDBaseDir</span><span class="o">+</span><span class="s1">&#39;/rdkit/Chem/test_data/1PPC_ligand.pdb&#39;</span><span class="p">)</span>
+<span class="n">mol1</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">mol2</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(),</span> <span class="n">assignId</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">TorsionFingerprints</span><span class="o">.</span><span class="n">GetTFDBetweenConformers</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">confIds1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">confIds2</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.0691</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For the conformer RMS and TFD values, the RDKit provides convenience functions that calculated directly the symmetric matrix which can be fed into a clustering algorithm such as Butina clustering. The flag reordering ensures that the number of neighbors of the unclustered molecules is updated every time a cluster is created.</p>
+<p>Examples of using it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span><span class="p">,</span> <span class="n">TorsionFingerprints</span>
+<span class="kn">from</span> <span class="nn">rdkit.ML.Cluster</span> <span class="k">import</span> <span class="n">Butina</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;NC(=[NH2+])c1ccc(C[C@@H](NC(=O)CNS(=O)(=O)c2ccc3ccccc3c2)C(=O)N2CCCCC2)cc1&#39;</span><span class="p">)</span>
+<span class="n">cids</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">maxAttempts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">pruneRmsThresh</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># RMS matrix</span>
+<span class="n">rmsmat</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">GetConformerRMSMatrix</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prealigned</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># TFD matrix</span>
+<span class="n">tfdmat</span> <span class="o">=</span> <span class="n">TorsionFingerprints</span><span class="o">.</span><span class="n">GetTFDMatrix</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="c1"># clustering</span>
+<span class="n">num</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span>
+<span class="n">rms_clusters</span> <span class="o">=</span> <span class="n">Butina</span><span class="o">.</span><span class="n">ClusterData</span><span class="p">(</span><span class="n">rmsmat</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">isDistData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reordering</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tfd_clusters</span> <span class="o">=</span> <span class="n">Butina</span><span class="o">.</span><span class="n">ClusterData</span><span class="p">(</span><span class="n">tfdmat</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">isDistData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reordering</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-scikit-learn-with-rdkit">
+<span id="using-scikit-learn-with-rdkit"></span><h2>Using scikit-learn with RDKit<a class="headerlink" href="#using-scikit-learn-with-rdkit" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>scikit-learn is a machine-learning library for Python containing a variety of supervised and unsupervised methods. The documention can be found here: <a class="reference external" href="http://scikit-learn.org/stable/user_guide.html">http://scikit-learn.org/stable/user_guide.html</a></p>
+<p>RDKit fingerprints can be used to train machine-learning models from scikit-learn. Here is an example for random forest:</p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span><span class="p">,</span> <span class="n">DataStructs</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="c1"># generate four molecules</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccccc1&#39;</span><span class="p">)</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccccc1CC&#39;</span><span class="p">)</span>
+<span class="n">m3</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccncc1&#39;</span><span class="p">)</span>
+<span class="n">m4</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccncc1CC&#39;</span><span class="p">)</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">,</span> <span class="n">m4</span><span class="p">]</span>
+
+<span class="c1"># generate fingeprints: Morgan fingerprint with radius 2</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllChem</span><span class="o">.</span><span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+
+<span class="c1"># convert the RDKit explicit vectors into numpy arrays</span>
+<span class="n">np_fps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">fp</span> <span class="ow">in</span> <span class="n">fps</span><span class="p">:</span>
+  <span class="n">arr</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+  <span class="n">DataStructs</span><span class="o">.</span><span class="n">ConvertToNumpyArray</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>
+  <span class="n">np_fps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="c1"># get a random forest classifiert with 100 trees</span>
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1123</span><span class="p">)</span>
+
+<span class="c1"># train the random forest</span>
+<span class="c1"># with the first two molecules being actives (class 1) and</span>
+<span class="c1"># the last two being inactives (class 0)</span>
+<span class="n">ys_fit</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np_fps</span><span class="p">,</span> <span class="n">ys_fit</span><span class="p">)</span>
+
+<span class="c1"># use the random forest to predict a new molecule</span>
+<span class="n">m5</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccccc1O&#39;</span><span class="p">)</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span>
+<span class="n">DataStructs</span><span class="o">.</span><span class="n">ConvertToNumpyArray</span><span class="p">(</span><span class="n">AllChem</span><span class="o">.</span><span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span><span class="n">m5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">fp</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">((</span><span class="n">fp</span><span class="p">,)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">((</span><span class="n">fp</span><span class="p">,)))</span>
+</pre></div>
+</div>
+<p>The output with scikit-learn version 0.13 is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[[</span> <span class="mf">0.14</span> <span class="mf">0.86</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Generating a similarity map for this model.</p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="k">import</span> <span class="n">SimilarityMaps</span>
+
+<span class="c1"># helper function</span>
+<span class="k">def</span> <span class="nf">getProba</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">predictionFunction</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">predictionFunction</span><span class="p">((</span><span class="n">fp</span><span class="p">,))[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">m5</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ccccc1O&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">maxweight</span> <span class="o">=</span> <span class="n">SimilarityMaps</span><span class="o">.</span><span class="n">GetSimilarityMapForModel</span><span class="p">(</span><span class="n">m5</span><span class="p">,</span> <span class="n">SimilarityMaps</span><span class="o">.</span><span class="n">GetMorganFingerprint</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">getProba</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This produces:</p>
+<p><img alt="image" src="_images/similarity_map_rf.png" /></p>
+</div>
+<div class="section" id="using-custom-mcs-atom-types">
+<span id="using-custom-mcs-atom-types"></span><h2>Using custom MCS atom types<a class="headerlink" href="#using-custom-mcs-atom-types" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Mailing list discussion: <a class="reference external" href="http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg03676.html">http://www.mail-archive.com/rdkit-discuss&#64;lists.sourceforge.net/msg03676.html</a></p>
+<p>IPython notebook: <a class="reference external" href="http://nbviewer.ipython.org/gist/greglandrum/8351725">http://nbviewer.ipython.org/gist/greglandrum/8351725</a> <a class="reference external" href="https://gist.github.com/greglandrum/8351725">https://gist.github.com/greglandrum/8351725</a></p>
+<p>The goal is to be able to use custom atom types in the MCS code, yet still be able to get a readable SMILES for the MCS. We will use the MCS code’s option to use isotope information in the matching and then set bogus isotope values that contain our isotope information.</p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">rdFMCS</span>
+
+<span class="c1"># our test molecules:</span>
+<span class="n">smis</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;COc1ccc(C(Nc2nc3c(ncn3COCC=O)c(=O)[nH]2)(c2ccccc2)c2ccccc2)cc1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;COc1ccc(C(Nc2nc3c(ncn3COC(CO)(CO)CO)c(=O)[nH]2)(c2ccccc2)c2ccccc2)cc1&quot;</span><span class="p">]</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">smis</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="s2">&quot; a simple hash combining atom number and hybridization &quot;</span>
+  <span class="k">return</span> <span class="mi">100</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">GetHybridization</span><span class="p">())</span><span class="o">+</span><span class="n">a</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span>
+
+<span class="c1"># copy the molecules, since we will be changing them</span>
+<span class="n">nms</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">nm</span> <span class="ow">in</span> <span class="n">nms</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">nm</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+      <span class="n">at</span><span class="o">.</span><span class="n">SetIsotope</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">at</span><span class="p">))</span>
+
+<span class="n">mcs</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">FindMCS</span><span class="p">(</span><span class="n">nms</span><span class="p">,</span><span class="n">atomCompare</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">AtomCompare</span><span class="o">.</span><span class="n">CompareIsotopes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mcs</span><span class="o">.</span><span class="n">smartsString</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This generates the following output:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">406</span><span class="o">*</span><span class="p">]</span><span class="o">-</span><span class="p">[</span><span class="mi">308</span><span class="o">*</span><span class="p">]</span><span class="o">-</span><span class="p">[</span><span class="mi">306</span><span class="o">*</span><span class="p">]</span><span class="mi">1</span><span class="p">:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">](:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="mi">406</span><span class="o">*</span><span class="p">](</span><span class="o">-</span><span class="p">[</span><span class="mi">307</span><span class="o">*</span><span class="p">]</span><span class="o">-</span><span class="p">[</span><span class="mi">306</span><span class="o">*</span><span class="p">]</span><span class="mi">1</span><span class="p">:[</span><span class="mi">307</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]</span><span class="mi">2</span><span class="p">:[</span><span class="mi">306</span><span class="o">*</span><span class="p">](:[</span><span class="mi">306</span><span class="o">*</span><span class="p">](:[</span><span class="mi">307</span><span class="o">*</span><span class="p">]:</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="p">[</span><span class="mi">308</span><span class="o">*</span><span class="p">]):[</span><span class="mi">307</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">307</span><span class="o">*</span><span class="p">]:</span><span class="mi">2</span><span class="o">-</span><span class="p">[</span><span class="mi">406</span><span class="o">*</span><span class="p">]</span><span class="o">-</span><span class="p">[</span><span class="mi">408</span><span class="o">*</span><span class="p">]</span><span class="o">-</span><span class="p">[</span><span class="mi">406</span><span class="o">*</span><span class="p">])(</span><span class="o">-</span><span class="p">[</span><span class="mi">306</span><span class="o">*</span><span class="p">]</span><span class="mi">1</span><span class="p">:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="mi">306</span><span class="o">*</span><span class="p">]</span><span class="mi">1</span><span class="p">:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:[</span><span class="mi">306</span><span class="o">*</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>That’s what we asked for, but it’s not exactly readable. We can get to a more readable form in a two step process:</p>
+<blockquote>
+<div><ol class="simple">
+<li>Do a substructure match of the MCS onto a copied molecule</li>
+<li>Generate SMILES for the original molecule, using only the atoms that matched in the copy.</li>
+</ol>
+</div></blockquote>
+<p>This works because we know that the atom indices in the copies and the original molecules are the same.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getMCSSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">labelledMol</span><span class="p">,</span><span class="n">mcs</span><span class="p">):</span>
+    <span class="n">mcsp</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">mcs</span><span class="o">.</span><span class="n">smartsString</span><span class="p">)</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">labelledMol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">mcsp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFragmentToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">atomsToUse</span><span class="o">=</span><span class="n">match</span><span class="p">,</span>
+                                    <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">canonical</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">getMCSSmiles</span><span class="p">(</span><span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">mcs</span><span class="p">))</span>
+
+<span class="n">COc1ccc</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">Nc2nc3c</span><span class="p">(</span><span class="n">ncn3COC</span><span class="p">)</span><span class="n">c</span><span class="p">(</span><span class="o">=</span><span class="n">O</span><span class="p">)[</span><span class="n">nH</span><span class="p">]</span><span class="mi">2</span><span class="p">)(</span><span class="n">c2ccccc2</span><span class="p">)</span><span class="n">c2ccccc2</span><span class="p">)</span><span class="n">cc1</span>
+</pre></div>
+</div>
+<p>That’s what we were looking for.</p>
+</div>
+<div class="section" id="clustering-molecules">
+<span id="clustering-molecules"></span><h2>Clustering molecules<a class="headerlink" href="#clustering-molecules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>For large sets of molecules (more than 1000-2000), it’s most efficient to use the Butina clustering algorithm.</p>
+<p>Here’s some code for doing that for a set of fingerprints:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ClusterFps</span><span class="p">(</span><span class="n">fps</span><span class="p">,</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">DataStructs</span>
+    <span class="kn">from</span> <span class="nn">rdkit.ML.Cluster</span> <span class="k">import</span> <span class="n">Butina</span>
+
+    <span class="c1"># first generate the distance matrix:</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nfps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nfps</span><span class="p">):</span>
+        <span class="n">sims</span> <span class="o">=</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">BulkTanimotoSimilarity</span><span class="p">(</span><span class="n">fps</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">fps</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">dists</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sims</span><span class="p">])</span>
+
+    <span class="c1"># now cluster the data:</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">Butina</span><span class="o">.</span><span class="n">ClusterData</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span><span class="n">nfps</span><span class="p">,</span><span class="n">cutoff</span><span class="p">,</span><span class="n">isDistData</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cs</span>
+</pre></div>
+</div>
+<p>The return value is a tuple of clusters, where each cluster is a tuple of ids.</p>
+<p>Example usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;zdd.sdf.gz&#39;</span><span class="p">))</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="p">[</span><span class="n">AllChem</span><span class="o">.</span><span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1024</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">]</span>
+<span class="n">clusters</span><span class="o">=</span><span class="n">ClusterFps</span><span class="p">(</span><span class="n">fps</span><span class="p">,</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The variable clusters contains the results:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="mi">200</span><span class="p">])</span>
+<span class="go">(6164, 1400, 1403, 1537, 1543, 6575, 6759)</span>
+</pre></div>
+</div>
+<p>That cluster contains 7 points, the centroid is point 6164.</p>
+</div>
+<div class="section" id="rmsd-calculation-between-n-molecules">
+<span id="rmsd-calculation-between-n-molecules"></span><h2>RMSD Calculation between N molecules<a class="headerlink" href="#rmsd-calculation-between-n-molecules" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="introduction">
+<span id="introduction"></span><h3>Introduction<a class="headerlink" href="#introduction" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>We sometimes need to calculate RMSD distances between two (or more) molecules. This can be used to calculate how close two conformers are. Most RMSD calculations make sense only on similar compounds or, at least, for common parts in different compounds.</p>
+</div>
+<div class="section" id="details">
+<span id="details"></span><h3>Details<a class="headerlink" href="#details" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>The following program (written in python 2.7) takes an SDF file as an input and generates all the RMSD distances between the molecules in that file. These distances are written to an output file (user defined).</p>
+<p>So for an SDF with 5 conformers we will get 10 RMSD scores - typical n choose k problem, without repetition i.e. 5! / 2!(5-2)!</p>
+<p>The code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">calculates RMSD differences between all structures in a file</span>
+
+<span class="sd">@author: JP &lt;jp@javaclass.co.uk&gt;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">getopt</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># rdkit imports</span>
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Write contents of a string to file</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">write_contents</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+  <span class="c1"># do some basic checking, could use assert strictly speaking</span>
+  <span class="k">assert</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;filename cannot be None&quot;</span>
+  <span class="k">assert</span> <span class="n">contents</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;contents cannot be None&quot;</span>
+  <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># close the file</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Write a list to a file</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">write_list_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">line_sep</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">):</span>
+  <span class="c1"># do some basic checking, could use assert strictly speaking</span>
+  <span class="k">assert</span> <span class="nb">list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;list cannot be None or empty&quot;</span>
+  <span class="n">write_contents</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">line_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">))</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Calculate RMSD spread</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">calculate_spread</span><span class="p">(</span><span class="n">molecules_file</span><span class="p">):</span>
+
+  <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">molecules_file</span><span class="p">),</span> <span class="s2">&quot;File </span><span class="si">%s</span><span class="s2"> does not exist!&quot;</span> <span class="o">%</span> <span class="n">molecules</span>
+
+  <span class="c1"># get an iterator</span>
+  <span class="n">mols</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDMolSupplier</span><span class="p">(</span><span class="n">molecules_file</span><span class="p">)</span>
+
+  <span class="n">spread_values</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="c1"># how many molecules do we have in our file</span>
+  <span class="n">mol_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+  <span class="c1"># we are going to compare each molecule with every other molecule</span>
+  <span class="c1"># typical n choose k scenario (n choose 2)</span>
+  <span class="c1"># where number of combinations is given by (n!) / k!(n-k)! ; if my maths isn&#39;t too rusty</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mol_count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">mol_count</span><span class="p">):</span>
+          <span class="c1"># show something is being done ... because for large mol_count this will take some time</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aligning molecule #</span><span class="si">%d</span><span class="s2"> with molecule #</span><span class="si">%d</span><span class="s2"> (</span><span class="si">%d</span><span class="s2"> molecules in all)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mol_count</span><span class="p">))</span>
+          <span class="c1"># calculate RMSD and store in an array</span>
+          <span class="c1"># unlike AlignMol this takes care of symmetry</span>
+          <span class="n">spread_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">AllChem</span><span class="o">.</span><span class="n">GetBestRMS</span><span class="p">(</span><span class="n">mols</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">mols</span><span class="p">[</span><span class="n">j</span><span class="p">])))</span>
+  <span class="c1"># return that array</span>
+  <span class="k">return</span> <span class="n">spread_values</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">try</span><span class="p">:</span>
+      <span class="c1"># the options are as follows:</span>
+      <span class="c1"># f - the actual structure file</span>
+      <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s2">&quot;vf:o:&quot;</span><span class="p">)</span>
+  <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">GetoptError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+      <span class="c1"># print help information and exit:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span> <span class="c1"># will print something like &quot;option -a not recognized&quot;</span>
+      <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">401</span><span class="p">)</span>
+
+  <span class="c1"># DEFAULTS</span>
+  <span class="n">molecules_file</span>  <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">output_file</span> <span class="o">=</span> <span class="kc">None</span>
+
+  <span class="k">for</span> <span class="n">opt</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;-v&quot;</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RMSD Spread 1.1&quot;</span><span class="p">)</span>
+          <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+      <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;-f&quot;</span><span class="p">:</span>
+          <span class="n">molecules_file</span> <span class="o">=</span> <span class="n">arg</span>
+      <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;-o&quot;</span><span class="p">:</span>
+          <span class="n">output_file</span> <span class="o">=</span> <span class="n">arg</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unhandled option: &quot;</span> <span class="o">+</span> <span class="n">opt</span>
+
+  <span class="c1"># assert the following - not the cleanest way to do this but this will work</span>
+  <span class="k">assert</span> <span class="n">molecules_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;file containing molecules must be specified, add -f to command line arguments&quot;</span>
+  <span class="k">assert</span> <span class="n">output_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;output file must be specified, add -o to command line arguments&quot;</span>
+  <span class="c1"># get the RMSD spread values</span>
+  <span class="n">spread_values</span> <span class="o">=</span> <span class="n">calculate_spread</span><span class="p">(</span><span class="n">molecules_file</span><span class="p">)</span>
+  <span class="c1"># write them to file</span>
+  <span class="n">write_list_to_file</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">spread_values</span><span class="p">)</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This program may be executed at the command line in the following manner (provided you have your python interpreter at <code class="docutils literal"><span class="pre">/usr/bin/python</span></code>, otherwise edit the first line; the funnily named shebang):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">calculate_spread</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">f</span> <span class="n">my_conformers</span><span class="o">.</span><span class="n">sdf</span> <span class="o">-</span><span class="n">o</span> <span class="n">my_conformers</span><span class="o">.</span><span class="n">rmsd_spread</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p><strong>TL;DR</strong> : The line <code class="docutils literal"><span class="pre">AllChem.GetBestRMS(mol1,</span> <span class="pre">mol2)</span></code> returns the RMSD as a float and is the gist of this program. <code class="docutils literal"><span class="pre">GetBestRMS()</span></code> takes care of symmetry unlike <code class="docutils literal"><span class="pre">AlignMol()</span></code></p>
+</div>
+</div>
+<div class="section" id="license">
+<span id="license"></span><h2>License<a class="headerlink" href="#license" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>This document is copyright (C) 2012-2016 by Greg Landrum</p>
+<p>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 License. To view a copy of this license, visit <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a> or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA.</p>
+<p>The intent of this license is similar to that of the RDKit itself. In simple words: “Do whatever you want with it, but please give us some credit.”</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Cartridge.html" title="The RDKit database cartridge"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="RDKit_Book.html" title="The RDKit Book"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Greg Landrum.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
+    </div>
+  </body>
+</html>

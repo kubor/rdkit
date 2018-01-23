@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.MACCSkeys</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;MACCSkeys
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.MACCSkeys-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module MACCSkeys</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+SMARTS definitions for the publically available MACCS keys
+and a MACCS fingerprinter
+
+I compared the MACCS fingerprints generated here with those from two
+other packages (not MDL, unfortunately). Of course there are
+disagreements between the various fingerprints still, but I think
+these definitions work pretty well. Some notes:
+
+1) most of the differences have to do with aromaticity
+2) there's a discrepancy sometimes because the current RDKit
+definitions do not require multiple matches to be distinct. e.g. the
+SMILES C(=O)CC(=O) can match the (hypothetical) key O=CC twice in my
+definition. It's not clear to me what the correct behavior is.
+3) Some keys are not fully defined in the MDL documentation
+4) Two keys, 125 and 166, have to be done outside of SMARTS.
+5) Key 1 (ISOTOPE) isn't defined
+
+Rev history:
+2006 (gl): Original open-source release
+May 2011 (gl): Update some definitions based on feedback from Andrew Dalke
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.MACCSkeys-module.html#_InitKeys" class="summary-sig-name" onclick="show_private();">_InitKeys</a>(<span class="summary-sig-arg">keyList</span>,
+        <span class="summary-sig-arg">keyDict</span>)</span><br />
+      *Internal Use Only*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html#_InitKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.MACCSkeys-module.html#_pyGenMACCSKeys" class="summary-sig-name" onclick="show_private();">_pyGenMACCSKeys</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      generates the MACCS fingerprint for a molecules</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html#_pyGenMACCSKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_test"></a><span class="summary-sig-name">_test</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html#_test">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.MACCSkeys-module.html#smartsPatts" class="summary-name">smartsPatts</a> = <code title="{1:('?', 0), 2:('[#104]', 0), 3:('[#32,#33,#34,#50,#51,#52,#82,#83,#84\
+]', 0), 4:('[Ac,Th,Pa,U,Np,Pu,Am,Cm,Bk,Cf,Es,Fm,Md,No,Lr]', 0), 5:('[S\
+c,Ti,Y,Zr,Hf]', 0), 6:('[La,Ce,Pr,Nd,Pm,Sm,Eu,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu]\
+', 0), 7:('[V,Cr,Mn,Nb,Mo,Tc,Ta,W,Re]', 0), 8:('[!#6;!#1]1~*~*~*~1', 0\
+), 9:('[Fe,Co,Ni,Ru,Rh,Pd,Os,Ir,Pt]', 0), 10:('[Be,Mg,Ca,Sr,Ba,Ra]', 0\
+), 11:('*1~*~*~*~1', 0), 12:('[Cu,Zn,Ag,Cd,Au,Hg]', 0), 13:('[#8]~[#7]\
+(~[#6])~[#6]', 0), 14:('[#16]-[#16]', 0), 15:('[#8]~[#6](~[#8])~[#8]',\
+ 0), 16:('[!#6;!#1]1~*~*~1', 0), 17:('[#6]#[#6]', 0), 18:('[#5,#13,#31\
+...">{1:('?', 0), 2:('[#104]', 0), 3:('[#32,#33,#34,#<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="maccsKeys"></a><span class="summary-name">maccsKeys</span> = <code title="None">None</code><br />
+      hash(x)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="GenMACCSKeys"></a><span class="summary-name">GenMACCSKeys</span> = <code title="rdMolDescriptors.GetMACCSKeysFingerprint">rdMolDescriptors.GetMACCSKeysFingerprint</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FingerprintMol"></a><span class="summary-name">FingerprintMol</span> = <code title="rdMolDescriptors.GetMACCSKeysFingerprint">rdMolDescriptors.GetMACCSKeysFingerprint</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.Chem.rdMolDescriptors">rdMolDescriptors</span>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_InitKeys"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_InitKeys</span>(<span class="sig-arg">keyList</span>,
+        <span class="sig-arg">keyDict</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html#_InitKeys">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Internal Use Only*
+
+generates SMARTS patterns for the keys, run once
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_pyGenMACCSKeys"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_pyGenMACCSKeys</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.MACCSkeys-pysrc.html#_pyGenMACCSKeys">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+generates the MACCS fingerprint for a molecules
+
+ **Arguments**
+
+   - mol: the molecule to be fingerprinted
+
+   - any extra keyword arguments are ignored
+   
+ **Returns**
+
+    a _DataStructs.SparseBitVect_ containing the fingerprint.
+
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CNO')
+&gt;&gt;&gt; bv = GenMACCSKeys(m)
+&gt;&gt;&gt; tuple(bv.GetOnBits())
+(24, 68, 69, 71, 93, 94, 102, 124, 131, 139, 151, 158, 160, 161, 164)
+&gt;&gt;&gt; bv = GenMACCSKeys(Chem.MolFromSmiles('CCC'))
+&gt;&gt;&gt; tuple(bv.GetOnBits())
+(74, 114, 149, 155, 160)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="smartsPatts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">smartsPatts</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{1:('?', 0), 2:('[#104]', 0), 3:('[#32,#33,#34,#50,#51,#52,#82,#83,#84<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+]', 0), 4:('[Ac,Th,Pa,U,Np,Pu,Am,Cm,Bk,Cf,Es,Fm,Md,No,Lr]', 0), 5:('[S<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+c,Ti,Y,Zr,Hf]', 0), 6:('[La,Ce,Pr,Nd,Pm,Sm,Eu,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu]<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+', 0), 7:('[V,Cr,Mn,Nb,Mo,Tc,Ta,W,Re]', 0), 8:('[!#6;!#1]1~*~*~*~1', 0<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+), 9:('[Fe,Co,Ni,Ru,Rh,Pd,Os,Ir,Pt]', 0), 10:('[Be,Mg,Ca,Sr,Ba,Ra]', 0<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+), 11:('*1~*~*~*~1', 0), 12:('[Cu,Zn,Ag,Cd,Au,Hg]', 0), 13:('[#8]~[#7]<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+(~[#6])~[#6]', 0), 14:('[#16]-[#16]', 0), 15:('[#8]~[#6](~[#8])~[#8]',<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ 0), 16:('[!#6;!#1]1~*~*~1', 0), 17:('[#6]#[#6]', 0), 18:('[#5,#13,#31<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

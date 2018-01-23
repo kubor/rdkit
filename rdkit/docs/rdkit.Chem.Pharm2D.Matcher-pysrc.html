@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Pharm2D.Matcher</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Pharm2D-module.html">Package&nbsp;Pharm2D</a> ::
+        Module&nbsp;Matcher
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Pharm2D.Matcher-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.Pharm2D.Matcher-module.html">Module rdkit.Chem.Pharm2D.Matcher</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2003-2008 greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">""" functionality for finding pharmacophore matches in molecules</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">  See Docs/Chem/Pharm2D.triangles.jpg for an illustration of the way</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">  pharmacophores are broken into triangles and labelled.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">  See Docs/Chem/Pharm2D.signatures.jpg for an illustration of bit</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">  numbering</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.Chem.Pharm2D=rdkit.Chem.Pharm2D-module.html"><a title="rdkit.Chem.Pharm2D" class="py-name" href="#" onclick="return doclink('link-2', 'Pharm2D', 'link-2');">Pharm2D</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module rdkit.Chem.AtomPairs.Utils=rdkit.Chem.AtomPairs.Utils-module.html,Module rdkit.Chem.Pharm2D.Utils=rdkit.Chem.Pharm2D.Utils-module.html"><a title="rdkit.Chem.AtomPairs.Utils
+rdkit.Chem.Pharm2D.Utils" class="py-name" href="#" onclick="return doclink('link-3', 'Utils', 'link-3');">Utils</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="MatchError"></a><div id="MatchError-def"><a name="L24"></a><tt class="py-lineno"> 24</tt> <a class="py-toggle" href="#" id="MatchError-toggle" onclick="return toggle('MatchError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Chem.Pharm2D.Matcher.MatchError-class.html">MatchError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatchError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MatchError-expanded"><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">  <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable rdkit.Chem.Pharm2D.Generate._verbose=rdkit.Chem.Pharm2D.Generate-module.html#_verbose,Variable rdkit.Chem.Pharm2D.Matcher._verbose=rdkit.Chem.Pharm2D.Matcher-module.html#_verbose,Variable rdkit.Chem.Pharm2D.SigFactory._verbose=rdkit.Chem.Pharm2D.SigFactory-module.html#_verbose,Variable rdkit.Chem.Pharm2D.Utils._verbose=rdkit.Chem.Pharm2D.Utils-module.html#_verbose,Variable rdkit.ML.BuildComposite._verbose=rdkit.ML.BuildComposite-module.html#_verbose,Variable rdkit.ML.DecTree.PruneTree._verbose=rdkit.ML.DecTree.PruneTree-module.html#_verbose,Variable rdkit.ML.GrowComposite._verbose=rdkit.ML.GrowComposite-module.html#_verbose"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-4', '_verbose', 'link-4');">_verbose</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="GetAtomsMatchingBit"></a><div id="GetAtomsMatchingBit-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="GetAtomsMatchingBit-toggle" onclick="return toggle('GetAtomsMatchingBit');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Pharm2D.Matcher-module.html#GetAtomsMatchingBit">GetAtomsMatchingBit</a><tt class="py-op">(</tt><tt class="py-param">sigFactory</tt><tt class="py-op">,</tt> <tt class="py-param">bitIdx</tt><tt class="py-op">,</tt> <tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">dMat</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">justOne</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">matchingAtoms</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetAtomsMatchingBit-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetAtomsMatchingBit-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">  <tt class="py-docstring">""" Returns a list of lists of atom indices for a bit</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">    **Arguments**</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">      - sigFactory: a SigFactory</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">      - bitIdx: the bit to be queried</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">      - mol: the molecule to be examined</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">      - dMat: (optional) the distance matrix of the molecule</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">      - justOne: (optional) if this is nonzero, only the first match</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        will be returned.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">      - matchingAtoms: (optional) if this is nonzero, it should</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">        contain a sequence of sequences with the indices of atoms in</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        the molecule which match each of the patterns used by the</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        signature.</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">    **Returns**</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">      a list of tuples with the matching atoms</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">sigFactory</tt><tt class="py-op">.</tt><tt class="py-name">shortestPathsOnly</tt><tt class="py-op">,</tt> <tt class="py-string">'not implemented for non-shortest path signatures'</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">  <tt class="py-name">nPts</tt><tt class="py-op">,</tt> <tt class="py-name">featCombo</tt><tt class="py-op">,</tt> <tt class="py-name">scaffold</tt> <tt class="py-op">=</tt> <tt class="py-name">sigFactory</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetBitInfo()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#GetBitInfo"><a title="rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetBitInfo" class="py-name" href="#" onclick="return doclink('link-5', 'GetBitInfo', 'link-5');">GetBitInfo</a></tt><tt class="py-op">(</tt><tt class="py-name">bitIdx</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-6" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-6', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'info:'</tt><tt class="py-op">,</tt> <tt class="py-name">nPts</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t'</tt><tt class="py-op">,</tt> <tt class="py-name">featCombo</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t'</tt><tt class="py-op">,</tt> <tt class="py-name">scaffold</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">matchingAtoms</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-name">matchingAtoms</tt> <tt class="py-op">=</tt> <tt class="py-name">sigFactory</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetMolFeats()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#GetMolFeats"><a title="rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetMolFeats" class="py-name" href="#" onclick="return doclink('link-7', 'GetMolFeats', 'link-7');">GetMolFeats</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-8', 'mol', 'link-8');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-comment"># find the atoms that match each features</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-comment"># fams = sigFactory.GetFeatFamilies()</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">  <tt class="py-name">choices</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">featIdx</tt> <tt class="py-keyword">in</tt> <tt class="py-name">featCombo</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">tmp</tt> <tt class="py-op">=</tt> <tt class="py-name">matchingAtoms</tt><tt class="py-op">[</tt><tt class="py-name">featIdx</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">tmp</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">      <tt class="py-name">choices</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">tmp</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">      <tt class="py-comment"># one of the patterns didn't find a match, we</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-comment">#  can return now</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-9" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-9', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'no match found for feature:'</tt><tt class="py-op">,</tt> <tt class="py-name">featIdx</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-10', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'choices:'</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">choices</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">dMat</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">dMat</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-11', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Function rdkit.Chem.Fingerprints.ClusterMols.GetDistanceMatrix()=rdkit.Chem.Fingerprints.ClusterMols-module.html#GetDistanceMatrix"><a title="rdkit.Chem.Fingerprints.ClusterMols.GetDistanceMatrix" class="py-name" href="#" onclick="return doclink('link-12', 'GetDistanceMatrix', 'link-12');">GetDistanceMatrix</a></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-13', 'mol', 'link-8');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">sigFactory</tt><tt class="py-op">.</tt><tt class="py-name">includeBondOrder</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">  <tt class="py-name">distsToCheck</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rdkit.Chem.AtomPairs.Utils
+rdkit.Chem.Pharm2D.Utils" class="py-name" href="#" onclick="return doclink('link-14', 'Utils', 'link-3');">Utils</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable rdkit.Chem.Pharm2D.Utils.nPointDistDict=rdkit.Chem.Pharm2D.Utils-module.html#nPointDistDict"><a title="rdkit.Chem.Pharm2D.Utils.nPointDistDict" class="py-name" href="#" onclick="return doclink('link-15', 'nPointDistDict', 'link-15');">nPointDistDict</a></tt><tt class="py-op">[</tt><tt class="py-name">nPts</tt><tt class="py-op">]</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">  <tt class="py-name">protoPharmacophores</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="rdkit.Chem.AtomPairs.Utils
+rdkit.Chem.Pharm2D.Utils" class="py-name" href="#" onclick="return doclink('link-16', 'Utils', 'link-3');">Utils</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Function rdkit.Chem.Pharm2D.Utils.GetAllCombinations()=rdkit.Chem.Pharm2D.Utils-module.html#GetAllCombinations"><a title="rdkit.Chem.Pharm2D.Utils.GetAllCombinations" class="py-name" href="#" onclick="return doclink('link-17', 'GetAllCombinations', 'link-17');">GetAllCombinations</a></tt><tt class="py-op">(</tt><tt class="py-name">choices</tt><tt class="py-op">,</tt> <tt class="py-name">noDups</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">protoPharm</tt> <tt class="py-keyword">in</tt> <tt class="py-name">protoPharmacophores</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-18" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-18', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">      <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'protoPharm:'</tt><tt class="py-op">,</tt> <tt class="py-name">protoPharm</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">distsToCheck</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">      <tt class="py-name">dLow</tt><tt class="py-op">,</tt> <tt class="py-name">dHigh</tt> <tt class="py-op">=</tt> <tt class="py-name">sigFactory</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetBins()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#GetBins"><a title="rdkit.Chem.Pharm2D.SigFactory.SigFactory.GetBins" class="py-name" href="#" onclick="return doclink('link-19', 'GetBins', 'link-19');">GetBins</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-name">scaffold</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">      <tt class="py-name">a1</tt><tt class="py-op">,</tt> <tt class="py-name">a2</tt> <tt class="py-op">=</tt> <tt class="py-name">distsToCheck</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">      <tt class="py-comment">#</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">      <tt class="py-comment"># FIX: this is making all kinds of assumptions about</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">      <tt class="py-comment">#  things being single-atom matches (or at least that</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">      <tt class="py-comment">#  only the first atom matters</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">      <tt class="py-comment">#</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">      <tt class="py-name">idx1</tt><tt class="py-op">,</tt> <tt class="py-name">idx2</tt> <tt class="py-op">=</tt> <tt class="py-name">protoPharm</tt><tt class="py-op">[</tt><tt class="py-name">a1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">protoPharm</tt><tt class="py-op">[</tt><tt class="py-name">a2</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-name">dist</tt> <tt class="py-op">=</tt> <tt class="py-name">dMat</tt><tt class="py-op">[</tt><tt class="py-name">idx1</tt><tt class="py-op">,</tt> <tt class="py-name">idx2</tt><tt class="py-op">]</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-20" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-20', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\t dist: %d-&gt;%d = %d (%d,%d)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">idx1</tt><tt class="py-op">,</tt> <tt class="py-name">idx2</tt><tt class="py-op">,</tt> <tt class="py-name">dist</tt><tt class="py-op">,</tt> <tt class="py-name">dLow</tt><tt class="py-op">,</tt> <tt class="py-name">dHigh</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">dist</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">dLow</tt> <tt class="py-keyword">or</tt> <tt class="py-name">dist</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">dHigh</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">break</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-21" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-21', '_verbose', 'link-4');">_verbose</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Found one'</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">      <tt class="py-comment"># we found it</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">      <tt class="py-name">protoPharm</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">      <tt class="py-name">protoPharm</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">protoPharm</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">protoPharm</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">res</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">res</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">protoPharm</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">justOne</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">          <tt class="py-keyword">break</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="_exampleCode"></a><div id="_exampleCode-def"><a name="L122"></a><tt class="py-lineno">122</tt> <a class="py-toggle" href="#" id="_exampleCode-toggle" onclick="return toggle('_exampleCode');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Pharm2D.Matcher-module.html#_exampleCode">_exampleCode</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_exampleCode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_exampleCode-expanded"><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RDConfig</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-22', 'Chem', 'link-0');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt id="link-23" class="py-name" targets="Module rdkit.Chem.ChemicalFeatures=rdkit.Chem.ChemicalFeatures-module.html"><a title="rdkit.Chem.ChemicalFeatures" class="py-name" href="#" onclick="return doclink('link-23', 'ChemicalFeatures', 'link-23');">ChemicalFeatures</a></tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-24', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="rdkit.Chem.Pharm2D" class="py-name" href="#" onclick="return doclink('link-25', 'Pharm2D', 'link-2');">Pharm2D</a></tt> <tt class="py-keyword">import</tt> <tt id="link-26" class="py-name" targets="Module rdkit.Chem.Pharm2D.SigFactory=rdkit.Chem.Pharm2D.SigFactory-module.html,Class rdkit.Chem.Pharm2D.SigFactory.SigFactory=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html"><a title="rdkit.Chem.Pharm2D.SigFactory
+rdkit.Chem.Pharm2D.SigFactory.SigFactory" class="py-name" href="#" onclick="return doclink('link-26', 'SigFactory', 'link-26');">SigFactory</a></tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name" targets="Module rdkit.Chem.Pharm2D.Generate=rdkit.Chem.Pharm2D.Generate-module.html"><a title="rdkit.Chem.Pharm2D.Generate" class="py-name" href="#" onclick="return doclink('link-27', 'Generate', 'link-27');">Generate</a></tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">  <tt class="py-name">fdefFile</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">RDConfig</tt><tt class="py-op">.</tt><tt class="py-name">RDCodeDir</tt><tt class="py-op">,</tt> <tt class="py-string">'Chem'</tt><tt class="py-op">,</tt> <tt class="py-string">'Pharm2D'</tt><tt class="py-op">,</tt> <tt class="py-string">'test_data'</tt><tt class="py-op">,</tt> <tt class="py-string">'BaseFeatures.fdef'</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">  <tt id="link-28" class="py-name" targets="Variable rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.featFactory=rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder-class.html#featFactory"><a title="rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.featFactory" class="py-name" href="#" onclick="return doclink('link-28', 'featFactory', 'link-28');">featFactory</a></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="rdkit.Chem.ChemicalFeatures" class="py-name" href="#" onclick="return doclink('link-29', 'ChemicalFeatures', 'link-23');">ChemicalFeatures</a></tt><tt class="py-op">.</tt><tt class="py-name">BuildFeatureFactory</tt><tt class="py-op">(</tt><tt class="py-name">fdefFile</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">  <tt class="py-name">factory</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="rdkit.Chem.Pharm2D.SigFactory
+rdkit.Chem.Pharm2D.SigFactory.SigFactory" class="py-name" href="#" onclick="return doclink('link-30', 'SigFactory', 'link-26');">SigFactory</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="rdkit.Chem.Pharm2D.SigFactory
+rdkit.Chem.Pharm2D.SigFactory.SigFactory" class="py-name" href="#" onclick="return doclink('link-31', 'SigFactory', 'link-26');">SigFactory</a></tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.featFactory" class="py-name" href="#" onclick="return doclink('link-32', 'featFactory', 'link-28');">featFactory</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">  <tt class="py-name">factory</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.SetBins()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#SetBins"><a title="rdkit.Chem.Pharm2D.SigFactory.SigFactory.SetBins" class="py-name" href="#" onclick="return doclink('link-33', 'SetBins', 'link-33');">SetBins</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-number">5</tt><tt class="py-op">,</tt> <tt class="py-number">8</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">  <tt class="py-name">factory</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method rdkit.Chem.FragmentMatcher.FragmentMatcher.Init()=rdkit.Chem.FragmentMatcher.FragmentMatcher-class.html#Init,Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.Init()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#Init,Method rdkit.ML.ModelPackage.Packager.ModelPackage.Init()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#Init"><a title="rdkit.Chem.FragmentMatcher.FragmentMatcher.Init
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.Init
+rdkit.ML.ModelPackage.Packager.ModelPackage.Init" class="py-name" href="#" onclick="return doclink('link-34', 'Init', 'link-34');">Init</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">  <tt id="link-35" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-35', 'mol', 'link-8');">mol</a></tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-36', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmiles</tt><tt class="py-op">(</tt><tt class="py-string">'OCC(=O)CCCN'</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">  <tt class="py-name">sig</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate" class="py-name" href="#" onclick="return doclink('link-37', 'Generate', 'link-27');">Generate</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Function rdkit.Chem.Pharm2D.Generate.Gen2DFingerprint()=rdkit.Chem.Pharm2D.Generate-module.html#Gen2DFingerprint"><a title="rdkit.Chem.Pharm2D.Generate.Gen2DFingerprint" class="py-name" href="#" onclick="return doclink('link-38', 'Gen2DFingerprint', 'link-38');">Gen2DFingerprint</a></tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-39', 'mol', 'link-8');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">factory</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'onbits:'</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">sig</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method rdkit.DataStructs.VectCollection.VectCollection.GetOnBits()=rdkit.DataStructs.VectCollection.VectCollection-class.html#GetOnBits"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetOnBits" class="py-name" href="#" onclick="return doclink('link-40', 'GetOnBits', 'link-40');">GetOnBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">  <tt id="link-41" class="py-name"><a title="rdkit.Chem.Pharm2D.Generate._verbose
+rdkit.Chem.Pharm2D.Matcher._verbose
+rdkit.Chem.Pharm2D.SigFactory._verbose
+rdkit.Chem.Pharm2D.Utils._verbose
+rdkit.ML.BuildComposite._verbose
+rdkit.ML.DecTree.PruneTree._verbose
+rdkit.ML.GrowComposite._verbose" class="py-name" href="#" onclick="return doclink('link-41', '_verbose', 'link-4');">_verbose</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">bit</tt> <tt class="py-keyword">in</tt> <tt class="py-name">sig</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetOnBits" class="py-name" href="#" onclick="return doclink('link-42', 'GetOnBits', 'link-40');">GetOnBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-name">atoms</tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name" targets="Function rdkit.Chem.Pharm2D.Matcher.GetAtomsMatchingBit()=rdkit.Chem.Pharm2D.Matcher-module.html#GetAtomsMatchingBit"><a title="rdkit.Chem.Pharm2D.Matcher.GetAtomsMatchingBit" class="py-name" href="#" onclick="return doclink('link-43', 'GetAtomsMatchingBit', 'link-43');">GetAtomsMatchingBit</a></tt><tt class="py-op">(</tt><tt class="py-name">factory</tt><tt class="py-op">,</tt> <tt class="py-name">bit</tt><tt class="py-op">,</tt> <tt id="link-44" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-44', 'mol', 'link-8');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'\tBit %d: '</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">bit</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">atoms</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'finished'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">  <tt id="link-45" class="py-name" targets="Function rdkit.Chem.EState.EState._exampleCode()=rdkit.Chem.EState.EState-module.html#_exampleCode,Function rdkit.Chem.EState.Fingerprinter._exampleCode()=rdkit.Chem.EState.Fingerprinter-module.html#_exampleCode,Function rdkit.Chem.Pharm2D.Matcher._exampleCode()=rdkit.Chem.Pharm2D.Matcher-module.html#_exampleCode,Function rdkit.DataStructs.TopNContainer._exampleCode()=rdkit.DataStructs.TopNContainer-module.html#_exampleCode,Function rdkit.ML.DecTree.Tree._exampleCode()=rdkit.ML.DecTree.Tree-module.html#_exampleCode,Function rdkit.ML.Descriptors.CompoundDescriptors._exampleCode()=rdkit.ML.Descriptors.CompoundDescriptors-module.html#_exampleCode,Function rdkit.ML.Descriptors.Parser._exampleCode()=rdkit.ML.Descriptors.Parser-module.html#_exampleCode"><a title="rdkit.Chem.EState.EState._exampleCode
+rdkit.Chem.EState.Fingerprinter._exampleCode
+rdkit.Chem.Pharm2D.Matcher._exampleCode
+rdkit.DataStructs.TopNContainer._exampleCode
+rdkit.ML.DecTree.Tree._exampleCode
+rdkit.ML.Descriptors.CompoundDescriptors._exampleCode
+rdkit.ML.Descriptors.Parser._exampleCode" class="py-name" href="#" onclick="return doclink('link-45', '_exampleCode', 'link-45');">_exampleCode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

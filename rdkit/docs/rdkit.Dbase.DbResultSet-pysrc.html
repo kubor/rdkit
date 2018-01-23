@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Dbase.DbResultSet</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Dbase-module.html">Package&nbsp;Dbase</a> ::
+        Module&nbsp;DbResultSet
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Dbase.DbResultSet-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Dbase.DbResultSet-module.html">Module rdkit.Dbase.DbResultSet</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2003  Greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">""" defines class _DbResultSet_ for lazy interactions with Db query results</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">**Note**</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">  this uses the Python iterator interface, so you'll need python 2.2 or above.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package rdkit.Dbase=rdkit.Dbase-module.html"><a title="rdkit.Dbase" class="py-name" href="#" onclick="return doclink('link-0', 'Dbase', 'link-0');">Dbase</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module rdkit.Dbase.DbInfo=rdkit.Dbase.DbInfo-module.html"><a title="rdkit.Dbase.DbInfo" class="py-name" href="#" onclick="return doclink('link-1', 'DbInfo', 'link-1');">DbInfo</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase"></a><div id="DbResultBase-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="DbResultBase-toggle" onclick="return toggle('DbResultBase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html">DbResultBase</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DbResultBase-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.__init__"></a><div id="DbResultBase.__init__-def"><a name="L18"></a><tt class="py-lineno"> 18</tt> <a class="py-toggle" href="#" id="DbResultBase.__init__-toggle" onclick="return toggle('DbResultBase.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cursor</tt><tt class="py-op">,</tt> <tt class="py-param">conn</tt><tt class="py-op">,</tt> <tt class="py-param">cmd</tt><tt class="py-op">,</tt> <tt class="py-param">removeDups</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">transform</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">extras</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.__init__-expanded"><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-op">=</tt> <tt class="py-name">cursor</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt> <tt class="py-op">=</tt> <tt class="py-name">removeDups</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform=rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment-class.html#transform,Method rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform()=rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover-class.html#transform"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-2', 'transform', 'link-2');">transform</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-3', 'transform', 'link-2');">transform</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-name">cmd</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extras</tt> <tt class="py-op">=</tt> <tt class="py-name">extras</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener-class.html#Reset,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#Reset,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#Reset,Method rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset()=rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#Reset,Method rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset()=rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#Reset,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#Reset,Method rdkit.DataStructs.VectCollection.VectCollection.Reset()=rdkit.DataStructs.VectCollection.VectCollection-class.html#Reset,Method rdkit.Dbase.DbResultSet.DbResultBase.Reset()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#Reset,Method rdkit.Dbase.DbResultSet.DbResultSet.Reset()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#Reset,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#Reset"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-4', 'Reset', 'link-4');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.Dbase.DbResultSet.DbResultBase._initColumnNamesAndTypes()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#_initColumnNamesAndTypes"><a title="rdkit.Dbase.DbResultSet.DbResultBase._initColumnNamesAndTypes" class="py-name" href="#" onclick="return doclink('link-5', '_initColumnNamesAndTypes', 'link-5');">_initColumnNamesAndTypes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-6', 'Reset', 'link-4');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.Reset"></a><div id="DbResultBase.Reset-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="DbResultBase.Reset-toggle" onclick="return toggle('DbResultBase.Reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#Reset">Reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.Reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.Reset-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-docstring">""" implement in subclasses</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extras</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extras</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">      <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'the command "%s" generated errors:\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">      <tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">      <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.__iter__"></a><div id="DbResultBase.__iter__-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="DbResultBase.__iter__-toggle" onclick="return toggle('DbResultBase.__iter__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.__iter__-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-7', 'Reset', 'link-4');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase._initColumnNamesAndTypes"></a><div id="DbResultBase._initColumnNamesAndTypes-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="DbResultBase._initColumnNamesAndTypes-toggle" onclick="return toggle('DbResultBase._initColumnNamesAndTypes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#_initColumnNamesAndTypes">_initColumnNamesAndTypes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase._initColumnNamesAndTypes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase._initColumnNamesAndTypes-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">cName</tt><tt class="py-op">,</tt> <tt class="py-name">cType</tt> <tt class="py-keyword">in</tt> <tt id="link-8" class="py-name"><a title="rdkit.Dbase.DbInfo" class="py-name" href="#" onclick="return doclink('link-8', 'DbInfo', 'link-1');">DbInfo</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Function rdkit.Dbase.DbInfo.GetColumnInfoFromCursor()=rdkit.Dbase.DbInfo-module.html#GetColumnInfoFromCursor"><a title="rdkit.Dbase.DbInfo.GetColumnInfoFromCursor" class="py-name" href="#" onclick="return doclink('link-9', 'GetColumnInfoFromCursor', 'link-9');">GetColumnInfoFromCursor</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">cName</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">cType</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.GetColumnNames"></a><div id="DbResultBase.GetColumnNames-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="DbResultBase.GetColumnNames-toggle" onclick="return toggle('DbResultBase.GetColumnNames');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnNames">GetColumnNames</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.GetColumnNames-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.GetColumnNames-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.GetColumnTypes"></a><div id="DbResultBase.GetColumnTypes-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="DbResultBase.GetColumnTypes-toggle" onclick="return toggle('DbResultBase.GetColumnTypes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnTypes">GetColumnTypes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.GetColumnTypes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.GetColumnTypes-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="DbResultBase.GetColumnNamesAndTypes"></a><div id="DbResultBase.GetColumnNamesAndTypes-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="DbResultBase.GetColumnNamesAndTypes-toggle" onclick="return toggle('DbResultBase.GetColumnNamesAndTypes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnNamesAndTypes">GetColumnNamesAndTypes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultBase.GetColumnNamesAndTypes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultBase.GetColumnNamesAndTypes-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">nt</tt> <tt class="py-keyword">for</tt> <tt class="py-name">nt</tt> <tt class="py-keyword">in</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colNames</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">colTypes</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="DbResultSet"></a><div id="DbResultSet-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="DbResultSet-toggle" onclick="return toggle('DbResultSet');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultSet-class.html">DbResultSet</a><tt class="py-op">(</tt><tt class="py-base-class">DbResultBase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultSet-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DbResultSet-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-docstring">""" Only supports forward iteration """</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="DbResultSet.__init__"></a><div id="DbResultSet.__init__-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="DbResultSet.__init__-toggle" onclick="return toggle('DbResultSet.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultSet-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultSet.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultSet.__init__-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Class rdkit.Dbase.DbResultSet.DbResultBase=rdkit.Dbase.DbResultSet.DbResultBase-class.html"><a title="rdkit.Dbase.DbResultSet.DbResultBase" class="py-name" href="#" onclick="return doclink('link-10', 'DbResultBase', 'link-10');">DbResultBase</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method rdkit.Chem.DSViewer.Displayable.__init__()=rdkit.Chem.DSViewer.Displayable-class.html#__init__,Method rdkit.Chem.DSViewer.MolViewer.__init__()=rdkit.Chem.DSViewer.MolViewer-class.html#__init__,Method rdkit.Chem.Descriptors.PropertyFunctor.__init__()=rdkit.Chem.Descriptors.PropertyFunctor-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.Font.__init__()=rdkit.Chem.Draw.MolDrawing.Font-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__()=rdkit.Chem.Draw.MolDrawing.MolDrawing-class.html#__init__,Method rdkit.Chem.Draw.aggCanvas.Canvas.__init__()=rdkit.Chem.Draw.aggCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.cairoCanvas.Canvas.__init__()=rdkit.Chem.Draw.cairoCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.mplCanvas.Canvas.__init__()=rdkit.Chem.Draw.mplCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.qtCanvas.Canvas.__init__()=rdkit.Chem.Draw.qtCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.spingCanvas.Canvas.__init__()=rdkit.Chem.Draw.spingCanvas.Canvas-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__()=rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._AtomFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._BondFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__()=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__()=rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__()=rdkit.Chem.FeatMaps.FeatMaps.FeatMap-class.html#__init__,Method rdkit.Chem.FilterCatalog.FilterMatcher.__init__()=rdkit.Chem.FilterCatalog.FilterMatcher-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__()=rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#__init__,Method rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__()=rdkit.Chem.FragmentMatcher.FragmentMatcher-class.html#__init__,Method rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__()=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#__init__,Method rdkit.Chem.MCS.MCSResult.__init__()=rdkit.Chem.MCS.MCSResult-class.html#__init__,Method rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__()=rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#__init__,Method rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__()=rdkit.Chem.Pharm2D.LazyGenerator.Generator-class.html#__init__,Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#__init__,Method rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__()=rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore-class.html#__init__,Method rdkit.Chem.PropertyMol.PropertyMol.__init__()=rdkit.Chem.PropertyMol.PropertyMol-class.html#__init__,Method rdkit.Chem.PyMol.MolViewer.__init__()=rdkit.Chem.PyMol.MolViewer-class.html#__init__,Method rdkit.Chem.Recap.RecapHierarchyNode.__init__()=rdkit.Chem.Recap.RecapHierarchyNode-class.html#__init__,Method rdkit.Chem.SaltRemover.SaltRemover.__init__()=rdkit.Chem.SaltRemover.SaltRemover-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__()=rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CangenNode.__init__()=rdkit.Chem.fmcs.fmcs.CangenNode-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.MCSResult.__init__()=rdkit.Chem.fmcs.fmcs.MCSResult-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Timer.__init__()=rdkit.Chem.fmcs.fmcs.Timer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedFragment.__init__()=rdkit.Chem.fmcs.fmcs.TypedFragment-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.TypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Uniquer.__init__()=rdkit.Chem.fmcs.fmcs.Uniquer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__()=rdkit.Chem.fmcs.fmcs.VerboseHeapOps-class.html#__init__,Method rdkit.Chem.fmcs.fmcs._SingleBest.__init__()=rdkit.Chem.fmcs.fmcs._SingleBest-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.starting_from.__init__()=rdkit.Chem.fmcs.fmcs.starting_from-class.html#__init__,Method rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__()=rdkit.DataStructs.BitEnsemble.BitEnsemble-class.html#__init__,Method rdkit.DataStructs.LazySignature.LazySig.__init__()=rdkit.DataStructs.LazySignature.LazySig-class.html#__init__,Method rdkit.DataStructs.TopNContainer.TopNContainer.__init__()=rdkit.DataStructs.TopNContainer.TopNContainer-class.html#__init__,Method rdkit.DataStructs.VectCollection.VectCollection.__init__()=rdkit.DataStructs.VectCollection.VectCollection-class.html#__init__,Method rdkit.Dbase.DbConnection.DbConnect.__init__()=rdkit.Dbase.DbConnection.DbConnect-class.html#__init__,Method rdkit.Dbase.DbReport.CDXImageTransformer.__init__()=rdkit.Dbase.DbReport.CDXImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.CactvsImageTransformer.__init__()=rdkit.Dbase.DbReport.CactvsImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.RDImageTransformer.__init__()=rdkit.Dbase.DbReport.RDImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__()=rdkit.Dbase.DbReport.ReportLabImageTransformer-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultBase.__init__()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultSet.__init__()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#__init__,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__init__,Method rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__()=rdkit.ML.Cluster.ClusterVis.ClusterRenderer-class.html#__init__,Method rdkit.ML.Cluster.Clusters.Cluster.__init__()=rdkit.ML.Cluster.Clusters.Cluster-class.html#__init__,Method rdkit.ML.Composite.BayesComposite.BayesComposite.__init__()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#__init__,Method rdkit.ML.Composite.Composite.Composite.__init__()=rdkit.ML.Composite.Composite.Composite-class.html#__init__,Method rdkit.ML.Data.MLData.MLDataSet.__init__()=rdkit.ML.Data.MLData.MLDataSet-class.html#__init__,Method rdkit.ML.Data.MLData.MLQuantDataSet.__init__()=rdkit.ML.Data.MLData.MLQuantDataSet-class.html#__init__,Method rdkit.ML.DecTree.DecTree.DecTreeNode.__init__()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Forest.Forest.__init__()=rdkit.ML.DecTree.Forest.Forest-class.html#__init__,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#__init__,Method rdkit.ML.DecTree.SigTree.SigTreeNode.__init__()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Tree.TreeNode.__init__()=rdkit.ML.DecTree.Tree.TreeNode-class.html#__init__,Method rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__()=rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#__init__,Method rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__()=rdkit.ML.InfoTheory.BitClusterer.BitClusterer-class.html#__init__,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#__init__,Method rdkit.ML.KNN.KNNModel.KNNModel.__init__()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#__init__,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#__init__,Method rdkit.ML.ModelPackage.Packager.ModelPackage.__init__()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#__init__,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.Sigmoid.__init__()=rdkit.ML.Neural.ActFuncs.Sigmoid-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.TanH.__init__()=rdkit.ML.Neural.ActFuncs.TanH-class.html#__init__,Method rdkit.ML.Neural.NetNode.NetNode.__init__()=rdkit.ML.Neural.NetNode.NetNode-class.html#__init__,Method rdkit.ML.Neural.Network.Network.__init__()=rdkit.ML.Neural.Network.Network-class.html#__init__,Method rdkit.ML.Neural.Trainers.BackProp.__init__()=rdkit.ML.Neural.Trainers.BackProp-class.html#__init__,Method rdkit.ML.files.ReFile.__init__()=rdkit.ML.files.ReFile-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.SpreadPicker-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker-class.html#__init__,Method rdkit.VLib.Filter.FilterNode.__init__()=rdkit.VLib.Filter.FilterNode-class.html#__init__,Method rdkit.VLib.Node.VLibNode.__init__()=rdkit.VLib.Node.VLibNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#__init__,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__()=rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__()=rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__()=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#__init__,Method rdkit.VLib.Output.OutputNode.__init__()=rdkit.VLib.Output.OutputNode-class.html#__init__,Method rdkit.VLib.Supply.SupplyNode.__init__()=rdkit.VLib.Supply.SupplyNode-class.html#__init__,Method rdkit.VLib.Transform.TransformNode.__init__()=rdkit.VLib.Transform.TransformNode-class.html#__init__"><a title="rdkit.Chem.DSViewer.Displayable.__init__
+rdkit.Chem.DSViewer.MolViewer.__init__
+rdkit.Chem.Descriptors.PropertyFunctor.__init__
+rdkit.Chem.Draw.MolDrawing.Font.__init__
+rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__
+rdkit.Chem.Draw.aggCanvas.Canvas.__init__
+rdkit.Chem.Draw.cairoCanvas.Canvas.__init__
+rdkit.Chem.Draw.mplCanvas.Canvas.__init__
+rdkit.Chem.Draw.qtCanvas.Canvas.__init__
+rdkit.Chem.Draw.spingCanvas.Canvas.__init__
+rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__
+rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__
+rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__
+rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__
+rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__
+rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__
+rdkit.Chem.FilterCatalog.FilterMatcher.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__
+rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__
+rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__
+rdkit.Chem.MCS.MCSResult.__init__
+rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__
+rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__
+rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__
+rdkit.Chem.PropertyMol.PropertyMol.__init__
+rdkit.Chem.PyMol.MolViewer.__init__
+rdkit.Chem.Recap.RecapHierarchyNode.__init__
+rdkit.Chem.SaltRemover.SaltRemover.__init__
+rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__
+rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.CangenNode.__init__
+rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.MCSResult.__init__
+rdkit.Chem.fmcs.fmcs.Timer.__init__
+rdkit.Chem.fmcs.fmcs.TypedFragment.__init__
+rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.Uniquer.__init__
+rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__
+rdkit.Chem.fmcs.fmcs._SingleBest.__init__
+rdkit.Chem.fmcs.fmcs.starting_from.__init__
+rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__
+rdkit.DataStructs.LazySignature.LazySig.__init__
+rdkit.DataStructs.TopNContainer.TopNContainer.__init__
+rdkit.DataStructs.VectCollection.VectCollection.__init__
+rdkit.Dbase.DbConnection.DbConnect.__init__
+rdkit.Dbase.DbReport.CDXImageTransformer.__init__
+rdkit.Dbase.DbReport.CactvsImageTransformer.__init__
+rdkit.Dbase.DbReport.RDImageTransformer.__init__
+rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__
+rdkit.Dbase.DbResultSet.DbResultBase.__init__
+rdkit.Dbase.DbResultSet.DbResultSet.__init__
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__
+rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__
+rdkit.ML.Cluster.Clusters.Cluster.__init__
+rdkit.ML.Composite.BayesComposite.BayesComposite.__init__
+rdkit.ML.Composite.Composite.Composite.__init__
+rdkit.ML.Data.MLData.MLDataSet.__init__
+rdkit.ML.Data.MLData.MLQuantDataSet.__init__
+rdkit.ML.DecTree.DecTree.DecTreeNode.__init__
+rdkit.ML.DecTree.Forest.Forest.__init__
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__
+rdkit.ML.DecTree.SigTree.SigTreeNode.__init__
+rdkit.ML.DecTree.Tree.TreeNode.__init__
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__
+rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__
+rdkit.ML.KNN.KNNModel.KNNModel.__init__
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__
+rdkit.ML.ModelPackage.Packager.ModelPackage.__init__
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__
+rdkit.ML.Neural.ActFuncs.Sigmoid.__init__
+rdkit.ML.Neural.ActFuncs.TanH.__init__
+rdkit.ML.Neural.NetNode.NetNode.__init__
+rdkit.ML.Neural.Network.Network.__init__
+rdkit.ML.Neural.Trainers.BackProp.__init__
+rdkit.ML.files.ReFile.__init__
+rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__
+rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__
+rdkit.VLib.Filter.FilterNode.__init__
+rdkit.VLib.Node.VLibNode.__init__
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__
+rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__
+rdkit.VLib.Output.OutputNode.__init__
+rdkit.VLib.Supply.SupplyNode.__init__
+rdkit.VLib.Transform.TransformNode.__init__" class="py-name" href="#" onclick="return doclink('link-11', '__init__', 'link-11');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stopped</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="DbResultSet.Reset"></a><div id="DbResultSet.Reset-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="DbResultSet.Reset-toggle" onclick="return toggle('DbResultSet.Reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultSet-class.html#Reset">Reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultSet.Reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultSet.Reset-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stopped</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt id="link-12" class="py-name"><a title="rdkit.Dbase.DbResultSet.DbResultBase" class="py-name" href="#" onclick="return doclink('link-12', 'DbResultBase', 'link-10');">DbResultBase</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-13', 'Reset', 'link-4');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="DbResultSet.next"></a><div id="DbResultSet.next-def"><a name="L78"></a><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="DbResultSet.next-toggle" onclick="return toggle('DbResultSet.next');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.DbResultSet-class.html#next">next</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbResultSet.next-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbResultSet.next-expanded"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stopped</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">StopIteration</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">r</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">      <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">fetchone</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stopped</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">StopIteration</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-14', 'transform', 'link-2');">transform</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-15', 'transform', 'link-2');">transform</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt><tt class="py-op">]</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">          <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">          <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">r</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">  <tt class="py-name">__next__</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#next,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#next,Method rdkit.Dbase.DbResultSet.DbResultSet.next()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#next,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#next,Method rdkit.VLib.Filter.FilterNode.next()=rdkit.VLib.Filter.FilterNode-class.html#next,Method rdkit.VLib.Node.VLibNode.next()=rdkit.VLib.Node.VLibNode-class.html#next,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#next,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#next,Method rdkit.VLib.Output.OutputNode.next()=rdkit.VLib.Output.OutputNode-class.html#next,Method rdkit.VLib.Supply.SupplyNode.next()=rdkit.VLib.Supply.SupplyNode-class.html#next,Method rdkit.VLib.Transform.TransformNode.next()=rdkit.VLib.Transform.TransformNode-class.html#next"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next
+rdkit.Dbase.DbResultSet.DbResultSet.next
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next
+rdkit.VLib.Filter.FilterNode.next
+rdkit.VLib.Node.VLibNode.next
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next
+rdkit.VLib.Output.OutputNode.next
+rdkit.VLib.Supply.SupplyNode.next
+rdkit.VLib.Transform.TransformNode.next" class="py-name" href="#" onclick="return doclink('link-16', 'next', 'link-16');">next</a></tt>  <tt class="py-comment"># PY3</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet"></a><div id="RandomAccessDbResultSet-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet-toggle" onclick="return toggle('RandomAccessDbResultSet');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html">RandomAccessDbResultSet</a><tt class="py-op">(</tt><tt class="py-base-class">DbResultBase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RandomAccessDbResultSet-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">  <tt class="py-docstring">""" Supports random access """</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet.__init__"></a><div id="RandomAccessDbResultSet.__init__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet.__init__-toggle" onclick="return toggle('RandomAccessDbResultSet.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet.__init__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="rdkit.Dbase.DbResultSet.DbResultBase" class="py-name" href="#" onclick="return doclink('link-17', 'DbResultBase', 'link-10');">DbResultBase</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem.DSViewer.Displayable.__init__
+rdkit.Chem.DSViewer.MolViewer.__init__
+rdkit.Chem.Descriptors.PropertyFunctor.__init__
+rdkit.Chem.Draw.MolDrawing.Font.__init__
+rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__
+rdkit.Chem.Draw.aggCanvas.Canvas.__init__
+rdkit.Chem.Draw.cairoCanvas.Canvas.__init__
+rdkit.Chem.Draw.mplCanvas.Canvas.__init__
+rdkit.Chem.Draw.qtCanvas.Canvas.__init__
+rdkit.Chem.Draw.spingCanvas.Canvas.__init__
+rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__
+rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__
+rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__
+rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__
+rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__
+rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__
+rdkit.Chem.FilterCatalog.FilterMatcher.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__
+rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__
+rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__
+rdkit.Chem.MCS.MCSResult.__init__
+rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__
+rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__
+rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__
+rdkit.Chem.PropertyMol.PropertyMol.__init__
+rdkit.Chem.PyMol.MolViewer.__init__
+rdkit.Chem.Recap.RecapHierarchyNode.__init__
+rdkit.Chem.SaltRemover.SaltRemover.__init__
+rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__
+rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.CangenNode.__init__
+rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.MCSResult.__init__
+rdkit.Chem.fmcs.fmcs.Timer.__init__
+rdkit.Chem.fmcs.fmcs.TypedFragment.__init__
+rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.Uniquer.__init__
+rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__
+rdkit.Chem.fmcs.fmcs._SingleBest.__init__
+rdkit.Chem.fmcs.fmcs.starting_from.__init__
+rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__
+rdkit.DataStructs.LazySignature.LazySig.__init__
+rdkit.DataStructs.TopNContainer.TopNContainer.__init__
+rdkit.DataStructs.VectCollection.VectCollection.__init__
+rdkit.Dbase.DbConnection.DbConnect.__init__
+rdkit.Dbase.DbReport.CDXImageTransformer.__init__
+rdkit.Dbase.DbReport.CactvsImageTransformer.__init__
+rdkit.Dbase.DbReport.RDImageTransformer.__init__
+rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__
+rdkit.Dbase.DbResultSet.DbResultBase.__init__
+rdkit.Dbase.DbResultSet.DbResultSet.__init__
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__
+rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__
+rdkit.ML.Cluster.Clusters.Cluster.__init__
+rdkit.ML.Composite.BayesComposite.BayesComposite.__init__
+rdkit.ML.Composite.Composite.Composite.__init__
+rdkit.ML.Data.MLData.MLDataSet.__init__
+rdkit.ML.Data.MLData.MLQuantDataSet.__init__
+rdkit.ML.DecTree.DecTree.DecTreeNode.__init__
+rdkit.ML.DecTree.Forest.Forest.__init__
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__
+rdkit.ML.DecTree.SigTree.SigTreeNode.__init__
+rdkit.ML.DecTree.Tree.TreeNode.__init__
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__
+rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__
+rdkit.ML.KNN.KNNModel.KNNModel.__init__
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__
+rdkit.ML.ModelPackage.Packager.ModelPackage.__init__
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__
+rdkit.ML.Neural.ActFuncs.Sigmoid.__init__
+rdkit.ML.Neural.ActFuncs.TanH.__init__
+rdkit.ML.Neural.NetNode.NetNode.__init__
+rdkit.ML.Neural.Network.Network.__init__
+rdkit.ML.Neural.Trainers.BackProp.__init__
+rdkit.ML.files.ReFile.__init__
+rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__
+rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__
+rdkit.VLib.Filter.FilterNode.__init__
+rdkit.VLib.Node.VLibNode.__init__
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__
+rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__
+rdkit.VLib.Output.OutputNode.__init__
+rdkit.VLib.Supply.SupplyNode.__init__
+rdkit.VLib.Transform.TransformNode.__init__" class="py-name" href="#" onclick="return doclink('link-18', '__init__', 'link-11');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+</div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet.Reset"></a><div id="RandomAccessDbResultSet.Reset-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet.Reset-toggle" onclick="return toggle('RandomAccessDbResultSet.Reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#Reset">Reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet.Reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet.Reset-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">      <tt id="link-19" class="py-name"><a title="rdkit.Dbase.DbResultSet.DbResultBase" class="py-name" href="#" onclick="return doclink('link-19', 'DbResultBase', 'link-10');">DbResultBase</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-20', 'Reset', 'link-4');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet._finish"></a><div id="RandomAccessDbResultSet._finish-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet._finish-toggle" onclick="return toggle('RandomAccessDbResultSet._finish');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#_finish">_finish</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet._finish-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet._finish-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">      <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">fetchone</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">      <tt class="py-keyword">while</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-21', 'transform', 'link-2');">transform</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">          <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-22', 'transform', 'link-2');">transform</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">          <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt><tt class="py-op">]</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">v</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">          <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">fetchone</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet.__getitem__"></a><div id="RandomAccessDbResultSet.__getitem__-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet.__getitem__-toggle" onclick="return toggle('RandomAccessDbResultSet.__getitem__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">idx</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet.__getitem__-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">idx</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">IndexError</tt><tt class="py-op">(</tt><tt class="py-string">"negative indices not supported"</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">idx</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">          <tt class="py-keyword">raise</tt> <tt class="py-name">IndexError</tt><tt class="py-op">(</tt><tt class="py-string">'index %d too large (%d max)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Invalid cursor'</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">idx</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">      <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">      <tt class="py-keyword">while</tt> <tt class="py-name">r</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">fetchone</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">r</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">          <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">          <tt class="py-keyword">raise</tt> <tt class="py-name">IndexError</tt><tt class="py-op">(</tt><tt class="py-string">'index %d too large (%d max)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">idx</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-23', 'transform', 'link-2');">transform</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">          <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeAligner.SubshapeAlignment.transform
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.transform" class="py-name" href="#" onclick="return doclink('link-24', 'transform', 'link-2');">transform</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">          <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">removeDups</tt><tt class="py-op">]</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">:</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">            <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">          <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">seen</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">          <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet.__len__"></a><div id="RandomAccessDbResultSet.__len__-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet.__len__-toggle" onclick="return toggle('RandomAccessDbResultSet.__len__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet.__len__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet.__len__-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"len() not supported for noMemory Results Sets"</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet._finish()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#_finish"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet._finish" class="py-name" href="#" onclick="return doclink('link-25', '_finish', 'link-25');">_finish</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbResultSet.next"></a><div id="RandomAccessDbResultSet.next-def"><a name="L168"></a><tt class="py-lineno">168</tt> <a class="py-toggle" href="#" id="RandomAccessDbResultSet.next-toggle" onclick="return toggle('RandomAccessDbResultSet.next');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#next">next</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbResultSet.next-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbResultSet.next-expanded"><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">      <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">results</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt><tt class="py-op">]</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">StopIteration</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">  <tt class="py-name">__next__</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next
+rdkit.Dbase.DbResultSet.DbResultSet.next
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next
+rdkit.VLib.Filter.FilterNode.next
+rdkit.VLib.Node.VLibNode.next
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next
+rdkit.VLib.Output.OutputNode.next
+rdkit.VLib.Supply.SupplyNode.next
+rdkit.VLib.Transform.TransformNode.next" class="py-name" href="#" onclick="return doclink('link-26', 'next', 'link-16');">next</a></tt>  <tt class="py-comment"># PY3</tt> </tt>
+</div><a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="rdkit.Dbase" class="py-name" href="#" onclick="return doclink('link-27', 'Dbase', 'link-0');">Dbase</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Module rdkit.Dbase.DbConnection=rdkit.Dbase.DbConnection-module.html"><a title="rdkit.Dbase.DbConnection" class="py-name" href="#" onclick="return doclink('link-28', 'DbConnection', 'link-28');">DbConnection</a></tt> <tt class="py-keyword">import</tt> <tt id="link-29" class="py-name" targets="Class rdkit.Dbase.DbConnection.DbConnect=rdkit.Dbase.DbConnection.DbConnect-class.html"><a title="rdkit.Dbase.DbConnection.DbConnect" class="py-name" href="#" onclick="return doclink('link-29', 'DbConnect', 'link-29');">DbConnect</a></tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">  <tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect" class="py-name" href="#" onclick="return doclink('link-30', 'DbConnect', 'link-29');">DbConnect</a></tt><tt class="py-op">(</tt><tt class="py-string">'TEST.GDB'</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.GetCursor()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetCursor"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-31', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'curs:'</tt><tt class="py-op">,</tt> <tt class="py-name">repr</tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements'</tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name" targets="Class rdkit.Dbase.DbResultSet.RandomAccessDbResultSet=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet" class="py-name" href="#" onclick="return doclink('link-32', 'RandomAccessDbResultSet', 'link-32');">RandomAccessDbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">12</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">      <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">IndexError</tt><tt class="py-op">:</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">      <tt class="py-keyword">assert</tt> <tt class="py-name">i</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">10</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'use len'</tt><tt class="py-op">)</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-33', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements'</tt><tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet" class="py-name" href="#" onclick="return doclink('link-34', 'RandomAccessDbResultSet', 'link-32');">RandomAccessDbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">resultSet</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'use iter'</tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-35', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements'</tt><tt class="py-op">)</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name" targets="Module rdkit.Dbase.DbResultSet=rdkit.Dbase.DbResultSet-module.html,Class rdkit.Dbase.DbResultSet.DbResultSet=rdkit.Dbase.DbResultSet.DbResultSet-class.html"><a title="rdkit.Dbase.DbResultSet
+rdkit.Dbase.DbResultSet.DbResultSet" class="py-name" href="#" onclick="return doclink('link-36', 'DbResultSet', 'link-36');">DbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">thing</tt> <tt class="py-keyword">in</tt> <tt class="py-name">resultSet</tt><tt class="py-op">:</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-name">ID</tt><tt class="py-op">,</tt> <tt class="py-name">val</tt> <tt class="py-op">=</tt> <tt class="py-name">thing</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">  <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-37', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements_dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="rdkit.Dbase.DbResultSet
+rdkit.Dbase.DbResultSet.DbResultSet" class="py-name" href="#" onclick="return doclink('link-38', 'DbResultSet', 'link-36');">DbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">  <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">thing</tt> <tt class="py-keyword">in</tt> <tt class="py-name">resultSet</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">    <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">thing</tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">20</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line"> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-39', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements_dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="rdkit.Dbase.DbResultSet
+rdkit.Dbase.DbResultSet.DbResultSet" class="py-name" href="#" onclick="return doclink('link-40', 'DbResultSet', 'link-36');">DbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">,</tt> <tt class="py-name">removeDups</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">  <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">thing</tt> <tt class="py-keyword">in</tt> <tt class="py-name">resultSet</tt><tt class="py-op">:</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">thing</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">10</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-41', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements_dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet" class="py-name" href="#" onclick="return doclink('link-42', 'RandomAccessDbResultSet', 'link-32');">RandomAccessDbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">,</tt> <tt class="py-name">removeDups</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">resultSet</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">10</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">)</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-43', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements_dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet" class="py-name" href="#" onclick="return doclink('link-44', 'RandomAccessDbResultSet', 'link-32');">RandomAccessDbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">,</tt> <tt class="py-name">removeDups</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">)</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">21</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">5</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> <tt class="py-number">61</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">  <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-45', 'GetCursor', 'link-31');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">  <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'select * from ten_elements_dups'</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">  <tt class="py-name">resultSet</tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="rdkit.Dbase.DbResultSet.RandomAccessDbResultSet" class="py-name" href="#" onclick="return doclink('link-46', 'RandomAccessDbResultSet', 'link-32');">RandomAccessDbResultSet</a></tt><tt class="py-op">(</tt><tt class="py-name">curs</tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">)</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">  <tt class="py-keyword">assert</tt> <tt class="py-name">resultSet</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">11</tt><tt class="py-op">)</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

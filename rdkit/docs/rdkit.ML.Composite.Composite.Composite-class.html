@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Composite.Composite.Composite</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Composite-module.html">Package&nbsp;Composite</a> ::
+        <a href="rdkit.ML.Composite.Composite-module.html">Module&nbsp;Composite</a> ::
+        Class&nbsp;Composite
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Composite.Composite.Composite-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Composite</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Composite</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+a composite model
+
+
+**Notes**
+
+- adding a model which is already present just results in its count
+   field being incremented and the errors being averaged.
+
+- typical usage:
+
+   1) grow the composite with AddModel until happy with it
+
+   2) call AverageErrors to calculate the average error values
+
+   3) call SortModels to put things in order by either error or count
+
+- Composites can support individual models requiring either quantized or
+   nonquantized data.  This is done by keeping a set of quantization bounds
+   (_QuantBounds_) in the composite and quantizing data passed in when required.
+   Quantization bounds can be set and interrogated using the
+   _Get/SetQuantBounds()_ methods.  When models are added to the composite,
+   it can be indicated whether or not they require quantization.
+
+- Composites are also capable of extracting relevant variables from longer lists.
+  This is accessible using _SetDescriptorNames()_ to register the descriptors about
+  which the composite cares and _SetInputOrder()_ to tell the composite what the
+  ordering of input vectors will be.  **Note** there is a limitation on this: each
+  model needs to take the same set of descriptors as inputs.  This could be changed.
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SetModelFilterData"></a><span class="summary-sig-name">SetModelFilterData</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">modelFilterFrac</span>=<span class="summary-sig-default">0.0</span>,
+        <span class="summary-sig-arg">modelFilterVal</span>=<span class="summary-sig-default">0.0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetModelFilterData">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SetDescriptorNames" class="summary-sig-name">SetDescriptorNames</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">names</span>)</span><br />
+      registers the names of the descriptors this composite uses</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetDescriptorNames">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetDescriptorNames"></a><span class="summary-sig-name">GetDescriptorNames</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns the names of the descriptors this composite uses</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetDescriptorNames">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SetQuantBounds" class="summary-sig-name">SetQuantBounds</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">qBounds</span>,
+        <span class="summary-sig-arg">nPossible</span>=<span class="summary-sig-default">None</span>)</span><br />
+      sets the quantization bounds that the composite will use</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetQuantBounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#GetQuantBounds" class="summary-sig-name">GetQuantBounds</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns the quantization bounds</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetQuantBounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetActivityQuantBounds"></a><span class="summary-sig-name">GetActivityQuantBounds</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetActivityQuantBounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SetActivityQuantBounds"></a><span class="summary-sig-name">SetActivityQuantBounds</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bounds</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetActivityQuantBounds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="QuantizeActivity"></a><span class="summary-sig-name">QuantizeActivity</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">example</span>,
+        <span class="summary-sig-arg">activityQuant</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">actCol</span>=<span class="summary-sig-default">-1</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.QuantizeActivity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#QuantizeExample" class="summary-sig-name">QuantizeExample</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">example</span>,
+        <span class="summary-sig-arg">quantBounds</span>=<span class="summary-sig-default">None</span>)</span><br />
+      quantizes an example</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.QuantizeExample">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#MakeHistogram" class="summary-sig-name">MakeHistogram</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      creates a histogram of error/count pairs</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.MakeHistogram">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#CollectVotes" class="summary-sig-name">CollectVotes</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">example</span>,
+        <span class="summary-sig-arg">quantExample</span>,
+        <span class="summary-sig-arg">appendExample</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">onlyModels</span>=<span class="summary-sig-default">None</span>)</span><br />
+      collects votes across every member of the composite for the given example</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.CollectVotes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#ClassifyExample" class="summary-sig-name">ClassifyExample</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">example</span>,
+        <span class="summary-sig-arg">threshold</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">appendExample</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">onlyModels</span>=<span class="summary-sig-default">None</span>)</span><br />
+      classifies the given example using the entire composite</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.ClassifyExample">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#GetVoteDetails" class="summary-sig-name">GetVoteDetails</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns the votes from the last classification</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetVoteDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#_RemapInput" class="summary-sig-name" onclick="show_private();">_RemapInput</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">inputVect</span>)</span><br />
+      remaps the input so that it matches the expected internal ordering</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite._RemapInput">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetInputOrder"></a><span class="summary-sig-name">GetInputOrder</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns the input order (used in remapping inputs)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetInputOrder">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SetInputOrder" class="summary-sig-name">SetInputOrder</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">colNames</span>)</span><br />
+      sets the input order</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetInputOrder">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#Grow" class="summary-sig-name">Grow</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">buildDriver</span>,
+        <span class="summary-sig-arg">pruner</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nTries</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">pruneIt</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">needsQuantization</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">progressCallback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**buildArgs</span>)</span><br />
+      Grows the composite</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.Grow">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ClearModelExamples"></a><span class="summary-sig-name">ClearModelExamples</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.ClearModelExamples">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#Pickle" class="summary-sig-name">Pickle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">fileName</span>=<span class="summary-sig-default">'foo.pkl'</span>,
+        <span class="summary-sig-arg">saveExamples</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Writes this composite off to a file so that it can be easily loaded later</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.Pickle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#AddModel" class="summary-sig-name">AddModel</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">model</span>,
+        <span class="summary-sig-arg">error</span>,
+        <span class="summary-sig-arg">needsQuantization</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Adds a model to the composite</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.AddModel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="AverageErrors"></a><span class="summary-sig-name">AverageErrors</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      convert local summed error to average error</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.AverageErrors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SortModels" class="summary-sig-name">SortModels</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sortOnError</span>=<span class="summary-sig-default">True</span>)</span><br />
+      sorts the list of models</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SortModels">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetModel"></a><span class="summary-sig-name">GetModel</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      returns a particular model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetModel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SetModel" class="summary-sig-name">SetModel</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      replaces a particular model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetModel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetCount"></a><span class="summary-sig-name">GetCount</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      returns the count of the _i_th model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetCount">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SetCount"></a><span class="summary-sig-name">SetCount</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      sets the count of the _i_th model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetCount">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetError"></a><span class="summary-sig-name">GetError</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      returns the error of the _i_th model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetError">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SetError"></a><span class="summary-sig-name">SetError</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">val</span>)</span><br />
+      sets the error of the _i_th model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetError">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#GetDataTuple" class="summary-sig-name">GetDataTuple</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      returns all relevant data about a particular model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetDataTuple">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#SetDataTuple" class="summary-sig-name">SetDataTuple</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>,
+        <span class="summary-sig-arg">tup</span>)</span><br />
+      sets all relevant data for a particular tree in the forest</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetDataTuple">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#GetAllData" class="summary-sig-name">GetAllData</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns everything we know</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetAllData">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      allows len(composite) to work</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getitem__"></a><span class="summary-sig-name">__getitem__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">which</span>)</span><br />
+      allows composite[i] to work, returns the data tuple</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Composite.Composite.Composite-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns a string representation of the composite</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+x.__init__(...) initializes x; see help(type(x)) for signature
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetDescriptorNames"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetDescriptorNames</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">names</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetDescriptorNames">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+registers the names of the descriptors this composite uses
+
+**Arguments**
+
+ - names: a list of descriptor names (strings).
+
+**NOTE**
+
+   the _names_ list is not
+   copied, so if you modify it later, the composite itself will also be modified.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetQuantBounds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetQuantBounds</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">qBounds</span>,
+        <span class="sig-arg">nPossible</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetQuantBounds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+sets the quantization bounds that the composite will use
+
+**Arguments**
+
+ - qBounds:  a list of quantization bounds, each quantbound is a
+       list of boundaries
+
+ - nPossible:  a list of integers indicating how many possible values
+    each descriptor can take on.
+
+**NOTE**
+
+   - if the two lists are of different lengths, this will assert out
+
+   - neither list is copied, so if you modify it later, the composite
+     itself will also be modified.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetQuantBounds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetQuantBounds</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetQuantBounds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the quantization bounds
+
+**Returns**
+
+  a 2-tuple consisting of:
+
+    1) the list of quantization bounds
+
+    2) the nPossibleVals list
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="QuantizeExample"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">QuantizeExample</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">example</span>,
+        <span class="sig-arg">quantBounds</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.QuantizeExample">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+quantizes an example
+
+**Arguments**
+
+ - example: a data point (list, tuple or numpy array)
+
+ - quantBounds:  a list of quantization bounds, each quantbound is a
+       list of boundaries.  If this argument is not provided, the composite
+       will use its own quantBounds
+
+**Returns**
+
+  the quantized example as a list
+
+**Notes**
+
+  - If _example_ is different in length from _quantBounds_, this will
+     assert out.
+
+  - This is primarily intended for internal use
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MakeHistogram"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MakeHistogram</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.MakeHistogram">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+creates a histogram of error/count pairs
+
+**Returns**
+
+  the histogram as a series of (error, count) 2-tuples
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CollectVotes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CollectVotes</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">example</span>,
+        <span class="sig-arg">quantExample</span>,
+        <span class="sig-arg">appendExample</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">onlyModels</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.CollectVotes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+collects votes across every member of the composite for the given example
+
+**Arguments**
+
+  - example: the example to be voted upon
+
+  - quantExample: the quantized form of the example
+
+  - appendExample: toggles saving the example on the models
+
+  - onlyModels: if provided, this should be a sequence of model
+    indices. Only the specified models will be used in the
+    prediction.
+
+**Returns**
+
+  a list with a vote from each member
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ClassifyExample"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ClassifyExample</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">example</span>,
+        <span class="sig-arg">threshold</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">appendExample</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">onlyModels</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.ClassifyExample">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+classifies the given example using the entire composite
+
+**Arguments**
+
+ - example: the data to be classified
+
+ - threshold:  if this is a number greater than zero, then a
+    classification will only be returned if the confidence is
+    above _threshold_.  Anything lower is returned as -1.
+
+ - appendExample: toggles saving the example on the models
+
+ - onlyModels: if provided, this should be a sequence of model
+   indices. Only the specified models will be used in the
+   prediction.
+
+**Returns**
+
+  a (result,confidence) tuple
+
+
+**FIX:**
+  statistics sucks... I'm not seeing an obvious way to get
+     the confidence intervals.  For that matter, I'm not seeing
+     an unobvious way.
+
+  For now, this is just treated as a voting problem with the confidence
+  measure being the percent of models which voted for the winning result.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVoteDetails"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVoteDetails</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetVoteDetails">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the votes from the last classification
+
+This will be _None_ if nothing has yet be classified
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_RemapInput"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_RemapInput</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">inputVect</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite._RemapInput">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+remaps the input so that it matches the expected internal ordering
+
+**Arguments**
+
+  - inputVect: the input to be reordered
+
+**Returns**
+
+  - a list with the reordered (and possible shorter) data
+
+**Note**
+
+  - you must call _SetDescriptorNames()_ and _SetInputOrder()_ for this to work
+
+  - this is primarily intended for internal use
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetInputOrder"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetInputOrder</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">colNames</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetInputOrder">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+sets the input order
+
+**Arguments**
+
+  - colNames: a list of the names of the data columns that will be passed in
+
+**Note**
+
+  - you must call _SetDescriptorNames()_ first for this to work
+
+  - if the local descriptor names do not appear in _colNames_, this will
+    raise an _IndexError_ exception.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Grow"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Grow</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">examples</span>,
+        <span class="sig-arg">attrs</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">buildDriver</span>,
+        <span class="sig-arg">pruner</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nTries</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">pruneIt</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">needsQuantization</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">progressCallback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**buildArgs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.Grow">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Grows the composite
+
+**Arguments**
+
+ - examples: a list of examples to be used in training
+
+ - attrs: a list of the variables to be used in training
+
+ - nPossibleVals: this is used to provide a list of the number
+    of possible values for each variable.  It is used if the
+    local quantBounds have not been set (for example for when you
+    are working with data which is already quantized).
+
+ - buildDriver: the function to call to build the new models
+
+ - pruner: a function used to &quot;prune&quot; (reduce the complexity of)
+    the resulting model.
+
+ - nTries: the number of new models to add
+
+ - pruneIt: toggles whether or not pruning is done
+
+ - needsQuantization: used to indicate whether or not this type of model
+    requires quantized data
+
+ - **buildArgs: all other keyword args are passed to _buildDriver_
+
+**Note**
+
+  - new models are *added* to the existing ones
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Pickle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Pickle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">fileName</span>=<span class="sig-default">'foo.pkl'</span>,
+        <span class="sig-arg">saveExamples</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.Pickle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Writes this composite off to a file so that it can be easily loaded later
+
+**Arguments**
+
+  - fileName: the name of the file to be written
+
+  - saveExamples: if this is zero, the individual models will have
+    their stored examples cleared.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddModel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddModel</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">model</span>,
+        <span class="sig-arg">error</span>,
+        <span class="sig-arg">needsQuantization</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.AddModel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Adds a model to the composite
+
+**Arguments**
+
+  - model: the model to be added
+
+  - error: the model's error
+
+  - needsQuantization: a toggle to indicate whether or not this model
+     requires quantized inputs
+
+**NOTE**
+
+   - this can be used as an alternative to _Grow()_ if you already have
+     some models constructed
+
+   - the errList is run as an accumulator,
+     you probably want to call _AverageErrors_ after finishing the forest
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SortModels"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SortModels</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sortOnError</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SortModels">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+sorts the list of models
+
+**Arguments**
+
+  sortOnError: toggles sorting on the models' errors rather than their counts
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetModel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetModel</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>,
+        <span class="sig-arg">val</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetModel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+replaces a particular model
+
+**Note**
+
+  This is included for the sake of completeness, but you need to be
+  *very* careful when you use it.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetDataTuple"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetDataTuple</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetDataTuple">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns all relevant data about a particular model
+
+**Arguments**
+
+  i: an integer indicating which model should be returned
+
+**Returns**
+
+  a 3-tuple consisting of:
+
+    1) the model
+
+    2) its count
+
+    3) its error
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetDataTuple"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetDataTuple</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">i</span>,
+        <span class="sig-arg">tup</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.SetDataTuple">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+sets all relevant data for a particular tree in the forest
+
+**Arguments**
+
+  - i: an integer indicating which model should be returned
+
+  - tup: a 3-tuple consisting of:
+
+    1) the model
+
+    2) its count
+
+    3) its error
+
+**Note**
+
+  This is included for the sake of completeness, but you need to be
+  *very* careful when you use it.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllData"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllData</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.GetAllData">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns everything we know
+
+**Returns**
+
+  a 3-tuple consisting of:
+
+    1) our list of models
+
+    2) our list of model counts
+
+    3) our list of model errors
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Composite.Composite-pysrc.html#Composite.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns a string representation of the composite
+
+    
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

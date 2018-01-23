@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.VLib.Node</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.VLib-module.html">Package&nbsp;VLib</a> ::
+        Module&nbsp;Node
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.VLib.Node-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.VLib.Node-module.html">Module rdkit.VLib.Node</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#  $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2003-2006 Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#     All Rights Reserved</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">six</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode"></a><div id="VLibNode-def"><a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="VLibNode-toggle" onclick="return toggle('VLibNode');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html">VLibNode</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="VLibNode-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">  <tt class="py-docstring">""" base class for all virtual library nodes,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">  defines minimal required interface</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.__init__"></a><div id="VLibNode.__init__-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="VLibNode.__init__-toggle" onclick="return toggle('VLibNode.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.__init__-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_children</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parents</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">  <tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">  <tt class="py-comment">#  Iteration</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="VLibNode.__iter__"></a><div id="VLibNode.__iter__-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="VLibNode.__iter__-toggle" onclick="return toggle('VLibNode.__iter__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.__iter__-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-docstring">""" part of the iterator interface """</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.reset()=rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier-class.html#reset,Method rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.reset()=rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier-class.html#reset,Method rdkit.VLib.Node.VLibNode.reset()=rdkit.VLib.Node.VLibNode-class.html#reset,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.reset()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.reset()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.reset()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.reset()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#reset,Method rdkit.VLib.NodeLib.SmilesOutput.OutputNode.reset()=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html#reset,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.reset()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#reset,Method rdkit.VLib.Supply.SupplyNode.reset()=rdkit.VLib.Supply.SupplyNode-class.html#reset"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.reset
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.reset
+rdkit.VLib.Node.VLibNode.reset
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.reset
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.reset
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.reset
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.reset
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.reset
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.reset
+rdkit.VLib.Supply.SupplyNode.reset" class="py-name" href="#" onclick="return doclink('link-0', 'reset', 'link-0');">reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.next"></a><div id="VLibNode.next-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="VLibNode.next-toggle" onclick="return toggle('VLibNode.next');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#next">next</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.next-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.next-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-docstring">""" part of the iterator interface</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">      raises StopIteration on failure</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.reset"></a><div id="VLibNode.reset-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="VLibNode.reset-toggle" onclick="return toggle('VLibNode.reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#reset">reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.reset-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-docstring">""" resets our iteration state</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-1" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#parent"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-1', 'parent', 'link-1');">parent</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method rdkit.VLib.Node.VLibNode.GetParents()=rdkit.VLib.Node.VLibNode-class.html#GetParents"><a title="rdkit.VLib.Node.VLibNode.GetParents" class="py-name" href="#" onclick="return doclink('link-2', 'GetParents', 'link-2');">GetParents</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">      <tt id="link-3" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-3', 'parent', 'link-1');">parent</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.reset
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.reset
+rdkit.VLib.Node.VLibNode.reset
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.reset
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.reset
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.reset
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.reset
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.reset
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.reset
+rdkit.VLib.Supply.SupplyNode.reset" class="py-name" href="#" onclick="return doclink('link-4', 'reset', 'link-0');">reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">  <tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">  <tt class="py-comment">#  Library graph operations</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">  <tt class="py-comment">#  Probably most of these won't need to be reimplemented in</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">  <tt class="py-comment">#  child classes</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="VLibNode.AddChild"></a><div id="VLibNode.AddChild-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="VLibNode.AddChild-toggle" onclick="return toggle('VLibNode.AddChild');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#AddChild">AddChild</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">child</tt><tt class="py-op">,</tt> <tt class="py-param">notify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.AddChild-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.AddChild-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1 = VLibNode()</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2 = VLibNode()</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1 = VLibNode()</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1.AddChild(c1)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2.AddChild(c1,notify=0)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1.AddParent(p2,notify=0)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_children</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">child</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">notify</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-name">child</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.VLib.Node.VLibNode.AddParent()=rdkit.VLib.Node.VLibNode-class.html#AddParent,Method rdkit.VLib.Supply.SupplyNode.AddParent()=rdkit.VLib.Supply.SupplyNode-class.html#AddParent"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-5', 'AddParent', 'link-5');">AddParent</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.RemoveChild"></a><div id="VLibNode.RemoveChild-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="VLibNode.RemoveChild-toggle" onclick="return toggle('VLibNode.RemoveChild');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#RemoveChild">RemoveChild</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">child</tt><tt class="py-op">,</tt> <tt class="py-param">notify</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.RemoveChild-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.RemoveChild-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1 = VLibNode()</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1 = VLibNode()</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1.AddChild(c1)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1.RemoveChild(c1)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_children</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">child</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">notify</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">      <tt class="py-name">child</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.VLib.Node.VLibNode.RemoveParent()=rdkit.VLib.Node.VLibNode-class.html#RemoveParent"><a title="rdkit.VLib.Node.VLibNode.RemoveParent" class="py-name" href="#" onclick="return doclink('link-6', 'RemoveParent', 'link-6');">RemoveParent</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.GetChildren"></a><div id="VLibNode.GetChildren-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="VLibNode.GetChildren-toggle" onclick="return toggle('VLibNode.GetChildren');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#GetChildren">GetChildren</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.GetChildren-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.GetChildren-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_children</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.AddParent"></a><div id="VLibNode.AddParent-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="VLibNode.AddParent-toggle" onclick="return toggle('VLibNode.AddParent');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#AddParent">AddParent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt><tt class="py-op">,</tt> <tt class="py-param">notify</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.AddParent-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.AddParent-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1 = VLibNode()</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2 = VLibNode()</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1 = VLibNode()</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1.AddParent(p1)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1.AddParent(p2,notify=0)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2.AddChild(c1,notify=0)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parents</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-7', 'parent', 'link-1');">parent</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">notify</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">      <tt id="link-8" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-8', 'parent', 'link-1');">parent</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.AddChild()=rdkit.ML.Cluster.Clusters.Cluster-class.html#AddChild,Method rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#AddChild,Method rdkit.ML.DecTree.Tree.TreeNode.AddChild()=rdkit.ML.DecTree.Tree.TreeNode-class.html#AddChild,Method rdkit.VLib.Node.VLibNode.AddChild()=rdkit.VLib.Node.VLibNode-class.html#AddChild"><a title="rdkit.ML.Cluster.Clusters.Cluster.AddChild
+rdkit.ML.DecTree.DecTree.DecTreeNode.AddChild
+rdkit.ML.DecTree.Tree.TreeNode.AddChild
+rdkit.VLib.Node.VLibNode.AddChild" class="py-name" href="#" onclick="return doclink('link-9', 'AddChild', 'link-9');">AddChild</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.RemoveParent"></a><div id="VLibNode.RemoveParent-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="VLibNode.RemoveParent-toggle" onclick="return toggle('VLibNode.RemoveParent');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#RemoveParent">RemoveParent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">parent</tt><tt class="py-op">,</tt> <tt class="py-param">notify</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.RemoveParent-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.RemoveParent-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1 = VLibNode()</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1 = VLibNode()</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1.AddChild(c1)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1.RemoveParent(p1)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parents</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-10', 'parent', 'link-1');">parent</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">notify</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">      <tt id="link-11" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.parent" class="py-name" href="#" onclick="return doclink('link-11', 'parent', 'link-1');">parent</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.RemoveChild()=rdkit.ML.Cluster.Clusters.Cluster-class.html#RemoveChild,Method rdkit.VLib.Node.VLibNode.RemoveChild()=rdkit.VLib.Node.VLibNode-class.html#RemoveChild"><a title="rdkit.ML.Cluster.Clusters.Cluster.RemoveChild
+rdkit.VLib.Node.VLibNode.RemoveChild" class="py-name" href="#" onclick="return doclink('link-12', 'RemoveChild', 'link-12');">RemoveChild</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.GetParents"></a><div id="VLibNode.GetParents-def"><a name="L143"></a><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="VLibNode.GetParents-toggle" onclick="return toggle('VLibNode.GetParents');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#GetParents">GetParents</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.GetParents-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.GetParents-expanded"><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parents</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="VLibNode.Destroy"></a><div id="VLibNode.Destroy-def"><a name="L146"></a><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="VLibNode.Destroy-toggle" onclick="return toggle('VLibNode.Destroy');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node.VLibNode-class.html#Destroy">Destroy</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">notify</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">propagateDown</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">propagateUp</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="VLibNode.Destroy-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="VLibNode.Destroy-expanded"><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1 = VLibNode()</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2 = VLibNode()</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1 = VLibNode()</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c2 = VLibNode()</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p1.AddChild(c1)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2.AddChild(c1)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; p2.AddChild(c2)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c2.GetParents())</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p1.GetChildren())</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">    1</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    2</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; c1.Destroy(propagateUp=True)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(p2.GetChildren())</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c1.GetParents())</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(c2.GetParents())</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'_destroyed'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_destroyed</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">notify</tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">o</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method rdkit.DataStructs.VectCollection.VectCollection.GetChildren()=rdkit.DataStructs.VectCollection.VectCollection-class.html#GetChildren,Method rdkit.ML.Cluster.Clusters.Cluster.GetChildren()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetChildren,Method rdkit.ML.DecTree.Tree.TreeNode.GetChildren()=rdkit.ML.DecTree.Tree.TreeNode-class.html#GetChildren,Method rdkit.VLib.Node.VLibNode.GetChildren()=rdkit.VLib.Node.VLibNode-class.html#GetChildren"><a title="rdkit.DataStructs.VectCollection.VectCollection.GetChildren
+rdkit.ML.Cluster.Clusters.Cluster.GetChildren
+rdkit.ML.DecTree.Tree.TreeNode.GetChildren
+rdkit.VLib.Node.VLibNode.GetChildren" class="py-name" href="#" onclick="return doclink('link-13', 'GetChildren', 'link-13');">GetChildren</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="rdkit.VLib.Node.VLibNode.RemoveParent" class="py-name" href="#" onclick="return doclink('link-14', 'RemoveParent', 'link-6');">RemoveParent</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">propagateDown</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">          <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method rdkit.ML.DecTree.Tree.TreeNode.Destroy()=rdkit.ML.DecTree.Tree.TreeNode-class.html#Destroy,Method rdkit.VLib.Node.VLibNode.Destroy()=rdkit.VLib.Node.VLibNode-class.html#Destroy"><a title="rdkit.ML.DecTree.Tree.TreeNode.Destroy
+rdkit.VLib.Node.VLibNode.Destroy" class="py-name" href="#" onclick="return doclink('link-15', 'Destroy', 'link-15');">Destroy</a></tt><tt class="py-op">(</tt><tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">propagateDown</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">propagateUp</tt><tt class="py-op">=</tt><tt class="py-name">propagateUp</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">o</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="rdkit.VLib.Node.VLibNode.GetParents" class="py-name" href="#" onclick="return doclink('link-16', 'GetParents', 'link-2');">GetParents</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="rdkit.ML.Cluster.Clusters.Cluster.RemoveChild
+rdkit.VLib.Node.VLibNode.RemoveChild" class="py-name" href="#" onclick="return doclink('link-17', 'RemoveChild', 'link-12');">RemoveChild</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">propagateUp</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">          <tt class="py-name">o</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="rdkit.ML.DecTree.Tree.TreeNode.Destroy
+rdkit.VLib.Node.VLibNode.Destroy" class="py-name" href="#" onclick="return doclink('link-18', 'Destroy', 'link-15');">Destroy</a></tt><tt class="py-op">(</tt><tt class="py-name">notify</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">propagateDown</tt><tt class="py-op">=</tt><tt class="py-name">propagateDown</tt><tt class="py-op">,</tt> <tt class="py-name">propagateUp</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_children</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_parents</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">six</tt><tt class="py-op">.</tt><tt class="py-name">PY3</tt><tt class="py-op">:</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">  <tt id="link-19" class="py-name" targets="Class rdkit.VLib.Node.VLibNode=rdkit.VLib.Node.VLibNode-class.html"><a title="rdkit.VLib.Node.VLibNode" class="py-name" href="#" onclick="return doclink('link-19', 'VLibNode', 'link-19');">VLibNode</a></tt><tt class="py-op">.</tt><tt class="py-name">__next__</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="rdkit.VLib.Node.VLibNode" class="py-name" href="#" onclick="return doclink('link-20', 'VLibNode', 'link-19');">VLibNode</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#next,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#next,Method rdkit.Dbase.DbResultSet.DbResultSet.next()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#next,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#next,Method rdkit.VLib.Filter.FilterNode.next()=rdkit.VLib.Filter.FilterNode-class.html#next,Method rdkit.VLib.Node.VLibNode.next()=rdkit.VLib.Node.VLibNode-class.html#next,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#next,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#next,Method rdkit.VLib.Output.OutputNode.next()=rdkit.VLib.Output.OutputNode-class.html#next,Method rdkit.VLib.Supply.SupplyNode.next()=rdkit.VLib.Supply.SupplyNode-class.html#next,Method rdkit.VLib.Transform.TransformNode.next()=rdkit.VLib.Transform.TransformNode-class.html#next"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next
+rdkit.Dbase.DbResultSet.DbResultSet.next
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next
+rdkit.VLib.Filter.FilterNode.next
+rdkit.VLib.Node.VLibNode.next
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next
+rdkit.VLib.Output.OutputNode.next
+rdkit.VLib.Supply.SupplyNode.next
+rdkit.VLib.Transform.TransformNode.next" class="py-name" href="#" onclick="return doclink('link-21', 'next', 'link-21');">next</a></tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-comment">#  doctest boilerplate</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="_runDoctests"></a><div id="_runDoctests-def"><a name="L197"></a><tt class="py-lineno">197</tt> <a class="py-toggle" href="#" id="_runDoctests-toggle" onclick="return toggle('_runDoctests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.Node-module.html#_runDoctests">_runDoctests</a><tt class="py-op">(</tt><tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+</div><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">  <tt class="py-name">failed</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">testmod</tt><tt class="py-op">(</tt><tt class="py-name">optionflags</tt><tt class="py-op">=</tt><tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">ELLIPSIS</tt><tt class="py-op">,</tt> <tt class="py-name">verbose</tt><tt class="py-op">=</tt><tt class="py-name">verbose</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">  <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-name">failed</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">  <tt id="link-22" class="py-name" targets="Function rdkit.Chem.AllChem._runDoctests()=rdkit.Chem.AllChem-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Pairs._runDoctests()=rdkit.Chem.AtomPairs.Pairs-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Sheridan._runDoctests()=rdkit.Chem.AtomPairs.Sheridan-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Torsions._runDoctests()=rdkit.Chem.AtomPairs.Torsions-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Utils._runDoctests()=rdkit.Chem.AtomPairs.Utils-module.html#_runDoctests,Function rdkit.Chem.Descriptors._runDoctests()=rdkit.Chem.Descriptors-module.html#_runDoctests,Function rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests()=rdkit.Chem.FeatMaps.FeatMapPoint-module.html#_runDoctests,Function rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests()=rdkit.Chem.Fingerprints.DbFpSupplier-module.html#_runDoctests,Function rdkit.Chem.Fraggle.FraggleSim._runDoctests()=rdkit.Chem.Fraggle.FraggleSim-module.html#_runDoctests,Function rdkit.Chem.MolKey.MolKey._runDoctests()=rdkit.Chem.MolKey.MolKey-module.html#_runDoctests,Function rdkit.Chem.PandasTools._runDoctests()=rdkit.Chem.PandasTools-module.html#_runDoctests,Function rdkit.Chem.Pharm2D.Utils._runDoctests()=rdkit.Chem.Pharm2D.Utils-module.html#_runDoctests,Function rdkit.Chem.Pharm3D.EmbedLib._runDoctests()=rdkit.Chem.Pharm3D.EmbedLib-module.html#_runDoctests,Function rdkit.Chem.QED._runDoctests()=rdkit.Chem.QED-module.html#_runDoctests,Function rdkit.Chem.SaltRemover._runDoctests()=rdkit.Chem.SaltRemover-module.html#_runDoctests,Function rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests()=rdkit.Chem.Scaffolds.MurckoScaffold-module.html#_runDoctests,Function rdkit.Chem.SimpleEnum.Enumerator._runDoctests()=rdkit.Chem.SimpleEnum.Enumerator-module.html#_runDoctests,Function rdkit.DataStructs.BitUtils._runDoctests()=rdkit.DataStructs.BitUtils-module.html#_runDoctests,Function rdkit.DataStructs.LazySignature._runDoctests()=rdkit.DataStructs.LazySignature-module.html#_runDoctests,Function rdkit.DataStructs.VectCollection._runDoctests()=rdkit.DataStructs.VectCollection-module.html#_runDoctests,Function rdkit.ML.Data.DataUtils._runDoctests()=rdkit.ML.Data.DataUtils-module.html#_runDoctests,Function rdkit.ML.Data.SplitData._runDoctests()=rdkit.ML.Data.SplitData-module.html#_runDoctests,Function rdkit.ML.KNN.DistFunctions._runDoctests()=rdkit.ML.KNN.DistFunctions-module.html#_runDoctests,Function rdkit.SimDivFilters.SimilarityPickers._runDoctests()=rdkit.SimDivFilters.SimilarityPickers-module.html#_runDoctests,Function rdkit.VLib.Filter._runDoctests()=rdkit.VLib.Filter-module.html#_runDoctests,Function rdkit.VLib.Node._runDoctests()=rdkit.VLib.Node-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SDSupply._runDoctests()=rdkit.VLib.NodeLib.SDSupply-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests()=rdkit.VLib.NodeLib.SmartsMolFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsRemover._runDoctests()=rdkit.VLib.NodeLib.SmartsRemover-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests()=rdkit.VLib.NodeLib.SmilesDupeFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesOutput._runDoctests()=rdkit.VLib.NodeLib.SmilesOutput-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesSupply._runDoctests()=rdkit.VLib.NodeLib.SmilesSupply-module.html#_runDoctests,Function rdkit.VLib.Output._runDoctests()=rdkit.VLib.Output-module.html#_runDoctests,Function rdkit.VLib.Supply._runDoctests()=rdkit.VLib.Supply-module.html#_runDoctests,Function rdkit.VLib.Transform._runDoctests()=rdkit.VLib.Transform-module.html#_runDoctests"><a title="rdkit.Chem.AllChem._runDoctests
+rdkit.Chem.AtomPairs.Pairs._runDoctests
+rdkit.Chem.AtomPairs.Sheridan._runDoctests
+rdkit.Chem.AtomPairs.Torsions._runDoctests
+rdkit.Chem.AtomPairs.Utils._runDoctests
+rdkit.Chem.Descriptors._runDoctests
+rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests
+rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests
+rdkit.Chem.Fraggle.FraggleSim._runDoctests
+rdkit.Chem.MolKey.MolKey._runDoctests
+rdkit.Chem.PandasTools._runDoctests
+rdkit.Chem.Pharm2D.Utils._runDoctests
+rdkit.Chem.Pharm3D.EmbedLib._runDoctests
+rdkit.Chem.QED._runDoctests
+rdkit.Chem.SaltRemover._runDoctests
+rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests
+rdkit.Chem.SimpleEnum.Enumerator._runDoctests
+rdkit.DataStructs.BitUtils._runDoctests
+rdkit.DataStructs.LazySignature._runDoctests
+rdkit.DataStructs.VectCollection._runDoctests
+rdkit.ML.Data.DataUtils._runDoctests
+rdkit.ML.Data.SplitData._runDoctests
+rdkit.ML.KNN.DistFunctions._runDoctests
+rdkit.SimDivFilters.SimilarityPickers._runDoctests
+rdkit.VLib.Filter._runDoctests
+rdkit.VLib.Node._runDoctests
+rdkit.VLib.NodeLib.SDSupply._runDoctests
+rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests
+rdkit.VLib.NodeLib.SmartsRemover._runDoctests
+rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests
+rdkit.VLib.NodeLib.SmilesOutput._runDoctests
+rdkit.VLib.NodeLib.SmilesSupply._runDoctests
+rdkit.VLib.Output._runDoctests
+rdkit.VLib.Supply._runDoctests
+rdkit.VLib.Transform._runDoctests" class="py-name" href="#" onclick="return doclink('link-22', '_runDoctests', 'link-22');">_runDoctests</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.TorsionFingerprints</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;TorsionFingerprints
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.TorsionFingerprints-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module TorsionFingerprints</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Torsion Fingerprints (Deviation) (TFD)
+According to a paper from Schulz-Gasch et al., JCIM, 52, 1499-1512 (2012).
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_doMatch" class="summary-sig-name" onclick="show_private();">_doMatch</a>(<span class="summary-sig-arg">inv</span>,
+        <span class="summary-sig-arg">atoms</span>)</span><br />
+      Helper function to check if all atoms in the list are the same</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doMatch">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_doNotMatch" class="summary-sig-name" onclick="show_private();">_doNotMatch</a>(<span class="summary-sig-arg">inv</span>,
+        <span class="summary-sig-arg">atoms</span>)</span><br />
+      Helper function to check if all atoms in the list are NOT the same</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doNotMatch">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_doMatchExcept1" class="summary-sig-name" onclick="show_private();">_doMatchExcept1</a>(<span class="summary-sig-arg">inv</span>,
+        <span class="summary-sig-arg">atoms</span>)</span><br />
+      Helper function to check if two atoms in the list are the same, 
+and one not
+Note: Works only for three atoms</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doMatchExcept1">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getAtomInvariantsWithRadius" class="summary-sig-name" onclick="show_private();">_getAtomInvariantsWithRadius</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Helper function to calculate the atom invariants for each atom 
+with a given radius</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getAtomInvariantsWithRadius">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getHeavyAtomNeighbors" class="summary-sig-name" onclick="show_private();">_getHeavyAtomNeighbors</a>(<span class="summary-sig-arg">atom1</span>,
+        <span class="summary-sig-arg">aid2</span>=<span class="summary-sig-default">-1</span>)</span><br />
+      Helper function to calculate the number of heavy atom neighbors.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getHeavyAtomNeighbors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getIndexforTorsion" class="summary-sig-name" onclick="show_private();">_getIndexforTorsion</a>(<span class="summary-sig-arg">neighbors</span>,
+        <span class="summary-sig-arg">inv</span>)</span><br />
+      Helper function to calculate the index of the reference atom for 
+a given atom</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getIndexforTorsion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getBondsForTorsions" class="summary-sig-name" onclick="show_private();">_getBondsForTorsions</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>)</span><br />
+      Determine the bonds (or pair of atoms treated like a bond) for which
+torsions should be calculated.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getBondsForTorsions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#CalculateTorsionLists" class="summary-sig-name">CalculateTorsionLists</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">maxDev</span>=<span class="summary-sig-default">'equal'</span>,
+        <span class="summary-sig-arg">symmRadius</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Calculate a list of torsions for a given molecule.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionLists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getTorsionAtomPositions" class="summary-sig-name" onclick="show_private();">_getTorsionAtomPositions</a>(<span class="summary-sig-arg">atoms</span>,
+        <span class="summary-sig-arg">conf</span>)</span><br />
+      Helper function to retrieve the coordinates of the four atoms
+in a torsion</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getTorsionAtomPositions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#CalculateTorsionAngles" class="summary-sig-name">CalculateTorsionAngles</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">tors_list</span>,
+        <span class="summary-sig-arg">tors_list_rings</span>,
+        <span class="summary-sig-arg">confId</span>=<span class="summary-sig-default">-1</span>)</span><br />
+      Calculate the torsion angles for a list of non-ring and 
+a list of ring torsions.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionAngles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_findCentralBond" class="summary-sig-name" onclick="show_private();">_findCentralBond</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">distmat</span>)</span><br />
+      Helper function to identify the atoms of the most central bond.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_findCentralBond">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_calculateBeta" class="summary-sig-name" onclick="show_private();">_calculateBeta</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">distmat</span>,
+        <span class="summary-sig-arg">aid1</span>)</span><br />
+      Helper function to calculate the beta for torsion weights
+according to the formula in the paper.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_calculateBeta">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#CalculateTorsionWeights" class="summary-sig-name">CalculateTorsionWeights</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">aid1</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">aid2</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Calculate the weights for the torsions in a molecule.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionWeights">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#CalculateTFD" class="summary-sig-name">CalculateTFD</a>(<span class="summary-sig-arg">torsions1</span>,
+        <span class="summary-sig-arg">torsions2</span>,
+        <span class="summary-sig-arg">weights</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Calculate the torsion deviation fingerprint (TFD) given two lists of
+torsion angles.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTFD">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#_getSameAtomOrder" class="summary-sig-name" onclick="show_private();">_getSameAtomOrder</a>(<span class="summary-sig-arg">mol1</span>,
+        <span class="summary-sig-arg">mol2</span>)</span><br />
+      Generate a new molecule with the atom order of mol1 and coordinates
+from mol2.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getSameAtomOrder">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#GetTFDBetweenConformers" class="summary-sig-name">GetTFDBetweenConformers</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">confIds1</span>,
+        <span class="summary-sig-arg">confIds2</span>,
+        <span class="summary-sig-arg">useWeights</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">maxDev</span>=<span class="summary-sig-default">'equal'</span>,
+        <span class="summary-sig-arg">symmRadius</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Wrapper to calculate the TFD between two list of conformers 
+of a molecule</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDBetweenConformers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#GetTFDBetweenMolecules" class="summary-sig-name">GetTFDBetweenMolecules</a>(<span class="summary-sig-arg">mol1</span>,
+        <span class="summary-sig-arg">mol2</span>,
+        <span class="summary-sig-arg">confId1</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">confId2</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">useWeights</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">maxDev</span>=<span class="summary-sig-default">'equal'</span>,
+        <span class="summary-sig-arg">symmRadius</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Wrapper to calculate the TFD between two molecules.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDBetweenMolecules">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.TorsionFingerprints-module.html#GetTFDMatrix" class="summary-sig-name">GetTFDMatrix</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">useWeights</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">maxDev</span>=<span class="summary-sig-default">'equal'</span>,
+        <span class="summary-sig-arg">symmRadius</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">ignoreColinearBonds</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Wrapper to calculate the matrix of TFD values for the
+conformers of a molecule.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDMatrix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="rdkit.rdBase">rdBase</span>,
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <a href="rdkit.Geometry-module.html" title="rdkit.Geometry">Geometry</a>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.Chem.rdchem">rdchem</span>,
+  <span title="rdkit.Chem.rdMolDescriptors">rdMolDescriptors</span>,
+  <span title="math">math</span>,
+  <span title="os">os</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_doMatch"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_doMatch</span>(<span class="sig-arg">inv</span>,
+        <span class="sig-arg">atoms</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doMatch">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to check if all atoms in the list are the same
+
+Arguments:
+- inv:    atom invariants (used to define equivalence of atoms)
+- atoms:  list of atoms to check
+
+Return: boolean
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_doNotMatch"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_doNotMatch</span>(<span class="sig-arg">inv</span>,
+        <span class="sig-arg">atoms</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doNotMatch">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to check if all atoms in the list are NOT the same
+
+Arguments:
+- inv:    atom invariants (used to define equivalence of atoms)
+- atoms:  list of atoms to check
+
+Return: boolean
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_doMatchExcept1"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_doMatchExcept1</span>(<span class="sig-arg">inv</span>,
+        <span class="sig-arg">atoms</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_doMatchExcept1">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to check if two atoms in the list are the same, 
+and one not
+Note: Works only for three atoms
+
+Arguments:
+- inv:    atom invariants (used to define equivalence of atoms)
+- atoms:  list of atoms to check
+
+Return: atom that is different
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getAtomInvariantsWithRadius"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getAtomInvariantsWithRadius</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">radius</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getAtomInvariantsWithRadius">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to calculate the atom invariants for each atom 
+with a given radius
+
+Arguments:
+- mol:    the molecule of interest
+- radius: the radius for the Morgan fingerprint
+
+Return: list of atom invariants
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getHeavyAtomNeighbors"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getHeavyAtomNeighbors</span>(<span class="sig-arg">atom1</span>,
+        <span class="sig-arg">aid2</span>=<span class="sig-default">-1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getHeavyAtomNeighbors">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to calculate the number of heavy atom neighbors.
+
+Arguments:
+- atom1:    the atom of interest
+- aid2:     atom index that should be excluded from neighbors (default: none)
+
+Return: a list of heavy atom neighbors of the given atom
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getIndexforTorsion"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getIndexforTorsion</span>(<span class="sig-arg">neighbors</span>,
+        <span class="sig-arg">inv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getIndexforTorsion">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to calculate the index of the reference atom for 
+a given atom
+
+Arguments:
+- neighbors:  list of the neighbors of the atom
+- inv:        atom invariants
+
+Return: list of atom indices as reference for torsion
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getBondsForTorsions"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getBondsForTorsions</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getBondsForTorsions">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Determine the bonds (or pair of atoms treated like a bond) for which
+torsions should be calculated.
+
+Arguments:
+- refmol: the molecule of interest
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalculateTorsionLists"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalculateTorsionLists</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">maxDev</span>=<span class="sig-default">'equal'</span>,
+        <span class="sig-arg">symmRadius</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionLists">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculate a list of torsions for a given molecule. For each torsion
+the four atom indices are determined and stored in a set.
+
+Arguments:
+- mol:      the molecule of interest
+- maxDev:   maximal deviation used for normalization
+            'equal': all torsions are normalized using 180.0 (default)
+            'spec':  each torsion is normalized using its specific
+                     maximal deviation as given in the paper
+- symmRadius: radius used for calculating the atom invariants
+              (default: 2)
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+Return: two lists of torsions: non-ring and ring torsions
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getTorsionAtomPositions"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getTorsionAtomPositions</span>(<span class="sig-arg">atoms</span>,
+        <span class="sig-arg">conf</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getTorsionAtomPositions">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to retrieve the coordinates of the four atoms
+in a torsion
+
+Arguments:
+- atoms:   list with the four atoms
+- conf:    conformation of the molecule
+
+Return: Point3D objects of the four atoms
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalculateTorsionAngles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalculateTorsionAngles</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">tors_list</span>,
+        <span class="sig-arg">tors_list_rings</span>,
+        <span class="sig-arg">confId</span>=<span class="sig-default">-1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionAngles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculate the torsion angles for a list of non-ring and 
+a list of ring torsions.
+
+Arguments:
+- mol:       the molecule of interest
+- tors_list: list of non-ring torsions
+- tors_list_rings: list of ring torsions
+- confId:    index of the conformation (default: first conformer)
+
+Return: list of torsion angles
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_findCentralBond"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_findCentralBond</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">distmat</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_findCentralBond">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to identify the atoms of the most central bond.
+
+Arguments:
+- mol:     the molecule of interest
+- distmat: distance matrix of the molecule
+
+Return: atom indices of the two most central atoms (in order)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_calculateBeta"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_calculateBeta</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">distmat</span>,
+        <span class="sig-arg">aid1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_calculateBeta">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Helper function to calculate the beta for torsion weights
+according to the formula in the paper.
+w(dmax/2) = 0.1
+
+Arguments:
+- mol:     the molecule of interest
+- distmat: distance matrix of the molecule
+- aid1:    atom index of the most central atom
+
+Return: value of beta (float)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalculateTorsionWeights"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalculateTorsionWeights</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">aid1</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">aid2</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTorsionWeights">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculate the weights for the torsions in a molecule.
+By default, the highest weight is given to the bond 
+connecting the two most central atoms.
+If desired, two alternate atoms can be specified (must 
+be connected by a bond).
+
+Arguments:
+- mol:   the molecule of interest
+- aid1:  index of the first atom (default: most central)
+- aid2:  index of the second atom (default: second most central)
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+Return: list of torsion weights (both non-ring and ring)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalculateTFD"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalculateTFD</span>(<span class="sig-arg">torsions1</span>,
+        <span class="sig-arg">torsions2</span>,
+        <span class="sig-arg">weights</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#CalculateTFD">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculate the torsion deviation fingerprint (TFD) given two lists of
+torsion angles.
+
+Arguments:
+- torsions1:  torsion angles of conformation 1
+- torsions2:  torsion angles of conformation 2
+- weights:    list of torsion weights (default: None)
+
+Return: TFD value (float)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_getSameAtomOrder"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_getSameAtomOrder</span>(<span class="sig-arg">mol1</span>,
+        <span class="sig-arg">mol2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#_getSameAtomOrder">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generate a new molecule with the atom order of mol1 and coordinates
+from mol2.
+
+Arguments:
+- mol1:     first instance of the molecule of interest
+- mol2:     second instance the molecule of interest
+
+Return: RDKit molecule
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTFDBetweenConformers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTFDBetweenConformers</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">confIds1</span>,
+        <span class="sig-arg">confIds2</span>,
+        <span class="sig-arg">useWeights</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">maxDev</span>=<span class="sig-default">'equal'</span>,
+        <span class="sig-arg">symmRadius</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDBetweenConformers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Wrapper to calculate the TFD between two list of conformers 
+of a molecule
+
+Arguments:
+- mol:      the molecule of interest
+- confIds1:  first list of conformer indices
+- confIds2:  second list of conformer indices
+- useWeights: flag for using torsion weights in the TFD calculation
+- maxDev:   maximal deviation used for normalization
+            'equal': all torsions are normalized using 180.0 (default)
+            'spec':  each torsion is normalized using its specific
+                     maximal deviation as given in the paper
+- symmRadius: radius used for calculating the atom invariants
+              (default: 2)
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+Return: list of TFD values
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTFDBetweenMolecules"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTFDBetweenMolecules</span>(<span class="sig-arg">mol1</span>,
+        <span class="sig-arg">mol2</span>,
+        <span class="sig-arg">confId1</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">confId2</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">useWeights</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">maxDev</span>=<span class="sig-default">'equal'</span>,
+        <span class="sig-arg">symmRadius</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDBetweenMolecules">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Wrapper to calculate the TFD between two molecules.
+Important: The two molecules must be instances of the same molecule
+
+Arguments:
+- mol1:     first instance of the molecule of interest
+- mol2:     second instance the molecule of interest
+- confId1:  conformer index for mol1 (default: first conformer)
+- confId2:  conformer index for mol2 (default: first conformer)
+- useWeights: flag for using torsion weights in the TFD calculation
+- maxDev:   maximal deviation used for normalization
+            'equal': all torsions are normalized using 180.0 (default)
+            'spec':  each torsion is normalized using its specific
+                     maximal deviation as given in the paper
+- symmRadius: radius used for calculating the atom invariants
+              (default: 2)
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+Return: TFD value
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTFDMatrix"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTFDMatrix</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">useWeights</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">maxDev</span>=<span class="sig-default">'equal'</span>,
+        <span class="sig-arg">symmRadius</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">ignoreColinearBonds</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.TorsionFingerprints-pysrc.html#GetTFDMatrix">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Wrapper to calculate the matrix of TFD values for the
+conformers of a molecule.
+
+Arguments:
+- mol:      the molecule of interest
+- useWeights: flag for using torsion weights in the TFD calculation
+- maxDev:   maximal deviation used for normalization
+            'equal': all torsions are normalized using 180.0 (default)
+            'spec':  each torsion is normalized using its specific
+                     maximal deviation as given in the paper
+- symmRadius: radius used for calculating the atom invariants
+              (default: 2)
+- ignoreColinearBonds: if True (default), single bonds adjacent to
+                       triple bonds are ignored
+                       if False, alternative not-covalently bound
+                       atoms are used to define the torsion
+
+Return: matrix of TFD values
+Note that the returned matrix is symmetrical, i.e. it is the
+lower half of the matrix, e.g. for 5 conformers:
+matrix = [ a,
+           b, c,
+           d, e, f,
+           g, h, i, j]
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

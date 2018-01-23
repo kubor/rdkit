@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.BuildComposite</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        Module&nbsp;BuildComposite
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.BuildComposite-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module BuildComposite</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+command line utility for building composite models
+
+#DOC
+
+**Usage**
+
+  BuildComposite [optional args] filename
+
+Unless indicated otherwise (via command line arguments), _filename_ is
+a QDAT file.
+
+**Command Line Arguments**
+
+  - -o *filename*: name of the output file for the pickled composite
+
+  - -n *num*: number of separate models to add to the composite
+
+  - -p *tablename*: store persistence data in the database
+     in table *tablename*
+
+  - -N *note*: attach some arbitrary text to the persistence data
+
+  - -b *filename*: name of the text file to hold examples from the
+     holdout set which are misclassified
+
+  - -s: split the data into training and hold-out sets before building
+     the composite
+
+  - -f *frac*: the fraction of data to use in the training set when the
+     data is split
+
+  - -r: randomize the activities (for testing purposes).  This ignores
+     the initial distribution of activity values and produces each
+     possible activity value with equal likliehood.
+
+  - -S: shuffle the activities (for testing purposes) This produces
+     a permutation of the input activity values.
+
+  - -l: locks the random number generator to give consistent sets
+     of training and hold-out data.  This is primarily intended
+     for testing purposes.
+
+  - -B: use a so-called Bayesian composite model.
+
+  - -d *database name*: instead of reading the data from a QDAT file,
+     pull it from a database.  In this case, the _filename_ argument
+     provides the name of the database table containing the data set.
+
+  - -D: show a detailed breakdown of the composite model performance
+     across the training and, when appropriate, hold-out sets.
+
+  - -P *pickle file name*: write out the pickled data set to the file
+
+  - -F *filter frac*: filters the data before training to change the
+     distribution of activity values in the training set.  *filter
+     frac* is the fraction of the training set that should have the
+     target value.  **See note below on data filtering.**
+
+  - -v *filter value*: filters the data before training to change the
+     distribution of activity values in the training set. *filter
+     value* is the target value to use in filtering.  **See note below
+     on data filtering.**
+
+  - --modelFiltFrac *model filter frac*: Similar to filter frac above,
+     in this case the data is filtered for each model in the composite
+     rather than a single overall filter for a composite. *model
+     filter frac* is the fraction of the training set for each model
+     that should have the target value (*model filter value*).
+
+  - --modelFiltVal *model filter value*: target value to use for
+     filtering data before training each model in the composite.
+
+  - -t *threshold value*: use high-confidence predictions for the
+     final analysis of the hold-out data.
+
+  - -Q *list string*: the values of quantization bounds for the
+     activity value.  See the _-q_ argument for the format of *list
+     string*.
+
+  - --nRuns *count*: build *count* composite models
+
+  - --prune: prune any models built
+
+  - -h: print a usage message and exit.
+
+  - -V: print the version number and exit
+
+  *-*-*-*-*-*-*-*- Tree-Related Options -*-*-*-*-*-*-*-*
+
+  - -g: be less greedy when training the models.
+
+  - -G *number*: force trees to be rooted at descriptor *number*.
+
+  - -L *limit*: provide an (integer) limit on individual model
+     complexity
+
+  - -q *list string*: Add QuantTrees to the composite and use the list
+     specified in *list string* as the number of target quantization
+     bounds for each descriptor.  Don't forget to include 0's at the
+     beginning and end of *list string* for the name and value fields.
+     For example, if there are 4 descriptors and you want 2 quant
+     bounds apiece, you would use _-q &quot;[0,2,2,2,2,0]&quot;_.
+     Two special cases:
+       1) If you would like to ignore a descriptor in the model
+          building, use '-1' for its number of quant bounds.
+       2) If you have integer valued data that should not be quantized
+          further, enter 0 for that descriptor.
+
+  - --recycle: allow descriptors to be used more than once in a tree
+
+  - --randomDescriptors=val: toggles growing random forests with val
+      randomly-selected descriptors available at each node.
+
+
+  *-*-*-*-*-*-*-*- KNN-Related Options -*-*-*-*-*-*-*-*
+
+  - --doKnn: use K-Nearest Neighbors models
+
+  - --knnK=*value*: the value of K to use in the KNN models
+
+  - --knnTanimoto: use the Tanimoto metric in KNN models
+
+  - --knnEuclid: use a Euclidean metric in KNN models
+
+  *-*-*-*-*-*-*- Naive Bayes Classifier Options -*-*-*-*-*-*-*-*
+  - --doNaiveBayes : use Naive Bayes classifiers
+
+  - --mEstimateVal : the value to be used in the m-estimate formula
+      If this is greater than 0.0, we use it to compute the conditional
+      probabilities by the m-estimate
+
+  *-*-*-*-*-*-*-*- SVM-Related Options -*-*-*-*-*-*-*-*
+
+  **** NOTE: THESE ARE DISABLED ****
+
+# #   - --doSVM: use Support-vector machines
+
+# #   - --svmKernel=*kernel*: choose the type of kernel to be used for
+# #     the SVMs.  Options are:
+# #     The default is:
+
+# #   - --svmType=*type*: choose the type of support-vector machine
+# #     to be used.  Options are:
+# #     The default is:
+
+# #   - --svmGamma=*gamma*: provide the gamma value for the SVMs.  If this
+# #     is not provided, a grid search will be carried out to determine an
+# #     optimal *gamma* value for each SVM.
+
+# #   - --svmCost=*cost*: provide the cost value for the SVMs.  If this is
+# #     not provided, a grid search will be carried out to determine an
+# #     optimal *cost* value for each SVM.
+
+# #   - --svmWeights=*weights*: provide the weight values for the
+# #     activities.  If provided this should be a sequence of (label,
+# #     weight) 2-tuples *nActs* long.  If not provided, a weight of 1
+# #     will be used for each activity.
+
+# #   - --svmEps=*epsilon*: provide the epsilon value used to determine
+# #     when the SVM has converged.  Defaults to 0.001
+
+# #   - --svmDegree=*degree*: provide the degree of the kernel (when
+# #     sensible) Defaults to 3
+
+# #   - --svmCoeff=*coeff*: provide the coefficient for the kernel (when
+# #     sensible) Defaults to 0
+
+# #   - --svmNu=*nu*: provide the nu value for the kernel (when sensible)
+# #     Defaults to 0.5
+
+# #   - --svmDataType=*float*: if the data is contains only 1 and 0 s, specify by
+# #     using binary. Defaults to float
+
+# #   - --svmCache=*cache*: provide the size of the memory cache (in MB)
+# #     to be used while building the SVM.  Defaults to 40
+
+**Notes**
+
+  - *Data filtering*: When there is a large disparity between the
+    numbers of points with various activity levels present in the
+    training set it is sometimes desirable to train on a more
+    homogeneous data set.  This can be accomplished using filtering.
+    The filtering process works by selecting a particular target
+    fraction and target value.  For example, in a case where 95% of
+    the original training set has activity 0 and ony 5% activity 1, we
+    could filter (by randomly removing points with activity 0) so that
+    30% of the data set used to build the composite has activity 1.
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.BuildComposite-module.html#message" class="summary-sig-name">message</a>(<span class="summary-sig-arg">msg</span>)</span><br />
+      emits messages to _sys.stdout_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.BuildComposite-module.html#testall" class="summary-sig-name">testall</a>(<span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">badExamples</span>=<span class="summary-sig-default">[]</span>)</span><br />
+      screens a number of examples past a composite</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#testall">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetCommandLine"></a><span class="summary-sig-name">GetCommandLine</span>(<span class="summary-sig-arg">details</span>)</span><br />
+      #DOC</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#GetCommandLine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RunOnData"></a><span class="summary-sig-name">RunOnData</span>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">progressCallback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">saveIt</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">setDescNames</span>=<span class="summary-sig-default">0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#RunOnData">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.BuildComposite-module.html#RunIt" class="summary-sig-name">RunIt</a>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">progressCallback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">saveIt</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">setDescNames</span>=<span class="summary-sig-default">0</span>)</span><br />
+      does the actual work of building a composite model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#RunIt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ShowVersion"></a><span class="summary-sig-name">ShowVersion</span>(<span class="summary-sig-arg">includeArgs</span>=<span class="summary-sig-default">0</span>)</span><br />
+      prints the version number</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#ShowVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Usage"></a><span class="summary-sig-name">Usage</span>()</span><br />
+      provides a list of arguments for when this is used from the command line</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.BuildComposite-module.html#SetDefaults" class="summary-sig-name">SetDefaults</a>(<span class="summary-sig-arg">runDetails</span>=<span class="summary-sig-default">None</span>)</span><br />
+      initializes a details object with default values</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#SetDefaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.BuildComposite-module.html#ParseArgs" class="summary-sig-name">ParseArgs</a>(<span class="summary-sig-arg">runDetails</span>)</span><br />
+      parses command line arguments and updates _runDetails_</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#ParseArgs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_runDetails"></a><span class="summary-name">_runDetails</span> = <code title="CompositeRun.CompositeRun()">CompositeRun.CompositeRun()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__VERSION_STRING"></a><span class="summary-name">__VERSION_STRING</span> = <code title="&quot;3.2.3&quot;">&quot;3.2.3&quot;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_verbose"></a><span class="summary-name">_verbose</span> = <code title="1">1</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="time">time</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <a href="rdkit.Dbase.DbModule-module.html" title="rdkit.Dbase.DbModule">DbModule</a>,
+  <a href="rdkit.ML.CompositeRun-module.html" title="rdkit.ML.CompositeRun">CompositeRun</a>,
+  <a href="rdkit.ML.ScreenComposite-module.html" title="rdkit.ML.ScreenComposite">ScreenComposite</a>,
+  <a href="rdkit.ML.Composite.Composite-module.html" title="rdkit.ML.Composite.Composite">Composite</a>,
+  <a href="rdkit.ML.Composite.BayesComposite-module.html" title="rdkit.ML.Composite.BayesComposite">BayesComposite</a>,
+  <a href="rdkit.ML.Data.DataUtils-module.html" title="rdkit.ML.Data.DataUtils">DataUtils</a>,
+  <a href="rdkit.ML.Data.SplitData-module.html" title="rdkit.ML.Data.SplitData">SplitData</a>,
+  <span title="rdkit.utils.listutils">listutils</span>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="message"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">message</span>(<span class="sig-arg">msg</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#message">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stdout_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="testall"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">testall</span>(<span class="sig-arg">composite</span>,
+        <span class="sig-arg">examples</span>,
+        <span class="sig-arg">badExamples</span>=<span class="sig-default">[]</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#testall">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+screens a number of examples past a composite
+
+**Arguments**
+
+  - composite: a composite model
+
+  - examples: a list of examples (with results) to be screened
+
+  - badExamples: a list to which misclassified examples are appended
+
+**Returns**
+
+  a list of 2-tuples containing:
+
+    1) a vote
+
+    2) a confidence
+
+  these are the votes and confidence levels for **misclassified** examples
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RunIt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RunIt</span>(<span class="sig-arg">details</span>,
+        <span class="sig-arg">progressCallback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">saveIt</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">setDescNames</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#RunIt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+does the actual work of building a composite model
+
+**Arguments**
+
+  - details:  a _CompositeRun.CompositeRun_ object containing details
+    (options, parameters, etc.) about the run
+
+  - progressCallback: (optional) a function which is called with a single
+    argument (the number of models built so far) after each model is built.
+
+  - saveIt: (optional) if this is nonzero, the resulting model will be pickled
+    and dumped to the filename specified in _details.outName_
+
+  - setDescNames: (optional) if nonzero, the composite's _SetInputOrder()_ method
+    will be called using the results of the data set's _GetVarNames()_ method;
+    it is assumed that the details object has a _descNames attribute which
+    is passed to the composites _SetDescriptorNames()_ method.  Otherwise
+    (the default), _SetDescriptorNames()_ gets the results of _GetVarNames()_.
+
+**Returns**
+
+  the composite model constructed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetDefaults"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetDefaults</span>(<span class="sig-arg">runDetails</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#SetDefaults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+initializes a details object with default values
+
+**Arguments**
+
+  - details:  (optional) a _CompositeRun.CompositeRun_ object.
+    If this is not provided, the global _runDetails will be used.
+
+**Returns**
+
+  the initialized _CompositeRun_ object.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseArgs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseArgs</span>(<span class="sig-arg">runDetails</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.BuildComposite-pysrc.html#ParseArgs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+parses command line arguments and updates _runDetails_
+
+**Arguments**
+
+  - runDetails:  a _CompositeRun.CompositeRun_ object.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

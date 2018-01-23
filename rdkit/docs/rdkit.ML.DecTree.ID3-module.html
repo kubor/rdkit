@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.DecTree.ID3</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.DecTree-module.html">Package&nbsp;DecTree</a> ::
+        Module&nbsp;ID3
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.DecTree.ID3-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module ID3</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+ID3 Decision Trees
+
+contains an implementation of the ID3 decision tree algorithm
+as described in Tom Mitchell's book &quot;Machine Learning&quot;
+
+It relies upon the _Tree.TreeNode_ data structure (or something
+  with the same API) defined locally to represent the trees
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.ID3-module.html#CalcTotalEntropy" class="summary-sig-name">CalcTotalEntropy</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>)</span><br />
+      Calculates the total entropy of the data set (w.r.t.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#CalcTotalEntropy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.ID3-module.html#GenVarTable" class="summary-sig-name">GenVarTable</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">vars</span>)</span><br />
+      Generates a list of variable tables for the examples passed in.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#GenVarTable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.ID3-module.html#ID3" class="summary-sig-name">ID3</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">target</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">depth</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">maxDepth</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Implements the ID3 algorithm for constructing decision trees.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#ID3">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.DecTree.ID3-module.html#ID3Boot" class="summary-sig-name">ID3Boot</a>(<span class="summary-sig-arg">examples</span>,
+        <span class="summary-sig-arg">attrs</span>,
+        <span class="summary-sig-arg">nPossibleVals</span>,
+        <span class="summary-sig-arg">initialVar</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">depth</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">maxDepth</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Bootstrapping code for the ID3 algorithm</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#ID3Boot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.ML.DecTree.DecTree-module.html" title="rdkit.ML.DecTree.DecTree">DecTree</a>,
+  <a href="rdkit.ML.InfoTheory.entropy-module.html" title="rdkit.ML.InfoTheory.entropy">entropy</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="CalcTotalEntropy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcTotalEntropy</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">nPossibleVals</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#CalcTotalEntropy">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculates the total entropy of the data set (w.r.t. the results)
+
+**Arguments**
+
+ - examples: a list (nInstances long) of lists of variable values + instance
+           values
+ - nPossibleVals: a list (nVars long) of the number of possible values each variable
+   can adopt.
+
+**Returns**
+
+  a float containing the informational entropy of the data set.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GenVarTable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GenVarTable</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">vars</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#GenVarTable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generates a list of variable tables for the examples passed in.
+
+  The table for a given variable records the number of times each possible value
+  of that variable appears for each possible result of the function.
+
+**Arguments**
+
+  - examples: a list (nInstances long) of lists of variable values + instance
+            values
+
+  - nPossibleVals: a list containing the number of possible values of
+                 each variable + the number of values of the function.
+
+  - vars:  a list of the variables to include in the var table
+
+
+**Returns**
+
+    a list of variable result tables. Each table is a Numeric array
+      which is varValues x nResults
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ID3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ID3</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">target</span>,
+        <span class="sig-arg">attrs</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">depth</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">maxDepth</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#ID3">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Implements the ID3 algorithm for constructing decision trees.
+
+From Mitchell's book, page 56
+
+This is *slightly* modified from Mitchell's book because it supports
+  multivalued (non-binary) results.
+
+**Arguments**
+
+  - examples: a list (nInstances long) of lists of variable values + instance
+          values
+
+  - target: an int
+
+  - attrs: a list of ints indicating which variables can be used in the tree
+
+  - nPossibleVals: a list containing the number of possible values of
+               every variable.
+
+  - depth: (optional) the current depth in the tree
+
+  - maxDepth: (optional) the maximum depth to which the tree
+               will be grown
+
+**Returns**
+
+ a DecTree.DecTreeNode with the decision tree
+
+**NOTE:** This code cannot bootstrap (start from nothing...)
+      use _ID3Boot_ (below) for that.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ID3Boot"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ID3Boot</span>(<span class="sig-arg">examples</span>,
+        <span class="sig-arg">attrs</span>,
+        <span class="sig-arg">nPossibleVals</span>,
+        <span class="sig-arg">initialVar</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">depth</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">maxDepth</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.DecTree.ID3-pysrc.html#ID3Boot">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Bootstrapping code for the ID3 algorithm
+
+see ID3 for descriptions of the arguments
+
+If _initialVar_ is not set, the algorithm will automatically
+ choose the first variable in the tree (the standard greedy
+ approach).  Otherwise, _initialVar_ will be used as the first
+ split.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

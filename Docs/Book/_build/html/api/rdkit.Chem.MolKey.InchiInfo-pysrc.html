@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.MolKey.InchiInfo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.MolKey-module.html">Package&nbsp;MolKey</a> ::
+        Module&nbsp;InchiInfo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.MolKey.InchiInfo-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.MolKey.InchiInfo-module.html">Module rdkit.Chem.MolKey.InchiInfo</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (c) 2015, Novartis Institutes for BioMedical Research Inc.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#  All rights reserved.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># Redistribution and use in source and binary forms, with or without</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># modification, are permitted provided that the following conditions are</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># met: </tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#     * Redistributions of source code must retain the above copyright </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#       notice, this list of conditions and the following disclaimer.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#     * Redistributions in binary form must reproduce the above</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#       copyright notice, this list of conditions and the following </tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#       disclaimer in the documentation and/or other materials provided </tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">#       with the distribution.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#     * Neither the name of Novartis Institutes for BioMedical Research Inc. </tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#       nor the names of its contributors may be used to endorse or promote </tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#       products derived from this software without specific prior written permission.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"># DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-comment"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-comment"># Retrieve stereo and tautomer information from the the InChI string</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-comment"># Created on Sep 23, 2010</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-comment"># Original author: Thomas Muellerk muelleth</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">unittest</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-0');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module rdkit.Chem.inchi=rdkit.Chem.inchi-module.html"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-2', 'inchi', 'link-2');">inchi</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-3" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-3', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable rdkit.Chem.inchi.INCHI_AVAILABLE=rdkit.Chem.inchi-module.html#INCHI_AVAILABLE"><a title="rdkit.Chem.inchi.INCHI_AVAILABLE" class="py-name" href="#" onclick="return doclink('link-4', 'INCHI_AVAILABLE', 'link-4');">INCHI_AVAILABLE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-keyword">raise</tt> <tt class="py-name">ImportError</tt><tt class="py-op">(</tt><tt class="py-string">"This code requires the RDKit to be built with InChI suport"</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="_is_achiral_by_symmetry"></a><div id="_is_achiral_by_symmetry-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="_is_achiral_by_symmetry-toggle" onclick="return toggle('_is_achiral_by_symmetry');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.MolKey.InchiInfo-module.html#_is_achiral_by_symmetry">_is_achiral_by_symmetry</a><tt class="py-op">(</tt><tt class="py-param">INCHI</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_is_achiral_by_symmetry-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_is_achiral_by_symmetry-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">  <tt id="link-5" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-5', 'mol', 'link-5');">mol</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-6', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromInchi</tt><tt class="py-op">(</tt><tt class="py-name">INCHI</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-7" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-7', 'mol', 'link-5');">mol</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-8', 'mol', 'link-5');">mol</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-9', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromInchi</tt><tt class="py-op">(</tt><tt class="py-string">'InChI=1/{0}'</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">INCHI</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">list_chiral</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-10', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Function rdkit.Chem.FindMolChiralCenters()=rdkit.Chem-module.html#FindMolChiralCenters"><a title="rdkit.Chem.FindMolChiralCenters" class="py-name" href="#" onclick="return doclink('link-11', 'FindMolChiralCenters', 'link-11');">FindMolChiralCenters</a></tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-12', 'mol', 'link-5');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-comment">#   is there any real chiral centre?</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">list_chiral</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.console=rdkit.Chem.MolKey.InchiInfo-module.html#console"><a title="rdkit.Chem.MolKey.InchiInfo.console" class="py-name" href="#" onclick="return doclink('link-13', 'console', 'link-13');">console</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">StreamHandler</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.UPD_APP=rdkit.Chem.MolKey.InchiInfo-module.html#UPD_APP"><a title="rdkit.Chem.MolKey.InchiInfo.UPD_APP" class="py-name" href="#" onclick="return doclink('link-14', 'UPD_APP', 'link-14');">UPD_APP</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'inchiinfo.application'</tt><tt class="py-op">)</tt>  <tt class="py-comment"># application runtime information</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.version_re=rdkit.Chem.MolKey.InchiInfo-module.html#version_re"><a title="rdkit.Chem.MolKey.InchiInfo.version_re" class="py-name" href="#" onclick="return doclink('link-15', 'version_re', 'link-15');">version_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(.*?)/(.*)'</tt><tt class="py-op">)</tt>  <tt class="py-comment"># get version</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.reconnected_re=rdkit.Chem.MolKey.InchiInfo-module.html#reconnected_re"><a title="rdkit.Chem.MolKey.InchiInfo.reconnected_re" class="py-name" href="#" onclick="return doclink('link-16', 'reconnected_re', 'link-16');">reconnected_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(.*?)/r(.*)'</tt><tt class="py-op">)</tt>  <tt class="py-comment"># reconnected layer?</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.fixed_h_re=rdkit.Chem.MolKey.InchiInfo-module.html#fixed_h_re"><a title="rdkit.Chem.MolKey.InchiInfo.fixed_h_re" class="py-name" href="#" onclick="return doclink('link-17', 'fixed_h_re', 'link-17');">fixed_h_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(.*?)/f(.*)'</tt><tt class="py-op">)</tt>  <tt class="py-comment"># fixed-H layer?</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.isotope_re=rdkit.Chem.MolKey.InchiInfo-module.html#isotope_re"><a title="rdkit.Chem.MolKey.InchiInfo.isotope_re" class="py-name" href="#" onclick="return doclink('link-18', 'isotope_re', 'link-18');">isotope_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(.*?)/i(.*)'</tt><tt class="py-op">)</tt>  <tt class="py-comment"># isotope layer?</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.stereo_re=rdkit.Chem.MolKey.InchiInfo-module.html#stereo_re"><a title="rdkit.Chem.MolKey.InchiInfo.stereo_re" class="py-name" href="#" onclick="return doclink('link-19', 'stereo_re', 'link-19');">stereo_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'.*\/t(.*?)\/.*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.stereo_all_re=rdkit.Chem.MolKey.InchiInfo-module.html#stereo_all_re"><a title="rdkit.Chem.MolKey.InchiInfo.stereo_all_re" class="py-name" href="#" onclick="return doclink('link-20', 'stereo_all_re', 'link-20');">stereo_all_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'.*\/t([^\/]+)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.undef_stereo_re=rdkit.Chem.MolKey.InchiInfo-module.html#undef_stereo_re"><a title="rdkit.Chem.MolKey.InchiInfo.undef_stereo_re" class="py-name" href="#" onclick="return doclink('link-21', 'undef_stereo_re', 'link-21');">undef_stereo_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(\d+)\?'</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.all_stereo_re=rdkit.Chem.MolKey.InchiInfo-module.html#all_stereo_re"><a title="rdkit.Chem.MolKey.InchiInfo.all_stereo_re" class="py-name" href="#" onclick="return doclink('link-22', 'all_stereo_re', 'link-22');">all_stereo_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(\d+)[?+-]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.defined_stereo_re=rdkit.Chem.MolKey.InchiInfo-module.html#defined_stereo_re"><a title="rdkit.Chem.MolKey.InchiInfo.defined_stereo_re" class="py-name" href="#" onclick="return doclink('link-23', 'defined_stereo_re', 'link-23');">defined_stereo_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(\d+)[+-]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.h_layer_re=rdkit.Chem.MolKey.InchiInfo-module.html#h_layer_re"><a title="rdkit.Chem.MolKey.InchiInfo.h_layer_re" class="py-name" href="#" onclick="return doclink('link-24', 'h_layer_re', 'link-24');">h_layer_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'.*\/h(.*)\/?'</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.mobile_h_group_re=rdkit.Chem.MolKey.InchiInfo-module.html#mobile_h_group_re"><a title="rdkit.Chem.MolKey.InchiInfo.mobile_h_group_re" class="py-name" href="#" onclick="return doclink('link-25', 'mobile_h_group_re', 'link-25');">mobile_h_group_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'(\(H.+?\))'</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt id="link-26" class="py-name" targets="Variable rdkit.Chem.MolKey.InchiInfo.mobile_h_atoms_re=rdkit.Chem.MolKey.InchiInfo-module.html#mobile_h_atoms_re"><a title="rdkit.Chem.MolKey.InchiInfo.mobile_h_atoms_re" class="py-name" href="#" onclick="return doclink('link-26', 'mobile_h_atoms_re', 'link-26');">mobile_h_atoms_re</a></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">',(\d+)'</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="InchiInfo"></a><div id="InchiInfo-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="InchiInfo-toggle" onclick="return toggle('InchiInfo');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html">InchiInfo</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InchiInfo-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="InchiInfo-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="InchiInfo.__init__"></a><div id="InchiInfo.__init__-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="InchiInfo.__init__-toggle" onclick="return toggle('InchiInfo.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">inchi_str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InchiInfo.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="InchiInfo.__init__-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">version</tt><tt class="py-op">,</tt> <tt class="py-name">rest</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.version_re" class="py-name" href="#" onclick="return doclink('link-27', 'version_re', 'link-15');">version_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">inchi_str</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">groups</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-name">reconn_match</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.reconnected_re" class="py-name" href="#" onclick="return doclink('link-28', 'reconnected_re', 'link-16');">reconnected_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">rest</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">connection_layers</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">reconn_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">      <tt class="py-op">(</tt><tt class="py-name">connection_layers</tt><tt class="py-op">[</tt><tt class="py-string">'id_disconnected'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">       <tt class="py-name">connection_layers</tt><tt class="py-op">[</tt><tt class="py-string">'id_reconnected'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">reconn_match</tt><tt class="py-op">.</tt><tt class="py-name">groups</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">      <tt class="py-op">(</tt><tt class="py-name">connection_layers</tt><tt class="py-op">[</tt><tt class="py-string">'id'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">rest</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">fixed_h_layers</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">conn_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">connection_layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">      <tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">      <tt class="py-name">fixed_match</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.fixed_h_re" class="py-name" href="#" onclick="return doclink('link-29', 'fixed_h_re', 'link-17');">fixed_h_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">connection_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">fixed_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'main'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">         <tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'fixed_h'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">fixed_match</tt><tt class="py-op">.</tt><tt class="py-name">groups</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'main'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">connection_layers</tt><tt class="py-op">[</tt><tt class="py-name">conn_layer</tt><tt class="py-op">]</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt id="link-30" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-30', 'inchi', 'link-2');">inchi</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i0_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">fixed_h_layers</tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">      <tt id="link-31" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-31', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">i1_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt id="link-32" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-32', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">iso_match</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.isotope_re" class="py-name" href="#" onclick="return doclink('link-33', 'isotope_re', 'link-18');">isotope_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">iso_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">          <tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-34', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'non-isotopic'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">           <tt id="link-35" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-35', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'isotopic'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">iso_match</tt><tt class="py-op">.</tt><tt class="py-name">groups</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">          <tt id="link-36" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-36', 'inchi', 'link-2');">inchi</a></tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">'non-isotopic'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">fixed_h_layers</tt><tt class="py-op">[</tt><tt class="py-name">i0_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">i1_layer</tt><tt class="py-op">]</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="rdkit.Chem.inchi" class="py-name" href="#" onclick="return doclink('link-37', 'inchi', 'link-2');">inchi</a></tt> </tt>
+</div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="InchiInfo.get_sp3_stereo"></a><div id="InchiInfo.get_sp3_stereo-def"><a name="L112"></a><tt class="py-lineno">112</tt> <a class="py-toggle" href="#" id="InchiInfo.get_sp3_stereo-toggle" onclick="return toggle('InchiInfo.get_sp3_stereo');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#get_sp3_stereo">get_sp3_stereo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InchiInfo.get_sp3_stereo-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="InchiInfo.get_sp3_stereo-expanded"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-docstring">''' retrieve sp3 stereo information</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        return a 4-item tuple containing</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        1) Number of stereocenters detected. If 0, the remaining items of the tuple = None</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        2) Number of undefined stereocenters. Must be smaller or equal to above</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        3) True if the molecule is a meso form (with chiral centers and a plane of symmetry)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        4) Comma-separated list of internal atom numbers with sp3 stereochemistry</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">sp3_stereo</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">con_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">fixed_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">sp3_stereo</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">iso_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">          <tt class="py-name">sp3_stereo</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">          <tt class="py-name">stereo_match</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.stereo_re" class="py-name" href="#" onclick="return doclink('link-38', 'stereo_re', 'link-19');">stereo_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">          <tt class="py-name">stereo_all_match</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.stereo_all_re" class="py-name" href="#" onclick="return doclink('link-39', 'stereo_all_re', 'link-20');">stereo_all_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">iso_layer</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">          <tt class="py-name">num_stereo</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">          <tt class="py-name">num_undef_stereo</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">          <tt class="py-name">is_meso</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">          <tt class="py-name">stereo</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">          <tt class="py-name">stereo_centers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">          <tt class="py-name">undef_stereo_centers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">          <tt class="py-comment">#    match patterns with defined and undefined stereo</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">stereo_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-name">stereo</tt> <tt class="py-op">=</tt> <tt class="py-name">stereo_match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">          <tt class="py-comment">#    match patterns with only undefined stereo or for the MESO case</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">          <tt class="py-keyword">elif</tt> <tt class="py-name">stereo_all_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-name">stereo</tt> <tt class="py-op">=</tt> <tt class="py-name">stereo_all_match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-name">is_meso</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.defined_stereo_re" class="py-name" href="#" onclick="return doclink('link-40', 'defined_stereo_re', 'link-23');">defined_stereo_re</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-name">stereo</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">          <tt class="py-comment">#    Number of ALL stereo centres</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">          <tt class="py-name">stereo_centers</tt> <tt class="py-op">=</tt> <tt id="link-41" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.all_stereo_re" class="py-name" href="#" onclick="return doclink('link-41', 'all_stereo_re', 'link-22');">all_stereo_re</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-name">stereo</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">          <tt class="py-name">num_stereo</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">stereo_centers</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">          <tt class="py-name">undef_stereo_centers</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.undef_stereo_re" class="py-name" href="#" onclick="return doclink('link-42', 'undef_stereo_re', 'link-21');">undef_stereo_re</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-name">stereo</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">          <tt class="py-name">num_undef_stereo</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">undef_stereo_centers</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">          <tt class="py-comment">#    Meso centres    --    VT     --    2011.12.08</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">          <tt class="py-name">inchi_layer</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">          <tt class="py-name">is_meso</tt> <tt class="py-op">=</tt> <tt class="py-name">is_meso</tt> <tt class="py-keyword">or</tt> <tt class="py-op">(</tt><tt class="py-name">num_undef_stereo</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt> <tt class="py-keyword">and</tt> <tt id="link-43" class="py-name" targets="Function rdkit.Chem.MolKey.InchiInfo._is_achiral_by_symmetry()=rdkit.Chem.MolKey.InchiInfo-module.html#_is_achiral_by_symmetry"><a title="rdkit.Chem.MolKey.InchiInfo._is_achiral_by_symmetry" class="py-name" href="#" onclick="return doclink('link-43', '_is_achiral_by_symmetry', 'link-43');">_is_achiral_by_symmetry</a></tt><tt class="py-op">(</tt><tt class="py-name">inchi_layer</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">          <tt class="py-name">sp3_stereo</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">num_stereo</tt><tt class="py-op">,</tt> <tt class="py-name">num_undef_stereo</tt><tt class="py-op">,</tt> <tt class="py-name">is_meso</tt><tt class="py-op">,</tt> <tt class="py-name">stereo</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">sp3_stereo</tt> </tt>
+</div><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="InchiInfo.get_mobile_h"></a><div id="InchiInfo.get_mobile_h-def"><a name="L154"></a><tt class="py-lineno">154</tt> <a class="py-toggle" href="#" id="InchiInfo.get_mobile_h-toggle" onclick="return toggle('InchiInfo.get_mobile_h');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#get_mobile_h">get_mobile_h</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InchiInfo.get_mobile_h-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="InchiInfo.get_mobile_h-expanded"><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-docstring">''' retrieve mobile H (tautomer) information</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-docstring">        return a 2-item tuple containing</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring">        1) Number of mobile hydrogen groups detected. If 0, next item = '' </tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">        2) List of groups   </tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-name">mobile_h</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">con_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">fixed_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">mobile_h</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">iso_layer</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">          <tt class="py-name">num_groups</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">          <tt class="py-name">mobile_h_groups</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">          <tt class="py-name">h_layer_match</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.h_layer_re" class="py-name" href="#" onclick="return doclink('link-44', 'h_layer_re', 'link-24');">h_layer_re</a></tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">parsed_inchi</tt><tt class="py-op">[</tt><tt class="py-name">con_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">h_layer_match</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-name">mobile_h_matches</tt> <tt class="py-op">=</tt> <tt id="link-45" class="py-name"><a title="rdkit.Chem.MolKey.InchiInfo.mobile_h_group_re" class="py-name" href="#" onclick="return doclink('link-45', 'mobile_h_group_re', 'link-25');">mobile_h_group_re</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-name">h_layer_match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-name">num_groups</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">mobile_h_matches</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt class="py-name">mobile_h_groups</tt> <tt class="py-op">=</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">mobile_h_matches</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">          <tt class="py-name">mobile_h</tt><tt class="py-op">[</tt><tt class="py-name">fixed_layer</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">iso_layer</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">num_groups</tt><tt class="py-op">,</tt> <tt class="py-name">mobile_h_groups</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">mobile_h</tt> </tt>
+</div></div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

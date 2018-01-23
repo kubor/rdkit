@@ -1,0 +1,26 @@
+var classRDKit_1_1FilterCatalog =
+[
+    [ "CONST_SENTRY", "classRDKit_1_1FilterCatalog.html#afa4402cc180906c951e9145d31400365", null ],
+    [ "SENTRY", "classRDKit_1_1FilterCatalog.html#ae6784bc40e94199b309bf19e1a1948a7", null ],
+    [ "FilterCatalog", "classRDKit_1_1FilterCatalog.html#abf3fd1c20940c41483c7cd5a179e1260", null ],
+    [ "FilterCatalog", "classRDKit_1_1FilterCatalog.html#a05edf67780adcebc4b636133c0a3b25a", null ],
+    [ "FilterCatalog", "classRDKit_1_1FilterCatalog.html#a7368eb847baf664181e67971fa9bc3af", null ],
+    [ "FilterCatalog", "classRDKit_1_1FilterCatalog.html#aaf6dfbd9b2042a7905069ff3df6e610d", null ],
+    [ "FilterCatalog", "classRDKit_1_1FilterCatalog.html#ae5a4fabb7aad3818f21b9902eb4b98c1", null ],
+    [ "~FilterCatalog", "classRDKit_1_1FilterCatalog.html#a37d79e10e4bde07f0d329c88b8440e2a", null ],
+    [ "addEntry", "classRDKit_1_1FilterCatalog.html#a9e24b1f7db2e2228953a1434fcf851d7", null ],
+    [ "addEntry", "classRDKit_1_1FilterCatalog.html#ac4a59b2445d20af299617f100f2cdf54", null ],
+    [ "getEntry", "classRDKit_1_1FilterCatalog.html#a6bef70844288a8e031a752cfc9063efc", null ],
+    [ "getEntryWithIdx", "classRDKit_1_1FilterCatalog.html#a374533309b8efa7809a9cda72f352f9a", null ],
+    [ "getFilterMatches", "classRDKit_1_1FilterCatalog.html#adc672c715142e27085b790a946dbd44d", null ],
+    [ "getFirstMatch", "classRDKit_1_1FilterCatalog.html#a2d40ff675a4d2f42d75d0d9a14339166", null ],
+    [ "getIdxForEntry", "classRDKit_1_1FilterCatalog.html#ac7baed0fc56a161080a159f7359a057c", null ],
+    [ "getIdxForEntry", "classRDKit_1_1FilterCatalog.html#a07615abede0ccf7f44f4de45b1339d11", null ],
+    [ "getMatches", "classRDKit_1_1FilterCatalog.html#a9fa39d7b6477479d277b3cf8ebf5c290", null ],
+    [ "getNumEntries", "classRDKit_1_1FilterCatalog.html#ad9186353dffee7ba174c779d29699332", null ],
+    [ "hasMatch", "classRDKit_1_1FilterCatalog.html#a2572f2da0bbf93ccdeb0f20b5705a965", null ],
+    [ "removeEntry", "classRDKit_1_1FilterCatalog.html#a9be5efb91dff185e539b400becb560d1", null ],
+    [ "removeEntry", "classRDKit_1_1FilterCatalog.html#a2d20c0e2a6c516b11135110a14396a5e", null ],
+    [ "Serialize", "classRDKit_1_1FilterCatalog.html#a093e2c76cfd20dc2bdd9223483afef00", null ],
+    [ "setCatalogParams", "classRDKit_1_1FilterCatalog.html#a2803cb906c96719d3ea912dd4288a9ce", null ]
+];

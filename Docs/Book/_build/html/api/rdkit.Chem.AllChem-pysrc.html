@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.AllChem</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;AllChem
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.AllChem-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.AllChem-module.html">Module rdkit.Chem.AllChem</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2006-2017  greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">""" Import all RDKit chemistry modules</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">warnings</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">collections</tt> <tt class="py-keyword">import</tt> <tt class="py-name">namedtuple</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.DataStructs=rdkit.DataStructs-module.html"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-0', 'DataStructs', 'link-0');">DataStructs</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package rdkit.ForceField=rdkit.ForceField-module.html"><a title="rdkit.ForceField" class="py-name" href="#" onclick="return doclink('link-1', 'ForceField', 'link-1');">ForceField</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RDConfig</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">rdBase</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-2', 'Chem', 'link-2');">Chem</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-3', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module rdkit.Chem.ChemicalFeatures=rdkit.Chem.ChemicalFeatures-module.html"><a title="rdkit.Chem.ChemicalFeatures" class="py-name" href="#" onclick="return doclink('link-4', 'ChemicalFeatures', 'link-4');">ChemicalFeatures</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-5', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdChemReactions</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-6', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdDepictor</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-7', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdDistGeom</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-8', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdForceFieldHelpers</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-9', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdMolAlign</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-10', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdMolDescriptors</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-11', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdMolTransforms</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-12', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdPartialCharges</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-13', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdReducedGraphs</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-14', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdShapeHelpers</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-15', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdqueries</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Package rdkit.Geometry=rdkit.Geometry-module.html"><a title="rdkit.Geometry" class="py-name" href="#" onclick="return doclink('link-16', 'Geometry', 'link-16');">Geometry</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">rdGeometry</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt class="py-name">RDLogger</tt> <tt class="py-keyword">import</tt> <tt id="link-17" class="py-name" targets="Variable rdkit.Chem.AllChem.logger=rdkit.Chem.AllChem-module.html#logger,Variable rdkit.Chem.ChemUtils.TemplateExpand.logger=rdkit.Chem.ChemUtils.TemplateExpand-module.html#logger,Variable rdkit.Chem.FeatFinderCLI.logger=rdkit.Chem.FeatFinderCLI-module.html#logger,Variable rdkit.Chem.Features.ShowFeats.logger=rdkit.Chem.Features.ShowFeats-module.html#logger,Variable rdkit.Chem.MolDb.Loader_orig.logger=rdkit.Chem.MolDb.Loader_orig-module.html#logger,Variable rdkit.Chem.MolDb.Loader_sa.logger=rdkit.Chem.MolDb.Loader_sa-module.html#logger,Variable rdkit.Chem.Pharm2D.Generate.logger=rdkit.Chem.Pharm2D.Generate-module.html#logger,Variable rdkit.Chem.Pharm3D.EmbedLib.logger=rdkit.Chem.Pharm3D.EmbedLib-module.html#logger,Variable rdkit.Chem.Pharm3D.Pharmacophore.logger=rdkit.Chem.Pharm3D.Pharmacophore-module.html#logger,Variable rdkit.Chem.Subshape.SubshapeAligner.logger=rdkit.Chem.Subshape.SubshapeAligner-module.html#logger,Variable rdkit.ML.Cluster.Butina.logger=rdkit.ML.Cluster.Butina-module.html#logger,Variable rdkit.ML.Descriptors.MoleculeDescriptors.logger=rdkit.ML.Descriptors.MoleculeDescriptors-module.html#logger"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-17', 'logger', 'link-17');">logger</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-18', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Module rdkit.Chem.EnumerateStereoisomers=rdkit.Chem.EnumerateStereoisomers-module.html,Function rdkit.Chem.EnumerateStereoisomers.EnumerateStereoisomers()=rdkit.Chem.EnumerateStereoisomers-module.html#EnumerateStereoisomers"><a title="rdkit.Chem.EnumerateStereoisomers
+rdkit.Chem.EnumerateStereoisomers.EnumerateStereoisomers" class="py-name" href="#" onclick="return doclink('link-19', 'EnumerateStereoisomers', 'link-19');">EnumerateStereoisomers</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Class rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions=rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions-class.html"><a title="rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions" class="py-name" href="#" onclick="return doclink('link-20', 'StereoEnumerationOptions', 'link-20');">StereoEnumerationOptions</a></tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name"><a title="rdkit.Chem.EnumerateStereoisomers
+rdkit.Chem.EnumerateStereoisomers.EnumerateStereoisomers" class="py-name" href="#" onclick="return doclink('link-21', 'EnumerateStereoisomers', 'link-19');">EnumerateStereoisomers</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-22', 'Chem', 'link-2');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">rdSLNParse</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">  <tt class="py-keyword">pass</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-name">Mol</tt><tt class="py-op">.</tt><tt class="py-name">Compute2DCoords</tt> <tt class="py-op">=</tt> <tt class="py-name">Compute2DCoords</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-name">Mol</tt><tt class="py-op">.</tt><tt class="py-name">ComputeGasteigerCharges</tt> <tt class="py-op">=</tt> <tt class="py-name">ComputeGasteigerCharges</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt id="link-23" class="py-name"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-23', 'logger', 'link-17');">logger</a></tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-24', 'logger', 'link-17');">logger</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="TransformMol"></a><div id="TransformMol-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="TransformMol-toggle" onclick="return toggle('TransformMol');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#TransformMol">TransformMol</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">tform</tt><tt class="py-op">,</tt> <tt class="py-param">confId</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">keepConfs</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TransformMol-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TransformMol-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">  <tt class="py-docstring">"""  Applies the transformation (usually a 4x4 double matrix) to a molecule</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">  if keepConfs is False then all but that conformer are removed</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">  <tt class="py-name">refConf</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-25', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt class="py-name">confId</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">  <tt class="py-name">TransformConformer</tt><tt class="py-op">(</tt><tt class="py-name">refConf</tt><tt class="py-op">,</tt> <tt class="py-name">tform</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">keepConfs</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">confId</tt> <tt class="py-op">==</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">      <tt class="py-name">confId</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-name">allConfIds</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">c</tt><tt class="py-op">.</tt><tt class="py-name">GetId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt id="link-26" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-26', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformers</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">cid</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allConfIds</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">cid</tt> <tt class="py-op">==</tt> <tt class="py-name">confId</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-27', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">RemoveConformer</tt><tt class="py-op">(</tt><tt class="py-name">cid</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-comment"># reset the conf Id to zero since there is only one conformer left</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt id="link-28" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-28', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt class="py-name">confId</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">SetId</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="ComputeMolShape"></a><div id="ComputeMolShape-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="ComputeMolShape-toggle" onclick="return toggle('ComputeMolShape');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#ComputeMolShape">ComputeMolShape</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">confId</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">boxDim</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">,</tt> <tt class="py-number">20</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-param">spacing</tt><tt class="py-op">=</tt><tt class="py-number">0.5</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ComputeMolShape-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ComputeMolShape-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">  <tt class="py-docstring">""" returns a grid representation of the molecule's shape</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">rdGeometry</tt><tt class="py-op">.</tt><tt class="py-name">UniformGrid3D</tt><tt class="py-op">(</tt><tt class="py-name">boxDim</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">boxDim</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">boxDim</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">spacing</tt><tt class="py-op">=</tt><tt class="py-name">spacing</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">  <tt class="py-name">EncodeShape</tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-29', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">res</tt><tt class="py-op">,</tt> <tt class="py-name">confId</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="ComputeMolVolume"></a><div id="ComputeMolVolume-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="ComputeMolVolume-toggle" onclick="return toggle('ComputeMolVolume');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#ComputeMolVolume">ComputeMolVolume</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">confId</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">gridSpacing</tt><tt class="py-op">=</tt><tt class="py-number">0.2</tt><tt class="py-op">,</tt> <tt class="py-param">boxMargin</tt><tt class="py-op">=</tt><tt class="py-number">2.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ComputeMolVolume-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ComputeMolVolume-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">  <tt class="py-docstring">""" Calculates the volume of a particular conformer of a molecule</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">  based on a grid-encoding of the molecular shape.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">  <tt id="link-30" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-30', 'mol', 'link-25');">mol</a></tt> <tt class="py-op">=</tt> <tt class="py-name">rdchem</tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-31', 'mol', 'link-25');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">  <tt class="py-name">conf</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-32', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt class="py-name">confId</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">  <tt class="py-name">CanonicalizeConformer</tt><tt class="py-op">(</tt><tt class="py-name">conf</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">  <tt class="py-name">box</tt> <tt class="py-op">=</tt> <tt class="py-name">ComputeConfBox</tt><tt class="py-op">(</tt><tt class="py-name">conf</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">  <tt class="py-name">sideLen</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">-</tt> <tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">+</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-name">boxMargin</tt><tt class="py-op">,</tt> <tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">-</tt> <tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">+</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-name">boxMargin</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">             <tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">z</tt> <tt class="py-op">-</tt> <tt class="py-name">box</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">z</tt> <tt class="py-op">+</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-name">boxMargin</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">  <tt class="py-name">shape</tt> <tt class="py-op">=</tt> <tt class="py-name">rdGeometry</tt><tt class="py-op">.</tt><tt class="py-name">UniformGrid3D</tt><tt class="py-op">(</tt><tt class="py-name">sideLen</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">sideLen</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">sideLen</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">spacing</tt><tt class="py-op">=</tt><tt id="link-33" class="py-name" targets="Variable rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.gridSpacing=rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder-class.html#gridSpacing"><a title="rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.gridSpacing" class="py-name" href="#" onclick="return doclink('link-33', 'gridSpacing', 'link-33');">gridSpacing</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">  <tt class="py-name">EncodeShape</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-34', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">shape</tt><tt class="py-op">,</tt> <tt class="py-name">confId</tt><tt class="py-op">,</tt> <tt class="py-name">ignoreHs</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">vdwScale</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">  <tt class="py-name">voxelVol</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="rdkit.Chem.Subshape.SubshapeBuilder.SubshapeBuilder.gridSpacing" class="py-name" href="#" onclick="return doclink('link-35', 'gridSpacing', 'link-33');">gridSpacing</a></tt><tt class="py-op">**</tt><tt class="py-number">3</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">  <tt class="py-name">occVect</tt> <tt class="py-op">=</tt> <tt class="py-name">shape</tt><tt class="py-op">.</tt><tt class="py-name">GetOccupancyVect</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">  <tt class="py-name">voxels</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">occVect</tt> <tt class="py-keyword">if</tt> <tt class="py-name">x</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">  <tt class="py-name">vol</tt> <tt class="py-op">=</tt> <tt class="py-name">voxelVol</tt> <tt class="py-op">*</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">voxels</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">vol</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="GetConformerRMS"></a><div id="GetConformerRMS-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="GetConformerRMS-toggle" onclick="return toggle('GetConformerRMS');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#GetConformerRMS">GetConformerRMS</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">confId1</tt><tt class="py-op">,</tt> <tt class="py-param">confId2</tt><tt class="py-op">,</tt> <tt class="py-param">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">prealigned</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetConformerRMS-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetConformerRMS-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">  <tt class="py-docstring">""" Returns the RMS between two conformations.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">  By default, the conformers will be aligned to the first conformer</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">  before the RMS calculation and, as a side-effect, the second will be left</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">  in the aligned state.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">  Arguments:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">    - mol:        the molecule</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    - confId1:    the id of the first conformer</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">    - confId2:    the id of the second conformer</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">    - atomIds:    (optional) list of atom ids to use a points for</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">                  alingment - defaults to all atoms</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    - prealigned: (optional) by default the conformers are assumed</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">                  be unaligned and the second conformer be aligned</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">                  to the first</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">  <tt class="py-comment"># align the conformers if necessary</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">  <tt class="py-comment"># Note: the reference conformer is always the first one</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">prealigned</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">atomIds</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">      <tt class="py-name">AlignMolConformers</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-36', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">confId1</tt><tt class="py-op">,</tt> <tt class="py-name">confId2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">atomIds</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">      <tt class="py-name">AlignMolConformers</tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-37', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">confId1</tt><tt class="py-op">,</tt> <tt class="py-name">confId2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">  <tt class="py-comment"># calculate the RMS between the two conformations</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">  <tt class="py-name">conf1</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-38', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt id="link-39" class="py-name" targets="Variable rdkit.Chem.FragmentCatalog.BitGainsInfo.id=rdkit.Chem.FragmentCatalog.BitGainsInfo-class.html#id"><a title="rdkit.Chem.FragmentCatalog.BitGainsInfo.id" class="py-name" href="#" onclick="return doclink('link-39', 'id', 'link-39');">id</a></tt><tt class="py-op">=</tt><tt class="py-name">confId1</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">  <tt class="py-name">conf2</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-40', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="rdkit.Chem.FragmentCatalog.BitGainsInfo.id" class="py-name" href="#" onclick="return doclink('link-41', 'id', 'link-39');">id</a></tt><tt class="py-op">=</tt><tt class="py-name">confId2</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">  <tt class="py-name">ssr</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-42', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">conf1</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomPosition</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapUtils.MergeMetric.Distance=rdkit.Chem.FeatMaps.FeatMapUtils.MergeMetric-class.html#Distance"><a title="rdkit.Chem.FeatMaps.FeatMapUtils.MergeMetric.Distance" class="py-name" href="#" onclick="return doclink('link-43', 'Distance', 'link-43');">Distance</a></tt><tt class="py-op">(</tt><tt class="py-name">conf2</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomPosition</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">ssr</tt> <tt class="py-op">+=</tt> <tt class="py-name">d</tt> <tt class="py-op">*</tt> <tt class="py-name">d</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">  <tt class="py-name">ssr</tt> <tt class="py-op">/=</tt> <tt id="link-44" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-44', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">ssr</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="GetConformerRMSMatrix"></a><div id="GetConformerRMSMatrix-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="GetConformerRMSMatrix-toggle" onclick="return toggle('GetConformerRMSMatrix');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#GetConformerRMSMatrix">GetConformerRMSMatrix</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">prealigned</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetConformerRMSMatrix-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetConformerRMSMatrix-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">  <tt class="py-docstring">""" Returns the RMS matrix of the conformers of a molecule.</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">  As a side-effect, the conformers will be aligned to the first</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">  conformer (i.e. the reference) and will left in the aligned state.</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">  Arguments:</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    - mol:     the molecule</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">    - atomIds: (optional) list of atom ids to use a points for</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">               alingment - defaults to all atoms</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">    - prealigned: (optional) by default the conformers are assumed</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">                  be unaligned and will therefore be aligned to the</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">                  first conformer</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">  Note that the returned RMS matrix is symmetrical, i.e. it is the</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">  lower half of the matrix, e.g. for 5 conformers:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">  rmsmatrix = [ a,</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">                b, c,</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">                d, e, f,</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">                g, h, i, j]</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">  where a is the RMS between conformers 0 and 1, b is the RMS between</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">  conformers 0 and 2, etc.</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">  This way it can be directly used as distance matrix in e.g. Butina</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">  clustering.</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">  <tt class="py-comment"># if necessary, align the conformers</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">  <tt class="py-comment"># Note: the reference conformer is always the first one</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">  <tt class="py-name">rmsvals</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">  <tt class="py-name">confIds</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">conf</tt><tt class="py-op">.</tt><tt class="py-name">GetId</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">conf</tt> <tt class="py-keyword">in</tt> <tt id="link-45" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-45', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetConformers</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">prealigned</tt><tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">atomIds</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">      <tt class="py-name">AlignMolConformers</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-46', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">atomIds</tt><tt class="py-op">,</tt> <tt class="py-name">RMSlist</tt><tt class="py-op">=</tt><tt class="py-name">rmsvals</tt><tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">      <tt class="py-name">AlignMolConformers</tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-47', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">RMSlist</tt><tt class="py-op">=</tt><tt class="py-name">rmsvals</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt>  <tt class="py-comment"># already prealigned</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">confIds</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">      <tt class="py-name">rmsvals</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-48" class="py-name" targets="Function rdkit.Chem.AllChem.GetConformerRMS()=rdkit.Chem.AllChem-module.html#GetConformerRMS"><a title="rdkit.Chem.AllChem.GetConformerRMS" class="py-name" href="#" onclick="return doclink('link-48', 'GetConformerRMS', 'link-48');">GetConformerRMS</a></tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-49', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">atomIds</tt><tt class="py-op">,</tt> <tt class="py-name">prealigned</tt><tt class="py-op">=</tt><tt class="py-name">prealigned</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">  <tt class="py-comment"># loop over the conformations (except the reference one)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">  <tt class="py-name">cmat</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">confIds</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">cmat</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">rmsvals</tt><tt class="py-op">[</tt><tt class="py-name">i</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">      <tt class="py-name">cmat</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="rdkit.Chem.AllChem.GetConformerRMS" class="py-name" href="#" onclick="return doclink('link-50', 'GetConformerRMS', 'link-48');">GetConformerRMS</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-51', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">confIds</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">atomIds</tt><tt class="py-op">=</tt><tt class="py-name">atomIds</tt><tt class="py-op">,</tt> <tt class="py-name">prealigned</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">cmat</tt> </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="EnumerateLibraryFromReaction"></a><div id="EnumerateLibraryFromReaction-def"><a name="L176"></a><tt class="py-lineno">176</tt> <a class="py-toggle" href="#" id="EnumerateLibraryFromReaction-toggle" onclick="return toggle('EnumerateLibraryFromReaction');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#EnumerateLibraryFromReaction">EnumerateLibraryFromReaction</a><tt class="py-op">(</tt><tt class="py-param">reaction</tt><tt class="py-op">,</tt> <tt class="py-param">sidechainSets</tt><tt class="py-op">,</tt> <tt class="py-param">returnReactants</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="EnumerateLibraryFromReaction-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="EnumerateLibraryFromReaction-expanded"><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">  <tt class="py-docstring">""" Returns a generator for the virtual library defined by</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">   a reaction and a sequence of sidechain sets</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; from rdkit import Chem</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; from rdkit.Chem import AllChem</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; s1=[Chem.MolFromSmiles(x) for x in ('NC','NCC')]</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; s2=[Chem.MolFromSmiles(x) for x in ('OC=O','OC(=O)C')]</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; rxn = AllChem.ReactionFromSmarts('[O:2]=[C:1][OH].[N:3]&gt;&gt;[O:2]=[C:1][N:3]')</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; r = AllChem.EnumerateLibraryFromReaction(rxn,[s2,s1])</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; [Chem.MolToSmiles(x[0]) for x in list(r)]</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-docstring">  ['CNC=O', 'CCNC=O', 'CNC(C)=O', 'CCNC(C)=O']</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring">  Note that this is all done in a lazy manner, so "infinitely" large libraries can</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">  be done without worrying about running out of memory. Your patience will run out first:</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">  Define a set of 10000 amines:</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; amines = (Chem.MolFromSmiles('N'+'C'*x) for x in range(10000))</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">  ... a set of 10000 acids</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; acids = (Chem.MolFromSmiles('OC(=O)'+'C'*x) for x in range(10000))</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">  ... now the virtual library (1e8 compounds in principle):</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; r = AllChem.EnumerateLibraryFromReaction(rxn,[acids,amines])</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">  ... look at the first 4 compounds:</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">  &gt;&gt;&gt; [Chem.MolToSmiles(next(r)[0]) for x in range(4)]</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">  ['NC=O', 'CNC=O', 'CCNC=O', 'CCCNC=O']</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sidechainSets</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">reaction</tt><tt class="py-op">.</tt><tt class="py-name">GetNumReactantTemplates</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'%d sidechains provided, %d required'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">                     <tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sidechainSets</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">reaction</tt><tt class="py-op">.</tt><tt class="py-name">GetNumReactantTemplates</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">  <tt class="py-keyword">def</tt> <tt class="py-def-name">_combiEnumerator</tt><tt class="py-op">(</tt><tt class="py-param">items</tt><tt class="py-op">,</tt> <tt class="py-param">depth</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">item</tt> <tt class="py-keyword">in</tt> <tt class="py-name">items</tt><tt class="py-op">[</tt><tt class="py-name">depth</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">depth</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">items</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">_combiEnumerator</tt><tt class="py-op">(</tt><tt class="py-name">items</tt><tt class="py-op">,</tt> <tt class="py-name">depth</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">entry</tt> <tt class="py-keyword">in</tt> <tt class="py-name">v</tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">          <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">item</tt><tt class="py-op">]</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">          <tt class="py-name">l</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-name">entry</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">          <tt class="py-keyword">yield</tt> <tt class="py-name">l</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-op">[</tt><tt class="py-name">item</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">  <tt class="py-name">ProductReactants</tt> <tt class="py-op">=</tt> <tt class="py-name">namedtuple</tt><tt class="py-op">(</tt><tt class="py-string">'ProductReactants'</tt><tt class="py-op">,</tt> <tt class="py-string">'products,reactants'</tt><tt class="py-op">)</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">chains</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_combiEnumerator</tt><tt class="py-op">(</tt><tt class="py-name">sidechainSets</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">    <tt class="py-name">prodSets</tt> <tt class="py-op">=</tt> <tt class="py-name">reaction</tt><tt class="py-op">.</tt><tt class="py-name">RunReactants</tt><tt class="py-op">(</tt><tt class="py-name">chains</tt><tt class="py-op">)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">prods</tt> <tt class="py-keyword">in</tt> <tt class="py-name">prodSets</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">returnReactants</tt><tt class="py-op">:</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-name">ProductReactants</tt><tt class="py-op">(</tt><tt class="py-name">prods</tt><tt class="py-op">,</tt> <tt class="py-name">chains</tt><tt class="py-op">)</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-name">prods</tt> </tt>
+</div><a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"> </tt>
+<a name="ConstrainedEmbed"></a><div id="ConstrainedEmbed-def"><a name="L232"></a><tt class="py-lineno">232</tt> <a class="py-toggle" href="#" id="ConstrainedEmbed-toggle" onclick="return toggle('ConstrainedEmbed');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#ConstrainedEmbed">ConstrainedEmbed</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">core</tt><tt class="py-op">,</tt> <tt class="py-param">useTethers</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">coreConfId</tt><tt class="py-op">=</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">randomseed</tt><tt class="py-op">=</tt><tt class="py-number">2342</tt><tt class="py-op">,</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">                     <tt class="py-param">getForceField</tt><tt class="py-op">=</tt><tt class="py-name">UFFGetMoleculeForceField</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ConstrainedEmbed-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ConstrainedEmbed-expanded"><a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">  <tt class="py-docstring">""" generates an embedding of a molecule where part of the molecule</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line"><tt class="py-docstring">  is constrained to have particular coordinates</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"><tt class="py-docstring">  Arguments</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"><tt class="py-docstring">    - mol: the molecule to embed</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line"><tt class="py-docstring">    - core: the molecule to use as a source of constraints</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"><tt class="py-docstring">    - useTethers: (optional) if True, the final conformation will be</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"><tt class="py-docstring">        optimized subject to a series of extra forces that pull the</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"><tt class="py-docstring">        matching atoms to the positions of the core atoms. Otherwise</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-docstring">        simple distance constraints based on the core atoms will be</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-docstring">        used in the optimization.</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"><tt class="py-docstring">    - coreConfId: (optional) id of the core conformation to use</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line"><tt class="py-docstring">    - randomSeed: (optional) seed for the random number generator</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"><tt class="py-docstring">    An example, start by generating a template with a 3D structure:</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; from rdkit.Chem import AllChem</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; template = AllChem.MolFromSmiles("c1nn(Cc2ccccc2)cc1")</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; AllChem.EmbedMolecule(template)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; AllChem.UFFOptimizeMolecule(template)</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">    0</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring">    Here's a molecule:</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; mol = AllChem.MolFromSmiles("c1nn(Cc2ccccc2)cc1-c3ccccc3")</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-docstring">    Now do the constrained embedding</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; newmol=AllChem.ConstrainedEmbed(mol, template)</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-docstring">    Demonstrate that the positions are the same:</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; newp=newmol.GetConformer().GetAtomPosition(0)</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; molp=mol.GetConformer().GetAtomPosition(0)</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; list(newp-molp)==[0.0,0.0,0.0]</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-docstring">    True</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; newp=newmol.GetConformer().GetAtomPosition(1)</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; molp=mol.GetConformer().GetAtomPosition(1)</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; list(newp-molp)==[0.0,0.0,0.0]</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line"><tt class="py-docstring">    True</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">  <tt class="py-name">match</tt> <tt class="py-op">=</tt> <tt id="link-52" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-52', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatch</tt><tt class="py-op">(</tt><tt class="py-name">core</tt><tt class="py-op">)</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">match</tt><tt class="py-op">:</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"molecule doesn't match the core"</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">  <tt class="py-name">coordMap</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">  <tt class="py-name">coreConf</tt> <tt class="py-op">=</tt> <tt class="py-name">core</tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt class="py-name">coreConfId</tt><tt class="py-op">)</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">idxI</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">    <tt class="py-name">corePtI</tt> <tt class="py-op">=</tt> <tt class="py-name">coreConf</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomPosition</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">    <tt class="py-name">coordMap</tt><tt class="py-op">[</tt><tt class="py-name">idxI</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">corePtI</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line"> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">  <tt class="py-name">ci</tt> <tt class="py-op">=</tt> <tt class="py-name">EmbedMolecule</tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-53', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">coordMap</tt><tt class="py-op">=</tt><tt class="py-name">coordMap</tt><tt class="py-op">,</tt> <tt class="py-name">randomSeed</tt><tt class="py-op">=</tt><tt class="py-name">randomseed</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">ci</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Could not embed molecule.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line"> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">  <tt class="py-name">algMap</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">j</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line"> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">useTethers</tt><tt class="py-op">:</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">    <tt class="py-comment"># clean up the conformation</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">    <tt class="py-name">ff</tt> <tt class="py-op">=</tt> <tt class="py-name">getForceField</tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-54', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confId</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">idxI</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">        <tt class="py-name">idxJ</tt> <tt class="py-op">=</tt> <tt class="py-name">match</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">        <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">coordMap</tt><tt class="py-op">[</tt><tt class="py-name">idxI</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapUtils.MergeMetric.Distance" class="py-name" href="#" onclick="return doclink('link-55', 'Distance', 'link-43');">Distance</a></tt><tt class="py-op">(</tt><tt class="py-name">coordMap</tt><tt class="py-op">[</tt><tt class="py-name">idxJ</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">AddDistanceConstraint</tt><tt class="py-op">(</tt><tt class="py-name">idxI</tt><tt class="py-op">,</tt> <tt class="py-name">idxJ</tt><tt class="py-op">,</tt> <tt class="py-name">d</tt><tt class="py-op">,</tt> <tt class="py-name">d</tt><tt class="py-op">,</tt> <tt class="py-number">100.</tt><tt class="py-op">)</tt> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">    <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Initialize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">    <tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt class="py-number">4</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">    <tt class="py-name">more</tt> <tt class="py-op">=</tt> <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Minimize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">more</tt> <tt class="py-keyword">and</tt> <tt class="py-name">n</tt><tt class="py-op">:</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">      <tt class="py-name">more</tt> <tt class="py-op">=</tt> <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Minimize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">      <tt class="py-name">n</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">    <tt class="py-comment"># rotate the embedded conformation onto the core:</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">    <tt class="py-name">rms</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name" targets="Function rdkit.Chem.PandasTools.AlignMol()=rdkit.Chem.PandasTools-module.html#AlignMol"><a title="rdkit.Chem.PandasTools.AlignMol" class="py-name" href="#" onclick="return doclink('link-56', 'AlignMol', 'link-56');">AlignMol</a></tt><tt class="py-op">(</tt><tt id="link-57" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-57', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">core</tt><tt class="py-op">,</tt> <tt class="py-name">atomMap</tt><tt class="py-op">=</tt><tt class="py-name">algMap</tt><tt class="py-op">)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">    <tt class="py-comment"># rotate the embedded conformation onto the core:</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">    <tt class="py-name">rms</tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name"><a title="rdkit.Chem.PandasTools.AlignMol" class="py-name" href="#" onclick="return doclink('link-58', 'AlignMol', 'link-56');">AlignMol</a></tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-59', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">core</tt><tt class="py-op">,</tt> <tt class="py-name">atomMap</tt><tt class="py-op">=</tt><tt class="py-name">algMap</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">    <tt class="py-name">ff</tt> <tt class="py-op">=</tt> <tt class="py-name">getForceField</tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-60', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">confId</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">    <tt class="py-name">conf</tt> <tt class="py-op">=</tt> <tt class="py-name">core</tt><tt class="py-op">.</tt><tt class="py-name">GetConformer</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">core</tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">      <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">conf</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomPosition</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">      <tt class="py-name">pIdx</tt> <tt class="py-op">=</tt> <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">AddExtraPoint</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">fixed</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">      <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">AddDistanceConstraint</tt><tt class="py-op">(</tt><tt class="py-name">pIdx</tt><tt class="py-op">,</tt> <tt class="py-name">match</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">100.</tt><tt class="py-op">)</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">    <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Initialize</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">    <tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt class="py-number">4</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">    <tt class="py-name">more</tt> <tt class="py-op">=</tt> <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Minimize</tt><tt class="py-op">(</tt><tt class="py-name">energyTol</tt><tt class="py-op">=</tt><tt class="py-number">1e-4</tt><tt class="py-op">,</tt> <tt class="py-name">forceTol</tt><tt class="py-op">=</tt><tt class="py-number">1e-3</tt><tt class="py-op">)</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">more</tt> <tt class="py-keyword">and</tt> <tt class="py-name">n</tt><tt class="py-op">:</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">      <tt class="py-name">more</tt> <tt class="py-op">=</tt> <tt class="py-name">ff</tt><tt class="py-op">.</tt><tt class="py-name">Minimize</tt><tt class="py-op">(</tt><tt class="py-name">energyTol</tt><tt class="py-op">=</tt><tt class="py-number">1e-4</tt><tt class="py-op">,</tt> <tt class="py-name">forceTol</tt><tt class="py-op">=</tt><tt class="py-number">1e-3</tt><tt class="py-op">)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">      <tt class="py-name">n</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">    <tt class="py-comment"># realign</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">    <tt class="py-name">rms</tt> <tt class="py-op">=</tt> <tt id="link-61" class="py-name"><a title="rdkit.Chem.PandasTools.AlignMol" class="py-name" href="#" onclick="return doclink('link-61', 'AlignMol', 'link-56');">AlignMol</a></tt><tt class="py-op">(</tt><tt id="link-62" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-62', 'mol', 'link-25');">mol</a></tt><tt class="py-op">,</tt> <tt class="py-name">core</tt><tt class="py-op">,</tt> <tt class="py-name">atomMap</tt><tt class="py-op">=</tt><tt class="py-name">algMap</tt><tt class="py-op">)</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">  <tt id="link-63" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-63', 'mol', 'link-25');">mol</a></tt><tt class="py-op">.</tt><tt id="link-64" class="py-name" targets="Method rdkit.Chem.PropertyMol.PropertyMol.SetProp()=rdkit.Chem.PropertyMol.PropertyMol-class.html#SetProp"><a title="rdkit.Chem.PropertyMol.PropertyMol.SetProp" class="py-name" href="#" onclick="return doclink('link-64', 'SetProp', 'link-64');">SetProp</a></tt><tt class="py-op">(</tt><tt class="py-string">'EmbedRMS'</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">rms</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-65" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-65', 'mol', 'link-25');">mol</a></tt> </tt>
+</div><a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line"> </tt>
+<a name="AssignBondOrdersFromTemplate"></a><div id="AssignBondOrdersFromTemplate-def"><a name="L326"></a><tt class="py-lineno">326</tt> <a class="py-toggle" href="#" id="AssignBondOrdersFromTemplate-toggle" onclick="return toggle('AssignBondOrdersFromTemplate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#AssignBondOrdersFromTemplate">AssignBondOrdersFromTemplate</a><tt class="py-op">(</tt><tt class="py-param">refmol</tt><tt class="py-op">,</tt> <tt class="py-param">mol</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AssignBondOrdersFromTemplate-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="AssignBondOrdersFromTemplate-expanded"><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">  <tt class="py-docstring">""" assigns bond orders to a molecule based on the</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"><tt class="py-docstring">      bond orders in a template molecule</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line"><tt class="py-docstring">  Arguments</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line"><tt class="py-docstring">    - refmol: the template molecule</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line"><tt class="py-docstring">    - mol: the molecule to assign bond orders to</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line"><tt class="py-docstring">    An example, start by generating a template from a SMILES</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line"><tt class="py-docstring">    and read in the PDB structure of the molecule</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; import os</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; from rdkit.Chem import AllChem</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; template = AllChem.MolFromSmiles("CN1C(=NC(C1=O)(c2ccccc2)c3ccccc3)N")</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; mol = AllChem.MolFromPDBFile(os.path.join(RDConfig.RDCodeDir, 'Chem', 'test_data', '4DJU_lig.pdb'))</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len([1 for b in template.GetBonds() if b.GetBondTypeAsDouble() == 1.0])</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line"><tt class="py-docstring">    8</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len([1 for b in mol.GetBonds() if b.GetBondTypeAsDouble() == 1.0])</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"><tt class="py-docstring">    22</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line"><tt class="py-docstring">    Now assign the bond orders based on the template molecule</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; newMol = AllChem.AssignBondOrdersFromTemplate(template, mol)</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len([1 for b in newMol.GetBonds() if b.GetBondTypeAsDouble() == 1.0])</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"><tt class="py-docstring">    8</tt> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line"><tt class="py-docstring">    Note that the template molecule should have no explicit hydrogens</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line"><tt class="py-docstring">    else the algorithm will fail.</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"><tt class="py-docstring">    It also works if there are different formal charges (this was github issue 235):</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; template=AllChem.MolFromSmiles('CN(C)C(=O)Cc1ccc2c(c1)NC(=O)c3ccc(cc3N2)c4ccc(c(c4)OC)[N+](=O)[O-]')</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; mol = AllChem.MolFromMolFile(os.path.join(RDConfig.RDCodeDir, 'Chem', 'test_data', '4FTR_lig.mol'))</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; AllChem.MolToSmiles(mol)</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-docstring">    'COC1CC(C2CCC3C(O)NC4CC(CC(O)N(C)C)CCC4NC3C2)CCC1N(O)O'</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; newMol = AllChem.AssignBondOrdersFromTemplate(template, mol)</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; AllChem.MolToSmiles(newMol)</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line"><tt class="py-docstring">    'COc1cc(-c2ccc3c(c2)Nc2ccc(CC(=O)N(C)C)cc2NC3=O)ccc1[N+](=O)[O-]'</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line">  <tt class="py-name">refmol2</tt> <tt class="py-op">=</tt> <tt class="py-name">rdchem</tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt class="py-name">refmol</tt><tt class="py-op">)</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line">  <tt class="py-name">mol2</tt> <tt class="py-op">=</tt> <tt class="py-name">rdchem</tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt id="link-66" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-66', 'mol', 'link-25');">mol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line">  <tt class="py-comment"># do the molecules match already?</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line">  <tt class="py-name">matching</tt> <tt class="py-op">=</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatch</tt><tt class="py-op">(</tt><tt class="py-name">refmol2</tt><tt class="py-op">)</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">matching</tt><tt class="py-op">:</tt>  <tt class="py-comment"># no, they don't match</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line">    <tt class="py-comment"># check if bonds of mol are SINGLE</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">b</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetBonds</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">GetBondType</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">BondType</tt><tt class="py-op">.</tt><tt class="py-name">SINGLE</tt><tt class="py-op">:</tt> </tt>
+<a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line">        <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">SetBondType</tt><tt class="py-op">(</tt><tt class="py-name">BondType</tt><tt class="py-op">.</tt><tt class="py-name">SINGLE</tt><tt class="py-op">)</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">        <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">SetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line">    <tt class="py-comment"># set the bonds of mol to SINGLE</tt> </tt>
+<a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">b</tt> <tt class="py-keyword">in</tt> <tt class="py-name">refmol2</tt><tt class="py-op">.</tt><tt class="py-name">GetBonds</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line">      <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">SetBondType</tt><tt class="py-op">(</tt><tt class="py-name">BondType</tt><tt class="py-op">.</tt><tt class="py-name">SINGLE</tt><tt class="py-op">)</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">      <tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">SetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">    <tt class="py-comment"># set atom charges to zero;</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">refmol2</tt><tt class="py-op">.</tt><tt class="py-name">GetAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">      <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">SetFormalCharge</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">      <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">SetFormalCharge</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line"> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">    <tt class="py-name">matching</tt> <tt class="py-op">=</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">refmol2</tt><tt class="py-op">,</tt> <tt class="py-name">uniquify</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">    <tt class="py-comment"># do the molecules match now?</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">matching</tt><tt class="py-op">:</tt> </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">matching</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">        <tt id="link-67" class="py-name"><a title="rdkit.Chem.AllChem.logger
+rdkit.Chem.ChemUtils.TemplateExpand.logger
+rdkit.Chem.FeatFinderCLI.logger
+rdkit.Chem.Features.ShowFeats.logger
+rdkit.Chem.MolDb.Loader_orig.logger
+rdkit.Chem.MolDb.Loader_sa.logger
+rdkit.Chem.Pharm2D.Generate.logger
+rdkit.Chem.Pharm3D.EmbedLib.logger
+rdkit.Chem.Pharm3D.Pharmacophore.logger
+rdkit.Chem.Subshape.SubshapeAligner.logger
+rdkit.ML.Cluster.Butina.logger
+rdkit.ML.Descriptors.MoleculeDescriptors.logger" class="py-name" href="#" onclick="return doclink('link-67', 'logger', 'link-17');">logger</a></tt><tt class="py-op">.</tt><tt id="link-68" class="py-name" targets="Function rdkit.Chem.Suppliers.DbMolSupplier.warning()=rdkit.Chem.Suppliers.DbMolSupplier-module.html#warning"><a title="rdkit.Chem.Suppliers.DbMolSupplier.warning" class="py-name" href="#" onclick="return doclink('link-68', 'warning', 'link-68');">warning</a></tt><tt class="py-op">(</tt><tt class="py-string">"More than one matching pattern found - picking one"</tt><tt class="py-op">)</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">      <tt class="py-name">matching</tt> <tt class="py-op">=</tt> <tt class="py-name">matching</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">      <tt class="py-comment"># apply matching: set bond properties</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">b</tt> <tt class="py-keyword">in</tt> <tt class="py-name">refmol</tt><tt class="py-op">.</tt><tt class="py-name">GetBonds</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line">        <tt class="py-name">atom1</tt> <tt class="py-op">=</tt> <tt class="py-name">matching</tt><tt class="py-op">[</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">GetBeginAtomIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">        <tt class="py-name">atom2</tt> <tt class="py-op">=</tt> <tt class="py-name">matching</tt><tt class="py-op">[</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">GetEndAtomIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line">        <tt class="py-name">b2</tt> <tt class="py-op">=</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetBondBetweenAtoms</tt><tt class="py-op">(</tt><tt class="py-name">atom1</tt><tt class="py-op">,</tt> <tt class="py-name">atom2</tt><tt class="py-op">)</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line">        <tt class="py-name">b2</tt><tt class="py-op">.</tt><tt class="py-name">SetBondType</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">GetBondType</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line">        <tt class="py-name">b2</tt><tt class="py-op">.</tt><tt class="py-name">SetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">.</tt><tt class="py-name">GetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line">      <tt class="py-comment"># apply matching: set atom properties</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">refmol</tt><tt class="py-op">.</tt><tt class="py-name">GetAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line">        <tt class="py-name">a2</tt> <tt class="py-op">=</tt> <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomWithIdx</tt><tt class="py-op">(</tt><tt class="py-name">matching</tt><tt class="py-op">[</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line">        <tt class="py-name">a2</tt><tt class="py-op">.</tt><tt class="py-name">SetHybridization</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">GetHybridization</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">        <tt class="py-name">a2</tt><tt class="py-op">.</tt><tt class="py-name">SetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">GetIsAromatic</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">        <tt class="py-name">a2</tt><tt class="py-op">.</tt><tt class="py-name">SetNumExplicitHs</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">GetNumExplicitHs</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L402"></a><tt class="py-lineno">402</tt>  <tt class="py-line">        <tt class="py-name">a2</tt><tt class="py-op">.</tt><tt class="py-name">SetFormalCharge</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">GetFormalCharge</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">      <tt class="py-name">SanitizeMol</tt><tt class="py-op">(</tt><tt class="py-name">mol2</tt><tt class="py-op">)</tt> </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">mol2</tt><tt class="py-op">,</tt> <tt class="py-string">'__sssAtoms'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line">        <tt class="py-name">mol2</tt><tt class="py-op">.</tt><tt class="py-name">__sssAtoms</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt>  <tt class="py-comment"># we don't want all bonds highlighted</tt> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"No matching found"</tt><tt class="py-op">)</tt> </tt>
+<a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">mol2</tt> </tt>
+</div><a name="L409"></a><tt class="py-lineno">409</tt>  <tt class="py-line"> </tt>
+<a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line"><tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line"><tt class="py-comment">#  doctest boilerplate</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="_runDoctests"></a><div id="_runDoctests-def"><a name="L414"></a><tt class="py-lineno">414</tt> <a class="py-toggle" href="#" id="_runDoctests-toggle" onclick="return toggle('_runDoctests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.AllChem-module.html#_runDoctests">_runDoctests</a><tt class="py-op">(</tt><tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+</div><a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">  <tt class="py-name">failed</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">testmod</tt><tt class="py-op">(</tt><tt class="py-name">optionflags</tt><tt class="py-op">=</tt><tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">ELLIPSIS</tt><tt class="py-op">,</tt> <tt class="py-name">verbose</tt><tt class="py-op">=</tt><tt class="py-name">verbose</tt><tt class="py-op">)</tt> </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line">  <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-name">failed</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line"> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line"> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">  <tt id="link-69" class="py-name" targets="Function rdkit.Chem.AllChem._runDoctests()=rdkit.Chem.AllChem-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Pairs._runDoctests()=rdkit.Chem.AtomPairs.Pairs-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Sheridan._runDoctests()=rdkit.Chem.AtomPairs.Sheridan-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Torsions._runDoctests()=rdkit.Chem.AtomPairs.Torsions-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Utils._runDoctests()=rdkit.Chem.AtomPairs.Utils-module.html#_runDoctests,Function rdkit.Chem.Descriptors._runDoctests()=rdkit.Chem.Descriptors-module.html#_runDoctests,Function rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests()=rdkit.Chem.FeatMaps.FeatMapPoint-module.html#_runDoctests,Function rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests()=rdkit.Chem.Fingerprints.DbFpSupplier-module.html#_runDoctests,Function rdkit.Chem.Fraggle.FraggleSim._runDoctests()=rdkit.Chem.Fraggle.FraggleSim-module.html#_runDoctests,Function rdkit.Chem.MolKey.MolKey._runDoctests()=rdkit.Chem.MolKey.MolKey-module.html#_runDoctests,Function rdkit.Chem.PandasTools._runDoctests()=rdkit.Chem.PandasTools-module.html#_runDoctests,Function rdkit.Chem.Pharm2D.Utils._runDoctests()=rdkit.Chem.Pharm2D.Utils-module.html#_runDoctests,Function rdkit.Chem.Pharm3D.EmbedLib._runDoctests()=rdkit.Chem.Pharm3D.EmbedLib-module.html#_runDoctests,Function rdkit.Chem.QED._runDoctests()=rdkit.Chem.QED-module.html#_runDoctests,Function rdkit.Chem.SaltRemover._runDoctests()=rdkit.Chem.SaltRemover-module.html#_runDoctests,Function rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests()=rdkit.Chem.Scaffolds.MurckoScaffold-module.html#_runDoctests,Function rdkit.Chem.SimpleEnum.Enumerator._runDoctests()=rdkit.Chem.SimpleEnum.Enumerator-module.html#_runDoctests,Function rdkit.DataStructs.BitUtils._runDoctests()=rdkit.DataStructs.BitUtils-module.html#_runDoctests,Function rdkit.DataStructs.LazySignature._runDoctests()=rdkit.DataStructs.LazySignature-module.html#_runDoctests,Function rdkit.DataStructs.VectCollection._runDoctests()=rdkit.DataStructs.VectCollection-module.html#_runDoctests,Function rdkit.ML.Data.DataUtils._runDoctests()=rdkit.ML.Data.DataUtils-module.html#_runDoctests,Function rdkit.ML.Data.SplitData._runDoctests()=rdkit.ML.Data.SplitData-module.html#_runDoctests,Function rdkit.ML.KNN.DistFunctions._runDoctests()=rdkit.ML.KNN.DistFunctions-module.html#_runDoctests,Function rdkit.SimDivFilters.SimilarityPickers._runDoctests()=rdkit.SimDivFilters.SimilarityPickers-module.html#_runDoctests,Function rdkit.VLib.Filter._runDoctests()=rdkit.VLib.Filter-module.html#_runDoctests,Function rdkit.VLib.Node._runDoctests()=rdkit.VLib.Node-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SDSupply._runDoctests()=rdkit.VLib.NodeLib.SDSupply-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests()=rdkit.VLib.NodeLib.SmartsMolFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsRemover._runDoctests()=rdkit.VLib.NodeLib.SmartsRemover-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests()=rdkit.VLib.NodeLib.SmilesDupeFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesOutput._runDoctests()=rdkit.VLib.NodeLib.SmilesOutput-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesSupply._runDoctests()=rdkit.VLib.NodeLib.SmilesSupply-module.html#_runDoctests,Function rdkit.VLib.Output._runDoctests()=rdkit.VLib.Output-module.html#_runDoctests,Function rdkit.VLib.Supply._runDoctests()=rdkit.VLib.Supply-module.html#_runDoctests,Function rdkit.VLib.Transform._runDoctests()=rdkit.VLib.Transform-module.html#_runDoctests"><a title="rdkit.Chem.AllChem._runDoctests
+rdkit.Chem.AtomPairs.Pairs._runDoctests
+rdkit.Chem.AtomPairs.Sheridan._runDoctests
+rdkit.Chem.AtomPairs.Torsions._runDoctests
+rdkit.Chem.AtomPairs.Utils._runDoctests
+rdkit.Chem.Descriptors._runDoctests
+rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests
+rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests
+rdkit.Chem.Fraggle.FraggleSim._runDoctests
+rdkit.Chem.MolKey.MolKey._runDoctests
+rdkit.Chem.PandasTools._runDoctests
+rdkit.Chem.Pharm2D.Utils._runDoctests
+rdkit.Chem.Pharm3D.EmbedLib._runDoctests
+rdkit.Chem.QED._runDoctests
+rdkit.Chem.SaltRemover._runDoctests
+rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests
+rdkit.Chem.SimpleEnum.Enumerator._runDoctests
+rdkit.DataStructs.BitUtils._runDoctests
+rdkit.DataStructs.LazySignature._runDoctests
+rdkit.DataStructs.VectCollection._runDoctests
+rdkit.ML.Data.DataUtils._runDoctests
+rdkit.ML.Data.SplitData._runDoctests
+rdkit.ML.KNN.DistFunctions._runDoctests
+rdkit.SimDivFilters.SimilarityPickers._runDoctests
+rdkit.VLib.Filter._runDoctests
+rdkit.VLib.Node._runDoctests
+rdkit.VLib.NodeLib.SDSupply._runDoctests
+rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests
+rdkit.VLib.NodeLib.SmartsRemover._runDoctests
+rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests
+rdkit.VLib.NodeLib.SmilesOutput._runDoctests
+rdkit.VLib.NodeLib.SmilesSupply._runDoctests
+rdkit.VLib.Output._runDoctests
+rdkit.VLib.Supply._runDoctests
+rdkit.VLib.Transform._runDoctests" class="py-name" href="#" onclick="return doclink('link-69', '_runDoctests', 'link-69');">_runDoctests</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L423"></a><tt class="py-lineno">423</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+var classRDKit_1_1Conformer =
+[
+    [ "Conformer", "classRDKit_1_1Conformer.html#ae346ea2b89b096bc1cb0e0bd7403a1db", null ],
+    [ "Conformer", "classRDKit_1_1Conformer.html#a3514a53da6ab11d14ef160c6d1462804", null ],
+    [ "Conformer", "classRDKit_1_1Conformer.html#a4493b077529f03cf4c095707c64272ba", null ],
+    [ "~Conformer", "classRDKit_1_1Conformer.html#a63091f9c4c55da9046b31851e310eadf", null ],
+    [ "getAtomPos", "classRDKit_1_1Conformer.html#a25b889a9719193c9b385c3a15e286591", null ],
+    [ "getAtomPos", "classRDKit_1_1Conformer.html#ab3cb9ab27f9da6b74acfe05f13fcaae6", null ],
+    [ "getAtomPos", "classRDKit_1_1Conformer.html#a8c905820f54c6f405b73e5b8ea588440", null ],
+    [ "getAtomPos", "classRDKit_1_1Conformer.html#a6260ce10086be3c9122a4b0faa072f72", null ],
+    [ "getId", "classRDKit_1_1Conformer.html#acb74e66f0c7678f1d1d6aeb216546d0b", null ],
+    [ "getNumAtoms", "classRDKit_1_1Conformer.html#a799a9bcb9f89fca0a5011a7fc292bbda", null ],
+    [ "getOwningMol", "classRDKit_1_1Conformer.html#ad2c531b3280d7633adf553c6e996332d", null ],
+    [ "getPositions", "classRDKit_1_1Conformer.html#a9a44c38da1c233e7029afe0b8855b616", null ],
+    [ "getPositions", "classRDKit_1_1Conformer.html#ac2603cf77708f9dce06ca648957b7109", null ],
+    [ "is3D", "classRDKit_1_1Conformer.html#a73e7b91fe78d1e6a47b2bd57409809bc", null ],
+    [ "reserve", "classRDKit_1_1Conformer.html#ad0f8ad2030d78fb9ed2a5ef24a716584", null ],
+    [ "resize", "classRDKit_1_1Conformer.html#aa7ff8ad7b1def2364cd10c535effb3cc", null ],
+    [ "set3D", "classRDKit_1_1Conformer.html#a83c73e47ecc52594c6682216d0ee5c8d", null ],
+    [ "setAtomPos", "classRDKit_1_1Conformer.html#ad92076ded6710d5cf37366f1727a210c", null ],
+    [ "setAtomPos", "classRDKit_1_1Conformer.html#a853bc6b930b5f2840267b38060063582", null ],
+    [ "setId", "classRDKit_1_1Conformer.html#acf6fc7965858837451301a992d929563", null ],
+    [ "setOwningMol", "classRDKit_1_1Conformer.html#a8afa78bdd8c023c31b1c81dd83224078", null ],
+    [ "setOwningMol", "classRDKit_1_1Conformer.html#a52d17e39d3f35fa7ffa2652ebc8db5de", null ],
+    [ "ROMol", "classRDKit_1_1Conformer.html#a91e3f9506d4deb455b189ce09333ced2", null ]
+];

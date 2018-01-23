@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Suppliers.DbMolSupplier</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Suppliers-module.html">Package&nbsp;Suppliers</a> ::
+        Module&nbsp;DbMolSupplier
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Suppliers.DbMolSupplier-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.Suppliers.DbMolSupplier-module.html">Module rdkit.Chem.Suppliers.DbMolSupplier</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2003-2006 greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">Supplies a class for working with molecules from databases</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.Chem.Suppliers=rdkit.Chem.Suppliers-module.html"><a title="rdkit.Chem.Suppliers" class="py-name" href="#" onclick="return doclink('link-2', 'Suppliers', 'link-2');">Suppliers</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module rdkit.Chem.Suppliers.MolSupplier=rdkit.Chem.Suppliers.MolSupplier-module.html,Class rdkit.Chem.Suppliers.MolSupplier.MolSupplier=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html"><a title="rdkit.Chem.Suppliers.MolSupplier
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier" class="py-name" href="#" onclick="return doclink('link-3', 'MolSupplier', 'link-3');">MolSupplier</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="rdkit.Chem.Suppliers.MolSupplier
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier" class="py-name" href="#" onclick="return doclink('link-4', 'MolSupplier', 'link-3');">MolSupplier</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="warning"></a><div id="warning-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="warning-toggle" onclick="return toggle('warning');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier-module.html#warning">warning</a><tt class="py-op">(</tt><tt class="py-param">msg</tt><tt class="py-op">,</tt> <tt class="py-param">dest</tt><tt class="py-op">=</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="warning-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="warning-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">  <tt class="py-name">dest</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="DbMolSupplier"></a><div id="DbMolSupplier-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="DbMolSupplier-toggle" onclick="return toggle('DbMolSupplier');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html">DbMolSupplier</a><tt class="py-op">(</tt><tt class="py-base-class">MolSupplier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbMolSupplier-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DbMolSupplier-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    new molecules come back with all additional fields from the</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    database set in a "_fieldsFromDb" data member</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="DbMolSupplier.__init__"></a><div id="DbMolSupplier.__init__-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="DbMolSupplier.__init__-toggle" onclick="return toggle('DbMolSupplier.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dbResults</tt><tt class="py-op">,</tt> <tt class="py-param">molColumnFormats</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-string">'SMILES'</tt><tt class="py-op">:</tt> <tt class="py-string">'SMI'</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                                                  <tt class="py-string">'SMI'</tt><tt class="py-op">:</tt> <tt class="py-string">'SMI'</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                                                  <tt class="py-string">'MOLPKL'</tt><tt class="py-op">:</tt> <tt class="py-string">'PKL'</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Variable rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol=rdkit.Chem.BuildFragmentCatalog.RunDetails-class.html#nameCol"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-5', 'nameCol', 'link-5');">nameCol</a></tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">transformFunc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">               <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbMolSupplier.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbMolSupplier.__init__-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">      DbResults should be a subclass of Dbase.DbResultSet.DbResultBase</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> <tt class="py-op">=</tt> <tt class="py-name">dbResults</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.GetColumnNames()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#GetColumnNames,Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.GetColumnNames()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#GetColumnNames,Method rdkit.Dbase.DbConnection.DbConnect.GetColumnNames()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetColumnNames,Function rdkit.Dbase.DbInfo.GetColumnNames()=rdkit.Dbase.DbInfo-module.html#GetColumnNames,Method rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNames()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnNames"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.GetColumnNames
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.GetColumnNames
+rdkit.Dbase.DbConnection.DbConnect.GetColumnNames
+rdkit.Dbase.DbInfo.GetColumnNames
+rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNames" class="py-name" href="#" onclick="return doclink('link-6', 'GetColumnNames', 'link-6');">GetColumnNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-7', 'nameCol', 'link-5');">nameCol</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-8', 'nameCol', 'link-5');">nameCol</a></tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transformFunc</tt> <tt class="py-op">=</tt> <tt class="py-name">transformFunc</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-9', 'nameCol', 'link-5');">nameCol</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-10', 'nameCol', 'link-5');">nameCol</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-11', 'nameCol', 'link-5');">nameCol</a></tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-12" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.name=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-12', 'name', 'link-12');">name</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">molColumnFormats</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">      <tt id="link-13" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-12');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-14', 'name', 'link-12');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">idx</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-15', 'name', 'link-12');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt> <tt class="py-op">=</tt> <tt class="py-name">idx</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molFmt</tt> <tt class="py-op">=</tt> <tt class="py-name">molColumnFormats</tt><tt class="py-op">[</tt><tt id="link-16" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-16', 'name', 'link-12');">name</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">break</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'DbResultSet has no recognizable molecule column'</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt><tt class="py-op">]</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_numProcessed</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="DbMolSupplier.GetColumnNames"></a><div id="DbMolSupplier.GetColumnNames-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="DbMolSupplier.GetColumnNames-toggle" onclick="return toggle('DbMolSupplier.GetColumnNames');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#GetColumnNames">GetColumnNames</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbMolSupplier.GetColumnNames-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbMolSupplier.GetColumnNames-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="DbMolSupplier._BuildMol"></a><div id="DbMolSupplier._BuildMol-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="DbMolSupplier._BuildMol-toggle" onclick="return toggle('DbMolSupplier._BuildMol');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#_BuildMol">_BuildMol</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DbMolSupplier._BuildMol-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="DbMolSupplier._BuildMol-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt id="link-17" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-17', 'data', 'link-17');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-18', 'data', 'link-17');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">molD</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-19', 'data', 'link-17');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">del</tt> <tt id="link-20" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-20', 'data', 'link-17');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molCol</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_numProcessed</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molFmt</tt> <tt class="py-op">==</tt> <tt class="py-string">'SMI'</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-21', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmiles</tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">molD</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">newM</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">          <tt id="link-22" class="py-name" targets="Function rdkit.Chem.Suppliers.DbMolSupplier.warning()=rdkit.Chem.Suppliers.DbMolSupplier-module.html#warning"><a title="rdkit.Chem.Suppliers.DbMolSupplier.warning" class="py-name" href="#" onclick="return doclink('link-22', 'warning', 'link-22');">warning</a></tt><tt class="py-op">(</tt><tt class="py-string">'Problems processing mol %d, smiles: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_numProcessed</tt><tt class="py-op">,</tt> <tt class="py-name">molD</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">      <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">molFmt</tt> <tt class="py-op">==</tt> <tt class="py-string">'PKL'</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-23', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">Mol</tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">molD</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">      <tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">      <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">      <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">newM</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transformFunc</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">          <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">transformFunc</tt><tt class="py-op">(</tt><tt class="py-name">newM</tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-24', 'data', 'link-17');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">          <tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">          <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">          <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">newM</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">newM</tt><tt class="py-op">.</tt><tt class="py-name">_fieldsFromDb</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-25', 'data', 'link-17');">data</a></tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">nFields</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-26', 'data', 'link-17');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">nFields</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">          <tt class="py-name">newM</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method rdkit.Chem.PropertyMol.PropertyMol.SetProp()=rdkit.Chem.PropertyMol.PropertyMol-class.html#SetProp"><a title="rdkit.Chem.PropertyMol.PropertyMol.SetProp" class="py-name" href="#" onclick="return doclink('link-27', 'SetProp', 'link-27');">SetProp</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_colNames</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-28', 'data', 'link-17');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-29', 'nameCol', 'link-5');">nameCol</a></tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">          <tt class="py-name">newM</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="rdkit.Chem.PropertyMol.PropertyMol.SetProp" class="py-name" href="#" onclick="return doclink('link-30', 'SetProp', 'link-27');">SetProp</a></tt><tt class="py-op">(</tt><tt class="py-string">'_Name'</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-31', 'data', 'link-17');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.nameCol" class="py-name" href="#" onclick="return doclink('link-32', 'nameCol', 'link-5');">nameCol</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">newM</tt> </tt>
+</div></div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="ForwardDbMolSupplier"></a><div id="ForwardDbMolSupplier-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="ForwardDbMolSupplier-toggle" onclick="return toggle('ForwardDbMolSupplier');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html">ForwardDbMolSupplier</a><tt class="py-op">(</tt><tt class="py-base-class">DbMolSupplier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ForwardDbMolSupplier-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ForwardDbMolSupplier-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-docstring">""" DbMol supplier supporting only forward iteration</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    new molecules come back with all additional fields from the</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    database set in a "_fieldsFromDb" data member</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="ForwardDbMolSupplier.__init__"></a><div id="ForwardDbMolSupplier.__init__-def"><a name="L110"></a><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="ForwardDbMolSupplier.__init__-toggle" onclick="return toggle('ForwardDbMolSupplier.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dbResults</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ForwardDbMolSupplier.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ForwardDbMolSupplier.__init__-expanded"><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">      DbResults should be an iterator for Dbase.DbResultSet.DbResultBase</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt id="link-33" class="py-name" targets="Module rdkit.Chem.Suppliers.DbMolSupplier=rdkit.Chem.Suppliers.DbMolSupplier-module.html,Class rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html"><a title="rdkit.Chem.Suppliers.DbMolSupplier
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier" class="py-name" href="#" onclick="return doclink('link-33', 'DbMolSupplier', 'link-33');">DbMolSupplier</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method rdkit.Chem.DSViewer.Displayable.__init__()=rdkit.Chem.DSViewer.Displayable-class.html#__init__,Method rdkit.Chem.DSViewer.MolViewer.__init__()=rdkit.Chem.DSViewer.MolViewer-class.html#__init__,Method rdkit.Chem.Descriptors.PropertyFunctor.__init__()=rdkit.Chem.Descriptors.PropertyFunctor-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.Font.__init__()=rdkit.Chem.Draw.MolDrawing.Font-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__()=rdkit.Chem.Draw.MolDrawing.MolDrawing-class.html#__init__,Method rdkit.Chem.Draw.aggCanvas.Canvas.__init__()=rdkit.Chem.Draw.aggCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.cairoCanvas.Canvas.__init__()=rdkit.Chem.Draw.cairoCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.mplCanvas.Canvas.__init__()=rdkit.Chem.Draw.mplCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.qtCanvas.Canvas.__init__()=rdkit.Chem.Draw.qtCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.spingCanvas.Canvas.__init__()=rdkit.Chem.Draw.spingCanvas.Canvas-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__()=rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._AtomFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._BondFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__()=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__()=rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__()=rdkit.Chem.FeatMaps.FeatMaps.FeatMap-class.html#__init__,Method rdkit.Chem.FilterCatalog.FilterMatcher.__init__()=rdkit.Chem.FilterCatalog.FilterMatcher-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__()=rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#__init__,Method rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__()=rdkit.Chem.FragmentMatcher.FragmentMatcher-class.html#__init__,Method rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__()=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#__init__,Method rdkit.Chem.MCS.MCSResult.__init__()=rdkit.Chem.MCS.MCSResult-class.html#__init__,Method rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__()=rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#__init__,Method rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__()=rdkit.Chem.Pharm2D.LazyGenerator.Generator-class.html#__init__,Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#__init__,Method rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__()=rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore-class.html#__init__,Method rdkit.Chem.PropertyMol.PropertyMol.__init__()=rdkit.Chem.PropertyMol.PropertyMol-class.html#__init__,Method rdkit.Chem.PyMol.MolViewer.__init__()=rdkit.Chem.PyMol.MolViewer-class.html#__init__,Method rdkit.Chem.Recap.RecapHierarchyNode.__init__()=rdkit.Chem.Recap.RecapHierarchyNode-class.html#__init__,Method rdkit.Chem.SaltRemover.SaltRemover.__init__()=rdkit.Chem.SaltRemover.SaltRemover-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__()=rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CangenNode.__init__()=rdkit.Chem.fmcs.fmcs.CangenNode-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.MCSResult.__init__()=rdkit.Chem.fmcs.fmcs.MCSResult-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Timer.__init__()=rdkit.Chem.fmcs.fmcs.Timer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedFragment.__init__()=rdkit.Chem.fmcs.fmcs.TypedFragment-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.TypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Uniquer.__init__()=rdkit.Chem.fmcs.fmcs.Uniquer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__()=rdkit.Chem.fmcs.fmcs.VerboseHeapOps-class.html#__init__,Method rdkit.Chem.fmcs.fmcs._SingleBest.__init__()=rdkit.Chem.fmcs.fmcs._SingleBest-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.starting_from.__init__()=rdkit.Chem.fmcs.fmcs.starting_from-class.html#__init__,Method rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__()=rdkit.DataStructs.BitEnsemble.BitEnsemble-class.html#__init__,Method rdkit.DataStructs.LazySignature.LazySig.__init__()=rdkit.DataStructs.LazySignature.LazySig-class.html#__init__,Method rdkit.DataStructs.TopNContainer.TopNContainer.__init__()=rdkit.DataStructs.TopNContainer.TopNContainer-class.html#__init__,Method rdkit.DataStructs.VectCollection.VectCollection.__init__()=rdkit.DataStructs.VectCollection.VectCollection-class.html#__init__,Method rdkit.Dbase.DbConnection.DbConnect.__init__()=rdkit.Dbase.DbConnection.DbConnect-class.html#__init__,Method rdkit.Dbase.DbReport.CDXImageTransformer.__init__()=rdkit.Dbase.DbReport.CDXImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.CactvsImageTransformer.__init__()=rdkit.Dbase.DbReport.CactvsImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.RDImageTransformer.__init__()=rdkit.Dbase.DbReport.RDImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__()=rdkit.Dbase.DbReport.ReportLabImageTransformer-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultBase.__init__()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultSet.__init__()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#__init__,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__init__,Method rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__()=rdkit.ML.Cluster.ClusterVis.ClusterRenderer-class.html#__init__,Method rdkit.ML.Cluster.Clusters.Cluster.__init__()=rdkit.ML.Cluster.Clusters.Cluster-class.html#__init__,Method rdkit.ML.Composite.BayesComposite.BayesComposite.__init__()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#__init__,Method rdkit.ML.Composite.Composite.Composite.__init__()=rdkit.ML.Composite.Composite.Composite-class.html#__init__,Method rdkit.ML.Data.MLData.MLDataSet.__init__()=rdkit.ML.Data.MLData.MLDataSet-class.html#__init__,Method rdkit.ML.Data.MLData.MLQuantDataSet.__init__()=rdkit.ML.Data.MLData.MLQuantDataSet-class.html#__init__,Method rdkit.ML.DecTree.DecTree.DecTreeNode.__init__()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Forest.Forest.__init__()=rdkit.ML.DecTree.Forest.Forest-class.html#__init__,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#__init__,Method rdkit.ML.DecTree.SigTree.SigTreeNode.__init__()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Tree.TreeNode.__init__()=rdkit.ML.DecTree.Tree.TreeNode-class.html#__init__,Method rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__()=rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#__init__,Method rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__()=rdkit.ML.InfoTheory.BitClusterer.BitClusterer-class.html#__init__,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#__init__,Method rdkit.ML.KNN.KNNModel.KNNModel.__init__()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#__init__,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#__init__,Method rdkit.ML.ModelPackage.Packager.ModelPackage.__init__()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#__init__,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.Sigmoid.__init__()=rdkit.ML.Neural.ActFuncs.Sigmoid-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.TanH.__init__()=rdkit.ML.Neural.ActFuncs.TanH-class.html#__init__,Method rdkit.ML.Neural.NetNode.NetNode.__init__()=rdkit.ML.Neural.NetNode.NetNode-class.html#__init__,Method rdkit.ML.Neural.Network.Network.__init__()=rdkit.ML.Neural.Network.Network-class.html#__init__,Method rdkit.ML.Neural.Trainers.BackProp.__init__()=rdkit.ML.Neural.Trainers.BackProp-class.html#__init__,Method rdkit.ML.files.ReFile.__init__()=rdkit.ML.files.ReFile-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.SpreadPicker-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker-class.html#__init__,Method rdkit.VLib.Filter.FilterNode.__init__()=rdkit.VLib.Filter.FilterNode-class.html#__init__,Method rdkit.VLib.Node.VLibNode.__init__()=rdkit.VLib.Node.VLibNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#__init__,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__()=rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__()=rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__()=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#__init__,Method rdkit.VLib.Output.OutputNode.__init__()=rdkit.VLib.Output.OutputNode-class.html#__init__,Method rdkit.VLib.Supply.SupplyNode.__init__()=rdkit.VLib.Supply.SupplyNode-class.html#__init__,Method rdkit.VLib.Transform.TransformNode.__init__()=rdkit.VLib.Transform.TransformNode-class.html#__init__"><a title="rdkit.Chem.DSViewer.Displayable.__init__
+rdkit.Chem.DSViewer.MolViewer.__init__
+rdkit.Chem.Descriptors.PropertyFunctor.__init__
+rdkit.Chem.Draw.MolDrawing.Font.__init__
+rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__
+rdkit.Chem.Draw.aggCanvas.Canvas.__init__
+rdkit.Chem.Draw.cairoCanvas.Canvas.__init__
+rdkit.Chem.Draw.mplCanvas.Canvas.__init__
+rdkit.Chem.Draw.qtCanvas.Canvas.__init__
+rdkit.Chem.Draw.spingCanvas.Canvas.__init__
+rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__
+rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__
+rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__
+rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__
+rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__
+rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__
+rdkit.Chem.FilterCatalog.FilterMatcher.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__
+rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__
+rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__
+rdkit.Chem.MCS.MCSResult.__init__
+rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__
+rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__
+rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__
+rdkit.Chem.PropertyMol.PropertyMol.__init__
+rdkit.Chem.PyMol.MolViewer.__init__
+rdkit.Chem.Recap.RecapHierarchyNode.__init__
+rdkit.Chem.SaltRemover.SaltRemover.__init__
+rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__
+rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.CangenNode.__init__
+rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.MCSResult.__init__
+rdkit.Chem.fmcs.fmcs.Timer.__init__
+rdkit.Chem.fmcs.fmcs.TypedFragment.__init__
+rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.Uniquer.__init__
+rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__
+rdkit.Chem.fmcs.fmcs._SingleBest.__init__
+rdkit.Chem.fmcs.fmcs.starting_from.__init__
+rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__
+rdkit.DataStructs.LazySignature.LazySig.__init__
+rdkit.DataStructs.TopNContainer.TopNContainer.__init__
+rdkit.DataStructs.VectCollection.VectCollection.__init__
+rdkit.Dbase.DbConnection.DbConnect.__init__
+rdkit.Dbase.DbReport.CDXImageTransformer.__init__
+rdkit.Dbase.DbReport.CactvsImageTransformer.__init__
+rdkit.Dbase.DbReport.RDImageTransformer.__init__
+rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__
+rdkit.Dbase.DbResultSet.DbResultBase.__init__
+rdkit.Dbase.DbResultSet.DbResultSet.__init__
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__
+rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__
+rdkit.ML.Cluster.Clusters.Cluster.__init__
+rdkit.ML.Composite.BayesComposite.BayesComposite.__init__
+rdkit.ML.Composite.Composite.Composite.__init__
+rdkit.ML.Data.MLData.MLDataSet.__init__
+rdkit.ML.Data.MLData.MLQuantDataSet.__init__
+rdkit.ML.DecTree.DecTree.DecTreeNode.__init__
+rdkit.ML.DecTree.Forest.Forest.__init__
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__
+rdkit.ML.DecTree.SigTree.SigTreeNode.__init__
+rdkit.ML.DecTree.Tree.TreeNode.__init__
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__
+rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__
+rdkit.ML.KNN.KNNModel.KNNModel.__init__
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__
+rdkit.ML.ModelPackage.Packager.ModelPackage.__init__
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__
+rdkit.ML.Neural.ActFuncs.Sigmoid.__init__
+rdkit.ML.Neural.ActFuncs.TanH.__init__
+rdkit.ML.Neural.NetNode.NetNode.__init__
+rdkit.ML.Neural.Network.Network.__init__
+rdkit.ML.Neural.Trainers.BackProp.__init__
+rdkit.ML.files.ReFile.__init__
+rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__
+rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__
+rdkit.VLib.Filter.FilterNode.__init__
+rdkit.VLib.Node.VLibNode.__init__
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__
+rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__
+rdkit.VLib.Output.OutputNode.__init__
+rdkit.VLib.Supply.SupplyNode.__init__
+rdkit.VLib.Transform.TransformNode.__init__" class="py-name" href="#" onclick="return doclink('link-34', '__init__', 'link-34');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">dbResults</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener-class.html#Reset,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#Reset,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#Reset,Method rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset()=rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#Reset,Method rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset()=rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#Reset,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#Reset,Method rdkit.DataStructs.VectCollection.VectCollection.Reset()=rdkit.DataStructs.VectCollection.VectCollection-class.html#Reset,Method rdkit.Dbase.DbResultSet.DbResultBase.Reset()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#Reset,Method rdkit.Dbase.DbResultSet.DbResultSet.Reset()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#Reset,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#Reset"><a title="rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.Reset
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.Reset
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.Reset
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.Reset
+rdkit.DataStructs.VectCollection.VectCollection.Reset
+rdkit.Dbase.DbResultSet.DbResultBase.Reset
+rdkit.Dbase.DbResultSet.DbResultSet.Reset
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.Reset" class="py-name" href="#" onclick="return doclink('link-35', 'Reset', 'link-35');">Reset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="ForwardDbMolSupplier.Reset"></a><div id="ForwardDbMolSupplier.Reset-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="ForwardDbMolSupplier.Reset-toggle" onclick="return toggle('ForwardDbMolSupplier.Reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#Reset">Reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ForwardDbMolSupplier.Reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ForwardDbMolSupplier.Reset-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dataIter</tt> <tt class="py-op">=</tt> <tt class="py-name">iter</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="ForwardDbMolSupplier.NextMol"></a><div id="ForwardDbMolSupplier.NextMol-def"><a name="L122"></a><tt class="py-lineno">122</tt> <a class="py-toggle" href="#" id="ForwardDbMolSupplier.NextMol-toggle" onclick="return toggle('ForwardDbMolSupplier.NextMol');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#NextMol">NextMol</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ForwardDbMolSupplier.NextMol-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ForwardDbMolSupplier.NextMol-expanded"><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">      NOTE: this has side effects</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">      <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dataIter</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#next,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#next,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#next,Method rdkit.Dbase.DbResultSet.DbResultSet.next()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#next,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#next,Method rdkit.VLib.Filter.FilterNode.next()=rdkit.VLib.Filter.FilterNode-class.html#next,Method rdkit.VLib.Node.VLibNode.next()=rdkit.VLib.Node.VLibNode-class.html#next,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#next,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#next,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#next,Method rdkit.VLib.Output.OutputNode.next()=rdkit.VLib.Output.OutputNode-class.html#next,Method rdkit.VLib.Supply.SupplyNode.next()=rdkit.VLib.Supply.SupplyNode-class.html#next,Method rdkit.VLib.Transform.TransformNode.next()=rdkit.VLib.Transform.TransformNode-class.html#next"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.next
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.next
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.next
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.next
+rdkit.Dbase.DbResultSet.DbResultSet.next
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.next
+rdkit.VLib.Filter.FilterNode.next
+rdkit.VLib.Node.VLibNode.next
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.next
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.next
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.next
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.next
+rdkit.VLib.Output.OutputNode.next
+rdkit.VLib.Supply.SupplyNode.next
+rdkit.VLib.Transform.TransformNode.next" class="py-name" href="#" onclick="return doclink('link-36', 'next', 'link-36');">next</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">StopIteration</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">      <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">d</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">      <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier._BuildMol()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#_BuildMol"><a title="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier._BuildMol" class="py-name" href="#" onclick="return doclink('link-37', '_BuildMol', 'link-37');">_BuildMol</a></tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">      <tt class="py-name">newM</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">newM</tt> </tt>
+</div></div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier"></a><div id="RandomAccessDbMolSupplier-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier-toggle" onclick="return toggle('RandomAccessDbMolSupplier');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html">RandomAccessDbMolSupplier</a><tt class="py-op">(</tt><tt class="py-base-class">DbMolSupplier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RandomAccessDbMolSupplier-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier.__init__"></a><div id="RandomAccessDbMolSupplier.__init__-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier.__init__-toggle" onclick="return toggle('RandomAccessDbMolSupplier.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dbResults</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbMolSupplier.__init__-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">      DbResults should be a Dbase.DbResultSet.RandomAccessDbResultSet</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt id="link-38" class="py-name"><a title="rdkit.Chem.Suppliers.DbMolSupplier
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier" class="py-name" href="#" onclick="return doclink('link-38', 'DbMolSupplier', 'link-33');">DbMolSupplier</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="rdkit.Chem.DSViewer.Displayable.__init__
+rdkit.Chem.DSViewer.MolViewer.__init__
+rdkit.Chem.Descriptors.PropertyFunctor.__init__
+rdkit.Chem.Draw.MolDrawing.Font.__init__
+rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__
+rdkit.Chem.Draw.aggCanvas.Canvas.__init__
+rdkit.Chem.Draw.cairoCanvas.Canvas.__init__
+rdkit.Chem.Draw.mplCanvas.Canvas.__init__
+rdkit.Chem.Draw.qtCanvas.Canvas.__init__
+rdkit.Chem.Draw.spingCanvas.Canvas.__init__
+rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__
+rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__
+rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__
+rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__
+rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__
+rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__
+rdkit.Chem.FilterCatalog.FilterMatcher.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__
+rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__
+rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__
+rdkit.Chem.MCS.MCSResult.__init__
+rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__
+rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__
+rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__
+rdkit.Chem.PropertyMol.PropertyMol.__init__
+rdkit.Chem.PyMol.MolViewer.__init__
+rdkit.Chem.Recap.RecapHierarchyNode.__init__
+rdkit.Chem.SaltRemover.SaltRemover.__init__
+rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__
+rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.CangenNode.__init__
+rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.MCSResult.__init__
+rdkit.Chem.fmcs.fmcs.Timer.__init__
+rdkit.Chem.fmcs.fmcs.TypedFragment.__init__
+rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.Uniquer.__init__
+rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__
+rdkit.Chem.fmcs.fmcs._SingleBest.__init__
+rdkit.Chem.fmcs.fmcs.starting_from.__init__
+rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__
+rdkit.DataStructs.LazySignature.LazySig.__init__
+rdkit.DataStructs.TopNContainer.TopNContainer.__init__
+rdkit.DataStructs.VectCollection.VectCollection.__init__
+rdkit.Dbase.DbConnection.DbConnect.__init__
+rdkit.Dbase.DbReport.CDXImageTransformer.__init__
+rdkit.Dbase.DbReport.CactvsImageTransformer.__init__
+rdkit.Dbase.DbReport.RDImageTransformer.__init__
+rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__
+rdkit.Dbase.DbResultSet.DbResultBase.__init__
+rdkit.Dbase.DbResultSet.DbResultSet.__init__
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__
+rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__
+rdkit.ML.Cluster.Clusters.Cluster.__init__
+rdkit.ML.Composite.BayesComposite.BayesComposite.__init__
+rdkit.ML.Composite.Composite.Composite.__init__
+rdkit.ML.Data.MLData.MLDataSet.__init__
+rdkit.ML.Data.MLData.MLQuantDataSet.__init__
+rdkit.ML.DecTree.DecTree.DecTreeNode.__init__
+rdkit.ML.DecTree.Forest.Forest.__init__
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__
+rdkit.ML.DecTree.SigTree.SigTreeNode.__init__
+rdkit.ML.DecTree.Tree.TreeNode.__init__
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__
+rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__
+rdkit.ML.KNN.KNNModel.KNNModel.__init__
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__
+rdkit.ML.ModelPackage.Packager.ModelPackage.__init__
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__
+rdkit.ML.Neural.ActFuncs.Sigmoid.__init__
+rdkit.ML.Neural.ActFuncs.TanH.__init__
+rdkit.ML.Neural.NetNode.NetNode.__init__
+rdkit.ML.Neural.Network.Network.__init__
+rdkit.ML.Neural.Trainers.BackProp.__init__
+rdkit.ML.files.ReFile.__init__
+rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__
+rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__
+rdkit.VLib.Filter.FilterNode.__init__
+rdkit.VLib.Node.VLibNode.__init__
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__
+rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__
+rdkit.VLib.Output.OutputNode.__init__
+rdkit.VLib.Supply.SupplyNode.__init__
+rdkit.VLib.Transform.TransformNode.__init__" class="py-name" href="#" onclick="return doclink('link-39', '__init__', 'link-34');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">dbResults</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier.__len__"></a><div id="RandomAccessDbMolSupplier.__len__-def"><a name="L151"></a><tt class="py-lineno">151</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier.__len__-toggle" onclick="return toggle('RandomAccessDbMolSupplier.__len__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier.__len__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbMolSupplier.__len__-expanded"><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier.__getitem__"></a><div id="RandomAccessDbMolSupplier.__getitem__-def"><a name="L154"></a><tt class="py-lineno">154</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier.__getitem__-toggle" onclick="return toggle('RandomAccessDbMolSupplier.__getitem__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">idx</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbMolSupplier.__getitem__-expanded"><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-name">newD</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">]</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier._BuildMol" class="py-name" href="#" onclick="return doclink('link-40', '_BuildMol', 'link-37');">_BuildMol</a></tt><tt class="py-op">(</tt><tt class="py-name">newD</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier.Reset"></a><div id="RandomAccessDbMolSupplier.Reset-def"><a name="L158"></a><tt class="py-lineno">158</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier.Reset-toggle" onclick="return toggle('RandomAccessDbMolSupplier.Reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#Reset">Reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier.Reset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbMolSupplier.Reset-expanded"><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+</div><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="RandomAccessDbMolSupplier.NextMol"></a><div id="RandomAccessDbMolSupplier.NextMol-def"><a name="L161"></a><tt class="py-lineno">161</tt> <a class="py-toggle" href="#" id="RandomAccessDbMolSupplier.NextMol-toggle" onclick="return toggle('RandomAccessDbMolSupplier.NextMol');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#NextMol">NextMol</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RandomAccessDbMolSupplier.NextMol-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="RandomAccessDbMolSupplier.NextMol-expanded"><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">      <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pos</tt><tt class="py-op">]</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div></div><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

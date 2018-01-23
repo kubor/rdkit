@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Pharm2D.Utils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Pharm2D-module.html">Package&nbsp;Pharm2D</a> ::
+        Module&nbsp;Utils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Pharm2D.Utils-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module Utils</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+utility functionality for the 2D pharmacophores code
+
+See Docs/Chem/Pharm2D.triangles.jpg for an illustration of the way
+pharmacophores are broken into triangles and labelled.
+
+See Docs/Chem/Pharm2D.signatures.jpg for an illustration of bit
+numbering
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#GetTriangles" class="summary-sig-name">GetTriangles</a>(<span class="summary-sig-arg">nPts</span>)</span><br />
+      returns a tuple with the distance indices for...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetTriangles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fact"></a><span class="summary-sig-name">_fact</span>(<span class="summary-sig-arg">x</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#_fact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#BinsTriangleInequality" class="summary-sig-name">BinsTriangleInequality</a>(<span class="summary-sig-arg">d1</span>,
+        <span class="summary-sig-arg">d2</span>,
+        <span class="summary-sig-arg">d3</span>)</span><br />
+      checks the triangle inequality for combinations
+of distance bins.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#BinsTriangleInequality">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#ScaffoldPasses" class="summary-sig-name">ScaffoldPasses</a>(<span class="summary-sig-arg">combo</span>,
+        <span class="summary-sig-arg">bins</span>=<span class="summary-sig-default">None</span>)</span><br />
+      checks the scaffold passed in to see if all
+contributing triangles can satisfy the triangle inequality</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#ScaffoldPasses">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#NumCombinations" class="summary-sig-name">NumCombinations</a>(<span class="summary-sig-arg">nItems</span>,
+        <span class="summary-sig-arg">nSlots</span>)</span><br />
+      returns the number of ways to fit nItems into nSlots</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#NumCombinations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#CountUpTo" class="summary-sig-name">CountUpTo</a>(<span class="summary-sig-arg">nItems</span>,
+        <span class="summary-sig-arg">nSlots</span>,
+        <span class="summary-sig-arg">vs</span>,
+        <span class="summary-sig-arg">idx</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">startAt</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Figures out where a given combination of indices would
+ occur in the combinatorial explosion generated by _GetIndexCombinations_</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#CountUpTo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#GetIndexCombinations" class="summary-sig-name">GetIndexCombinations</a>(<span class="summary-sig-arg">nItems</span>,
+        <span class="summary-sig-arg">nSlots</span>,
+        <span class="summary-sig-arg">slot</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">lastItemVal</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Generates all combinations of nItems in nSlots without including
+  duplicates</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetIndexCombinations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#GetAllCombinations" class="summary-sig-name">GetAllCombinations</a>(<span class="summary-sig-arg">choices</span>,
+        <span class="summary-sig-arg">noDups</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">which</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Does the combinatorial explosion of the possible combinations
+of the elements of _choices_.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetAllCombinations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetUniqueCombinations"></a><span class="summary-sig-name">GetUniqueCombinations</span>(<span class="summary-sig-arg">choices</span>,
+        <span class="summary-sig-arg">classes</span>,
+        <span class="summary-sig-arg">which</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Does the combinatorial explosion of the possible combinations
+of the elements of _choices_.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetUniqueCombinations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetUniqueCombinations_new"></a><span class="summary-sig-name">GetUniqueCombinations_new</span>(<span class="summary-sig-arg">choices</span>,
+        <span class="summary-sig-arg">classes</span>,
+        <span class="summary-sig-arg">which</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Does the combinatorial explosion of the possible combinations
+of the elements of _choices_.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetUniqueCombinations_new">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#UniquifyCombinations" class="summary-sig-name">UniquifyCombinations</a>(<span class="summary-sig-arg">combos</span>)</span><br />
+      uniquifies the combinations in the argument</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#UniquifyCombinations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#GetPossibleScaffolds" class="summary-sig-name">GetPossibleScaffolds</a>(<span class="summary-sig-arg">nPts</span>,
+        <span class="summary-sig-arg">bins</span>,
+        <span class="summary-sig-arg">useTriangleInequality</span>=<span class="summary-sig-default">True</span>)</span><br />
+      gets all realizable scaffolds (passing the triangle inequality) with the...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetPossibleScaffolds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Pharm2D.Utils-module.html#OrderTriangle" class="summary-sig-name">OrderTriangle</a>(<span class="summary-sig-arg">featIndices</span>,
+        <span class="summary-sig-arg">dists</span>)</span><br />
+      put the distances for a triangle into canonical order</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#OrderTriangle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_runDoctests"></a><span class="summary-sig-name">_runDoctests</span>(<span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#_runDoctests">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Pharm2D.Utils-module.html#nPointDistDict" class="summary-name">nPointDistDict</a> = <code title="{2:((0, 1),), 3:((0, 1), (0, 2), (1, 2)), 4:((0, 1), (0, 2), (0, 3), (\
+1, 2), (2, 3)), 5:((0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (2, 3), (3,\
+ 4)), 6:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (2, 3), (3, 4\
+), (4, 5)), 7:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 2),\
+ (2, 3), (3, 4), (4, 5), (5, 6)), 8:((0, 1), (0, 2), (0, 3), (0, 4), (\
+0, 5), (0, 6), (0, 7), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7))\
+, 9:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (\
+1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8)), 10:((0, 1), (0\
+...">{2:((0, 1),), 3:((0, 1), (0, 2), (1, 2)), 4:(<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Pharm2D.Utils-module.html#nDistPointDict" class="summary-name">nDistPointDict</a> = <code title="{1: 2, 3: 3, 5: 4, 7: 5, 9: 6, 11: 7, 13: 8, 15: 9, 17: 10,}">{1: 2, 3: 3, 5: 4, 7: 5, 9: 6, 11: 7, 13: 8, <code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_trianglesInPharmacophore"></a><span class="summary-name">_trianglesInPharmacophore</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_numCombDict"></a><span class="summary-name">_numCombDict</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_verbose"></a><span class="summary-name">_verbose</span> = <code title="0">0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_countCache"></a><span class="summary-name">_countCache</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_indexCombinations"></a><span class="summary-name">_indexCombinations</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="itertools">itertools</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="GetTriangles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTriangles</span>(<span class="sig-arg">nPts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetTriangles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns a tuple with the distance indices for
+triangles composing an nPts-pharmacophore
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BinsTriangleInequality"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BinsTriangleInequality</span>(<span class="sig-arg">d1</span>,
+        <span class="sig-arg">d2</span>,
+        <span class="sig-arg">d3</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#BinsTriangleInequality">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+checks the triangle inequality for combinations
+of distance bins.
+
+the general triangle inequality is:
+   d1 + d2 &gt;= d3
+the conservative binned form of this is:
+   d1(upper) + d2(upper) &gt;= d3(lower)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScaffoldPasses"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScaffoldPasses</span>(<span class="sig-arg">combo</span>,
+        <span class="sig-arg">bins</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#ScaffoldPasses">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+checks the scaffold passed in to see if all
+contributing triangles can satisfy the triangle inequality
+
+the scaffold itself (encoded in combo) is a list of binned distances
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="NumCombinations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">NumCombinations</span>(<span class="sig-arg">nItems</span>,
+        <span class="sig-arg">nSlots</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#NumCombinations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the number of ways to fit nItems into nSlots
+
+We assume that (x,y) and (y,x) are equivalent, and
+(x,x) is allowed.
+
+General formula is, for N items and S slots:
+  res = (N+S-1)! / ( (N-1)! * S! )
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CountUpTo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CountUpTo</span>(<span class="sig-arg">nItems</span>,
+        <span class="sig-arg">nSlots</span>,
+        <span class="sig-arg">vs</span>,
+        <span class="sig-arg">idx</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">startAt</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#CountUpTo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Figures out where a given combination of indices would
+ occur in the combinatorial explosion generated by _GetIndexCombinations_
+
+ **Arguments**
+
+   - nItems: the number of items to distribute
+
+   - nSlots: the number of slots in which to distribute them
+
+   - vs: a sequence containing the values to find
+
+   - idx: used in the recursion
+
+   - startAt: used in the recursion
+
+**Returns**
+
+   an integer
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetIndexCombinations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetIndexCombinations</span>(<span class="sig-arg">nItems</span>,
+        <span class="sig-arg">nSlots</span>,
+        <span class="sig-arg">slot</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">lastItemVal</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetIndexCombinations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generates all combinations of nItems in nSlots without including
+  duplicates
+
+**Arguments**
+
+  - nItems: the number of items to distribute
+
+  - nSlots: the number of slots in which to distribute them
+
+  - slot: used in recursion
+
+  - lastItemVal: used in recursion
+
+**Returns**
+
+  a list of lists
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAllCombinations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAllCombinations</span>(<span class="sig-arg">choices</span>,
+        <span class="sig-arg">noDups</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">which</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetAllCombinations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Does the combinatorial explosion of the possible combinations
+of the elements of _choices_.
+
+**Arguments**
+
+  - choices: sequence of sequences with the elements to be enumerated
+
+  - noDups: (optional) if this is nonzero, results with duplicates,
+    e.g. (1,1,0), will not be generated
+
+  - which: used in recursion
+
+**Returns**
+
+  a list of lists
+
+&gt;&gt;&gt; GetAllCombinations([(0,),(1,),(2,)])
+[[0, 1, 2]]
+&gt;&gt;&gt; GetAllCombinations([(0,),(1,3),(2,)])
+[[0, 1, 2], [0, 3, 2]]
+
+&gt;&gt;&gt; GetAllCombinations([(0,1),(1,3),(2,)])
+[[0, 1, 2], [0, 3, 2], [1, 3, 2]]
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="UniquifyCombinations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">UniquifyCombinations</span>(<span class="sig-arg">combos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#UniquifyCombinations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+uniquifies the combinations in the argument
+
+**Arguments**:
+
+  - combos: a sequence of sequences
+
+**Returns**
+
+  - a list of tuples containing the unique combos
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetPossibleScaffolds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetPossibleScaffolds</span>(<span class="sig-arg">nPts</span>,
+        <span class="sig-arg">bins</span>,
+        <span class="sig-arg">useTriangleInequality</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#GetPossibleScaffolds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+gets all realizable scaffolds (passing the triangle inequality) with the
+given number of points and returns them as a list of tuples
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OrderTriangle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OrderTriangle</span>(<span class="sig-arg">featIndices</span>,
+        <span class="sig-arg">dists</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Pharm2D.Utils-pysrc.html#OrderTriangle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+put the distances for a triangle into canonical order
+
+It's easy if the features are all different:
+&gt;&gt;&gt; OrderTriangle([0,2,4],[1,2,3])
+([0, 2, 4], [1, 2, 3])
+
+It's trickiest if they are all the same:
+&gt;&gt;&gt; OrderTriangle([0,0,0],[1,2,3])
+([0, 0, 0], [3, 2, 1])
+&gt;&gt;&gt; OrderTriangle([0,0,0],[2,1,3])
+([0, 0, 0], [3, 2, 1])
+&gt;&gt;&gt; OrderTriangle([0,0,0],[1,3,2])
+([0, 0, 0], [3, 2, 1])
+&gt;&gt;&gt; OrderTriangle([0,0,0],[3,1,2])
+([0, 0, 0], [3, 2, 1])
+&gt;&gt;&gt; OrderTriangle([0,0,0],[3,2,1])
+([0, 0, 0], [3, 2, 1])
+
+&gt;&gt;&gt; OrderTriangle([0,0,1],[3,2,1])
+([0, 0, 1], [3, 2, 1])
+&gt;&gt;&gt; OrderTriangle([0,0,1],[1,3,2])
+([0, 0, 1], [1, 3, 2])
+&gt;&gt;&gt; OrderTriangle([0,0,1],[1,2,3])
+([0, 0, 1], [1, 3, 2])
+&gt;&gt;&gt; OrderTriangle([0,0,1],[1,3,2])
+([0, 0, 1], [1, 3, 2])
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="nPointDistDict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nPointDistDict</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{2:((0, 1),), 3:((0, 1), (0, 2), (1, 2)), 4:((0, 1), (0, 2), (0, 3), (<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+1, 2), (2, 3)), 5:((0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (2, 3), (3,<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ 4)), 6:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (2, 3), (3, 4<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+), (4, 5)), 7:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 2),<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+ (2, 3), (3, 4), (4, 5), (5, 6)), 8:((0, 1), (0, 2), (0, 3), (0, 4), (<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+0, 5), (0, 6), (0, 7), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7))<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, 9:((0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8)), 10:((0, 1), (0<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nDistPointDict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nDistPointDict</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{1: 2, 3: 3, 5: 4, 7: 5, 9: 6, 11: 7, 13: 8, 15: 9, 17: 10,}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

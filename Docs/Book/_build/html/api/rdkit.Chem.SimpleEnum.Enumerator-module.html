@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.SimpleEnum.Enumerator</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.SimpleEnum-module.html">Package&nbsp;SimpleEnum</a> ::
+        Module&nbsp;Enumerator
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.SimpleEnum.Enumerator-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module Enumerator</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html">source&nbsp;code</a></span></p>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.SimpleEnum.Enumerator-module.html#PreprocessReaction" class="summary-sig-name">PreprocessReaction</a>(<span class="summary-sig-arg">reaction</span>,
+        <span class="summary-sig-arg">funcGroupFilename</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">propName</span>=<span class="summary-sig-default">'molFileValue'</span>)</span><br />
+      &gt;&gt;&gt; from rdkit.Chem import AllChem
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','boronic1.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+&gt;&gt;&gt; nWarn
+0
+&gt;&gt;&gt; nError
+0
+&gt;&gt;&gt; nReacts
+2
+&gt;&gt;&gt; nProds
+1
+&gt;&gt;&gt; reactantLabels
+(((0, 'halogen.bromine.aromatic'),), ((1, 'boronicacid'),))</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html#PreprocessReaction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.SimpleEnum.Enumerator-module.html#EnumerateReaction" class="summary-sig-name">EnumerateReaction</a>(<span class="summary-sig-arg">reaction</span>,
+        <span class="summary-sig-arg">bbLists</span>,
+        <span class="summary-sig-arg">uniqueProductsOnly</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">funcGroupFilename</span>=<span class="summary-sig-default">os.path.join(RDConfig.RDDataDir,'Functional_Group_Hierarchy.txt')</span>,
+        <span class="summary-sig-arg">propName</span>=<span class="summary-sig-default">'molFileValue'</span>)</span><br />
+      &gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','boronic1.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; reacts1=['Brc1ccccc1','Brc1ncccc1','Brc1cnccc1']
+&gt;&gt;&gt; reacts1=[Chem.MolFromSmiles(x) for x in reacts1]
+&gt;&gt;&gt; reacts2=['CCB(O)O','CCCB(O)O']
+&gt;&gt;&gt; reacts2=[Chem.MolFromSmiles(x) for x in reacts2]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html#EnumerateReaction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_runDoctests"></a><span class="summary-sig-name">_runDoctests</span>(<span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html#_runDoctests">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="os">os</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <a href="rdkit.Chem.AllChem-module.html" title="rdkit.Chem.AllChem">AllChem</a>,
+  <span title="rdkit.Chem.rdChemReactions">rdChemReactions</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="PreprocessReaction"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PreprocessReaction</span>(<span class="sig-arg">reaction</span>,
+        <span class="sig-arg">funcGroupFilename</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">propName</span>=<span class="sig-default">'molFileValue'</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html#PreprocessReaction">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+&gt;&gt;&gt; from rdkit.Chem import AllChem
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','boronic1.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+&gt;&gt;&gt; nWarn
+0
+&gt;&gt;&gt; nError
+0
+&gt;&gt;&gt; nReacts
+2
+&gt;&gt;&gt; nProds
+1
+&gt;&gt;&gt; reactantLabels
+(((0, 'halogen.bromine.aromatic'),), ((1, 'boronicacid'),))
+
+If there are functional group labels in the input reaction (via atoms with molFileValue
+properties), the corresponding atoms will have queries added to them so that they only
+match such things. We can see this here:
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; r1 = rxn.GetReactantTemplate(0)
+&gt;&gt;&gt; m1 = Chem.MolFromSmiles('CCBr')
+&gt;&gt;&gt; m2 = Chem.MolFromSmiles('c1ccccc1Br')
+
+These both match because the reaction file itself just has R1-Br:
+&gt;&gt;&gt; m1.HasSubstructMatch(r1)
+True
+&gt;&gt;&gt; m2.HasSubstructMatch(r1)
+True
+
+After preprocessing, we only match the aromatic Br:
+&gt;&gt;&gt; d = PreprocessReaction(rxn)
+&gt;&gt;&gt; m1.HasSubstructMatch(r1)
+False
+&gt;&gt;&gt; m2.HasSubstructMatch(r1)
+True
+
+We also support or queries in the values field (separated by commas):
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','azide_reaction.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; reactantLabels = PreprocessReaction(rxn)[-1]
+&gt;&gt;&gt; reactantLabels
+(((1, 'azide'),), ((1, 'carboxylicacid,acidchloride'),))
+&gt;&gt;&gt; m1 = Chem.MolFromSmiles('CC(=O)O')
+&gt;&gt;&gt; m2 = Chem.MolFromSmiles('CC(=O)Cl')
+&gt;&gt;&gt; m3 = Chem.MolFromSmiles('CC(=O)N')
+&gt;&gt;&gt; r2 = rxn.GetReactantTemplate(1)
+&gt;&gt;&gt; m1.HasSubstructMatch(r2)
+True
+&gt;&gt;&gt; m2.HasSubstructMatch(r2)
+True
+&gt;&gt;&gt; m3.HasSubstructMatch(r2)
+False
+
+unrecognized final group types are returned as None:
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','bad_value1.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+Traceback (most recent call last):
+  File &quot;/usr/prog/python/2.6.6_gnu/lib/python2.6/doctest.py&quot;, line 1253, in __run
+    compileflags, 1) in test.globs
+  File &quot;&lt;doctest __main__.PreprocessReaction[36]&gt;&quot;, line 1, in &lt;module&gt;
+    nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+  File &quot;Enumerator.py&quot;, line 105, in PreprocessReaction
+    reactantLabels = reaction.AddRecursiveQueriesToReaction(queryDict, propName='molFileValue', getLabels=True)
+RuntimeError: KeyErrorException
+
+One unrecognized group type in a comma-separated list makes the whole thing fail:
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','bad_value2.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+Traceback (most recent call last):
+  File &quot;/usr/prog/python/2.6.6_gnu/lib/python2.6/doctest.py&quot;, line 1253, in __run
+    compileflags, 1) in test.globs
+  File &quot;&lt;doctest __main__.PreprocessReaction[36]&gt;&quot;, line 1, in &lt;module&gt;
+    nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+  File &quot;Enumerator.py&quot;, line 105, in PreprocessReaction
+    reactantLabels = reaction.AddRecursiveQueriesToReaction(queryDict, propName='molFileValue', getLabels=True)
+RuntimeError: KeyErrorException
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','bad_value3.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+Traceback (most recent call last):
+  File &quot;/usr/prog/python/2.6.6_gnu/lib/python2.6/doctest.py&quot;, line 1253, in __run
+    compileflags, 1) in test.globs
+  File &quot;&lt;doctest __main__.PreprocessReaction[36]&gt;&quot;, line 1, in &lt;module&gt;
+    nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+  File &quot;Enumerator.py&quot;, line 105, in PreprocessReaction
+    reactantLabels = reaction.AddRecursiveQueriesToReaction(queryDict, propName='molFileValue', getLabels=True)
+RuntimeError: KeyErrorException
+&gt;&gt;&gt; rxn = rdChemReactions.ChemicalReaction()
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; nWarn,nError,nReacts,nProds,reactantLabels = PreprocessReaction(rxn)
+&gt;&gt;&gt; reactantLabels
+()
+&gt;&gt;&gt; reactantLabels == ()
+True
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="EnumerateReaction"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EnumerateReaction</span>(<span class="sig-arg">reaction</span>,
+        <span class="sig-arg">bbLists</span>,
+        <span class="sig-arg">uniqueProductsOnly</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">funcGroupFilename</span>=<span class="sig-default">os.path.join(RDConfig.RDDataDir,'Functional_Group_Hierarchy.txt')</span>,
+        <span class="sig-arg">propName</span>=<span class="sig-default">'molFileValue'</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.SimpleEnum.Enumerator-pysrc.html#EnumerateReaction">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+&gt;&gt;&gt; testFile = os.path.join(RDConfig.RDCodeDir,'Chem','SimpleEnum','test_data','boronic1.rxn')
+&gt;&gt;&gt; rxn = AllChem.ReactionFromRxnFile(testFile)
+&gt;&gt;&gt; rxn.Initialize()
+&gt;&gt;&gt; reacts1=['Brc1ccccc1','Brc1ncccc1','Brc1cnccc1']
+&gt;&gt;&gt; reacts1=[Chem.MolFromSmiles(x) for x in reacts1]
+&gt;&gt;&gt; reacts2=['CCB(O)O','CCCB(O)O']
+&gt;&gt;&gt; reacts2=[Chem.MolFromSmiles(x) for x in reacts2]
+
+&gt;&gt;&gt; prods = EnumerateReaction(rxn,(reacts1,reacts2))
+&gt;&gt;&gt; prods = list(prods)
+
+This is a bit nasty because of the symmetry of the boronic acid:
+&gt;&gt;&gt; len(prods)
+12
+
+&gt;&gt;&gt; smis = list(set([Chem.MolToSmiles(x[0]) for x in prods]))
+&gt;&gt;&gt; smis.sort()
+&gt;&gt;&gt; len(smis)
+6
+&gt;&gt;&gt; print(smis)
+['CCCc1ccccc1', 'CCCc1ccccn1', 'CCCc1cccnc1', 'CCc1ccccc1', 'CCc1ccccn1', 'CCc1cccnc1']
+
+The nastiness can be avoided at the cost of some memory by asking for only unique products:
+&gt;&gt;&gt; prods = EnumerateReaction(rxn,(reacts1,reacts2),uniqueProductsOnly=True)
+&gt;&gt;&gt; prods = list(prods)
+&gt;&gt;&gt; len(prods)
+6
+&gt;&gt;&gt; print(sorted([Chem.MolToSmiles(x[0]) for x in prods]))
+['CCCc1ccccc1', 'CCCc1ccccn1', 'CCCc1cccnc1', 'CCc1ccccc1', 'CCc1ccccn1', 'CCc1cccnc1']
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

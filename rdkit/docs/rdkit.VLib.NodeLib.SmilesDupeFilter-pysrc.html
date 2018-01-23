@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.VLib.NodeLib.SmilesDupeFilter</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.VLib-module.html">Package&nbsp;VLib</a> ::
+        <a href="rdkit.VLib.NodeLib-module.html">Package&nbsp;NodeLib</a> ::
+        Module&nbsp;SmilesDupeFilter
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.VLib.NodeLib.SmilesDupeFilter-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.VLib.NodeLib.SmilesDupeFilter-module.html">Module rdkit.VLib.NodeLib.SmilesDupeFilter</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#  $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2003 Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#     All Rights Reserved</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.VLib=rdkit.VLib-module.html"><a title="rdkit.VLib" class="py-name" href="#" onclick="return doclink('link-1', 'VLib', 'link-1');">VLib</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module rdkit.VLib.Filter=rdkit.VLib.Filter-module.html"><a title="rdkit.VLib.Filter" class="py-name" href="#" onclick="return doclink('link-2', 'Filter', 'link-2');">Filter</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class rdkit.VLib.Filter.FilterNode=rdkit.VLib.Filter.FilterNode-class.html"><a title="rdkit.VLib.Filter.FilterNode" class="py-name" href="#" onclick="return doclink('link-3', 'FilterNode', 'link-3');">FilterNode</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="DupeFilter"></a><div id="DupeFilter-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="DupeFilter-toggle" onclick="return toggle('DupeFilter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html">DupeFilter</a><tt class="py-op">(</tt><tt class="py-base-class">FilterNode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DupeFilter-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="DupeFilter-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">  <tt class="py-docstring">""" canonical-smiles based duplicate filter</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">  Assumptions:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    - inputs are molecules</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">  Sample Usage:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; import os</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; from rdkit import RDConfig</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; from rdkit.VLib.NodeLib.SDSupply import SDSupplyNode</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; fileN = os.path.join(RDConfig.RDCodeDir,'VLib','NodeLib',\</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">                             'test_data','NCI_aids.10.sdf')</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; suppl = SDSupplyNode(fileN)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; filt = DupeFilter()</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; filt.AddParent(suppl)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; ms = [x for x in filt]</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; len(ms)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">    10</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; ms[0].GetProp("_Name")</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">    '48'</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; ms[1].GetProp("_Name")</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    '78'</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; filt.reset()</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; filt.next().GetProp("_Name")</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring">    '48'</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="DupeFilter.__init__"></a><div id="DupeFilter.__init__-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="DupeFilter.__init__-toggle" onclick="return toggle('DupeFilter.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DupeFilter.__init__-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="DupeFilter.__init__-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt id="link-4" class="py-name"><a title="rdkit.VLib.Filter.FilterNode" class="py-name" href="#" onclick="return doclink('link-4', 'FilterNode', 'link-3');">FilterNode</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.Chem.DSViewer.Displayable.__init__()=rdkit.Chem.DSViewer.Displayable-class.html#__init__,Method rdkit.Chem.DSViewer.MolViewer.__init__()=rdkit.Chem.DSViewer.MolViewer-class.html#__init__,Method rdkit.Chem.Descriptors.PropertyFunctor.__init__()=rdkit.Chem.Descriptors.PropertyFunctor-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.Font.__init__()=rdkit.Chem.Draw.MolDrawing.Font-class.html#__init__,Method rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__()=rdkit.Chem.Draw.MolDrawing.MolDrawing-class.html#__init__,Method rdkit.Chem.Draw.aggCanvas.Canvas.__init__()=rdkit.Chem.Draw.aggCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.cairoCanvas.Canvas.__init__()=rdkit.Chem.Draw.cairoCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.mplCanvas.Canvas.__init__()=rdkit.Chem.Draw.mplCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.qtCanvas.Canvas.__init__()=rdkit.Chem.Draw.qtCanvas.Canvas-class.html#__init__,Method rdkit.Chem.Draw.spingCanvas.Canvas.__init__()=rdkit.Chem.Draw.spingCanvas.Canvas-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__()=rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._AtomFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__()=rdkit.Chem.EnumerateStereoisomers._BondFlipper-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator-class.html#__init__,Method rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__()=rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__()=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__()=rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint-class.html#__init__,Method rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__()=rdkit.Chem.FeatMaps.FeatMaps.FeatMap-class.html#__init__,Method rdkit.Chem.FilterCatalog.FilterMatcher.__init__()=rdkit.Chem.FilterCatalog.FilterMatcher-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__()=rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier-class.html#__init__,Method rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__()=rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener-class.html#__init__,Method rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__()=rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener-class.html#__init__,Method rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__()=rdkit.Chem.FragmentMatcher.FragmentMatcher-class.html#__init__,Method rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__()=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#__init__,Method rdkit.Chem.MCS.MCSResult.__init__()=rdkit.Chem.MCS.MCSResult-class.html#__init__,Method rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__()=rdkit.Chem.MolKey.InchiInfo.InchiInfo-class.html#__init__,Method rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__()=rdkit.Chem.Pharm2D.LazyGenerator.Generator-class.html#__init__,Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#__init__,Method rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__()=rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore-class.html#__init__,Method rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__()=rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore-class.html#__init__,Method rdkit.Chem.PropertyMol.PropertyMol.__init__()=rdkit.Chem.PropertyMol.PropertyMol-class.html#__init__,Method rdkit.Chem.PyMol.MolViewer.__init__()=rdkit.Chem.PyMol.MolViewer-class.html#__init__,Method rdkit.Chem.Recap.RecapHierarchyNode.__init__()=rdkit.Chem.Recap.RecapHierarchyNode-class.html#__init__,Method rdkit.Chem.SaltRemover.SaltRemover.__init__()=rdkit.Chem.SaltRemover.SaltRemover-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__()=rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint-class.html#__init__,Method rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__()=rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__()=rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier-class.html#__init__,Method rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__()=rdkit.Chem.Suppliers.MolSupplier.MolSupplier-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.CangenNode.__init__()=rdkit.Chem.fmcs.fmcs.CangenNode-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.MCSResult.__init__()=rdkit.Chem.fmcs.fmcs.MCSResult-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Timer.__init__()=rdkit.Chem.fmcs.fmcs.Timer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedFragment.__init__()=rdkit.Chem.fmcs.fmcs.TypedFragment-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__()=rdkit.Chem.fmcs.fmcs.TypedMolecule-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.Uniquer.__init__()=rdkit.Chem.fmcs.fmcs.Uniquer-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__()=rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__()=rdkit.Chem.fmcs.fmcs.VerboseHeapOps-class.html#__init__,Method rdkit.Chem.fmcs.fmcs._SingleBest.__init__()=rdkit.Chem.fmcs.fmcs._SingleBest-class.html#__init__,Method rdkit.Chem.fmcs.fmcs.starting_from.__init__()=rdkit.Chem.fmcs.fmcs.starting_from-class.html#__init__,Method rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__()=rdkit.DataStructs.BitEnsemble.BitEnsemble-class.html#__init__,Method rdkit.DataStructs.LazySignature.LazySig.__init__()=rdkit.DataStructs.LazySignature.LazySig-class.html#__init__,Method rdkit.DataStructs.TopNContainer.TopNContainer.__init__()=rdkit.DataStructs.TopNContainer.TopNContainer-class.html#__init__,Method rdkit.DataStructs.VectCollection.VectCollection.__init__()=rdkit.DataStructs.VectCollection.VectCollection-class.html#__init__,Method rdkit.Dbase.DbConnection.DbConnect.__init__()=rdkit.Dbase.DbConnection.DbConnect-class.html#__init__,Method rdkit.Dbase.DbReport.CDXImageTransformer.__init__()=rdkit.Dbase.DbReport.CDXImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.CactvsImageTransformer.__init__()=rdkit.Dbase.DbReport.CactvsImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.RDImageTransformer.__init__()=rdkit.Dbase.DbReport.RDImageTransformer-class.html#__init__,Method rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__()=rdkit.Dbase.DbReport.ReportLabImageTransformer-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultBase.__init__()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#__init__,Method rdkit.Dbase.DbResultSet.DbResultSet.__init__()=rdkit.Dbase.DbResultSet.DbResultSet-class.html#__init__,Method rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__()=rdkit.Dbase.DbResultSet.RandomAccessDbResultSet-class.html#__init__,Method rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__()=rdkit.ML.Cluster.ClusterVis.ClusterRenderer-class.html#__init__,Method rdkit.ML.Cluster.Clusters.Cluster.__init__()=rdkit.ML.Cluster.Clusters.Cluster-class.html#__init__,Method rdkit.ML.Composite.BayesComposite.BayesComposite.__init__()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#__init__,Method rdkit.ML.Composite.Composite.Composite.__init__()=rdkit.ML.Composite.Composite.Composite-class.html#__init__,Method rdkit.ML.Data.MLData.MLDataSet.__init__()=rdkit.ML.Data.MLData.MLDataSet-class.html#__init__,Method rdkit.ML.Data.MLData.MLQuantDataSet.__init__()=rdkit.ML.Data.MLData.MLQuantDataSet-class.html#__init__,Method rdkit.ML.DecTree.DecTree.DecTreeNode.__init__()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Forest.Forest.__init__()=rdkit.ML.DecTree.Forest.Forest-class.html#__init__,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#__init__,Method rdkit.ML.DecTree.SigTree.SigTreeNode.__init__()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#__init__,Method rdkit.ML.DecTree.Tree.TreeNode.__init__()=rdkit.ML.DecTree.Tree.TreeNode-class.html#__init__,Method rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__()=rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#__init__,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#__init__,Method rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__()=rdkit.ML.InfoTheory.BitClusterer.BitClusterer-class.html#__init__,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#__init__,Method rdkit.ML.KNN.KNNModel.KNNModel.__init__()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#__init__,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#__init__,Method rdkit.ML.ModelPackage.Packager.ModelPackage.__init__()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#__init__,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.Sigmoid.__init__()=rdkit.ML.Neural.ActFuncs.Sigmoid-class.html#__init__,Method rdkit.ML.Neural.ActFuncs.TanH.__init__()=rdkit.ML.Neural.ActFuncs.TanH-class.html#__init__,Method rdkit.ML.Neural.NetNode.NetNode.__init__()=rdkit.ML.Neural.NetNode.NetNode-class.html#__init__,Method rdkit.ML.Neural.Network.Network.__init__()=rdkit.ML.Neural.Network.Network-class.html#__init__,Method rdkit.ML.Neural.Trainers.BackProp.__init__()=rdkit.ML.Neural.Trainers.BackProp-class.html#__init__,Method rdkit.ML.files.ReFile.__init__()=rdkit.ML.files.ReFile-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.SpreadPicker-class.html#__init__,Method rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__()=rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker-class.html#__init__,Method rdkit.VLib.Filter.FilterNode.__init__()=rdkit.VLib.Filter.FilterNode-class.html#__init__,Method rdkit.VLib.Node.VLibNode.__init__()=rdkit.VLib.Node.VLibNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__()=rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq-class.html#__init__,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__()=rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__()=rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__()=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html#__init__,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#__init__,Method rdkit.VLib.Output.OutputNode.__init__()=rdkit.VLib.Output.OutputNode-class.html#__init__,Method rdkit.VLib.Supply.SupplyNode.__init__()=rdkit.VLib.Supply.SupplyNode-class.html#__init__,Method rdkit.VLib.Transform.TransformNode.__init__()=rdkit.VLib.Transform.TransformNode-class.html#__init__"><a title="rdkit.Chem.DSViewer.Displayable.__init__
+rdkit.Chem.DSViewer.MolViewer.__init__
+rdkit.Chem.Descriptors.PropertyFunctor.__init__
+rdkit.Chem.Draw.MolDrawing.Font.__init__
+rdkit.Chem.Draw.MolDrawing.MolDrawing.__init__
+rdkit.Chem.Draw.aggCanvas.Canvas.__init__
+rdkit.Chem.Draw.cairoCanvas.Canvas.__init__
+rdkit.Chem.Draw.mplCanvas.Canvas.__init__
+rdkit.Chem.Draw.qtCanvas.Canvas.__init__
+rdkit.Chem.Draw.spingCanvas.Canvas.__init__
+rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions.__init__
+rdkit.Chem.EnumerateStereoisomers._AtomFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._BondFlipper.__init__
+rdkit.Chem.EnumerateStereoisomers._RangeBitsGenerator.__init__
+rdkit.Chem.EnumerateStereoisomers._UniqueRandomBitsGenerator.__init__
+rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.__init__
+rdkit.Chem.FeatMaps.FeatMapPoint.FeatMapPoint.__init__
+rdkit.Chem.FeatMaps.FeatMaps.FeatMap.__init__
+rdkit.Chem.FilterCatalog.FilterMatcher.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.__init__
+rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.SimilarityScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.ThresholdScreener.__init__
+rdkit.Chem.Fingerprints.SimilarityScreener.TopNScreener.__init__
+rdkit.Chem.FragmentMatcher.FragmentMatcher.__init__
+rdkit.Chem.FunctionalGroups.FGHierarchyNode.__init__
+rdkit.Chem.MCS.MCSResult.__init__
+rdkit.Chem.MolKey.InchiInfo.InchiInfo.__init__
+rdkit.Chem.Pharm2D.LazyGenerator.Generator.__init__
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.__init__
+rdkit.Chem.Pharm3D.ExcludedVolume.ExcludedVolume.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.ExplicitPharmacophore.__init__
+rdkit.Chem.Pharm3D.Pharmacophore.Pharmacophore.__init__
+rdkit.Chem.PropertyMol.PropertyMol.__init__
+rdkit.Chem.PyMol.MolViewer.__init__
+rdkit.Chem.Recap.RecapHierarchyNode.__init__
+rdkit.Chem.SaltRemover.SaltRemover.__init__
+rdkit.Chem.Subshape.SubshapeObjects.ShapeWithSkeleton.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SkeletonPoint.__init__
+rdkit.Chem.Subshape.SubshapeObjects.SubshapeShape.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.ForwardDbMolSupplier.__init__
+rdkit.Chem.Suppliers.DbMolSupplier.RandomAccessDbMolSupplier.__init__
+rdkit.Chem.Suppliers.MolSupplier.MolSupplier.__init__
+rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.CangenNode.__init__
+rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.MCSResult.__init__
+rdkit.Chem.fmcs.fmcs.Timer.__init__
+rdkit.Chem.fmcs.fmcs.TypedFragment.__init__
+rdkit.Chem.fmcs.fmcs.TypedMolecule.__init__
+rdkit.Chem.fmcs.fmcs.Uniquer.__init__
+rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher.__init__
+rdkit.Chem.fmcs.fmcs.VerboseHeapOps.__init__
+rdkit.Chem.fmcs.fmcs._SingleBest.__init__
+rdkit.Chem.fmcs.fmcs.starting_from.__init__
+rdkit.DataStructs.BitEnsemble.BitEnsemble.__init__
+rdkit.DataStructs.LazySignature.LazySig.__init__
+rdkit.DataStructs.TopNContainer.TopNContainer.__init__
+rdkit.DataStructs.VectCollection.VectCollection.__init__
+rdkit.Dbase.DbConnection.DbConnect.__init__
+rdkit.Dbase.DbReport.CDXImageTransformer.__init__
+rdkit.Dbase.DbReport.CactvsImageTransformer.__init__
+rdkit.Dbase.DbReport.RDImageTransformer.__init__
+rdkit.Dbase.DbReport.ReportLabImageTransformer.__init__
+rdkit.Dbase.DbResultSet.DbResultBase.__init__
+rdkit.Dbase.DbResultSet.DbResultSet.__init__
+rdkit.Dbase.DbResultSet.RandomAccessDbResultSet.__init__
+rdkit.ML.Cluster.ClusterVis.ClusterRenderer.__init__
+rdkit.ML.Cluster.Clusters.Cluster.__init__
+rdkit.ML.Composite.BayesComposite.BayesComposite.__init__
+rdkit.ML.Composite.Composite.Composite.__init__
+rdkit.ML.Data.MLData.MLDataSet.__init__
+rdkit.ML.Data.MLData.MLQuantDataSet.__init__
+rdkit.ML.DecTree.DecTree.DecTreeNode.__init__
+rdkit.ML.DecTree.Forest.Forest.__init__
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.__init__
+rdkit.ML.DecTree.SigTree.SigTreeNode.__init__
+rdkit.ML.DecTree.Tree.TreeNode.__init__
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.__init__
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.__init__
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.__init__
+rdkit.ML.InfoTheory.BitClusterer.BitClusterer.__init__
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.__init__
+rdkit.ML.KNN.KNNModel.KNNModel.__init__
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.__init__
+rdkit.ML.ModelPackage.Packager.ModelPackage.__init__
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.__init__
+rdkit.ML.Neural.ActFuncs.Sigmoid.__init__
+rdkit.ML.Neural.ActFuncs.TanH.__init__
+rdkit.ML.Neural.NetNode.NetNode.__init__
+rdkit.ML.Neural.Network.Network.__init__
+rdkit.ML.Neural.Trainers.BackProp.__init__
+rdkit.ML.files.ReFile.__init__
+rdkit.SimDivFilters.SimilarityPickers.SpreadPicker.__init__
+rdkit.SimDivFilters.SimilarityPickers.TopNOverallPicker.__init__
+rdkit.VLib.Filter.FilterNode.__init__
+rdkit.VLib.Node.VLibNode.__init__
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.__init__
+rdkit.VLib.NodeLib.DbPickleSupplier._lazyDataSeq.__init__
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.__init__
+rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.__init__
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover.__init__
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.__init__
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.__init__
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.__init__
+rdkit.VLib.Output.OutputNode.__init__
+rdkit.VLib.Supply.SupplyNode.__init__
+rdkit.VLib.Transform.TransformNode.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">func</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.filter()=rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter-class.html#filter,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.filter()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#filter"><a title="rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter.filter
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.filter" class="py-name" href="#" onclick="return doclink('link-6', 'filter', 'link-6');">filter</a></tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_smisSeen</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="DupeFilter.reset"></a><div id="DupeFilter.reset-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="DupeFilter.reset-toggle" onclick="return toggle('DupeFilter.reset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#reset">reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DupeFilter.reset-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="DupeFilter.reset-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="rdkit.VLib.Filter.FilterNode" class="py-name" href="#" onclick="return doclink('link-7', 'FilterNode', 'link-3');">FilterNode</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.reset()=rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier-class.html#reset,Method rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.reset()=rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier-class.html#reset,Method rdkit.VLib.Node.VLibNode.reset()=rdkit.VLib.Node.VLibNode-class.html#reset,Method rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.reset()=rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.reset()=rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.reset()=rdkit.VLib.NodeLib.SDSupply.SDSupplyNode-class.html#reset,Method rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.reset()=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#reset,Method rdkit.VLib.NodeLib.SmilesOutput.OutputNode.reset()=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html#reset,Method rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.reset()=rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode-class.html#reset,Method rdkit.VLib.Supply.SupplyNode.reset()=rdkit.VLib.Supply.SupplyNode-class.html#reset"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.ForwardDbFpSupplier.reset
+rdkit.Chem.Fingerprints.DbFpSupplier.RandomAccessDbFpSupplier.reset
+rdkit.VLib.Node.VLibNode.reset
+rdkit.VLib.NodeLib.DbMolSupply.DbMolSupplyNode.reset
+rdkit.VLib.NodeLib.DbPickleSupplier.DbPickleSupplyNode.reset
+rdkit.VLib.NodeLib.SDSupply.SDSupplyNode.reset
+rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter.reset
+rdkit.VLib.NodeLib.SmilesOutput.OutputNode.reset
+rdkit.VLib.NodeLib.SmilesSupply.SmilesSupplyNode.reset
+rdkit.VLib.Supply.SupplyNode.reset" class="py-name" href="#" onclick="return doclink('link-8', 'reset', 'link-8');">reset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_smisSeen</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="DupeFilter.filter"></a><div id="DupeFilter.filter-def"><a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="DupeFilter.filter-toggle" onclick="return toggle('DupeFilter.filter');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html#filter">filter</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cmpd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DupeFilter.filter-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="DupeFilter.filter-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-name">smi</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-9', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolToSmiles</tt><tt class="py-op">(</tt><tt class="py-name">cmpd</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">smi</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_smisSeen</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_smisSeen</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">smi</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-number">1</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-number">0</tt> </tt>
+</div></div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-comment"># ------------------------------------</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-comment">#  doctest boilerplate</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="_runDoctests"></a><div id="_runDoctests-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="_runDoctests-toggle" onclick="return toggle('_runDoctests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.VLib.NodeLib.SmilesDupeFilter-module.html#_runDoctests">_runDoctests</a><tt class="py-op">(</tt><tt class="py-param">verbose</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">doctest</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">  <tt class="py-name">failed</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">testmod</tt><tt class="py-op">(</tt><tt class="py-name">optionflags</tt><tt class="py-op">=</tt><tt class="py-name">doctest</tt><tt class="py-op">.</tt><tt class="py-name">ELLIPSIS</tt><tt class="py-op">,</tt> <tt class="py-name">verbose</tt><tt class="py-op">=</tt><tt class="py-name">verbose</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">  <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-name">failed</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt>  <tt class="py-comment"># pragma: nocover</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">  <tt id="link-10" class="py-name" targets="Function rdkit.Chem.AllChem._runDoctests()=rdkit.Chem.AllChem-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Pairs._runDoctests()=rdkit.Chem.AtomPairs.Pairs-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Sheridan._runDoctests()=rdkit.Chem.AtomPairs.Sheridan-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Torsions._runDoctests()=rdkit.Chem.AtomPairs.Torsions-module.html#_runDoctests,Function rdkit.Chem.AtomPairs.Utils._runDoctests()=rdkit.Chem.AtomPairs.Utils-module.html#_runDoctests,Function rdkit.Chem.Descriptors._runDoctests()=rdkit.Chem.Descriptors-module.html#_runDoctests,Function rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests()=rdkit.Chem.FeatMaps.FeatMapPoint-module.html#_runDoctests,Function rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests()=rdkit.Chem.Fingerprints.DbFpSupplier-module.html#_runDoctests,Function rdkit.Chem.Fraggle.FraggleSim._runDoctests()=rdkit.Chem.Fraggle.FraggleSim-module.html#_runDoctests,Function rdkit.Chem.MolKey.MolKey._runDoctests()=rdkit.Chem.MolKey.MolKey-module.html#_runDoctests,Function rdkit.Chem.PandasTools._runDoctests()=rdkit.Chem.PandasTools-module.html#_runDoctests,Function rdkit.Chem.Pharm2D.Utils._runDoctests()=rdkit.Chem.Pharm2D.Utils-module.html#_runDoctests,Function rdkit.Chem.Pharm3D.EmbedLib._runDoctests()=rdkit.Chem.Pharm3D.EmbedLib-module.html#_runDoctests,Function rdkit.Chem.QED._runDoctests()=rdkit.Chem.QED-module.html#_runDoctests,Function rdkit.Chem.SaltRemover._runDoctests()=rdkit.Chem.SaltRemover-module.html#_runDoctests,Function rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests()=rdkit.Chem.Scaffolds.MurckoScaffold-module.html#_runDoctests,Function rdkit.Chem.SimpleEnum.Enumerator._runDoctests()=rdkit.Chem.SimpleEnum.Enumerator-module.html#_runDoctests,Function rdkit.DataStructs.BitUtils._runDoctests()=rdkit.DataStructs.BitUtils-module.html#_runDoctests,Function rdkit.DataStructs.LazySignature._runDoctests()=rdkit.DataStructs.LazySignature-module.html#_runDoctests,Function rdkit.DataStructs.VectCollection._runDoctests()=rdkit.DataStructs.VectCollection-module.html#_runDoctests,Function rdkit.ML.Data.DataUtils._runDoctests()=rdkit.ML.Data.DataUtils-module.html#_runDoctests,Function rdkit.ML.Data.SplitData._runDoctests()=rdkit.ML.Data.SplitData-module.html#_runDoctests,Function rdkit.ML.KNN.DistFunctions._runDoctests()=rdkit.ML.KNN.DistFunctions-module.html#_runDoctests,Function rdkit.SimDivFilters.SimilarityPickers._runDoctests()=rdkit.SimDivFilters.SimilarityPickers-module.html#_runDoctests,Function rdkit.VLib.Filter._runDoctests()=rdkit.VLib.Filter-module.html#_runDoctests,Function rdkit.VLib.Node._runDoctests()=rdkit.VLib.Node-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SDSupply._runDoctests()=rdkit.VLib.NodeLib.SDSupply-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests()=rdkit.VLib.NodeLib.SmartsMolFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmartsRemover._runDoctests()=rdkit.VLib.NodeLib.SmartsRemover-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests()=rdkit.VLib.NodeLib.SmilesDupeFilter-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesOutput._runDoctests()=rdkit.VLib.NodeLib.SmilesOutput-module.html#_runDoctests,Function rdkit.VLib.NodeLib.SmilesSupply._runDoctests()=rdkit.VLib.NodeLib.SmilesSupply-module.html#_runDoctests,Function rdkit.VLib.Output._runDoctests()=rdkit.VLib.Output-module.html#_runDoctests,Function rdkit.VLib.Supply._runDoctests()=rdkit.VLib.Supply-module.html#_runDoctests,Function rdkit.VLib.Transform._runDoctests()=rdkit.VLib.Transform-module.html#_runDoctests"><a title="rdkit.Chem.AllChem._runDoctests
+rdkit.Chem.AtomPairs.Pairs._runDoctests
+rdkit.Chem.AtomPairs.Sheridan._runDoctests
+rdkit.Chem.AtomPairs.Torsions._runDoctests
+rdkit.Chem.AtomPairs.Utils._runDoctests
+rdkit.Chem.Descriptors._runDoctests
+rdkit.Chem.FeatMaps.FeatMapPoint._runDoctests
+rdkit.Chem.Fingerprints.DbFpSupplier._runDoctests
+rdkit.Chem.Fraggle.FraggleSim._runDoctests
+rdkit.Chem.MolKey.MolKey._runDoctests
+rdkit.Chem.PandasTools._runDoctests
+rdkit.Chem.Pharm2D.Utils._runDoctests
+rdkit.Chem.Pharm3D.EmbedLib._runDoctests
+rdkit.Chem.QED._runDoctests
+rdkit.Chem.SaltRemover._runDoctests
+rdkit.Chem.Scaffolds.MurckoScaffold._runDoctests
+rdkit.Chem.SimpleEnum.Enumerator._runDoctests
+rdkit.DataStructs.BitUtils._runDoctests
+rdkit.DataStructs.LazySignature._runDoctests
+rdkit.DataStructs.VectCollection._runDoctests
+rdkit.ML.Data.DataUtils._runDoctests
+rdkit.ML.Data.SplitData._runDoctests
+rdkit.ML.KNN.DistFunctions._runDoctests
+rdkit.SimDivFilters.SimilarityPickers._runDoctests
+rdkit.VLib.Filter._runDoctests
+rdkit.VLib.Node._runDoctests
+rdkit.VLib.NodeLib.SDSupply._runDoctests
+rdkit.VLib.NodeLib.SmartsMolFilter._runDoctests
+rdkit.VLib.NodeLib.SmartsRemover._runDoctests
+rdkit.VLib.NodeLib.SmilesDupeFilter._runDoctests
+rdkit.VLib.NodeLib.SmilesOutput._runDoctests
+rdkit.VLib.NodeLib.SmilesSupply._runDoctests
+rdkit.VLib.Output._runDoctests
+rdkit.VLib.Supply._runDoctests
+rdkit.VLib.Transform._runDoctests" class="py-name" href="#" onclick="return doclink('link-10', '_runDoctests', 'link-10');">_runDoctests</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

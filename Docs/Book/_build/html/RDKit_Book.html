@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The RDKit Book &#8212; The RDKit 2017.09.2 ドキュメント</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.09.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="RDKit Cookbook" href="Cookbook.html" />
+    <link rel="prev" title="Getting Started with the RDKit in Python" href="GettingStartedInPython.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Cookbook.html" title="RDKit Cookbook"
+             accesskey="N">次へ</a> |</li>
+        <li class="right" >
+          <a href="GettingStartedInPython.html" title="Getting Started with the RDKit in Python"
+             accesskey="P">前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="index.html">目次</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">An overview of the RDKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The RDKit Book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#misc-cheminformatics-topics">Misc Cheminformatics Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aromaticity">Aromaticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ring-finding-and-sssr">Ring Finding and SSSR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#chemical-reaction-handling">Chemical Reaction Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reaction-smarts">Reaction SMARTS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#some-features">Some features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chirality">Chirality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rules-and-caveats">Rules and caveats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-feature-definition-file-format">The Feature Definition File Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#chemical-features">Chemical Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#syntax-of-the-fdef-file">Syntax of the FDef file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#atomtype-definitions">AtomType definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#feature-definitions">Feature definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#additional-syntax-notes">Additional syntax notes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atom-weights-and-feature-locations">Atom weights and feature locations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-question-s">Frequently Asked Question(s)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#representation-of-pharmacophore-fingerprints">Representation of Pharmacophore Fingerprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#atom-atom-matching-in-substructure-queries">Atom-Atom Matching in Substructure Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#molecular-sanitization">Molecular Sanitization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#magic-property-values">「Magic」 Property Values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#romol-mol-in-python">ROMol  (Mol in Python)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atom">Atom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-safety-and-the-rdkit">Thread safety and the RDKit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-has-been-tested">What has been tested</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#known-problems">Known Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cookbook.html">RDKit Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a></li>
+</ul>
+
+  <h4>前のトピックへ</h4>
+  <p class="topless"><a href="GettingStartedInPython.html"
+                        title="前の章へ">Getting Started with the RDKit in Python</a></p>
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Cookbook.html"
+                        title="次の章へ">RDKit Cookbook</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/RDKit_Book.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-rdkit-book">
+<h1>The RDKit Book<a class="headerlink" href="#the-rdkit-book" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="misc-cheminformatics-topics">
+<h2>Misc Cheminformatics Topics<a class="headerlink" href="#misc-cheminformatics-topics" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="aromaticity">
+<h3>Aromaticity<a class="headerlink" href="#aromaticity" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Aromaticity is one of those unpleasant topics that is simultaneously simple and impossibly complicated.
+Since neither experimental nor theoretical chemists can agree with each other about a definition, it’s necessary to pick something arbitrary and stick to it.
+This is the approach taken in the RDKit.</p>
+<p>Instead of using patterns to match known aromatic systems, the aromaticity perception code in the RDKit uses a set of rules.
+The rules are relatively straightforward.</p>
+<p>Aromaticity is a property of atoms and bonds in rings.
+An aromatic bond must be between aromatic atoms, but a bond between aromatic atoms does not need to be aromatic.</p>
+<p>For example the fusing bonds here are not considered to be aromatic by the RDKit:</p>
+<img alt="_images/picture_9.png" src="_images/picture_9.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rdkit</span> <span class="k">import</span> <span class="n">Chem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1=CC2=C(C=C1)C1=CC=CC=C21&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>A ring, or fused ring system, is considered to be aromatic if it obeys the 4N+2 rule.
+Contributions to the electron count are determined by atom type and environment.
+Some examples:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Fragment</td>
+<td>Number of pi electrons</td>
+</tr>
+<tr class="row-even"><td>c(a)a</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>n(a)a</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>An(a)a</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>o(a)a</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>s(a)a</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>se(a)a</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>te(a)a</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>O=c(a)a</td>
+<td>0</td>
+</tr>
+<tr class="row-even"><td>N=c(a)a</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>*(a)a</td>
+<td>0, 1, or 2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notation</strong> a: any aromatic atom; A: any atom, include H; *: a dummy atom</p>
+<p>Notice that exocyclic bonds to electronegative atoms “steal” the valence electron from the ring atom and that dummy atoms contribute whatever count is necessary to make the ring aromatic.</p>
+<p>The use of fused rings for aromaticity can lead to situations where individual rings are not aromatic, but the fused system is.
+An example of this is azulene:</p>
+<img alt="_images/picture_8.png" src="_images/picture_8.png" />
+<p>An extreme example, demonstrating both fused rings and the influence of exocyclic double bonds:</p>
+<img alt="_images/picture_7.png" src="_images/picture_7.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">=</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;O=C1C=CC(=O)C2=C1OC=CO2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>A special case, heteroatoms with radicals are not considered candidates for aromaticity:</p>
+<img alt="_images/picture_10.png" src="_images/picture_10.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1=C[N]C=C1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">GetNumRadicalElectrons</span><span class="p">()</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>Carbons with radicals, however, are still considered:</p>
+<img alt="_images/picture_11.png" src="_images/picture_11.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1=[C]NC=C1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">GetNumRadicalElectrons</span><span class="p">()</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> For reasons of computation expediency, aromaticity perception is only done for fused-ring systems where all members are at most 24 atoms in size.</p>
+</div>
+<div class="section" id="ring-finding-and-sssr">
+<h3>Ring Finding and SSSR<a class="headerlink" href="#ring-finding-and-sssr" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>[Section taken from “Getting Started” document]</p>
+<p>As others have ranted about with more energy and eloquence than I intend to, the definition of a molecule’s smallest set of smallest rings is not unique.
+In some high symmetry molecules, a “true” SSSR will give results that are unappealing.
+For example, the SSSR for cubane only contains 5 rings, even though there are “obviously” 6. This problem can be fixed by implementing a <em>small</em> (instead of <em>smallest</em>) set of smallest rings algorithm that returns symmetric results.
+This is the approach that we took with the RDKit.</p>
+<p>Because it is sometimes useful to be able to count how many SSSR rings are present in the molecule, there is a GetSSSR function, but this only returns the SSSR count, not the potentially non-unique set of rings.</p>
+</div>
+</div>
+<div class="section" id="chemical-reaction-handling">
+<h2>Chemical Reaction Handling<a class="headerlink" href="#chemical-reaction-handling" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="reaction-smarts">
+<h3>Reaction SMARTS<a class="headerlink" href="#reaction-smarts" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Not SMIRKS <a class="footnote-reference" href="#smirks" id="id1">[1]</a> , not reaction SMILES <a class="footnote-reference" href="#smiles" id="id2">[2]</a>, derived from SMARTS <a class="footnote-reference" href="#smarts" id="id3">[3]</a>.</p>
+<p>The general grammar for a reaction SMARTS is :</p>
+<pre>
+<strong id="grammar-token-reaction">reaction </strong> ::=   reactants &quot;&gt;&gt;&quot; products
+<strong id="grammar-token-reactants">reactants</strong> ::=  molecules
+<strong id="grammar-token-products">products </strong> ::=   molecules
+<strong id="grammar-token-molecules">molecules</strong> ::=  molecule
+               molecules &quot;.&quot; molecule
+<strong id="grammar-token-molecule">molecule </strong> ::=   a valid SMARTS string without &quot;.&quot; characters
+                &quot;(&quot; a valid SMARTS string without &quot;.&quot; characters &quot;)&quot;
+</pre>
+<div class="section" id="some-features">
+<h4>Some features<a class="headerlink" href="#some-features" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Mapped dummy atoms in the product template are replaced by the corresponding atom in the reactant:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="k">import</span> <span class="n">AllChem</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C:1]=[O,N:2]&gt;&gt;[C:1][*:2]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC=O&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;CCO&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC=N&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;CCN&#39;]</span>
+</pre></div>
+</div>
+<p>but unmapped dummy atoms are left as dummies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C:1]=[O,N:2]&gt;&gt;[*][C:1][*:2]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC=O&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;[*]C(C)O&#39;]</span>
+</pre></div>
+</div>
+<p>“Any” bonds in the products are replaced by the corresponding bond in the reactant:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C:1]~[O,N:2]&gt;&gt;[*][C:1]~[*:2]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C=O&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;[*]C=O&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CO&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;[*]CO&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C#N&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;[*]C#N&#39;]</span>
+</pre></div>
+</div>
+<p>Intramolecular reactions can be expressed flexibly by including
+reactants in parentheses. This is demonstrated in this ring-closing
+metathesis example <a class="footnote-reference" href="#intramolrxn" id="id4">[4]</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s2">&quot;([C:1]=[C;H2].[C:2]=[C;H2])&gt;&gt;[*:1]=[*:2]&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C=CCOCC=C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span> <span class="o">=</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">m1</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&#39;C1=CCOC1&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chirality">
+<h4>Chirality<a class="headerlink" href="#chirality" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>This section describes how chirality information in the reaction
+defition is handled. A consistent example, esterification of secondary
+alcohols, is used throughout <a class="footnote-reference" href="#chiralrxn" id="id5">[5]</a>.</p>
+<p>If no chiral information is present in the reaction definition, the
+stereochemistry of the reactants is preserved:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC(CCN)O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C[C@H](CCN)O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol3</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C[C@@H](CCN)O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acid</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC(=O)O&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CH1:1][OH:2].[OH][C:3]=[O:4]&gt;&gt;[C:1][O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@@H](C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>You get the same result (retention of stereochemistry) if a mapped atom has the same chirality
+in both reactants and products:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C@H1:1][OH:2].[OH][C:3]=[O:4]&gt;&gt;[C@:1][O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@@H](C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>A mapped atom with different chirality in reactants and products leads
+to inversion of stereochemistry:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C@H1:1][OH:2].[OH][C:3]=[O:4]&gt;&gt;[C@@:1][O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>If a mapped atom has chirality specified in the reactants, but not
+in the products, the reaction destroys chirality at that center:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C@H1:1][OH:2].[OH][C:3]=[O:4]&gt;&gt;[C:1][O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)OC(C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>And, finally, if chirality is specified in the products, but not the
+reactants, the reaction creates a stereocenter with the specified
+chirality:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CH1:1][OH:2].[OH][C:3]=[O:4]&gt;&gt;[C@:1][O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>Note that this doesn’t make sense without including a bit more
+context around the stereocenter in the reaction definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CH3:5][CH1:1]([C:6])[OH:2].[OH][C:3]=[O:4]&gt;&gt;[C:5][C@:1]([C:6])[O:2][C:3]=[O:4]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol1</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol3</span><span class="p">,</span><span class="n">acid</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(=O)O[C@H](C)CCN&#39;</span>
+</pre></div>
+</div>
+<p>Note that the chirality specification is not being used as part of the
+query: a molecule with no chirality specified can match a reactant
+with specified chirality.</p>
+<p>In general, the reaction machinery tries to preserve as much
+stereochemistry information as possible. This works when a single new
+bond is formed to a chiral center:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C:1][C:2]-O&gt;&gt;[C:1][C:2]-S&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C[C@@H](O)CCN&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol2</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;C[C@@H](S)CCN&#39;</span>
+</pre></div>
+</div>
+<p>But it fails if two or more bonds are formed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[C:1][C:2](-O)-F&gt;&gt;[C:1][C:2](-S)-Cl&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alcohol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C[C@@H](O)F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span><span class="o">=</span><span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">alcohol</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;CC(S)Cl&#39;</span>
+</pre></div>
+</div>
+<p>In this case, there’s just not sufficient information present to allow
+the information to be preserved. You can help by providing mapping
+information:</p>
+</div>
+<div class="section" id="rules-and-caveats">
+<h4>Rules and caveats<a class="headerlink" href="#rules-and-caveats" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ol class="arabic simple">
+<li>Include atom map information at the end of an atom query.
+So do [C,N,O:1] or [C;R:1].</li>
+<li>Don’t forget that unspecified bonds in SMARTS are either single or aromatic.
+Bond orders in product templates are assigned when the product template itself is constructed and it’s not always possible to tell if the bond should be single or aromatic:</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[#6:1][#7,#8:2]&gt;&gt;[#6:1][#6:2]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1NCCCC1&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;C1CCCCC1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ncccc1&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;c1ccccc-1&#39;]</span>
+</pre></div>
+</div>
+<blockquote>
+<div>So if you want to copy the bond order from the reactant, use an “Any” bond:</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="s1">&#39;[#6:1][#7,#8:2]&gt;&gt;[#6:1]~[#6:2]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;c1ncccc1&#39;</span><span class="p">),))[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">[&#39;c1ccccc1&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-feature-definition-file-format">
+<h2>The Feature Definition File Format<a class="headerlink" href="#the-feature-definition-file-format" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>An FDef file contains all the information needed to define a set of chemical features.
+It contains definitions of feature types that are defined from queries built up using Daylight’s SMARTS language. <a class="footnote-reference" href="#smarts" id="id6">[3]</a> The FDef file can optionally also include definitions of atom types that are used to make feature definitions more readable.</p>
+<div class="section" id="chemical-features">
+<h3>Chemical Features<a class="headerlink" href="#chemical-features" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Chemical features are defined by a Feature Type and a Feature Family.
+The Feature Family is a general classification of the feature (such as 「Hydrogen-bond Donor」 or 「Aromatic」) while the Feature Type provides additional, higher-resolution, information about features.
+Pharmacophore matching is done using Feature Family’s. Each feature type contains the following pieces of information:</p>
+<ul class="simple">
+<li>A SMARTS pattern that describes atoms (one or more) matching the feature type.</li>
+<li>Weights used to determine the feature’s position based on the positions of its defining atoms.</li>
+</ul>
+</div>
+<div class="section" id="syntax-of-the-fdef-file">
+<h3>Syntax of the FDef file<a class="headerlink" href="#syntax-of-the-fdef-file" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="atomtype-definitions">
+<h4>AtomType definitions<a class="headerlink" href="#atomtype-definitions" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>An AtomType definition allows you to assign a shorthand name to be used in place of a SMARTS string defining an atom query.
+This allows FDef files to be made much more readable.
+For example, defining a non-polar carbon atom like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType Carbon_NonPolar [C&amp;!$(C=[O,N,P,S])&amp;!$(C#N)]
+</pre></div>
+</div>
+<p>creates a new name that can be used anywhere else in the FDef file that it would be useful to use this SMARTS.
+To reference an AtomType, just include its name in curly brackets.
+For example, this excerpt from an FDef file defines another atom type - Hphobe - which references the Carbon_NonPolar definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType Carbon_NonPolar [C&amp;!$(C=[O,N,P,S])&amp;!$(C#N)]
+AtomType Hphobe [{Carbon_NonPolar},c,s,S&amp;H0&amp;v2,F,Cl,Br,I]
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal"><span class="pre">{Carbon_NonPolar}</span></code> is used in the new AtomType definition without any additional decoration (no square brackes or recursive SMARTS markers are required).</p>
+<p>Repeating an AtomType results in the two definitions being combined using the SMARTS 「,」 (or) operator.
+Here’s an example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType d1 [N&amp;!H0]
+AtomType d1 [O&amp;!H0]
+</pre></div>
+</div>
+<p>This is equivalent to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType d1 [N&amp;!H0,O&amp;!H0]
+</pre></div>
+</div>
+<p>Which is equivalent to the more efficient:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType d1 [N,O;!H0]
+</pre></div>
+</div>
+<p><strong>Note</strong> that these examples tend to use SMARTS’s high-precendence and operator 「&amp;」 and not the low-precedence and 「;」.
+This can be important when AtomTypes are combined or when they are repeated.
+The SMARTS 「,」 operator is higher precedence than 「;」, so definitions that use 「;」 can lead to unexpected results.</p>
+<p>It is also possible to define negative AtomType queries:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType d1 [N,O,S]
+AtomType !d1 [H0]
+</pre></div>
+</div>
+<p>The negative query gets combined with the first to produce a definition identical to this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType d1 [!H0;N,O,S]
+</pre></div>
+</div>
+<p>Note that the negative AtomType is added to the beginning of the query.</p>
+</div>
+<div class="section" id="feature-definitions">
+<h4>Feature definitions<a class="headerlink" href="#feature-definitions" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>A feature definition is more complex than an AtomType definition and stretches across multiple lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>DefineFeature HDonor1 [N,O;!H0]
+Family HBondDonor
+Weights 1.0
+EndFeature
+</pre></div>
+</div>
+<p>The first line of the feature definition includes the feature type and the SMARTS string defining the feature.
+The next two lines (order not important) define the feature’s family and its atom weights (a comma-delimited list that is the same length as the number of atoms defining the feature).
+The atom weights are used to calculate the feature’s locations based on a weighted average of the positions of the atom defining the feature.
+More detail on this is provided below.
+The final line of a feature definition must be EndFeature.
+It is perfectly legal to mix AtomType definitions with feature definitions in the FDef file.
+The one rule is that AtomTypes must be defined before they are referenced.</p>
+</div>
+<div class="section" id="additional-syntax-notes">
+<h4>Additional syntax notes:<a class="headerlink" href="#additional-syntax-notes" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<ul>
+<li><p class="first">Any line that begins with a # symbol is considered a comment and will be ignored.</p>
+</li>
+<li><p class="first">A backslash character, , at the end of a line is a continuation character, it indicates that the data from that line is continued on the next line of the file.  Blank space at the beginning of these additional lines is ignored. For example, this AtomType definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType tButylAtom [$([C;!R](-[CH3])(-[CH3])(-[CH3])),\
+$([CH3](-[C;!R](-[CH3])(-[CH3])))]
+</pre></div>
+</div>
+<p>is exactly equivalent to this one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>AtomType tButylAtom [$([C;!R](-[CH3])(-[CH3])(-[CH3])),$([CH3](-[C;!R](-[CH3])(-[CH3])))]
+</pre></div>
+</div>
+<p>(though the first form is much easier to read!)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="atom-weights-and-feature-locations">
+<h4>Atom weights and feature locations<a class="headerlink" href="#atom-weights-and-feature-locations" title="このヘッドラインへのパーマリンク">¶</a></h4>
+</div>
+</div>
+<div class="section" id="frequently-asked-question-s">
+<h3>Frequently Asked Question(s)<a class="headerlink" href="#frequently-asked-question-s" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<ul>
+<li><p class="first">What happens if a Feature Type is repeated in the file? Here’s an example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>DefineFeature HDonor1 [O&amp;!H0]
+Family HBondDonor
+Weights 1.0
+EndFeature
+
+DefineFeature HDonor1 [N&amp;!H0]
+Family HBondDonor
+Weights 1.0
+EndFeature
+</pre></div>
+</div>
+<p>In this case both definitions of the HDonor1 feature type will be active.
+This is functionally identical to:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>DefineFeature HDonor1 [O,N;!H0]
+Family HBondDonor
+Weights 1.0
+EndFeature
+</pre></div>
+</div>
+<p><strong>However</strong> the formulation of this feature definition with a duplicated feature type is considerably less efficient and more confusing than the simpler combined definition.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="representation-of-pharmacophore-fingerprints">
+<h2>Representation of Pharmacophore Fingerprints<a class="headerlink" href="#representation-of-pharmacophore-fingerprints" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>In the RDKit scheme the bit ids in pharmacophore fingerprints are not hashed: each bit corresponds to a particular combination of features and distances.
+A given bit id can be converted back to the corresponding feature types and distances to allow interpretation.
+An illustration for 2D pharmacophores is shown in <a class="reference internal" href="#ph4-figure"><span class="std std-ref">Figure 1:   Bit numbering in pharmacophore fingerprints</span></a>.</p>
+<div class="figure" id="id7">
+<span id="ph4-figure"></span><a class="reference internal image-reference" href="_images/picture_10.jpg"><img alt="_images/picture_10.jpg" src="_images/picture_10.jpg" style="width: 597.0px; height: 732.5px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1:   Bit numbering in pharmacophore fingerprints</span></p>
+</div>
+</div>
+<div class="section" id="atom-atom-matching-in-substructure-queries">
+<h2>Atom-Atom Matching in Substructure Queries<a class="headerlink" href="#atom-atom-matching-in-substructure-queries" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>When doing substructure matches for queries derived from SMARTS the
+rules for which atoms in the molecule should match which atoms in the
+query are well defined.[#smarts]_  The same is not necessarily the
+case when the query molecule is derived from a mol block or SMILES.</p>
+<p>The general rule used in the RDKit is that if you
+don’t specify a property in the query, then it’s not used as part of
+the matching criteria and that Hs are ignored.
+This leads to the following behavior:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="35%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Molecule</th>
+<th class="head">Query</th>
+<th class="head">Match</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>CCO</td>
+<td>CCO</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>CC[O-]</td>
+<td>CCO</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>CCO</td>
+<td>CC[O-]</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>CC[O-]</td>
+<td>CC[O-]</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>CC[O-]</td>
+<td>CC[OH]</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>CCOC</td>
+<td>CC[OH]</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>CCOC</td>
+<td>CCO</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>CCC</td>
+<td>CCC</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>CC[14C]</td>
+<td>CCC</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>CCC</td>
+<td>CC[14C]</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>CC[14C]</td>
+<td>CC[14C]</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>OCO</td>
+<td>C</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>OCO</td>
+<td>[CH]</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>OCO</td>
+<td>[CH2]</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>OCO</td>
+<td>[CH3]</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>OCO</td>
+<td>O[CH3]</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>O[CH2]O</td>
+<td>C</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>O[CH2]O</td>
+<td>[CH2]</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Demonstrated here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCO&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[O-]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCO&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[O-]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[O-]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[O-]&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[O-]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[OH]&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCOC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[OH]&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCOC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCO&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCC&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[14C]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCC&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CCC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[14C]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[14C]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CC[14C]&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;OCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;OCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;[CH]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;OCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;[CH2]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;OCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;[CH3]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;OCO&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;O[CH3]&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;O[CH2]O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;O[CH2]O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;[CH2]&#39;</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="molecular-sanitization">
+<h2>Molecular Sanitization<a class="headerlink" href="#molecular-sanitization" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>The molecule parsing functions all, by default, perform a 「sanitization」
+operation on the molecules read. The idea is to generate useful computed
+properties (like hybridization, ring membership, etc.) for the rest of the code
+and to ensure that the molecules are 「reasonable」: that they can be represented
+with octet-complete Lewis dot structures.</p>
+<p>Here are the steps involved, in order.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">clearComputedProps</span></code>: removes any computed properties that already exist</dt>
+<dd><p class="first last">on the molecule and its atoms and bonds. This step is always performed.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">cleanUp</span></code>: standardizes a small number of non-standard valence states.
+The clean up operations are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Neutral 5 valent Ns with double bonds to Os are converted
+to the zwitterionic form.
+Example: <code class="docutils literal"><span class="pre">N(=O)=O</span> <span class="pre">-&gt;</span> <span class="pre">[N+](=O)O-]</span></code></li>
+<li>Neutral 5 valent Ns with triple bonds to another N are converted
+to the zwitterionic form.
+Example: <code class="docutils literal"><span class="pre">C-N=N#N</span> <span class="pre">-&gt;</span> <span class="pre">C-N=[N+]=[N-]</span></code></li>
+<li>Neutral 5 valent phosphorus with one double bond to an O and another to
+either a C or a P are converted to the zwitterionic form.
+Example: <code class="docutils literal"><span class="pre">C=P(=O)O</span> <span class="pre">-&gt;</span> <span class="pre">C=[P+]([O-])O</span></code></li>
+<li>Neutral Cl, Br, or I with exclusively O neighbors, and a valence of 3,
+5, or 7, are converted to the zwitterionic form. This covers things
+like chlorous acid, chloric acid, and perchloric acid.
+Example: <code class="docutils literal"><span class="pre">O=Cl(=O)O</span> <span class="pre">-&gt;</span> <span class="pre">[O-][Cl+2][O-]O</span></code></li>
+</ul>
+</div></blockquote>
+<p>This step should not generate execptions.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">updatePropertyCache</span></code>: calculates the explicit and implicit valences on
+all atoms. This generates exceptions for atoms in higher-than-allowed
+valence states. This step is always performed, but if it is 「skipped」
+the test for non-standard valences will not be carried out.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">symmetrizeSSSR</span></code>: calls the symmetrized smallest set of smallest rings
+algorithm (discussed in the Getting Started document).</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">Kekulize</span></code>: converts aromatic rings to their Kekule form. Will raise an
+exception if a ring cannot be kekulized or if aromatic bonds are found
+outside of rings.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">assignRadicals</span></code>: determines the number of radical electrons (if any) on
+each atom.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">setAromaticity</span></code>: identifies the aromatic rings and ring systems
+(see above), sets the aromatic flag on atoms and bonds, sets bond orders
+to aromatic.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">setConjugation</span></code>: identifies which bonds are conjugated</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">setHybridization</span></code>: calculates the hybridization state of each atom</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">cleanupChirality</span></code>: removes chiral tags from atoms that are not sp3
+hybridized.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">adjustHs</span></code>: adds explicit Hs where necessary to preserve the chemistry.
+This is typically needed for heteroatoms in aromatic rings. The classic
+example is the nitrogen atom in pyrrole.</p>
+</li>
+</ol>
+</div></blockquote>
+<p>The individual steps can be toggled on or off when calling
+<code class="docutils literal"><span class="pre">MolOps::sanitizeMol</span></code> or <code class="docutils literal"><span class="pre">Chem.SanitizeMol</span></code>.</p>
+</div>
+<div class="section" id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="magic-property-values">
+<h3>「Magic」 Property Values<a class="headerlink" href="#magic-property-values" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>The following property values are regularly used in the RDKit codebase and may be useful to client code.</p>
+<div class="section" id="romol-mol-in-python">
+<h4>ROMol  (Mol in Python)<a class="headerlink" href="#romol-mol-in-python" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property Name</th>
+<th class="head">Use</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MolFileComments</td>
+<td>Read from/written to the comment line of CTABs.</td>
+</tr>
+<tr class="row-odd"><td>MolFileInfo</td>
+<td>Read from/written to the info line of CTABs.</td>
+</tr>
+<tr class="row-even"><td>_MolFileChiralFlag</td>
+<td>Read from/written to the chiral flag of CTABs.</td>
+</tr>
+<tr class="row-odd"><td>_Name</td>
+<td>Read from/written to the name line of CTABs.</td>
+</tr>
+<tr class="row-even"><td>_smilesAtomOutputOrder</td>
+<td>The order in which atoms were written to SMILES</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="atom">
+<h4>Atom<a class="headerlink" href="#atom" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property Name</th>
+<th class="head">Use</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>_CIPCode</td>
+<td>the CIP code (R or S) of the atom</td>
+</tr>
+<tr class="row-odd"><td>_CIPRank</td>
+<td>the integer CIP rank of the atom</td>
+</tr>
+<tr class="row-even"><td>_ChiralityPossible</td>
+<td>set if an atom is a possible chiral center</td>
+</tr>
+<tr class="row-odd"><td>_MolFileRLabel</td>
+<td>integer R group label for an atom, read from/written to CTABs.</td>
+</tr>
+<tr class="row-even"><td>_ReactionDegreeChanged</td>
+<td>set on an atom in a product template of a reaction if its degree changes in the reaction</td>
+</tr>
+<tr class="row-odd"><td>_protected</td>
+<td>atoms with this property set will not be considered as matching reactant queries in reactions</td>
+</tr>
+<tr class="row-even"><td>dummyLabel</td>
+<td>(on dummy atoms) read from/written to CTABs as the atom symbol</td>
+</tr>
+<tr class="row-odd"><td>molAtomMapNumber</td>
+<td>the atom map number for an atom, read from/written to SMILES and CTABs</td>
+</tr>
+<tr class="row-even"><td>molfileAlias</td>
+<td>the mol file alias for an atom (follows A tags), read from/written to CTABs</td>
+</tr>
+<tr class="row-odd"><td>molFileValue</td>
+<td>the mol file value for an atom (follows V tags), read from/written to CTABs</td>
+</tr>
+<tr class="row-even"><td>molFileInversionFlag</td>
+<td>used to flag whether stereochemistry at an atom changes in a reaction,
+read from/written to CTABs, determined automatically from SMILES</td>
+</tr>
+<tr class="row-odd"><td>molRxnComponent</td>
+<td>which component of a reaction an atom belongs to, read from/written to CTABs</td>
+</tr>
+<tr class="row-even"><td>molRxnRole</td>
+<td>which role an atom plays in a reaction (1=Reactant, 2=Product, 3=Agent),
+read from/written to CTABs</td>
+</tr>
+<tr class="row-odd"><td>smilesSymbol</td>
+<td>determines the symbol that will be written to a SMILES for the atom</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="thread-safety-and-the-rdkit">
+<h3>Thread safety and the RDKit<a class="headerlink" href="#thread-safety-and-the-rdkit" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>While writing the RDKit, we did attempt to ensure that the code would
+work in a multi-threaded environment by avoiding use of global
+variables, etc. However, making code thread safe is not a completely
+trivial thing, so there are no doubt some gaps. This section describes
+which pieces of the code base have explicitly been tested for thread safety.</p>
+<dl class="docutils">
+<dt><strong>Note:</strong> With the exception of the small number of methods/functions</dt>
+<dd>that take a <code class="docutils literal"><span class="pre">numThreads</span></code> argument, this section does not apply to
+using the RDKit from Python threads. Boost.Python ensures that only
+one thread is calling into the C++ code at any point. To get
+concurrent execution in Python, use the multiprocessing module or
+one of the other standard python approaches for this .</dd>
+</dl>
+<div class="section" id="what-has-been-tested">
+<h4>What has been tested<a class="headerlink" href="#what-has-been-tested" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li>Reading molecules from SMILES/SMARTS/Mol blocks</li>
+<li>Writing molecules to SMILES/SMARTS/Mol blocks</li>
+<li>Generating 2D coordinates</li>
+<li>Generating 3D conformations with the distance geometry code</li>
+<li>Optimizing molecules with UFF or MMFF</li>
+<li>Generating fingerprints</li>
+<li>The descriptor calculators in $RDBASE/Code/GraphMol/Descriptors</li>
+<li>Substructure searching (Note: if a query molecule contains
+recursive queries, it may not be safe to use it concurrently on
+multiple threads, see below)</li>
+<li>The Subgraph code</li>
+<li>The ChemTransforms code</li>
+<li>The chemical reactions code</li>
+<li>The Open3DAlign code</li>
+<li>The MolDraw2D drawing code</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="known-problems">
+<h4>Known Problems<a class="headerlink" href="#known-problems" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li>InChI generation and (probably) parsing. This seems to be a
+limitation of the IUPAC InChI code. In order to allow the code to
+be used in a multi-threaded environment, a mutex is used to ensure
+that only one thread is using the IUPAC code at a time. This is
+only enabled if the RDKit is built with the <code class="docutils literal"><span class="pre">RDK_TEST_MULTITHREADED</span></code>
+option enabled.</li>
+<li>The MolSuppliers (e.g. SDMolSupplier, SmilesMolSupplier?) change
+their internal state when a molecule is read. It is not safe to
+use one supplier on more than one thread.</li>
+<li>Substructure searching using query molecules that include
+recursive queries. The recursive queries modify their internal
+state when a search is run, so it’s not safe to use the same query
+concurrently on multiple threads. If the code is built using the
+<code class="docutils literal"><span class="pre">RDK_BUILD_THREADSAFE_SSS</span></code> argument (the default for the binaries
+we provide), a mutex is used to ensure that only one thread is
+using a given recursive query at a time.</li>
+</ul>
+</div></blockquote>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="smirks" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://www.daylight.com/dayhtml/doc/theory/theory.smirks.html">http://www.daylight.com/dayhtml/doc/theory/theory.smirks.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="smiles" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.daylight.com/dayhtml/doc/theory/theory.smiles.html">http://www.daylight.com/dayhtml/doc/theory/theory.smiles.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="smarts" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> <a class="reference external" href="http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html">http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="intramolrxn" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Thanks to James Davidson for this example.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="chiralrxn" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>Thanks to JP Ebejer and Paul Finn for this example.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<img alt="_images/picture_5.png" src="_images/picture_5.png" />
+<p>This document is copyright (C) 2007-2016 by Greg Landrum</p>
+<p>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 License.
+To view a copy of this license, visit <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a> or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA.</p>
+<p>The intent of this license is similar to that of the RDKit itself.
+In simple words: “Do whatever you want with it, but please give us some credit.”</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Cookbook.html" title="RDKit Cookbook"
+             >次へ</a> |</li>
+        <li class="right" >
+          <a href="GettingStartedInPython.html" title="Getting Started with the RDKit in Python"
+             >前へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Greg Landrum.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
+    </div>
+  </body>
+</html>

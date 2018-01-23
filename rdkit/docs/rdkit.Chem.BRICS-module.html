@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.BRICS</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;BRICS
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.BRICS-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module BRICS</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Implementation of the BRICS algorithm from Degen et al. ChemMedChem *3* 1503-7 (2008)
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BRICS-module.html#FindBRICSBonds" class="summary-sig-name">FindBRICSBonds</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">randomizeOrder</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">silent</span>=<span class="summary-sig-default">True</span>)</span><br />
+      returns the bonds in a molecule that BRICS would cleave</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#FindBRICSBonds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BRICS-module.html#BreakBRICSBonds" class="summary-sig-name">BreakBRICSBonds</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">bonds</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">sanitize</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">silent</span>=<span class="summary-sig-default">True</span>)</span><br />
+      breaks the BRICS bonds in a molecule and returns the results</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#BreakBRICSBonds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BRICS-module.html#BRICSDecompose" class="summary-sig-name">BRICSDecompose</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">allNodes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">minFragmentSize</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">onlyUseReactions</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">silent</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">keepNonLeafNodes</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">singlePass</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">returnMols</span>=<span class="summary-sig-default">False</span>)</span><br />
+      returns the BRICS decomposition for a molecule</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#BRICSDecompose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="BRICSBuild"></a><span class="summary-sig-name">BRICSBuild</span>(<span class="summary-sig-arg">fragments</span>,
+        <span class="summary-sig-arg">onlyCompleteMols</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">seeds</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">uniquify</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">scrambleReagents</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">maxDepth</span>=<span class="summary-sig-default">3</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#BRICSBuild">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_test"></a><span class="summary-sig-name">_test</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#_test">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.BRICS-module.html#environs" class="summary-name">environs</a> = <code title="{'L1': '[C;D3]([#0,#6,#7,#8])(=O)', 'L3': '[O;D2]-;!@[#0,#6,#1]', 'L4'\
+: '[C;!D1;!$(C=*)]-;!@[#6]', 'L5': '[N;!D1;!$(N=*);!$(N-[!#6;!#16;!#0;\
+!#1]);!$([N;R]@[C;R]=O)]', 'L6': '[C;D3;!R](=O)-;!@[#0,#6,#7,#8]', 'L7\
+a': '[C;D2,D3]-[#6]', 'L7b': '[C;D2,D3]-[#6]', '#L8': '[C;!R;!D1]-;!@[\
+#6]', 'L8': '[C;!R;!D1;!$(C!-*)]', 'L9': '[n;+0;$(n(:[c,n,o,s]):[c,n,o\
+,s])]', 'L10': '[N;R;$(N(@C(=O))@[C,N,O,S])]', 'L11': '[S;D2](-;!@[#0,\
+#6])', 'L12': '[S;D4]([#6,#0])(=O)(=O)', 'L13': '[C;$(C(-;@[C,N,O,S])-\
+;@[N,O,S])]', 'L14': '[c;$(c(:[c,n,o,s]):[n,o,s])]', 'L14b': '[c;$(c(:\
+...">{'L1': '[C;D3]([#0,#6,#7,#8])(=O)', 'L3': '[O;D2]-;<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.BRICS-module.html#reactionDefs" class="summary-name">reactionDefs</a> = <code title="[('1', '3', '-'), ('1', '5', '-'), ('1', '10', '-'),], [('3', '4', '-'\
+), ('3', '13', '-'), ('3', '14', '-'), ('3', '15', '-'), ('3', '16', '\
+-'),], [('4', '5', '-'), ('4', '11', '-'),], [('5', '12', '-'), ('5', \
+'14', '-'), ('5', '16', '-'), ('5', '13', '-'), ('5', '15', '-'),], [(\
+'6', '13', '-'), ('6', '14', '-'), ('6', '15', '-'), ('6', '16', '-'),\
+], [('7a', '7b', '='),], [('8', '9', '-'), ('8', '10', '-'), ('8', '13\
+', '-'), ('8', '14', '-'), ('8', '15', '-'), ('8', '16', '-'),], [('9'\
+, '13', '-'), ('9', '14', '-'), ('9', '15', '-'), ('9', '16', '-'),], \
+...">[('1', '3', '-'), ('1', '5', '-'), ('1', '10', <code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="smartsGps"></a><span class="summary-name">smartsGps</span> = <code title="copy.deepcopy(reactionDefs)">copy.deepcopy(reactionDefs)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="environMatchers"></a><span class="summary-name">environMatchers</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="bondMatchers"></a><span class="summary-name">bondMatchers</span> = <code title="[]">[]</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.BRICS-module.html#reactions" class="summary-name">reactions</a> = <code title="tuple([[Reactions.ReactionFromSmarts(y) for y in x] for x in smartsGps\
+])">tuple([[Reactions.ReactionFromSmarts(y) for y in x<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="reverseReactions"></a><span class="summary-name">reverseReactions</span> = <code title="[]">[]</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="dummyPattern"></a><span class="summary-name">dummyPattern</span> = <code title="Chem.MolFromSmiles('[*]')">Chem.MolFromSmiles('[*]')</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="re">re</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.Chem.rdChemReactions">Reactions</span>,
+  <span title="rdkit.six.iteritems">iteritems</span>,
+  <span title="rdkit.six.iterkeys">iterkeys</span>,
+  <span title="rdkit.six.next">next</span>,
+  <span title="rdkit.six.moves.range">range</span>,
+  <span title="copy">copy</span>,
+  <span title="random">random</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="FindBRICSBonds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FindBRICSBonds</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">randomizeOrder</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">silent</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#FindBRICSBonds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the bonds in a molecule that BRICS would cleave
+
+&gt;&gt;&gt; from rdkit import Chem
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; res = list(FindBRICSBonds(m))
+&gt;&gt;&gt; res
+[((3, 2), ('3', '4')), ((3, 4), ('3', '4'))]
+
+a more complicated case:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCCC(=O)c1ccccc1')
+&gt;&gt;&gt; res = list(FindBRICSBonds(m))
+&gt;&gt;&gt; res
+[((3, 2), ('3', '4')), ((3, 4), ('3', '4')), ((6, 8), ('6', '16'))]
+
+we can also randomize the order of the results:
+&gt;&gt;&gt; random.seed(23)
+&gt;&gt;&gt; res = list(FindBRICSBonds(m,randomizeOrder=True))
+&gt;&gt;&gt; sorted(res)
+[((3, 2), ('3', '4')), ((3, 4), ('3', '4')), ((6, 8), ('6', '16'))]
+
+Note that this is a generator function :
+&gt;&gt;&gt; res = FindBRICSBonds(m)
+&gt;&gt;&gt; res
+&lt;generator object ...&gt;
+&gt;&gt;&gt; next(res)
+((3, 2), ('3', '4'))
+
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CC=CC')
+&gt;&gt;&gt; res = list(FindBRICSBonds(m))
+&gt;&gt;&gt; sorted(res)
+[((1, 2), ('7', '7'))]
+
+make sure we don't match ring bonds:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('O=C1NCCC1')
+&gt;&gt;&gt; list(FindBRICSBonds(m))
+[]
+
+another nice one, make sure environment 8 doesn't match something connected
+to a ring atom:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CC1(C)CCCCC1')
+&gt;&gt;&gt; list(FindBRICSBonds(m))
+[]
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BreakBRICSBonds"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BreakBRICSBonds</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">bonds</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">sanitize</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">silent</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#BreakBRICSBonds">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+breaks the BRICS bonds in a molecule and returns the results
+
+&gt;&gt;&gt; from rdkit import Chem
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; m2=BreakBRICSBonds(m)
+&gt;&gt;&gt; Chem.MolToSmiles(m2,True)
+'[3*]O[3*].[4*]CC.[4*]CCC'
+
+a more complicated case:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCCC(=O)c1ccccc1')
+&gt;&gt;&gt; m2=BreakBRICSBonds(m)
+&gt;&gt;&gt; Chem.MolToSmiles(m2,True)
+'[16*]c1ccccc1.[3*]O[3*].[4*]CCC.[4*]CCC([6*])=O'
+
+
+can also specify a limited set of bonds to work with:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; m2 = BreakBRICSBonds(m,[((3, 2), ('3', '4'))])
+&gt;&gt;&gt; Chem.MolToSmiles(m2,True)
+'[3*]OCC.[4*]CCC'
+
+this can be used as an alternate approach for doing a BRICS decomposition by
+following BreakBRICSBonds with a call to Chem.GetMolFrags:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; m2=BreakBRICSBonds(m)
+&gt;&gt;&gt; frags = Chem.GetMolFrags(m2,asMols=True)
+&gt;&gt;&gt; [Chem.MolToSmiles(x,True) for x in frags]
+['[4*]CCC', '[3*]O[3*]', '[4*]CC']
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BRICSDecompose"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BRICSDecompose</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">allNodes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">minFragmentSize</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">onlyUseReactions</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">silent</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">keepNonLeafNodes</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">singlePass</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">returnMols</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BRICS-pysrc.html#BRICSDecompose">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the BRICS decomposition for a molecule
+
+&gt;&gt;&gt; from rdkit import Chem
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCc1cc(c2ncccc2)ccc1')
+&gt;&gt;&gt; res = list(BRICSDecompose(m))
+&gt;&gt;&gt; sorted(res)
+['[14*]c1ccccn1', '[16*]c1cccc([16*])c1', '[3*]O[3*]', '[4*]CCC', '[4*]C[8*]']
+
+&gt;&gt;&gt; res = list(BRICSDecompose(m,returnMols=True))
+&gt;&gt;&gt; res[0]
+&lt;rdkit.Chem.rdchem.Mol object ...&gt;
+&gt;&gt;&gt; smis = [Chem.MolToSmiles(x,True) for x in res]
+&gt;&gt;&gt; sorted(smis)
+['[14*]c1ccccn1', '[16*]c1cccc([16*])c1', '[3*]O[3*]', '[4*]CCC', '[4*]C[8*]']
+
+nexavar, an example from the paper (corrected):
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CNC(=O)C1=NC=CC(OC2=CC=C(NC(=O)NC3=CC(=C(Cl)C=C3)C(F)(F)F)C=C2)=C1')
+&gt;&gt;&gt; res = list(BRICSDecompose(m))
+&gt;&gt;&gt; sorted(res)
+['[1*]C([1*])=O', '[1*]C([6*])=O', '[14*]c1cc([16*])ccn1', '[16*]c1ccc(Cl)c([16*])c1', '[16*]c1ccc([16*])cc1', '[3*]O[3*]', '[5*]NC', '[5*]N[5*]', '[8*]C(F)(F)F']
+
+it's also possible to keep pieces that haven't been fully decomposed:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; res = list(BRICSDecompose(m,keepNonLeafNodes=True))
+&gt;&gt;&gt; sorted(res)
+['CCCOCC', '[3*]OCC', '[3*]OCCC', '[3*]O[3*]', '[4*]CC', '[4*]CCC']
+
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCc1cc(c2ncccc2)ccc1')
+&gt;&gt;&gt; res = list(BRICSDecompose(m,keepNonLeafNodes=True))
+&gt;&gt;&gt; sorted(res)
+['CCCOCc1cccc(-c2ccccn2)c1', '[14*]c1ccccn1', '[16*]c1cccc(-c2ccccn2)c1', '[16*]c1cccc(COCCC)c1', '[16*]c1cccc([16*])c1', '[3*]OCCC', '[3*]OC[8*]', '[3*]OCc1cccc(-c2ccccn2)c1', '[3*]OCc1cccc([16*])c1', '[3*]O[3*]', '[4*]CCC', '[4*]C[8*]', '[4*]Cc1cccc(-c2ccccn2)c1', '[4*]Cc1cccc([16*])c1', '[8*]COCCC']
+
+or to only do a single pass of decomposition:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCc1cc(c2ncccc2)ccc1')
+&gt;&gt;&gt; res = list(BRICSDecompose(m,singlePass=True))
+&gt;&gt;&gt; sorted(res)
+['CCCOCc1cccc(-c2ccccn2)c1', '[14*]c1ccccn1', '[16*]c1cccc(-c2ccccn2)c1', '[16*]c1cccc(COCCC)c1', '[3*]OCCC', '[3*]OCc1cccc(-c2ccccn2)c1', '[4*]CCC', '[4*]Cc1cccc(-c2ccccn2)c1', '[8*]COCCC']
+
+setting a minimum size for the fragments:
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; res = list(BRICSDecompose(m,keepNonLeafNodes=True,minFragmentSize=2))
+&gt;&gt;&gt; sorted(res)
+['CCCOCC', '[3*]OCC', '[3*]OCCC', '[4*]CC', '[4*]CCC']
+&gt;&gt;&gt; m = Chem.MolFromSmiles('CCCOCC')
+&gt;&gt;&gt; res = list(BRICSDecompose(m,keepNonLeafNodes=True,minFragmentSize=3))
+&gt;&gt;&gt; sorted(res)
+['CCCOCC', '[3*]OCC', '[4*]CCC']
+&gt;&gt;&gt; res = list(BRICSDecompose(m,minFragmentSize=2))
+&gt;&gt;&gt; sorted(res)
+['[3*]OCC', '[3*]OCCC', '[4*]CC', '[4*]CCC']
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="environs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">environs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{'L1': '[C;D3]([#0,#6,#7,#8])(=O)', 'L3': '[O;D2]-;!@[#0,#6,#1]', 'L4'<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+: '[C;!D1;!$(C=*)]-;!@[#6]', 'L5': '[N;!D1;!$(N=*);!$(N-[!#6;!#16;!#0;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+!#1]);!$([N;R]@[C;R]=O)]', 'L6': '[C;D3;!R](=O)-;!@[#0,#6,#7,#8]', 'L7<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+a': '[C;D2,D3]-[#6]', 'L7b': '[C;D2,D3]-[#6]', '#L8': '[C;!R;!D1]-;!@[<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+#6]', 'L8': '[C;!R;!D1;!$(C!-*)]', 'L9': '[n;+0;$(n(:[c,n,o,s]):[c,n,o<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+,s])]', 'L10': '[N;R;$(N(@C(=O))@[C,N,O,S])]', 'L11': '[S;D2](-;!@[#0,<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+#6])', 'L12': '[S;D4]([#6,#0])(=O)(=O)', 'L13': '[C;$(C(-;@[C,N,O,S])-<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+;@[N,O,S])]', 'L14': '[c;$(c(:[c,n,o,s]):[n,o,s])]', 'L14b': '[c;$(c(:<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reactionDefs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reactionDefs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+[('1', '3', '-'), ('1', '5', '-'), ('1', '10', '-'),], [('3', '4', '-'<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+), ('3', '13', '-'), ('3', '14', '-'), ('3', '15', '-'), ('3', '16', '<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+-'),], [('4', '5', '-'), ('4', '11', '-'),], [('5', '12', '-'), ('5', <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+'14', '-'), ('5', '16', '-'), ('5', '13', '-'), ('5', '15', '-'),], [(<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+'6', '13', '-'), ('6', '14', '-'), ('6', '15', '-'), ('6', '16', '-'),<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+], [('7a', '7b', '='),], [('8', '9', '-'), ('8', '10', '-'), ('8', '13<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+', '-'), ('8', '14', '-'), ('8', '15', '-'), ('8', '16', '-'),], [('9'<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, '13', '-'), ('9', '14', '-'), ('9', '15', '-'), ('9', '16', '-'),], <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reactions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reactions</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+tuple([[Reactions.ReactionFromSmarts(y) for y in x] for x in smartsGps<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+])
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

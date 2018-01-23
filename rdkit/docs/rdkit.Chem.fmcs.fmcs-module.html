@@ -1,0 +1,2036 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.fmcs.fmcs</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.fmcs-module.html">Package&nbsp;fmcs</a> ::
+        Module&nbsp;fmcs
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.fmcs.fmcs-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module fmcs</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+FMCS - Find Maximum Common Substructure
+
+This software finds the maximum common substructure of a set of
+structures and reports it as a SMARTS strings.
+
+This implements what I think is a new algorithm for the MCS problem.
+The core description is:
+
+  best_substructure = None
+  pick one structure as the query, and other as the targets
+  for each substructure in the query graph:
+    convert it to a SMARTS string based on the desired match properties
+    if the SMARTS pattern exists in all of the targets:
+       then this is a common substructure
+       keep track of the maximum such common structure,
+
+The SMARTS string depends on the desired match properties. For
+example, if ring atoms are only allowed to match ring atoms then an
+aliphatic ring carbon in the query is converted to the SMARTS &quot;[C;R]&quot;,
+and the double-bond ring bond converted to &quot;=;@&quot; while the respectice
+chain-only version are &quot;[C;!R]&quot; and &quot;=;!@&quot;.
+
+The algorithm I outlined earlier will usually take a long time. There
+are several ways to speed it up.
+
+== Bond elimination ==
+
+As the first step, remove bonds which obviously cannot be part of the
+MCS.
+
+This requires atom and bond type information, which I store as SMARTS
+patterns. A bond can only be in the MCS if its canonical bond type is
+present in all of the structures. A bond type is string made of the
+SMARTS for one atom, the SMARTS for the bond, and the SMARTS for the
+other atom. The canonical bond type is the lexographically smaller of
+the two possible bond types for a bond.
+
+The atom and bond SMARTS depend on the type comparison used.
+
+The &quot;ring-matches-ring-only&quot; option adds an &quot;@&quot; or &quot;!@&quot; to the bond
+SMARTS, so that the canonical bondtype for &quot;C-C&quot; becomes [#6]-@[#6] or
+[#6]-!@[#6] if the bond is in a ring or not in a ring, and if atoms
+are compared by element and bonds are compared by bondtype. (This
+option does not add &quot;R&quot; or &quot;!R&quot; to the atom SMARTS because there
+should be a single bond in the MCS of c1ccccc1O and CO.)
+
+The result of all of this atom and bond typing is a &quot;TypedMolecule&quot;
+for each input structure.
+
+I then find which canonical bondtypes are present in all of the
+structures. I convert each TypedMolecule into a
+FragmentedTypedMolecule which has the same atom information but only
+those bonds whose bondtypes are in all of the structures. This can
+break a structure into multiple, disconnected fragments, hence the
+name.
+
+(BTW, I would like to use the fragmented molecules as the targets
+because I think the SMARTS match would go faster, but the RDKit SMARTS
+matcher doesn't like them. I think it's because the new molecule
+hasn't been sanitized and the underlying data structure the ring
+information doesn't exist. Instead, I use the input structures for the
+SMARTS match.)
+
+== Use the structure with the smallest largest fragment as the query ==
+== and sort the targets by the smallest largest fragment             ==
+
+I pick one of the FragmentedTypedMolecule instances as the source of
+substructure enumeration. Which one?
+
+My heuristic is to use the one with the smallest largest fragment.
+Hopefully it produces the least number of subgraphs, but that's also
+related to the number of rings, so a large linear graph will product
+fewer subgraphs than a small fused ring system. I don't know how to
+quantify that.
+
+For each of the fragmented structures, I find the number of atoms in
+the fragment with the most atoms, and I find the number of bonds in
+the fragment with the most bonds. These might not be the same
+fragment.
+
+I sort the input structures by the number of bonds in the largest
+fragment, with ties broken first on the number of atoms, and then on
+the input order. The smallest such structure is the query structure,
+and the remaining are the targets.
+
+== Use a breadth-first search and a priority queue to    ==
+== enumerate the fragment subgraphs                      ==
+
+I extract each of the fragments from the FragmentedTypedMolecule into
+a TypedFragment, which I use to make an EnumerationMolecule. An
+enumeration molecule contains a pair of directed edges for each atom,
+which simplifies the enumeration algorithm.
+
+The enumeration algorithm is based around growing a seed. A seed
+contains the current subgraph atoms and bonds as well as an exclusion
+set of bonds which cannot be used for future grown. The initial seed
+is the first bond in the fragment, which may potentially grow to use
+the entire fragment. The second seed is the second bond in the
+fragment, which is excluded from using the first bond in future
+growth. The third seed starts from the third bond, which may not use
+the first or second bonds during growth, and so on.
+
+
+A seed can grow along bonds connected to an atom in the seed but which
+aren't already in the seed and aren't in the set of excluded bonds for
+the seed. If there are no such bonds then subgraph enumeration ends
+for this fragment. Given N bonds there are 2**N-1 possible ways to
+grow, which is just the powerset of the available bonds, excluding the
+no-growth case.
+
+This breadth-first growth takes into account all possibilties of using
+the available N bonds so all of those bonds are added to the exclusion
+set of the newly expanded subgraphs.
+
+For performance reasons, the bonds used for growth are separated into
+'internal' bonds, which connect two atoms already in the subgraph, and
+'external' bonds, which lead outwards to an atom not already in the
+subgraph.
+
+Each seed growth can add from 0 to N new atoms and bonds. The goal is
+to maximize the subgraph size so the seeds are stored in a priority
+queue, ranked so the seed with the most bonds is processed first. This
+turns the enumeration into something more like a depth-first search.
+
+
+== Prune seeds which aren't found in all of the structures ==
+
+At each stage of seed growth I check that the new seed exists in all
+of the original structures. (Well, all except the one which I
+enumerate over in the first place; by definition that one will match.)
+If it doesn't match then there's no reason to include this seed or any
+larger seeds made from it.
+
+The check is easy; I turn the subgraph into its corresponding SMARTS
+string and use RDKit's normal SMARTS matcher to test for a match.
+
+There are three ways to generate a SMARTS string: 1) arbitrary, 2)
+canonical, 3) hybrid.
+
+I have not tested #1. During most of the development I assumed that
+SMARTS matches across a few hundred structures would be slow, so that
+the best solution is to generate a *canonical* SMARTS and cache the
+match information.
+
+Well, it turns out that my canonical SMARTS match code takes up most
+of the FMCS run-time. If I drop the canonicalization step then the
+code averages about 5-10% faster. This isn't the same as #1 - I still
+do the initial atom assignment based on its neighborhood, which is
+like a circular fingerprint of size 2 and *usually* gives a consistent
+SMARTS pattern, which I can then cache.
+
+However, there are times when the non-canonical SMARTS code is slower.
+Obviously one is if there are a lot of structures, and another if is
+there is a lot of symmetry. I'm still working on characterizing this.
+
+
+== Maximize atoms? or bonds? ==
+
+The above algorithm enumerates all subgraphs of the query and
+identifies those subgraphs which are common to all input structures.
+
+It's trivial then to keep track of the current &quot;best&quot; subgraph, which
+can defined as having the subgraph with the most atoms, or the most
+bonds. Both of those options are implemented.
+
+It would not be hard to keep track of all other subgraphs which are
+the same size.
+
+== --complete-ring-only implementation ==
+
+The &quot;complete ring only&quot; option is implemented by first enabling the
+&quot;ring-matches-ring-only&quot; option, as otherwise it doesn't make sense.
+
+Second, in order to be a &quot;best&quot; subgraph, all bonds in the subgraph
+which are ring bonds in the original molecule must also be in a ring
+in the subgraph. This is handled as a post-processing step.
+
+(Note: some possible optimizations, like removing ring bonds from
+structure fragments which are not in a ring, are not yet implemented.)
+
+
+== Prune seeds which have no potential for growing large enough  ==
+
+Given a seed, its set of edges available for growth, and the set of
+excluded bonds, figure out the maximum possible growth for the seed.
+If this maximum possible is less than the current best subgraph then
+prune.
+
+This requires a graph search, currently done in Python, which is a bit
+expensive. To speed things up, I precompute some edge information.
+That is, if I know that a given bond is a chain bond (not in a ring)
+then I can calculate the maximum number of atoms and bonds for seed
+growth along that bond, in either direction. However, precomputation
+doesn't take into account the excluded bonds, so after a while the
+predicted value is too high.
+
+Again, I'm still working on characterizing this, and an implementation
+in C++ would have different tradeoffs.
+
+</pre>
+
+<hr />
+<div class="fields">      <p><strong>Version:</strong>
+        1.1
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.Default-class.html" class="summary-name">Default</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.AtomSmartsNoAromaticity-class.html" class="summary-name">AtomSmartsNoAromaticity</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.TypedMolecule-class.html" class="summary-name">TypedMolecule</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.FragmentedTypedMolecule-class.html" class="summary-name">FragmentedTypedMolecule</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.TypedFragment-class.html" class="summary-name">TypedFragment</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.CangenNode-class.html" class="summary-name">CangenNode</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.CachingTargetsMatcher-class.html" class="summary-name">CachingTargetsMatcher</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.VerboseCachingTargetsMatcher-class.html" class="summary-name">VerboseCachingTargetsMatcher</a>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs._SingleBest-class.html" class="summary-name" onclick="show_private();">_SingleBest</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.MCSResult-class.html" class="summary-name">MCSResult</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.SingleBestAtoms-class.html" class="summary-name">SingleBestAtoms</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.SingleBestBonds-class.html" class="summary-name">SingleBestBonds</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.SingleBestAtomsCompleteRingsOnly-class.html" class="summary-name">SingleBestAtomsCompleteRingsOnly</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.SingleBestBondsCompleteRingsOnly-class.html" class="summary-name">SingleBestBondsCompleteRingsOnly</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.Uniquer-class.html" class="summary-name">Uniquer</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.VerboseHeapOps-class.html" class="summary-name">VerboseHeapOps</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.Timer-class.html" class="summary-name">Timer</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs.starting_from-class.html" class="summary-name">starting_from</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="atom_typer_any"></a><span class="summary-sig-name">atom_typer_any</span>(<span class="summary-sig-arg">atoms</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#atom_typer_any">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="atom_typer_elements"></a><span class="summary-sig-name">atom_typer_elements</span>(<span class="summary-sig-arg">atoms</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#atom_typer_elements">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="atom_typer_isotopes"></a><span class="summary-sig-name">atom_typer_isotopes</span>(<span class="summary-sig-arg">atoms</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#atom_typer_isotopes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bond_typer_any"></a><span class="summary-sig-name">bond_typer_any</span>(<span class="summary-sig-arg">bonds</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#bond_typer_any">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="bond_typer_bondtypes"></a><span class="summary-sig-name">bond_typer_bondtypes</span>(<span class="summary-sig-arg">bonds</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#bond_typer_bondtypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_isotopes"></a><span class="summary-sig-name">get_isotopes</span>(<span class="summary-sig-arg">mol</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_isotopes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_isotopes"></a><span class="summary-sig-name">set_isotopes</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">isotopes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#set_isotopes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="save_isotopes"></a><span class="summary-sig-name">save_isotopes</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">isotopes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#save_isotopes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="save_atom_classes"></a><span class="summary-sig-name">save_atom_classes</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">atom_classes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#save_atom_classes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_selected_atom_classes"></a><span class="summary-sig-name">get_selected_atom_classes</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">atom_indices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_selected_atom_classes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="restore_isotopes"></a><span class="summary-sig-name">restore_isotopes</span>(<span class="summary-sig-arg">mol</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#restore_isotopes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="assign_isotopes_from_class_tag"></a><span class="summary-sig-name">assign_isotopes_from_class_tag</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">atom_class_tag</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#assign_isotopes_from_class_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_canonical_bondtypes"></a><span class="summary-sig-name">get_canonical_bondtypes</span>(<span class="summary-sig-arg">rdmol</span>,
+        <span class="summary-sig-arg">bonds</span>,
+        <span class="summary-sig-arg">atom_smarts_types</span>,
+        <span class="summary-sig-arg">bond_smarts_types</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_canonical_bondtypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_typed_molecule"></a><span class="summary-sig-name">get_typed_molecule</span>(<span class="summary-sig-arg">rdmol</span>,
+        <span class="summary-sig-arg">atom_typer</span>,
+        <span class="summary-sig-arg">bond_typer</span>,
+        <span class="summary-sig-arg">matchValences</span>=<span class="summary-sig-default">Default.matchValences</span>,
+        <span class="summary-sig-arg">ringMatchesRingOnly</span>=<span class="summary-sig-default">Default.ringMatchesRingOnly</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_typed_molecule">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_specified_types"></a><span class="summary-sig-name">get_specified_types</span>(<span class="summary-sig-arg">rdmol</span>,
+        <span class="summary-sig-arg">atom_types</span>,
+        <span class="summary-sig-arg">ringMatchesRingOnly</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_specified_types">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convert_input_to_typed_molecules"></a><span class="summary-sig-name">convert_input_to_typed_molecules</span>(<span class="summary-sig-arg">mols</span>,
+        <span class="summary-sig-arg">atom_typer</span>,
+        <span class="summary-sig-arg">bond_typer</span>,
+        <span class="summary-sig-arg">matchValences</span>,
+        <span class="summary-sig-arg">ringMatchesRingOnly</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#convert_input_to_typed_molecules">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_check_atom_classes"></a><span class="summary-sig-name">_check_atom_classes</span>(<span class="summary-sig-arg">molno</span>,
+        <span class="summary-sig-arg">num_atoms</span>,
+        <span class="summary-sig-arg">atom_classes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_check_atom_classes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_counts"></a><span class="summary-sig-name">get_counts</span>(<span class="summary-sig-arg">it</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_counts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="intersect_counts"></a><span class="summary-sig-name">intersect_counts</span>(<span class="summary-sig-arg">counts1</span>,
+        <span class="summary-sig-arg">counts2</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#intersect_counts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_canonical_bondtype_counts"></a><span class="summary-sig-name">get_canonical_bondtype_counts</span>(<span class="summary-sig-arg">typed_mols</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_canonical_bondtype_counts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="remove_unknown_bondtypes"></a><span class="summary-sig-name">remove_unknown_bondtypes</span>(<span class="summary-sig-arg">typed_mol</span>,
+        <span class="summary-sig-arg">supported_canonical_bondtypes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#remove_unknown_bondtypes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_upper_fragment_size_limits"></a><span class="summary-sig-name">find_upper_fragment_size_limits</span>(<span class="summary-sig-arg">rdmol</span>,
+        <span class="summary-sig-arg">atoms</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#find_upper_fragment_size_limits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_typed_fragment"></a><span class="summary-sig-name">get_typed_fragment</span>(<span class="summary-sig-arg">typed_mol</span>,
+        <span class="summary-sig-arg">atom_indices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_typed_fragment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fragmented_mol_to_enumeration_mols"></a><span class="summary-sig-name">fragmented_mol_to_enumeration_mols</span>(<span class="summary-sig-arg">typed_mol</span>,
+        <span class="summary-sig-arg">minNumAtoms</span>=<span class="summary-sig-default">2</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#fragmented_mol_to_enumeration_mols">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="gen_primes"></a><span class="summary-sig-name">gen_primes</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#gen_primes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_nth_prime"></a><span class="summary-sig-name">_get_nth_prime</span>(<span class="summary-sig-arg">n</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_get_nth_prime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_initial_cangen_nodes"></a><span class="summary-sig-name">get_initial_cangen_nodes</span>(<span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">enumeration_mol</span>,
+        <span class="summary-sig-arg">atom_assignment</span>,
+        <span class="summary-sig-arg">do_initial_assignment</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_initial_cangen_nodes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="rerank"></a><span class="summary-sig-name">rerank</span>(<span class="summary-sig-arg">cangen_nodes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#rerank">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_duplicates"></a><span class="summary-sig-name">find_duplicates</span>(<span class="summary-sig-arg">cangen_nodes</span>,
+        <span class="summary-sig-arg">start</span>,
+        <span class="summary-sig-arg">end</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#find_duplicates">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="canon"></a><span class="summary-sig-name">canon</span>(<span class="summary-sig-arg">cangen_nodes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#canon">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_closure_label"></a><span class="summary-sig-name">get_closure_label</span>(<span class="summary-sig-arg">bond_smarts</span>,
+        <span class="summary-sig-arg">closure</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#get_closure_label">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="generate_smarts"></a><span class="summary-sig-name">generate_smarts</span>(<span class="summary-sig-arg">cangen_nodes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#generate_smarts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_canonical_smarts"></a><span class="summary-sig-name">make_canonical_smarts</span>(<span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">enumeration_mol</span>,
+        <span class="summary-sig-arg">atom_assignment</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_canonical_smarts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_arbitrary_smarts"></a><span class="summary-sig-name">make_arbitrary_smarts</span>(<span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">enumeration_mol</span>,
+        <span class="summary-sig-arg">atom_assignment</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_arbitrary_smarts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="powerset"></a><span class="summary-sig-name">powerset</span>(<span class="summary-sig-arg">iterable</span>)</span><br />
+      powerset([1,2,3]) --&gt; () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#powerset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="nonempty_powerset"></a><span class="summary-sig-name">nonempty_powerset</span>(<span class="summary-sig-arg">iterable</span>)</span><br />
+      nonempty_powerset([1,2,3]) --&gt; (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#nonempty_powerset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_Counter"></a><span class="summary-sig-name">_Counter</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_Counter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_extensions"></a><span class="summary-sig-name">find_extensions</span>(<span class="summary-sig-arg">atom_indices</span>,
+        <span class="summary-sig-arg">visited_bond_indices</span>,
+        <span class="summary-sig-arg">directed_edges</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#find_extensions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="all_subgraph_extensions"></a><span class="summary-sig-name">all_subgraph_extensions</span>(<span class="summary-sig-arg">enumeration_mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">visited_bond_indices</span>,
+        <span class="summary-sig-arg">internal_bonds</span>,
+        <span class="summary-sig-arg">external_edges</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#all_subgraph_extensions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="find_extension_size"></a><span class="summary-sig-name">find_extension_size</span>(<span class="summary-sig-arg">enumeration_mol</span>,
+        <span class="summary-sig-arg">known_atoms</span>,
+        <span class="summary-sig-arg">exclude_bonds</span>,
+        <span class="summary-sig-arg">directed_edges</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#find_extension_size">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="prune_maximize_bonds"></a><span class="summary-sig-name">prune_maximize_bonds</span>(<span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">num_remaining_atoms</span>,
+        <span class="summary-sig-arg">num_remaining_bonds</span>,
+        <span class="summary-sig-arg">best_sizes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#prune_maximize_bonds">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="prune_maximize_atoms"></a><span class="summary-sig-name">prune_maximize_atoms</span>(<span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">num_remaining_atoms</span>,
+        <span class="summary-sig-arg">num_remaining_bonds</span>,
+        <span class="summary-sig-arg">best_sizes</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#prune_maximize_atoms">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_completeRingsOnly"></a><span class="summary-sig-name">check_completeRingsOnly</span>(<span class="summary-sig-arg">smarts</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">enumeration_mol</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#check_completeRingsOnly">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="enumerate_subgraphs"></a><span class="summary-sig-name">enumerate_subgraphs</span>(<span class="summary-sig-arg">enumeration_mols</span>,
+        <span class="summary-sig-arg">prune</span>,
+        <span class="summary-sig-arg">atom_assignment</span>,
+        <span class="summary-sig-arg">matches_all_targets</span>,
+        <span class="summary-sig-arg">hits</span>,
+        <span class="summary-sig-arg">timeout</span>,
+        <span class="summary-sig-arg">heappush</span>,
+        <span class="summary-sig-arg">heappop</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#enumerate_subgraphs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="MATCH"></a><span class="summary-sig-name">MATCH</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">pat</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#MATCH">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compute_mcs"></a><span class="summary-sig-name">compute_mcs</span>(<span class="summary-sig-arg">fragmented_mols</span>,
+        <span class="summary-sig-arg">typed_mols</span>,
+        <span class="summary-sig-arg">minNumAtoms</span>,
+        <span class="summary-sig-arg">threshold_count</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">maximize</span>=<span class="summary-sig-default">Default.maximize</span>,
+        <span class="summary-sig-arg">completeRingsOnly</span>=<span class="summary-sig-default">Default.completeRingsOnly</span>,
+        <span class="summary-sig-arg">timeout</span>=<span class="summary-sig-default">Default.timeout</span>,
+        <span class="summary-sig-arg">timer</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">verboseDelay</span>=<span class="summary-sig-default">1.0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#compute_mcs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_update_times"></a><span class="summary-sig-name">_update_times</span>(<span class="summary-sig-arg">timer</span>,
+        <span class="summary-sig-arg">times</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_update_times">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_threshold_count"></a><span class="summary-sig-name">_get_threshold_count</span>(<span class="summary-sig-arg">num_mols</span>,
+        <span class="summary-sig-arg">threshold</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_get_threshold_count">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="fmcs"></a><span class="summary-sig-name">fmcs</span>(<span class="summary-sig-arg">mols</span>,
+        <span class="summary-sig-arg">minNumAtoms</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">maximize</span>=<span class="summary-sig-default">Default.maximize</span>,
+        <span class="summary-sig-arg">atomCompare</span>=<span class="summary-sig-default">Default.atomCompare</span>,
+        <span class="summary-sig-arg">bondCompare</span>=<span class="summary-sig-default">Default.bondCompare</span>,
+        <span class="summary-sig-arg">threshold</span>=<span class="summary-sig-default">1.0</span>,
+        <span class="summary-sig-arg">matchValences</span>=<span class="summary-sig-default">Default.matchValences</span>,
+        <span class="summary-sig-arg">ringMatchesRingOnly</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">completeRingsOnly</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">timeout</span>=<span class="summary-sig-default">Default.timeout</span>,
+        <span class="summary-sig-arg">times</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">verboseDelay</span>=<span class="summary-sig-default">1.0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#fmcs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="subgraph_to_fragment"></a><span class="summary-sig-name">subgraph_to_fragment</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">subgraph</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#subgraph_to_fragment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_fragment_smiles"></a><span class="summary-sig-name">make_fragment_smiles</span>(<span class="summary-sig-arg">mcs</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_fragment_smiles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_copy_sd_tags"></a><span class="summary-sig-name">_copy_sd_tags</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">fragment</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_copy_sd_tags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_MolToSDBlock"></a><span class="summary-sig-name">_MolToSDBlock</span>(<span class="summary-sig-arg">mol</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_MolToSDBlock">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_save_other_tags"></a><span class="summary-sig-name">_save_other_tags</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">fragment</span>,
+        <span class="summary-sig-arg">mcs</span>,
+        <span class="summary-sig-arg">orig_mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">args</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_save_other_tags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_fragment_sdf"></a><span class="summary-sig-name">make_fragment_sdf</span>(<span class="summary-sig-arg">mcs</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">args</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_fragment_sdf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_complete_sdf"></a><span class="summary-sig-name">make_complete_sdf</span>(<span class="summary-sig-arg">mcs</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">args</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_complete_sdf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="make_structure_format"></a><span class="summary-sig-name">make_structure_format</span>(<span class="summary-sig-arg">format_name</span>,
+        <span class="summary-sig-arg">mcs</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">subgraph</span>,
+        <span class="summary-sig-arg">args</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#make_structure_format">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_num_atoms"></a><span class="summary-sig-name">parse_num_atoms</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#parse_num_atoms">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_threshold"></a><span class="summary-sig-name">parse_threshold</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#parse_threshold">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_timeout"></a><span class="summary-sig-name">parse_timeout</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#parse_timeout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_select"></a><span class="summary-sig-name">parse_select</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#parse_select">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_match_bond_indices"></a><span class="summary-sig-name">_get_match_bond_indices</span>(<span class="summary-sig-arg">pat</span>,
+        <span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">match_atom_indices</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#_get_match_bond_indices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="main"></a><span class="summary-sig-name">main</span>(<span class="summary-sig-arg">args</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.fmcs.fmcs-pysrc.html#main">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__version_info"></a><span class="summary-name">__version_info</span> = <code title="1, 1, 0">1, 1, 0</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_get_symbol"></a><span class="summary-name">_get_symbol</span> = <code title="Chem.GetPeriodicTable().GetElementSymbol">Chem.GetPeriodicTable().GetElementSymbol</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_atom_smarts_no_aromaticity"></a><span class="summary-name">_atom_smarts_no_aromaticity</span> = <code title="AtomSmartsNoAromaticity()">AtomSmartsNoAromaticity()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#atom_typers" class="summary-name">atom_typers</a> = <code title="{&quot;any&quot;: atom_typer_any, &quot;elements&quot;: atom_typer_elements, &quot;isotopes&quot;: a\
+tom_typer_isotopes,}">{&quot;any&quot;: atom_typer_any, &quot;elements&quot;: atom_typer_e<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#bond_typers" class="summary-name">bond_typers</a> = <code title="{&quot;any&quot;: bond_typer_any, &quot;bondtypes&quot;: bond_typer_bondtypes,}">{&quot;any&quot;: bond_typer_any, &quot;bondtypes&quot;: bond_typer_<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="default_atom_typer"></a><span class="summary-name">default_atom_typer</span> = <code title="atom_typers [Default.atomCompare]">atom_typers [Default.atomCompare]</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="default_bond_typer"></a><span class="summary-name">default_bond_typer</span> = <code title="bond_typers [Default.bondCompare]">bond_typers [Default.bondCompare]</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_isotope_dict"></a><span class="summary-name">_isotope_dict</span> = <code title="weakref.WeakKeyDictionary()">weakref.WeakKeyDictionary()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_atom_class_dict"></a><span class="summary-name">_atom_class_dict</span> = <code title="weakref.WeakKeyDictionary()">weakref.WeakKeyDictionary()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#EnumerationMolecule" class="summary-name">EnumerationMolecule</a> = <code title="collections.namedtuple(&quot;Molecule&quot;, &quot;rdmol atoms bonds directed_edges&quot;)">collections.namedtuple(&quot;Molecule&quot;, &quot;rdmo<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#Atom" class="summary-name">Atom</a> = <code title="collections.namedtuple(&quot;Atom&quot;, &quot;real_atom atom_smarts bond_indices is_\
+in_ring&quot;)">collections.namedtuple(&quot;Atom&quot;, &quot;real_atom atom_smarts b<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#Bond" class="summary-name">Bond</a> = <code title="collections.namedtuple(&quot;Bond&quot;, &quot;real_bond bond_smarts canonical_bondty\
+pe atom_indices is_in_ring&quot;)">collections.namedtuple(&quot;Bond&quot;, &quot;real_bond bond_smarts c<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#DirectedEdge" class="summary-name">DirectedEdge</a> = <code title="collections.namedtuple(&quot;DirectedEdge&quot;, &quot;bond_index end_atom_index&quot;)">collections.namedtuple(&quot;DirectedEdge&quot;, &quot;bond_in<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#Subgraph" class="summary-name">Subgraph</a> = <code title="collections.namedtuple(&quot;Subgraph&quot;, &quot;atom_indices bond_indices&quot;)">collections.namedtuple(&quot;Subgraph&quot;, &quot;atom_indices bo<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_prime_stream"></a><span class="summary-name">_prime_stream</span> = <code title="gen_primes()">gen_primes()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_primes"></a><span class="summary-name">_primes</span> = <code title="[]">[]</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#OutgoingEdge" class="summary-name">OutgoingEdge</a> = <code title="collections.namedtuple(&quot;OutgoingEdge&quot;, &quot;from_atom_index bond_index bon\
+d_smarts other_node_idx other_node&quot;)">collections.namedtuple(&quot;OutgoingEdge&quot;, &quot;from_at<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_available_closures"></a><span class="summary-name">_available_closures</span> = <code title="list(range(1, 101))">list(range(1, 101))</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tiebreaker"></a><span class="summary-name">tiebreaker</span> = <code title="_Counter()">_Counter()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#_maximize_options" class="summary-name" onclick="show_private();">_maximize_options</a> = <code title="{(&quot;atoms&quot;, False):(prune_maximize_atoms, SingleBestAtoms), (&quot;atoms&quot;, T\
+rue):(prune_maximize_atoms, SingleBestAtomsCompleteRingsOnly), (&quot;bonds\
+&quot;, False):(prune_maximize_bonds, SingleBestBonds), (&quot;bonds&quot;, True):(pr\
+une_maximize_bonds, SingleBestBondsCompleteRingsOnly),}">{(&quot;atoms&quot;, False):(prune_maximize_atoms, S<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#structure_format_functions" class="summary-name">structure_format_functions</a> = <code title="{&quot;fragment-smiles&quot;: make_fragment_smiles, &quot;fragment-sdf&quot;: make_fragmen\
+t_sdf, &quot;complete-sdf&quot;: make_complete_sdf,}">{&quot;fragment-smiles&quot;: make_fragment<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="range_pat"></a><span class="summary-name">range_pat</span> = <code title="re.compile(r&quot;(\d+)-(\d*)&quot;)">re.compile(r&quot;(\d+)-(\d*)&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="value_pat"></a><span class="summary-name">value_pat</span> = <code title="re.compile(&quot;(\d+)&quot;)">re.compile(&quot;(\d+)&quot;)</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.fmcs.fmcs-module.html#compare_shortcuts" class="summary-name">compare_shortcuts</a> = <code title="{&quot;topology&quot;:(&quot;any&quot;, &quot;any&quot;), &quot;elements&quot;:(&quot;elements&quot;, &quot;any&quot;), &quot;types&quot;:(&quot;\
+elements&quot;, &quot;bondtypes&quot;),}">{&quot;topology&quot;:(&quot;any&quot;, &quot;any&quot;), &quot;elements&quot;:(&quot;e<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.six.next">next</span>,
+  <span title="rdkit.six.moves.range">range</span>,
+  <span title="copy">copy</span>,
+  <span title="itertools">itertools</span>,
+  <span title="re">re</span>,
+  <span title="weakref">weakref</span>,
+  <span title="heapq.heappush">heappush</span>,
+  <span title="heapq.heappop">heappop</span>,
+  <span title="heapq.heapify">heapify</span>,
+  <span title="itertools.chain">chain</span>,
+  <span title="itertools.combinations">combinations</span>,
+  <span title="itertools.product">product</span>,
+  <span title="collections">collections</span>,
+  <span title="collections.defaultdict">defaultdict</span>,
+  <span title="time">time</span>
+</p><br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="atom_typers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">atom_typers</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{&quot;any&quot;: atom_typer_any, &quot;elements&quot;: atom_typer_elements, &quot;isotopes&quot;: a<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+tom_typer_isotopes,}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bond_typers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">bond_typers</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{&quot;any&quot;: bond_typer_any, &quot;bondtypes&quot;: bond_typer_bondtypes,}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="EnumerationMolecule"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">EnumerationMolecule</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;Molecule&quot;, &quot;rdmol atoms bonds directed_edges&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Atom"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Atom</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;Atom&quot;, &quot;real_atom atom_smarts bond_indices is_<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+in_ring&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Bond"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Bond</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;Bond&quot;, &quot;real_bond bond_smarts canonical_bondty<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+pe atom_indices is_in_ring&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="DirectedEdge"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DirectedEdge</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;DirectedEdge&quot;, &quot;bond_index end_atom_index&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Subgraph"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Subgraph</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;Subgraph&quot;, &quot;atom_indices bond_indices&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="OutgoingEdge"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">OutgoingEdge</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+collections.namedtuple(&quot;OutgoingEdge&quot;, &quot;from_atom_index bond_index bon<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+d_smarts other_node_idx other_node&quot;)
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_maximize_options"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_maximize_options</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{(&quot;atoms&quot;, False):(prune_maximize_atoms, SingleBestAtoms), (&quot;atoms&quot;, T<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+rue):(prune_maximize_atoms, SingleBestAtomsCompleteRingsOnly), (&quot;bonds<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&quot;, False):(prune_maximize_bonds, SingleBestBonds), (&quot;bonds&quot;, True):(pr<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+une_maximize_bonds, SingleBestBondsCompleteRingsOnly),}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="structure_format_functions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">structure_format_functions</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{&quot;fragment-smiles&quot;: make_fragment_smiles, &quot;fragment-sdf&quot;: make_fragmen<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+t_sdf, &quot;complete-sdf&quot;: make_complete_sdf,}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="compare_shortcuts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">compare_shortcuts</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{&quot;topology&quot;:(&quot;any&quot;, &quot;any&quot;), &quot;elements&quot;:(&quot;elements&quot;, &quot;any&quot;), &quot;types&quot;:(&quot;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+elements&quot;, &quot;bondtypes&quot;),}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

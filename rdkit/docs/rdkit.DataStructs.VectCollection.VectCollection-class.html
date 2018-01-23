@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.DataStructs.VectCollection.VectCollection</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.DataStructs-module.html">Package&nbsp;DataStructs</a> ::
+        <a href="rdkit.DataStructs.VectCollection-module.html">Module&nbsp;VectCollection</a> ::
+        Class&nbsp;VectCollection
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.DataStructs.VectCollection.VectCollection-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class VectCollection</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">VectCollection</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+
+
+&gt;&gt;&gt; vc = VectCollection()
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((1,3,5))
+&gt;&gt;&gt; vc.AddVect(1,bv1)
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((6,8))
+&gt;&gt;&gt; vc.AddVect(2,bv1)
+&gt;&gt;&gt; len(vc)
+10
+&gt;&gt;&gt; vc.GetNumBits()
+10
+&gt;&gt;&gt; vc[0]
+0
+&gt;&gt;&gt; vc[1]
+1
+&gt;&gt;&gt; vc[9]
+0
+&gt;&gt;&gt; vc[6]
+1
+&gt;&gt;&gt; vc.GetBit(6)
+1
+&gt;&gt;&gt; list(vc.GetOnBits())
+[1, 3, 5, 6, 8]
+
+keys must be unique, so adding a duplicate replaces the
+previous values:
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((7,9))
+&gt;&gt;&gt; vc.AddVect(1,bv1)
+&gt;&gt;&gt; len(vc)
+10
+&gt;&gt;&gt; vc[1]
+0
+&gt;&gt;&gt; vc[9]
+1
+&gt;&gt;&gt; vc[6]
+1
+
+we can also query the children:
+&gt;&gt;&gt; vc.NumChildren()
+2
+&gt;&gt;&gt; cs = vc.GetChildren()
+&gt;&gt;&gt; id,fp = cs[0]
+&gt;&gt;&gt; id
+1
+&gt;&gt;&gt; list(fp.GetOnBits())
+[7, 9]
+&gt;&gt;&gt; id,fp = cs[1]
+&gt;&gt;&gt; id
+2
+&gt;&gt;&gt; list(fp.GetOnBits())
+[6, 8]
+
+attach/detach operations:
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((5,6))
+&gt;&gt;&gt; vc.AddVect(3,bv1)
+&gt;&gt;&gt; vc.NumChildren()
+3
+&gt;&gt;&gt; list(vc.GetOnBits())
+[5, 6, 7, 8, 9]
+&gt;&gt;&gt; vc.DetachVectsNotMatchingBit(6)
+&gt;&gt;&gt; vc.NumChildren()
+2
+&gt;&gt;&gt; list(vc.GetOnBits())
+[5, 6, 8]
+
+
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((7,9))
+&gt;&gt;&gt; vc.AddVect(1,bv1)
+&gt;&gt;&gt; vc.NumChildren()
+3
+&gt;&gt;&gt; list(vc.GetOnBits())
+[5, 6, 7, 8, 9]
+&gt;&gt;&gt; vc.DetachVectsMatchingBit(6)
+&gt;&gt;&gt; vc.NumChildren()
+1
+&gt;&gt;&gt; list(vc.GetOnBits())
+[7, 9]
+
+
+to copy VectCollections, use the copy module:
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((5,6))
+&gt;&gt;&gt; vc.AddVect(3,bv1)
+&gt;&gt;&gt; list(vc.GetOnBits())
+[5, 6, 7, 9]
+&gt;&gt;&gt; vc2 = copy.copy(vc)
+&gt;&gt;&gt; vc.DetachVectsNotMatchingBit(6)
+&gt;&gt;&gt; list(vc.GetOnBits())
+[5, 6]
+&gt;&gt;&gt; list(vc2.GetOnBits())
+[5, 6, 7, 9]
+
+The Uniquify() method can be used to remove duplicate vectors:
+&gt;&gt;&gt; vc = VectCollection()
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((7,9))
+&gt;&gt;&gt; vc.AddVect(1,bv1)
+&gt;&gt;&gt; vc.AddVect(2,bv1)
+&gt;&gt;&gt; bv1 = DataStructs.ExplicitBitVect(10)
+&gt;&gt;&gt; bv1.SetBitsFromList((2,3,5))
+&gt;&gt;&gt; vc.AddVect(3,bv1)
+&gt;&gt;&gt; vc.NumChildren()
+3
+&gt;&gt;&gt; vc.Uniquify()
+&gt;&gt;&gt; vc.NumChildren()
+2
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.DataStructs.VectCollection.VectCollection-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetOrVect"></a><span class="summary-sig-name">GetOrVect</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.GetOrVect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="orVect"></a><span class="summary-sig-name">orVect</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.orVect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="AddVect"></a><span class="summary-sig-name">AddVect</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">idx</span>,
+        <span class="summary-sig-arg">vect</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.AddVect">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Reset"></a><span class="summary-sig-name">Reset</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.Reset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="NumChildren"></a><span class="summary-sig-name">NumChildren</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.NumChildren">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetChildren"></a><span class="summary-sig-name">GetChildren</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.GetChildren">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getitem__"></a><span class="summary-sig-name">__getitem__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">idx</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetBit"></a><span class="summary-sig-name">GetBit</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">idx</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetNumBits"></a><span class="summary-sig-name">GetNumBits</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetOnBits"></a><span class="summary-sig-name">GetOnBits</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.GetOnBits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DetachVectsNotMatchingBit"></a><span class="summary-sig-name">DetachVectsNotMatchingBit</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bit</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.DetachVectsNotMatchingBit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="DetachVectsMatchingBit"></a><span class="summary-sig-name">DetachVectsMatchingBit</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bit</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.DetachVectsMatchingBit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Uniquify"></a><span class="summary-sig-name">Uniquify</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.Uniquify">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__getstate__"></a><span class="summary-sig-name">__getstate__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__getstate__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__setstate__"></a><span class="summary-sig-name">__setstate__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pkl</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__setstate__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.DataStructs.VectCollection-pysrc.html#VectCollection.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+x.__init__(...) initializes x; see help(type(x)) for signature
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

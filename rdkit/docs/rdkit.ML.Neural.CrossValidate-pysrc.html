@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Neural.CrossValidate</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Neural-module.html">Package&nbsp;Neural</a> ::
+        Module&nbsp;CrossValidate
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Neural.CrossValidate-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.Neural.CrossValidate-module.html">Module rdkit.ML.Neural.CrossValidate</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2000  greg Landrum</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">""" handles doing cross validation with neural nets</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">This is, perhaps, a little misleading.  For the purposes of this module,</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">cross validation == evaluating the accuracy of a net.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-0', 'ML', 'link-0');">ML</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.ML.Neural=rdkit.ML.Neural-module.html"><a title="rdkit.ML.Neural" class="py-name" href="#" onclick="return doclink('link-1', 'Neural', 'link-1');">Neural</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module rdkit.ML.Neural.Network=rdkit.ML.Neural.Network-module.html,Class rdkit.ML.Neural.Network.Network=rdkit.ML.Neural.Network.Network-class.html"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-2', 'Network', 'link-2');">Network</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Module rdkit.ML.Neural.Trainers=rdkit.ML.Neural.Trainers-module.html"><a title="rdkit.ML.Neural.Trainers" class="py-name" href="#" onclick="return doclink('link-3', 'Trainers', 'link-3');">Trainers</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-4', 'ML', 'link-0');">ML</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package rdkit.ML.Data=rdkit.ML.Data-module.html"><a title="rdkit.ML.Data" class="py-name" href="#" onclick="return doclink('link-5', 'Data', 'link-5');">Data</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Module rdkit.ML.Data.SplitData=rdkit.ML.Data.SplitData-module.html"><a title="rdkit.ML.Data.SplitData" class="py-name" href="#" onclick="return doclink('link-6', 'SplitData', 'link-6');">SplitData</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="CrossValidate"></a><div id="CrossValidate-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="CrossValidate-toggle" onclick="return toggle('CrossValidate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.CrossValidate-module.html#CrossValidate">CrossValidate</a><tt class="py-op">(</tt><tt class="py-param">net</tt><tt class="py-op">,</tt> <tt class="py-param">testExamples</tt><tt class="py-op">,</tt> <tt class="py-param">tolerance</tt><tt class="py-op">,</tt> <tt class="py-param">appendExamples</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CrossValidate-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CrossValidate-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">  <tt class="py-docstring">""" Determines the classification error for the testExamples</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    **Arguments**</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">      - tree: a decision tree (or anything supporting a _ClassifyExample()_ method)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">      - testExamples: a list of examples to be used for testing</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">      - appendExamples: a toggle which is ignored, it's just here to maintain</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">         the same API as the decision tree code.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    **Returns**</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">      a 2-tuple consisting of:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        1) the percent error of the net</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        2) a list of misclassified examples</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">   **Note**</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">     At the moment, this is specific to nets with only one output</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">  <tt class="py-name">nTest</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">testExamples</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">  <tt class="py-name">nBad</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">  <tt class="py-name">badExamples</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">nTest</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">testEx</tt> <tt class="py-op">=</tt> <tt class="py-name">testExamples</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">trueRes</tt> <tt class="py-op">=</tt> <tt class="py-name">testExamples</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">net</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#ClassifyExample,Method rdkit.ML.Composite.Composite.Composite.ClassifyExample()=rdkit.ML.Composite.Composite.Composite-class.html#ClassifyExample,Method rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.Forest.Forest.ClassifyExample()=rdkit.ML.DecTree.Forest.Forest-class.html#ClassifyExample,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#ClassifyExample,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#ClassifyExample,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#ClassifyExample,Method rdkit.ML.Neural.Network.Network.ClassifyExample()=rdkit.ML.Neural.Network.Network-class.html#ClassifyExample"><a title="rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample
+rdkit.ML.Composite.Composite.Composite.ClassifyExample
+rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample
+rdkit.ML.DecTree.Forest.Forest.ClassifyExample
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample
+rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample
+rdkit.ML.Neural.Network.Network.ClassifyExample" class="py-name" href="#" onclick="return doclink('link-7', 'ClassifyExample', 'link-7');">ClassifyExample</a></tt><tt class="py-op">(</tt><tt class="py-name">testEx</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">fabs</tt><tt class="py-op">(</tt><tt class="py-name">trueRes</tt> <tt class="py-op">-</tt> <tt class="py-name">res</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">tolerance</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">      <tt class="py-name">badExamples</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">testEx</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">      <tt class="py-name">nBad</tt> <tt class="py-op">=</tt> <tt class="py-name">nBad</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">nBad</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">nTest</tt><tt class="py-op">,</tt> <tt class="py-name">badExamples</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="CrossValidationDriver"></a><div id="CrossValidationDriver-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="CrossValidationDriver-toggle" onclick="return toggle('CrossValidationDriver');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Neural.CrossValidate-module.html#CrossValidationDriver">CrossValidationDriver</a><tt class="py-op">(</tt><tt class="py-param">examples</tt><tt class="py-op">,</tt> <tt class="py-param">attrs</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">nPossibleVals</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">holdOutFrac</tt><tt class="py-op">=</tt><tt class="py-number">.3</tt><tt class="py-op">,</tt> <tt class="py-param">silent</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                          <tt class="py-param">tolerance</tt><tt class="py-op">=</tt><tt class="py-number">0.3</tt><tt class="py-op">,</tt> <tt class="py-param">calcTotalError</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">hiddenSizes</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CrossValidationDriver-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CrossValidationDriver-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    **Arguments**</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">      - examples: the full set of examples</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">      - attrs: a list of attributes to consider in the tree building</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">         *This argument is ignored*</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">      - nPossibleVals: a list of the number of possible values each variable can adopt</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">         *This argument is ignored*</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">      - holdOutFrac: the fraction of the data which should be reserved for the hold-out set</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">         (used to calculate the error)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">      - silent: a toggle used to control how much visual noise this makes as it goes.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">      - tolerance: the tolerance for convergence of the net</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">      - calcTotalError: if this is true the entire data set is used to calculate</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">           accuracy of the net</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">      - hiddenSizes: a list containing the size(s) of the hidden layers in the network.</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">           if _hiddenSizes_ is None, one hidden layer containing the same number of nodes</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">           as the input layer will be used</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    **Returns**</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">       a 2-tuple containing:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">         1) the net</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">         2) the cross-validation error of the net</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    **Note**</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">      At the moment, this is specific to nets with only one output</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">  <tt class="py-name">nTot</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">examples</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">kwargs</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'replacementSelection'</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">testIndices</tt><tt class="py-op">,</tt> <tt class="py-name">trainIndices</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.ML.Data.SplitData" class="py-name" href="#" onclick="return doclink('link-8', 'SplitData', 'link-6');">SplitData</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Function rdkit.ML.Data.SplitData.SplitIndices()=rdkit.ML.Data.SplitData-module.html#SplitIndices"><a title="rdkit.ML.Data.SplitData.SplitIndices" class="py-name" href="#" onclick="return doclink('link-9', 'SplitIndices', 'link-9');">SplitIndices</a></tt><tt class="py-op">(</tt><tt class="py-name">nTot</tt><tt class="py-op">,</tt> <tt class="py-name">holdOutFrac</tt><tt class="py-op">,</tt> <tt class="py-name">silent</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">legacy</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                                                       <tt class="py-name">replacement</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">testIndices</tt><tt class="py-op">,</tt> <tt class="py-name">trainIndices</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.ML.Data.SplitData" class="py-name" href="#" onclick="return doclink('link-10', 'SplitData', 'link-6');">SplitData</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rdkit.ML.Data.SplitData.SplitIndices" class="py-name" href="#" onclick="return doclink('link-11', 'SplitIndices', 'link-9');">SplitIndices</a></tt><tt class="py-op">(</tt><tt class="py-name">nTot</tt><tt class="py-op">,</tt> <tt class="py-name">holdOutFrac</tt><tt class="py-op">,</tt> <tt class="py-name">silent</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">legacy</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                                                       <tt class="py-name">replacement</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">  <tt class="py-name">trainExamples</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">examples</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">trainIndices</tt><tt class="py-op">]</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">  <tt class="py-name">testExamples</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">examples</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">testIndices</tt><tt class="py-op">]</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">  <tt class="py-name">nTrain</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">trainExamples</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">silent</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Training with %d examples'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">nTrain</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">  <tt class="py-name">nInput</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">examples</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">  <tt class="py-name">nOutput</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">hiddenSizes</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">nHidden</tt> <tt class="py-op">=</tt> <tt class="py-name">nInput</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-name">netSize</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">nInput</tt><tt class="py-op">,</tt> <tt class="py-name">nHidden</tt><tt class="py-op">,</tt> <tt class="py-name">nOutput</tt><tt class="py-op">]</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-name">netSize</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">nInput</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">hiddenSizes</tt> <tt class="py-op">+</tt> <tt class="py-op">[</tt><tt class="py-name">nOutput</tt><tt class="py-op">]</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">  <tt class="py-name">net</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-12', 'Network', 'link-2');">Network</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.ML.Neural.Network
+rdkit.ML.Neural.Network.Network" class="py-name" href="#" onclick="return doclink('link-13', 'Network', 'link-2');">Network</a></tt><tt class="py-op">(</tt><tt class="py-name">netSize</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">  <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rdkit.ML.Neural.Trainers" class="py-name" href="#" onclick="return doclink('link-14', 'Trainers', 'link-3');">Trainers</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Class rdkit.ML.Neural.Trainers.BackProp=rdkit.ML.Neural.Trainers.BackProp-class.html"><a title="rdkit.ML.Neural.Trainers.BackProp" class="py-name" href="#" onclick="return doclink('link-15', 'BackProp', 'link-15');">BackProp</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">  <tt class="py-name">t</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method rdkit.ML.Neural.Trainers.BackProp.TrainOnLine()=rdkit.ML.Neural.Trainers.BackProp-class.html#TrainOnLine"><a title="rdkit.ML.Neural.Trainers.BackProp.TrainOnLine" class="py-name" href="#" onclick="return doclink('link-16', 'TrainOnLine', 'link-16');">TrainOnLine</a></tt><tt class="py-op">(</tt><tt class="py-name">trainExamples</tt><tt class="py-op">,</tt> <tt class="py-name">net</tt><tt class="py-op">,</tt> <tt class="py-name">errTol</tt><tt class="py-op">=</tt><tt class="py-name">tolerance</tt><tt class="py-op">,</tt> <tt class="py-name">useAvgErr</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">silent</tt><tt class="py-op">=</tt><tt class="py-name">silent</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">  <tt class="py-name">nTest</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">testExamples</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">silent</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Testing with %d examples'</tt> <tt class="py-op">%</tt> <tt class="py-name">nTest</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">calcTotalError</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">xValError</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name" targets="Module rdkit.ML.DecTree.CrossValidate=rdkit.ML.DecTree.CrossValidate-module.html,Function rdkit.ML.DecTree.CrossValidate.CrossValidate()=rdkit.ML.DecTree.CrossValidate-module.html#CrossValidate,Module rdkit.ML.KNN.CrossValidate=rdkit.ML.KNN.CrossValidate-module.html,Function rdkit.ML.KNN.CrossValidate.CrossValidate()=rdkit.ML.KNN.CrossValidate-module.html#CrossValidate,Module rdkit.ML.NaiveBayes.CrossValidate=rdkit.ML.NaiveBayes.CrossValidate-module.html,Function rdkit.ML.NaiveBayes.CrossValidate.CrossValidate()=rdkit.ML.NaiveBayes.CrossValidate-module.html#CrossValidate,Module rdkit.ML.Neural.CrossValidate=rdkit.ML.Neural.CrossValidate-module.html,Function rdkit.ML.Neural.CrossValidate.CrossValidate()=rdkit.ML.Neural.CrossValidate-module.html#CrossValidate"><a title="rdkit.ML.DecTree.CrossValidate
+rdkit.ML.DecTree.CrossValidate.CrossValidate
+rdkit.ML.KNN.CrossValidate
+rdkit.ML.KNN.CrossValidate.CrossValidate
+rdkit.ML.NaiveBayes.CrossValidate
+rdkit.ML.NaiveBayes.CrossValidate.CrossValidate
+rdkit.ML.Neural.CrossValidate
+rdkit.ML.Neural.CrossValidate.CrossValidate" class="py-name" href="#" onclick="return doclink('link-17', 'CrossValidate', 'link-17');">CrossValidate</a></tt><tt class="py-op">(</tt><tt class="py-name">net</tt><tt class="py-op">,</tt> <tt class="py-name">testExamples</tt><tt class="py-op">,</tt> <tt class="py-name">tolerance</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-name">xValError</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="rdkit.ML.DecTree.CrossValidate
+rdkit.ML.DecTree.CrossValidate.CrossValidate
+rdkit.ML.KNN.CrossValidate
+rdkit.ML.KNN.CrossValidate.CrossValidate
+rdkit.ML.NaiveBayes.CrossValidate
+rdkit.ML.NaiveBayes.CrossValidate.CrossValidate
+rdkit.ML.Neural.CrossValidate
+rdkit.ML.Neural.CrossValidate.CrossValidate" class="py-name" href="#" onclick="return doclink('link-18', 'CrossValidate', 'link-17');">CrossValidate</a></tt><tt class="py-op">(</tt><tt class="py-name">net</tt><tt class="py-op">,</tt> <tt class="py-name">examples</tt><tt class="py-op">,</tt> <tt class="py-name">tolerance</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">silent</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Validation error was %%%4.2f'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-number">100</tt> <tt class="py-op">*</tt> <tt class="py-name">xValError</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">  <tt class="py-name">net</tt><tt class="py-op">.</tt><tt class="py-name">_trainIndices</tt> <tt class="py-op">=</tt> <tt class="py-name">trainIndices</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">net</tt><tt class="py-op">,</tt> <tt class="py-name">xValError</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

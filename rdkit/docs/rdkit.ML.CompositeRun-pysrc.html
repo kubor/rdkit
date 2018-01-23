@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.CompositeRun</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        Module&nbsp;CompositeRun
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.CompositeRun-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.CompositeRun-module.html">Module rdkit.ML.CompositeRun</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2002-2006  greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">""" contains a class to store parameters for and results from</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">Composite building</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RDConfig</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package rdkit.Dbase=rdkit.Dbase-module.html"><a title="rdkit.Dbase" class="py-name" href="#" onclick="return doclink('link-0', 'Dbase', 'link-0');">Dbase</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module rdkit.Dbase.DbConnection=rdkit.Dbase.DbConnection-module.html"><a title="rdkit.Dbase.DbConnection" class="py-name" href="#" onclick="return doclink('link-1', 'DbConnection', 'link-1');">DbConnection</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class rdkit.Dbase.DbConnection.DbConnect=rdkit.Dbase.DbConnection.DbConnect-class.html"><a title="rdkit.Dbase.DbConnection.DbConnect" class="py-name" href="#" onclick="return doclink('link-2', 'DbConnect', 'link-2');">DbConnect</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="rdkit.Dbase" class="py-name" href="#" onclick="return doclink('link-3', 'Dbase', 'link-0');">Dbase</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Module rdkit.Dbase.DbModule=rdkit.Dbase.DbModule-module.html"><a title="rdkit.Dbase.DbModule" class="py-name" href="#" onclick="return doclink('link-4', 'DbModule', 'link-4');">DbModule</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="SetDefaults"></a><div id="SetDefaults-def"><a name="L20"></a><tt class="py-lineno"> 20</tt> <a class="py-toggle" href="#" id="SetDefaults-toggle" onclick="return toggle('SetDefaults');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun-module.html#SetDefaults">SetDefaults</a><tt class="py-op">(</tt><tt class="py-param">runDetails</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SetDefaults-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SetDefaults-expanded"><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">  <tt class="py-docstring">"""  initializes a details object with default values</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">        - details:  (optional) a _CompositeRun.CompositeRun_ object.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">          If this is not provided, the global _runDetails will be used.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">      **Returns**</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        the initialized _CompositeRun_ object.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">nRuns</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">nModels</tt> <tt class="py-op">=</tt> <tt class="py-number">10</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">outName</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">badName</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">splitRun</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">splitFrac</tt> <tt class="py-op">=</tt> <tt class="py-number">0.7</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">lockRandom</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">randomActivities</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">shuffleActivities</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">replacementSelection</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">  <tt class="py-comment"># Tree Parameters</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useTrees</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">pruneIt</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">lessGreedy</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">limitDepth</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">recycleVars</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">randomDescriptors</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt>  <tt class="py-comment"># toggles growing of random forests</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">  <tt class="py-comment"># KNN Parameters</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useKNN</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">knnDistFunc</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">knnNeighs</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">  <tt class="py-comment"># SigTree Parameters</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useSigTrees</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useCMIM</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">allowCollections</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">  <tt class="py-comment"># Naive Bayes Classifier Parameters</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">  <tt class="py-comment">#</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useNaiveBayes</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">mEstimateVal</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1.0</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">useSigBayes</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">  <tt class="py-comment">#   #</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">  <tt class="py-comment">#   # SVM Parameters</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">  <tt class="py-comment">#   #</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.useSVM = 0</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmKernel = SVM.radialKernel</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmType = SVM.cSVCType</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmGamma = None</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmCost = None</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmWeights = None</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmDataType = 'float'</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmDegree = 3</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmCoeff = 0.0</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmEps = 0.001</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmNu = 0.5</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmCache = 40</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmShrink = 1</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">  <tt class="py-comment">#   runDetails.svmDataType='float'</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">bayesModel</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable rdkit.Chem.BuildFragmentCatalog.RunDetails.dbName=rdkit.Chem.BuildFragmentCatalog.RunDetails-class.html#dbName"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.dbName" class="py-name" href="#" onclick="return doclink('link-5', 'dbName', 'link-5');">dbName</a></tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">dbUser</tt> <tt class="py-op">=</tt> <tt class="py-name">RDConfig</tt><tt class="py-op">.</tt><tt class="py-name">defaultDBUser</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">dbPassword</tt> <tt class="py-op">=</tt> <tt class="py-name">RDConfig</tt><tt class="py-op">.</tt><tt class="py-name">defaultDBPassword</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">dbWhat</tt> <tt class="py-op">=</tt> <tt class="py-string">'*'</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">dbWhere</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">dbJoin</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">qTableName</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">qBounds</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">qBoundCount</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">activityBounds</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">activityBoundsVals</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">detailedRes</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">noScreen</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">threshold</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">filterFrac</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">filterVal</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">modelFilterVal</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">modelFilterFrac</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">internalHoldoutFrac</tt> <tt class="py-op">=</tt> <tt class="py-number">0.3</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">pickleDataFileName</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">startAt</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">persistTblName</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">randomSeed</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">23</tt><tt class="py-op">,</tt> <tt class="py-number">42</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">  <tt class="py-name">runDetails</tt><tt class="py-op">.</tt><tt class="py-name">note</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">runDetails</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="CompositeRun"></a><div id="CompositeRun-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="CompositeRun-toggle" onclick="return toggle('CompositeRun');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun.CompositeRun-class.html">CompositeRun</a><tt class="py-op">:</tt> </tt>
+</div><div id="CompositeRun-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CompositeRun-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">  <tt class="py-docstring">""" class to store parameters for and results from Composite building</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">   This class has a default set of fields which are added to the database.</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">   By default these fields are stored in a tuple, so they are immutable.  This</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">     is probably what you want.</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">  <tt id="link-6" class="py-name" targets="Variable rdkit.ML.CompositeRun.CompositeRun.fields=rdkit.ML.CompositeRun.CompositeRun-class.html#fields"><a title="rdkit.ML.CompositeRun.CompositeRun.fields" class="py-name" href="#" onclick="return doclink('link-6', 'fields', 'link-6');">fields</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">"rundate"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(32)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"dbName"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(200)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"dbWhat"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(200)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"dbWhere"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(200)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"dbJoin"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(200)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"tableName"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(80)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"note"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(120)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"shuffled"</tt><tt class="py-op">,</tt> <tt class="py-string">"smallint"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"randomized"</tt><tt class="py-op">,</tt> <tt class="py-string">"smallint"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"overall_error"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"holdout_error"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"overall_fraction_dropped"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"holdout_fraction_dropped"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"overall_correct_conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"overall_incorrect_conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"holdout_correct_conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"holdout_incorrect_conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"overall_result_matrix"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(256)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"holdout_result_matrix"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(256)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"threshold"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"splitFrac"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"filterFrac"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"filterVal"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"modelFilterVal"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"modelFilterFrac"</tt><tt class="py-op">,</tt> <tt class="py-string">"float"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"nModels"</tt><tt class="py-op">,</tt> <tt class="py-string">"int"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"limitDepth"</tt><tt class="py-op">,</tt> <tt class="py-string">"int"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"bayesModels"</tt><tt class="py-op">,</tt> <tt class="py-string">"int"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"qBoundCount"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(3000)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"activityBoundsVals"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(200)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"cmd"</tt><tt class="py-op">,</tt> <tt class="py-string">"varchar(500)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"model"</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name"><a title="rdkit.Dbase.DbModule" class="py-name" href="#" onclick="return doclink('link-7', 'DbModule', 'link-4');">DbModule</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Variable rdkit.Dbase.DbModule.binaryTypeName=rdkit.Dbase.DbModule-module.html#binaryTypeName"><a title="rdkit.Dbase.DbModule.binaryTypeName" class="py-name" href="#" onclick="return doclink('link-8', 'binaryTypeName', 'link-8');">binaryTypeName</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="CompositeRun._CreateTable"></a><div id="CompositeRun._CreateTable-def"><a name="L166"></a><tt class="py-lineno">166</tt> <a class="py-toggle" href="#" id="CompositeRun._CreateTable-toggle" onclick="return toggle('CompositeRun._CreateTable');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun.CompositeRun-class.html#_CreateTable">_CreateTable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cn</tt><tt class="py-op">,</tt> <tt class="py-param">tblName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompositeRun._CreateTable-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CompositeRun._CreateTable-expanded"><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-docstring">""" *Internal Use only*</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">names</tt> <tt class="py-op">=</tt> <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.GetTableNames()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetTableNames,Function rdkit.Dbase.DbInfo.GetTableNames()=rdkit.Dbase.DbInfo-module.html#GetTableNames"><a title="rdkit.Dbase.DbConnection.DbConnect.GetTableNames
+rdkit.Dbase.DbInfo.GetTableNames" class="py-name" href="#" onclick="return doclink('link-9', 'GetTableNames', 'link-9');">GetTableNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">tblName</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">names</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">      <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.GetCursor()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetCursor"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-10', 'GetCursor', 'link-10');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">      <tt id="link-11" class="py-name" targets="Variable rdkit.Chem.PandasTools.fmt=rdkit.Chem.PandasTools-module.html#fmt"><a title="rdkit.Chem.PandasTools.fmt" class="py-name" href="#" onclick="return doclink('link-11', 'fmt', 'link-11');">fmt</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt id="link-12" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.name=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-12', 'name', 'link-12');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.ML.CompositeRun.CompositeRun.fields" class="py-name" href="#" onclick="return doclink('link-13', 'fields', 'link-6');">fields</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="rdkit.Chem.PandasTools.fmt" class="py-name" href="#" onclick="return doclink('link-14', 'fmt', 'link-11');">fmt</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'%s %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-15', 'name', 'link-12');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">      <tt class="py-name">fmtStr</tt> <tt class="py-op">=</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="rdkit.Chem.PandasTools.fmt" class="py-name" href="#" onclick="return doclink('link-16', 'fmt', 'link-11');">fmt</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">      <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'create table %s (%s)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">tblName</tt><tt class="py-op">,</tt> <tt class="py-name">fmtStr</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">      <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.Commit()=rdkit.Dbase.DbConnection.DbConnect-class.html#Commit"><a title="rdkit.Dbase.DbConnection.DbConnect.Commit" class="py-name" href="#" onclick="return doclink('link-17', 'Commit', 'link-17');">Commit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">      <tt class="py-name">heads</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.GetColumnNames()=rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier-class.html#GetColumnNames,Method rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.GetColumnNames()=rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier-class.html#GetColumnNames,Method rdkit.Dbase.DbConnection.DbConnect.GetColumnNames()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetColumnNames,Function rdkit.Dbase.DbInfo.GetColumnNames()=rdkit.Dbase.DbInfo-module.html#GetColumnNames,Method rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNames()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnNames"><a title="rdkit.Chem.Fingerprints.DbFpSupplier.DbFpSupplier.GetColumnNames
+rdkit.Chem.Suppliers.DbMolSupplier.DbMolSupplier.GetColumnNames
+rdkit.Dbase.DbConnection.DbConnect.GetColumnNames
+rdkit.Dbase.DbInfo.GetColumnNames
+rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNames" class="py-name" href="#" onclick="return doclink('link-18', 'GetColumnNames', 'link-18');">GetColumnNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">      <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-19', 'GetCursor', 'link-10');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt id="link-20" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-20', 'name', 'link-12');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="rdkit.ML.CompositeRun.CompositeRun.fields" class="py-name" href="#" onclick="return doclink('link-21', 'fields', 'link-6');">fields</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-22" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-22', 'name', 'link-12');">name</a></tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">heads</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">          <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">'alter table %s add %s %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">tblName</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-23', 'name', 'link-12');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">      <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.Commit" class="py-name" href="#" onclick="return doclink('link-24', 'Commit', 'link-17');">Commit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="CompositeRun.Store"></a><div id="CompositeRun.Store-def"><a name="L187"></a><tt class="py-lineno">187</tt> <a class="py-toggle" href="#" id="CompositeRun.Store-toggle" onclick="return toggle('CompositeRun.Store');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun.CompositeRun-class.html#Store">Store</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">db</tt><tt class="py-op">=</tt><tt class="py-string">'models.gdb'</tt><tt class="py-op">,</tt> <tt class="py-param">table</tt><tt class="py-op">=</tt><tt class="py-string">'results'</tt><tt class="py-op">,</tt> <tt class="py-param">user</tt><tt class="py-op">=</tt><tt class="py-string">'sysdba'</tt><tt class="py-op">,</tt> <tt class="py-param">password</tt><tt class="py-op">=</tt><tt class="py-string">'masterkey'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompositeRun.Store-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CompositeRun.Store-expanded"><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-docstring">""" adds the result to a database</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"><tt class="py-docstring">      **Arguments**</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">        - db: name of the database to use</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">        - table: name of the table to use</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">        - user&amp;password: connection information</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-name">cn</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect" class="py-name" href="#" onclick="return doclink('link-25', 'DbConnect', 'link-2');">DbConnect</a></tt><tt class="py-op">(</tt><tt class="py-name">db</tt><tt class="py-op">,</tt> <tt class="py-name">table</tt><tt class="py-op">,</tt> <tt class="py-name">user</tt><tt class="py-op">,</tt> <tt class="py-name">password</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-name">curs</tt> <tt class="py-op">=</tt> <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.GetCursor" class="py-name" href="#" onclick="return doclink('link-26', 'GetCursor', 'link-10');">GetCursor</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method rdkit.ML.CompositeRun.CompositeRun._CreateTable()=rdkit.ML.CompositeRun.CompositeRun-class.html#_CreateTable"><a title="rdkit.ML.CompositeRun.CompositeRun._CreateTable" class="py-name" href="#" onclick="return doclink('link-27', '_CreateTable', 'link-27');">_CreateTable</a></tt><tt class="py-op">(</tt><tt class="py-name">cn</tt><tt class="py-op">,</tt> <tt class="py-name">table</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-name">cols</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-name">vals</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-28" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-28', 'name', 'link-12');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="rdkit.ML.CompositeRun.CompositeRun.fields" class="py-name" href="#" onclick="return doclink('link-29', 'fields', 'link-6');">fields</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-30', 'name', 'link-12');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">AttributeError</tt><tt class="py-op">:</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-name">cols</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt id="link-31" class="py-name"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.name" class="py-name" href="#" onclick="return doclink('link-31', 'name', 'link-12');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-name">vals</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">    <tt class="py-name">nToDo</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">vals</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-name">qs</tt> <tt class="py-op">=</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt id="link-32" class="py-name"><a title="rdkit.Dbase.DbModule" class="py-name" href="#" onclick="return doclink('link-32', 'DbModule', 'link-4');">DbModule</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Variable rdkit.Dbase.DbModule.placeHolder=rdkit.Dbase.DbModule-module.html#placeHolder"><a title="rdkit.Dbase.DbModule.placeHolder" class="py-name" href="#" onclick="return doclink('link-33', 'placeHolder', 'link-33');">placeHolder</a></tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">nToDo</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-name">vals</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">vals</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">    <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">'insert into %s (%s) values (%s)'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">table</tt><tt class="py-op">,</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">cols</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">qs</tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">    <tt class="py-name">curs</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">,</tt> <tt class="py-name">vals</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-name">cn</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect.Commit" class="py-name" href="#" onclick="return doclink('link-34', 'Commit', 'link-17');">Commit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line"> </tt>
+<a name="CompositeRun.GetDataSet"></a><div id="CompositeRun.GetDataSet-def"><a name="L222"></a><tt class="py-lineno">222</tt> <a class="py-toggle" href="#" id="CompositeRun.GetDataSet-toggle" onclick="return toggle('CompositeRun.GetDataSet');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun.CompositeRun-class.html#GetDataSet">GetDataSet</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompositeRun.GetDataSet-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CompositeRun.GetDataSet-expanded"><a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">    <tt class="py-docstring">""" Returns a MLDataSet pulled from a database using our stored</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"><tt class="py-docstring">    values.</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-35', 'ML', 'link-35');">ML</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Package rdkit.ML.Data=rdkit.ML.Data-module.html"><a title="rdkit.ML.Data" class="py-name" href="#" onclick="return doclink('link-36', 'Data', 'link-36');">Data</a></tt> <tt class="py-keyword">import</tt> <tt id="link-37" class="py-name" targets="Module rdkit.ML.Data.DataUtils=rdkit.ML.Data.DataUtils-module.html"><a title="rdkit.ML.Data.DataUtils" class="py-name" href="#" onclick="return doclink('link-37', 'DataUtils', 'link-37');">DataUtils</a></tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt id="link-38" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-38', 'data', 'link-38');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="rdkit.ML.Data.DataUtils" class="py-name" href="#" onclick="return doclink('link-39', 'DataUtils', 'link-37');">DataUtils</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Function rdkit.ML.Data.DataUtils.DBToData()=rdkit.ML.Data.DataUtils-module.html#DBToData"><a title="rdkit.ML.Data.DataUtils.DBToData" class="py-name" href="#" onclick="return doclink('link-40', 'DBToData', 'link-40');">DBToData</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.dbName" class="py-name" href="#" onclick="return doclink('link-41', 'dbName', 'link-5');">dbName</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Variable rdkit.Chem.BuildFragmentCatalog.RunDetails.tableName=rdkit.Chem.BuildFragmentCatalog.RunDetails-class.html#tableName"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.tableName" class="py-name" href="#" onclick="return doclink('link-42', 'tableName', 'link-42');">tableName</a></tt><tt class="py-op">,</tt> <tt class="py-name">user</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbUser</tt><tt class="py-op">,</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">                              <tt class="py-name">password</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbPassword</tt><tt class="py-op">,</tt> <tt class="py-name">what</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbWhat</tt><tt class="py-op">,</tt> <tt class="py-name">where</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbWhere</tt><tt class="py-op">,</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">                              <tt class="py-name">join</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbJoin</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-43" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-43', 'data', 'link-38');">data</a></tt> </tt>
+</div><a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="CompositeRun.GetDataSetInfo"></a><div id="CompositeRun.GetDataSetInfo-def"><a name="L234"></a><tt class="py-lineno">234</tt> <a class="py-toggle" href="#" id="CompositeRun.GetDataSetInfo-toggle" onclick="return toggle('CompositeRun.GetDataSetInfo');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.CompositeRun.CompositeRun-class.html#GetDataSetInfo">GetDataSetInfo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompositeRun.GetDataSetInfo-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CompositeRun.GetDataSetInfo-expanded"><a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-docstring">""" Returns a MLDataSet pulled from a database using our stored</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line"><tt class="py-docstring">    values.</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="rdkit.Dbase.DbConnection.DbConnect" class="py-name" href="#" onclick="return doclink('link-44', 'DbConnect', 'link-2');">DbConnect</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.dbName" class="py-name" href="#" onclick="return doclink('link-45', 'dbName', 'link-5');">dbName</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.tableName" class="py-name" href="#" onclick="return doclink('link-46', 'tableName', 'link-42');">tableName</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method rdkit.Dbase.DbConnection.DbConnect.GetColumnNamesAndTypes()=rdkit.Dbase.DbConnection.DbConnect-class.html#GetColumnNamesAndTypes,Function rdkit.Dbase.DbInfo.GetColumnNamesAndTypes()=rdkit.Dbase.DbInfo-module.html#GetColumnNamesAndTypes,Method rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNamesAndTypes()=rdkit.Dbase.DbResultSet.DbResultBase-class.html#GetColumnNamesAndTypes"><a title="rdkit.Dbase.DbConnection.DbConnect.GetColumnNamesAndTypes
+rdkit.Dbase.DbInfo.GetColumnNamesAndTypes
+rdkit.Dbase.DbResultSet.DbResultBase.GetColumnNamesAndTypes" class="py-name" href="#" onclick="return doclink('link-47', 'GetColumnNamesAndTypes', 'link-47');">GetColumnNamesAndTypes</a></tt><tt class="py-op">(</tt><tt class="py-name">join</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbJoin</tt><tt class="py-op">,</tt> <tt class="py-name">what</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbWhat</tt><tt class="py-op">,</tt> <tt class="py-name">where</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dbWhere</tt><tt class="py-op">)</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div></div><a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

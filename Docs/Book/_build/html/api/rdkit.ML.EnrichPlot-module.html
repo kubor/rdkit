@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.EnrichPlot</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        Module&nbsp;EnrichPlot
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.EnrichPlot-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module EnrichPlot</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Command line tool to construct an enrichment plot from saved composite models
+
+Usage:  EnrichPlot [optional args] -d dbname -t tablename &lt;models&gt;
+
+Required Arguments:
+  -d &quot;dbName&quot;: the name of the database for screening
+
+  -t &quot;tablename&quot;: provide the name of the table with the data to be screened
+
+  &lt;models&gt;: file name(s) of pickled composite model(s).
+     If the -p argument is also provided (see below), this argument is ignored.
+
+Optional Arguments:
+  - -a &quot;list&quot;: the list of result codes to be considered active.  This will be
+        eval'ed, so be sure that it evaluates as a list or sequence of
+        integers. For example, -a &quot;[1,2]&quot; will consider activity values 1 and 2
+        to be active
+
+  - --enrich &quot;list&quot;: identical to the -a argument above.
+
+  - --thresh: sets a threshold for the plot.  If the confidence falls below
+          this value, picking will be terminated
+
+  - -H: screen only the hold out set (works only if a version of
+        BuildComposite more recent than 1.2.2 was used).
+
+  - -T: screen only the training set (works only if a version of
+        BuildComposite more recent than 1.2.2 was used).
+
+  - -S: shuffle activity values before screening
+
+  - -R: randomize activity values before screening
+
+  - -F *filter frac*: filters the data before training to change the
+     distribution of activity values in the training set.  *filter frac*
+     is the fraction of the training set that should have the target value.
+     **See note in BuildComposite help about data filtering**
+
+  - -v *filter value*: filters the data before training to change the
+     distribution of activity values in the training set. *filter value*
+     is the target value to use in filtering.
+     **See note in BuildComposite help about data filtering**
+
+  - -p &quot;tableName&quot;: provides the name of a db table containing the
+      models to be screened.  If you use this argument, you should also
+      use the -N argument (below) to specify a note value.
+
+  - -N &quot;note&quot;: provides a note to be used to pull models from a db table.
+
+  - --plotFile &quot;filename&quot;: writes the data to an output text file (filename.dat)
+    and creates a gnuplot input file (filename.gnu) to plot it
+
+  - --showPlot: causes the gnuplot plot constructed using --plotFile to be
+    displayed in gnuplot.
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="cmp"></a><span class="summary-sig-name">cmp</span>(<span class="summary-sig-arg">t1</span>,
+        <span class="summary-sig-arg">t2</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#cmp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.EnrichPlot-module.html#message" class="summary-sig-name">message</a>(<span class="summary-sig-arg">msg</span>,
+        <span class="summary-sig-arg">noRet</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">dest</span>=<span class="summary-sig-default">sys.stderr</span>)</span><br />
+      emits messages to _sys.stderr_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.EnrichPlot-module.html#error" class="summary-sig-name">error</a>(<span class="summary-sig-arg">msg</span>,
+        <span class="summary-sig-arg">dest</span>=<span class="summary-sig-default">sys.stderr</span>)</span><br />
+      emits messages to _sys.stderr_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.EnrichPlot-module.html#ScreenModel" class="summary-sig-name">ScreenModel</a>(<span class="summary-sig-arg">mdl</span>,
+        <span class="summary-sig-arg">descs</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">picking</span>=<span class="summary-sig-default">[1]</span>,
+        <span class="summary-sig-arg">indices</span>=<span class="summary-sig-default">[]</span>,
+        <span class="summary-sig-arg">errorEstimate</span>=<span class="summary-sig-default">0</span>)</span><br />
+      collects the results of screening an individual composite model that match
+ a particular value</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#ScreenModel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.EnrichPlot-module.html#AccumulateCounts" class="summary-sig-name">AccumulateCounts</a>(<span class="summary-sig-arg">predictions</span>,
+        <span class="summary-sig-arg">thresh</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">sortIt</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Accumulates the data for the enrichment plot for a single model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#AccumulateCounts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="MakePlot"></a><span class="summary-sig-name">MakePlot</span>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">final</span>,
+        <span class="summary-sig-arg">counts</span>,
+        <span class="summary-sig-arg">pickVects</span>,
+        <span class="summary-sig-arg">nModels</span>,
+        <span class="summary-sig-arg">nTrueActs</span>=<span class="summary-sig-default">-1</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#MakePlot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Usage"></a><span class="summary-sig-name">Usage</span>()</span><br />
+      displays a usage message and exits</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__VERSION_STRING"></a><span class="summary-name">__VERSION_STRING</span> = <code title="&quot;2.4.0&quot;">&quot;2.4.0&quot;</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <a href="rdkit.Dbase.DbConnection.DbConnect-class.html" title="rdkit.Dbase.DbConnection.DbConnect">DbConnect</a>,
+  <a href="rdkit.ML.CompositeRun-module.html" title="rdkit.ML.CompositeRun">CompositeRun</a>,
+  <a href="rdkit.ML.Data.DataUtils-module.html" title="rdkit.ML.Data.DataUtils">DataUtils</a>,
+  <a href="rdkit.ML.Data.SplitData-module.html" title="rdkit.ML.Data.SplitData">SplitData</a>,
+  <a href="rdkit.ML.Data.Stats-module.html" title="rdkit.ML.Data.Stats">Stats</a>,
+  <span title="rdkit.six.PY3">PY3</span>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>,
+  <span title="rdkit.six.moves.input">input</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="message"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">message</span>(<span class="sig-arg">msg</span>,
+        <span class="sig-arg">noRet</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">dest</span>=<span class="sig-default">sys.stderr</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#message">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stderr_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">error</span>(<span class="sig-arg">msg</span>,
+        <span class="sig-arg">dest</span>=<span class="sig-default">sys.stderr</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#error">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stderr_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScreenModel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScreenModel</span>(<span class="sig-arg">mdl</span>,
+        <span class="sig-arg">descs</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">picking</span>=<span class="sig-default">[1]</span>,
+        <span class="sig-arg">indices</span>=<span class="sig-default">[]</span>,
+        <span class="sig-arg">errorEstimate</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#ScreenModel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+collects the results of screening an individual composite model that match
+ a particular value
+
+**Arguments**
+
+  - mdl: the composite model
+
+  - descs: a list of descriptor names corresponding to the data set
+
+  - data: the data set, a list of points to be screened.
+
+  - picking: (Optional) a list of values that are to be collected.
+    For examples, if you want an enrichment plot for picking the values
+    1 and 2, you'd having picking=[1,2].
+
+ **Returns**
+
+   a list of 4-tuples containing:
+
+      - the id of the point
+
+      - the true result (from the data set)
+
+      - the predicted result
+
+      - the confidence value for the prediction
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AccumulateCounts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AccumulateCounts</span>(<span class="sig-arg">predictions</span>,
+        <span class="sig-arg">thresh</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">sortIt</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.EnrichPlot-pysrc.html#AccumulateCounts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Accumulates the data for the enrichment plot for a single model
+
+**Arguments**
+
+  - predictions: a list of 3-tuples (as returned by _ScreenModels_)
+
+  - thresh: a threshold for the confidence level.  Anything below
+    this threshold will not be considered
+
+  - sortIt: toggles sorting on confidence levels
+
+
+**Returns**
+
+  - a list of 3-tuples:
+
+    - the id of the active picked here
+
+    - num actives found so far
+
+    - number of picks made so far
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, Greg Landrum
+# This file is distributed under the same license as the The RDKit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: The RDKit 2017.09\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-23 11:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+
+#: ../../RDKit_Book.rst:3
+msgid "The RDKit Book"
+msgstr ""
+
+#: ../../RDKit_Book.rst:7
+msgid "Misc Cheminformatics Topics"
+msgstr ""
+
+#: ../../RDKit_Book.rst:11
+msgid "Aromaticity"
+msgstr ""
+
+#: ../../RDKit_Book.rst:13
+msgid ""
+"Aromaticity is one of those unpleasant topics that is simultaneously "
+"simple and impossibly complicated. Since neither experimental nor "
+"theoretical chemists can agree with each other about a definition, it's "
+"necessary to pick something arbitrary and stick to it. This is the "
+"approach taken in the RDKit."
+msgstr ""
+
+#: ../../RDKit_Book.rst:17
+msgid ""
+"Instead of using patterns to match known aromatic systems, the "
+"aromaticity perception code in the RDKit uses a set of rules. The rules "
+"are relatively straightforward."
+msgstr ""
+
+#: ../../RDKit_Book.rst:20
+msgid ""
+"Aromaticity is a property of atoms and bonds in rings. An aromatic bond "
+"must be between aromatic atoms, but a bond between aromatic atoms does "
+"not need to be aromatic."
+msgstr ""
+
+#: ../../RDKit_Book.rst:23
+msgid ""
+"For example the fusing bonds here are not considered to be aromatic by "
+"the RDKit:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:36
+msgid ""
+"A ring, or fused ring system, is considered to be aromatic if it obeys "
+"the 4N+2 rule. Contributions to the electron count are determined by atom"
+" type and environment. Some examples:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:41
+msgid "Fragment"
+msgstr ""
+
+#: ../../RDKit_Book.rst:41
+msgid "Number of pi electrons"
+msgstr ""
+
+#: ../../RDKit_Book.rst:43
+msgid "c(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:43 ../../RDKit_Book.rst:45
+msgid "1"
+msgstr ""
+
+#: ../../RDKit_Book.rst:45
+msgid "n(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:47
+msgid "An(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:47 ../../RDKit_Book.rst:49 ../../RDKit_Book.rst:51
+#: ../../RDKit_Book.rst:53 ../../RDKit_Book.rst:55
+msgid "2"
+msgstr ""
+
+#: ../../RDKit_Book.rst:49
+msgid "o(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:51
+msgid "s(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:53
+msgid "se(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:55
+msgid "te(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:57
+msgid "O=c(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:57 ../../RDKit_Book.rst:59
+msgid "0"
+msgstr ""
+
+#: ../../RDKit_Book.rst:59
+msgid "N=c(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:61
+msgid "\\*(a)a"
+msgstr ""
+
+#: ../../RDKit_Book.rst:61
+msgid "0, 1, or 2"
+msgstr ""
+
+#: ../../RDKit_Book.rst:64
+msgid ""
+"**Notation** a: any aromatic atom; A: any atom, include H; \\*: a dummy "
+"atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:66
+msgid ""
+"Notice that exocyclic bonds to electronegative atoms “steal” the valence "
+"electron from the ring atom and that dummy atoms contribute whatever "
+"count is necessary to make the ring aromatic."
+msgstr ""
+
+#: ../../RDKit_Book.rst:68
+msgid ""
+"The use of fused rings for aromaticity can lead to situations where "
+"individual rings are not aromatic, but the fused system is. An example of"
+" this is azulene:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:73
+msgid ""
+"An extreme example, demonstrating both fused rings and the influence of "
+"exocyclic double bonds:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:85
+msgid ""
+"A special case, heteroatoms with radicals are not considered candidates "
+"for aromaticity:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:97
+msgid "Carbons with radicals, however, are still considered:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:110
+msgid ""
+"**Note:** For reasons of computation expediency, aromaticity perception "
+"is only done for fused-ring systems where all members are at most 24 "
+"atoms in size."
+msgstr ""
+
+#: ../../RDKit_Book.rst:114
+msgid "Ring Finding and SSSR"
+msgstr ""
+
+#: ../../RDKit_Book.rst:116
+msgid "[Section taken from “Getting Started” document]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:118
+msgid ""
+"As others have ranted about with more energy and eloquence than I intend "
+"to, the definition of a molecule's smallest set of smallest rings is not "
+"unique. In some high symmetry molecules, a “true” SSSR will give results "
+"that are unappealing. For example, the SSSR for cubane only contains 5 "
+"rings, even though there are “obviously” 6. This problem can be fixed by "
+"implementing a *small* (instead of *smallest*) set of smallest rings "
+"algorithm that returns symmetric results. This is the approach that we "
+"took with the RDKit."
+msgstr ""
+
+#: ../../RDKit_Book.rst:123
+msgid ""
+"Because it is sometimes useful to be able to count how many SSSR rings "
+"are present in the molecule, there is a GetSSSR function, but this only "
+"returns the SSSR count, not the potentially non-unique set of rings."
+msgstr ""
+
+#: ../../RDKit_Book.rst:127
+msgid "Chemical Reaction Handling"
+msgstr ""
+
+#: ../../RDKit_Book.rst:131
+msgid "Reaction SMARTS"
+msgstr ""
+
+#: ../../RDKit_Book.rst:133
+msgid ""
+"Not SMIRKS [#smirks]_ , not reaction SMILES [#smiles]_, derived from "
+"SMARTS [#smarts]_."
+msgstr ""
+
+#: ../../RDKit_Book.rst:136
+msgid "The general grammar for a reaction SMARTS is :"
+msgstr ""
+
+#: ../../RDKit_Book.rst:149
+msgid "Some features"
+msgstr ""
+
+#: ../../RDKit_Book.rst:151
+msgid ""
+"Mapped dummy atoms in the product template are replaced by the "
+"corresponding atom in the reactant:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:160
+msgid "but unmapped dummy atoms are left as dummies:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:166
+msgid ""
+"“Any” bonds in the products are replaced by the corresponding bond in the"
+" reactant:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:176
+msgid ""
+"Intramolecular reactions can be expressed flexibly by including reactants"
+" in parentheses. This is demonstrated in this ring-closing metathesis "
+"example [#intramolRxn]_:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:188
+msgid "Chirality"
+msgstr ""
+
+#: ../../RDKit_Book.rst:190
+msgid ""
+"This section describes how chirality information in the reaction defition"
+" is handled. A consistent example, esterification of secondary alcohols, "
+"is used throughout [#chiralRxn]_."
+msgstr ""
+
+#: ../../RDKit_Book.rst:194
+msgid ""
+"If no chiral information is present in the reaction definition, the "
+"stereochemistry of the reactants is preserved:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:212
+msgid ""
+"You get the same result (retention of stereochemistry) if a mapped atom "
+"has the same chirality in both reactants and products:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:226
+msgid ""
+"A mapped atom with different chirality in reactants and products leads to"
+" inversion of stereochemistry:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:240
+msgid ""
+"If a mapped atom has chirality specified in the reactants, but not in the"
+" products, the reaction destroys chirality at that center:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:254
+msgid ""
+"And, finally, if chirality is specified in the products, but not the "
+"reactants, the reaction creates a stereocenter with the specified "
+"chirality:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:269
+msgid ""
+"Note that this doesn't make sense without including a bit more context "
+"around the stereocenter in the reaction definition:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:283
+msgid ""
+"Note that the chirality specification is not being used as part of the "
+"query: a molecule with no chirality specified can match a reactant with "
+"specified chirality."
+msgstr ""
+
+#: ../../RDKit_Book.rst:287
+msgid ""
+"In general, the reaction machinery tries to preserve as much "
+"stereochemistry information as possible. This works when a single new "
+"bond is formed to a chiral center:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:297
+msgid "But it fails if two or more bonds are formed:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:305
+msgid ""
+"In this case, there's just not sufficient information present to allow "
+"the information to be preserved. You can help by providing mapping "
+"information:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:311
+msgid "Rules and caveats"
+msgstr ""
+
+#: ../../RDKit_Book.rst:313
+msgid ""
+"Include atom map information at the end of an atom query. So do [C,N,O:1]"
+" or [C;R:1]."
+msgstr ""
+
+#: ../../RDKit_Book.rst:316
+msgid ""
+"Don't forget that unspecified bonds in SMARTS are either single or "
+"aromatic. Bond orders in product templates are assigned when the product "
+"template itself is constructed and it's not always possible to tell if "
+"the bond should be single or aromatic:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:325
+msgid ""
+"So if you want to copy the bond order from the reactant, use an “Any” "
+"bond:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:333
+msgid "The Feature Definition File Format"
+msgstr ""
+
+#: ../../RDKit_Book.rst:335
+msgid ""
+"An FDef file contains all the information needed to define a set of "
+"chemical features. It contains definitions of feature types that are "
+"defined from queries built up using Daylight's SMARTS language. "
+"[#smarts]_ The FDef file can optionally also include definitions of atom "
+"types that are used to make feature definitions more readable."
+msgstr ""
+
+#: ../../RDKit_Book.rst:341
+msgid "Chemical Features"
+msgstr ""
+
+#: ../../RDKit_Book.rst:343
+msgid ""
+"Chemical features are defined by a Feature Type and a Feature Family. The"
+" Feature Family is a general classification of the feature (such as "
+"\"Hydrogen-bond Donor\" or \"Aromatic\") while the Feature Type provides "
+"additional, higher-resolution, information about features. Pharmacophore "
+"matching is done using Feature Family's. Each feature type contains the "
+"following pieces of information:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:347
+msgid ""
+"A SMARTS pattern that describes atoms (one or more) matching the feature "
+"type."
+msgstr ""
+
+#: ../../RDKit_Book.rst:348
+msgid ""
+"Weights used to determine the feature's position based on the positions "
+"of its defining atoms."
+msgstr ""
+
+#: ../../RDKit_Book.rst:353
+msgid "Syntax of the FDef file"
+msgstr ""
+
+#: ../../RDKit_Book.rst:357
+msgid "AtomType definitions"
+msgstr ""
+
+#: ../../RDKit_Book.rst:359
+msgid ""
+"An AtomType definition allows you to assign a shorthand name to be used "
+"in place of a SMARTS string defining an atom query. This allows FDef "
+"files to be made much more readable. For example, defining a non-polar "
+"carbon atom like this::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:365
+msgid ""
+"creates a new name that can be used anywhere else in the FDef file that "
+"it would be useful to use this SMARTS. To reference an AtomType, just "
+"include its name in curly brackets. For example, this excerpt from an "
+"FDef file defines another atom type - Hphobe - which references the "
+"Carbon_NonPolar definition::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:372
+msgid ""
+"Note that ``{Carbon_NonPolar}`` is used in the new AtomType definition "
+"without any additional decoration (no square brackes or recursive SMARTS "
+"markers are required)."
+msgstr ""
+
+#: ../../RDKit_Book.rst:375
+msgid ""
+"Repeating an AtomType results in the two definitions being combined using"
+" the SMARTS \",\" (or) operator. Here's an example::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:381
+msgid "This is equivalent to::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:385
+msgid "Which is equivalent to the more efficient::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:389
+msgid ""
+"**Note** that these examples tend to use SMARTS's high-precendence and "
+"operator \"&\" and not the low-precedence and \";\". This can be "
+"important when AtomTypes are combined or when they are repeated. The "
+"SMARTS \",\" operator is higher precedence than \";\", so definitions "
+"that use \";\" can lead to unexpected results."
+msgstr ""
+
+#: ../../RDKit_Book.rst:394
+msgid "It is also possible to define negative AtomType queries::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:399
+msgid ""
+"The negative query gets combined with the first to produce a definition "
+"identical to this::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:403
+msgid "Note that the negative AtomType is added to the beginning of the query."
+msgstr ""
+
+#: ../../RDKit_Book.rst:408
+msgid "Feature definitions"
+msgstr ""
+
+#: ../../RDKit_Book.rst:410
+msgid ""
+"A feature definition is more complex than an AtomType definition and "
+"stretches across multiple lines::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:417
+msgid ""
+"The first line of the feature definition includes the feature type and "
+"the SMARTS string defining the feature. The next two lines (order not "
+"important) define the feature's family and its atom weights (a comma-"
+"delimited list that is the same length as the number of atoms defining "
+"the feature). The atom weights are used to calculate the feature's "
+"locations based on a weighted average of the positions of the atom "
+"defining the feature. More detail on this is provided below. The final "
+"line of a feature definition must be EndFeature. It is perfectly legal to"
+" mix AtomType definitions with feature definitions in the FDef file. The "
+"one rule is that AtomTypes must be defined before they are referenced."
+msgstr ""
+
+#: ../../RDKit_Book.rst:428
+msgid "Additional syntax notes:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:430
+msgid ""
+"Any line that begins with a # symbol is considered a comment and will be "
+"ignored."
+msgstr ""
+
+#: ../../RDKit_Book.rst:431
+msgid ""
+"A backslash character, \\, at the end of a line is a continuation "
+"character, it indicates that the data from that line is continued on the "
+"next line of the file.  Blank space at the beginning of these additional "
+"lines is ignored. For example, this AtomType definition::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:436
+msgid "is exactly equivalent to this one::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:440
+msgid "(though the first form is much easier to read!)"
+msgstr ""
+
+#: ../../RDKit_Book.rst:444
+msgid "Atom weights and feature locations"
+msgstr ""
+
+#: ../../RDKit_Book.rst:448
+msgid "Frequently Asked Question(s)"
+msgstr ""
+
+#: ../../RDKit_Book.rst:450
+msgid ""
+"What happens if a Feature Type is repeated in the file? Here's an "
+"example::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:462
+msgid ""
+"In this case both definitions of the HDonor1 feature type will be active."
+" This is functionally identical to::"
+msgstr ""
+
+#: ../../RDKit_Book.rst:470
+msgid ""
+"**However** the formulation of this feature definition with a duplicated "
+"feature type is considerably less efficient and more confusing than the "
+"simpler combined definition."
+msgstr ""
+
+#: ../../RDKit_Book.rst:475
+msgid "Representation of Pharmacophore Fingerprints"
+msgstr ""
+
+#: ../../RDKit_Book.rst:477
+msgid ""
+"In the RDKit scheme the bit ids in pharmacophore fingerprints are not "
+"hashed: each bit corresponds to a particular combination of features and "
+"distances. A given bit id can be converted back to the corresponding "
+"feature types and distances to allow interpretation. An illustration for "
+"2D pharmacophores is shown in :ref:`ph4_figure`."
+msgstr ""
+
+#: ../../RDKit_Book.rst:486
+msgid "Figure 1:   Bit numbering in pharmacophore fingerprints"
+msgstr ""
+
+#: ../../RDKit_Book.rst:489
+msgid "Atom-Atom Matching in Substructure Queries"
+msgstr ""
+
+#: ../../RDKit_Book.rst:491
+msgid ""
+"When doing substructure matches for queries derived from SMARTS the rules"
+" for which atoms in the molecule should match which atoms in the query "
+"are well defined.[#smarts]_  The same is not necessarily the case when "
+"the query molecule is derived from a mol block or SMILES."
+msgstr ""
+
+#: ../../RDKit_Book.rst:496
+msgid ""
+"The general rule used in the RDKit is that if you don't specify a "
+"property in the query, then it's not used as part of the matching "
+"criteria and that Hs are ignored. This leads to the following behavior:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:502
+msgid "Molecule"
+msgstr ""
+
+#: ../../RDKit_Book.rst:502
+msgid "Query"
+msgstr ""
+
+#: ../../RDKit_Book.rst:502
+msgid "Match"
+msgstr ""
+
+#: ../../RDKit_Book.rst:504 ../../RDKit_Book.rst:506 ../../RDKit_Book.rst:508
+#: ../../RDKit_Book.rst:516
+msgid "CCO"
+msgstr ""
+
+#: ../../RDKit_Book.rst:504 ../../RDKit_Book.rst:506 ../../RDKit_Book.rst:510
+#: ../../RDKit_Book.rst:512 ../../RDKit_Book.rst:514 ../../RDKit_Book.rst:516
+#: ../../RDKit_Book.rst:518 ../../RDKit_Book.rst:520 ../../RDKit_Book.rst:524
+#: ../../RDKit_Book.rst:526 ../../RDKit_Book.rst:534 ../../RDKit_Book.rst:536
+msgid "Yes"
+msgstr ""
+
+#: ../../RDKit_Book.rst:506 ../../RDKit_Book.rst:508 ../../RDKit_Book.rst:510
+#: ../../RDKit_Book.rst:512
+msgid "CC[O-]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:508 ../../RDKit_Book.rst:522 ../../RDKit_Book.rst:528
+#: ../../RDKit_Book.rst:530 ../../RDKit_Book.rst:532 ../../RDKit_Book.rst:538
+msgid "No"
+msgstr ""
+
+#: ../../RDKit_Book.rst:512 ../../RDKit_Book.rst:514
+msgid "CC[OH]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:514 ../../RDKit_Book.rst:516
+msgid "CCOC"
+msgstr ""
+
+#: ../../RDKit_Book.rst:518 ../../RDKit_Book.rst:520 ../../RDKit_Book.rst:522
+msgid "CCC"
+msgstr ""
+
+#: ../../RDKit_Book.rst:520 ../../RDKit_Book.rst:522 ../../RDKit_Book.rst:524
+msgid "CC[14C]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:526 ../../RDKit_Book.rst:528 ../../RDKit_Book.rst:530
+#: ../../RDKit_Book.rst:532 ../../RDKit_Book.rst:534
+msgid "OCO"
+msgstr ""
+
+#: ../../RDKit_Book.rst:526 ../../RDKit_Book.rst:536
+msgid "C"
+msgstr ""
+
+#: ../../RDKit_Book.rst:528
+msgid "[CH]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:530 ../../RDKit_Book.rst:538
+msgid "[CH2]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:532
+msgid "[CH3]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:534
+msgid "O[CH3]"
+msgstr ""
+
+#: ../../RDKit_Book.rst:536 ../../RDKit_Book.rst:538
+msgid "O[CH2]O"
+msgstr ""
+
+#: ../../RDKit_Book.rst:541
+msgid "Demonstrated here:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:582
+msgid "Molecular Sanitization"
+msgstr ""
+
+#: ../../RDKit_Book.rst:584
+msgid ""
+"The molecule parsing functions all, by default, perform a "
+"\"sanitization\" operation on the molecules read. The idea is to generate"
+" useful computed properties (like hybridization, ring membership, etc.) "
+"for the rest of the code and to ensure that the molecules are "
+"\"reasonable\": that they can be represented with octet-complete Lewis "
+"dot structures."
+msgstr ""
+
+#: ../../RDKit_Book.rst:590
+msgid "Here are the steps involved, in order."
+msgstr ""
+
+#: ../../RDKit_Book.rst:593
+msgid "``clearComputedProps``: removes any computed properties that already exist"
+msgstr ""
+
+#: ../../RDKit_Book.rst:593
+msgid "on the molecule and its atoms and bonds. This step is always performed."
+msgstr ""
+
+#: ../../RDKit_Book.rst:595
+msgid ""
+"``cleanUp``: standardizes a small number of non-standard valence states. "
+"The clean up operations are:"
+msgstr ""
+
+#: ../../RDKit_Book.rst:598
+msgid ""
+"Neutral 5 valent Ns with double bonds to Os are converted to the "
+"zwitterionic form. Example: ``N(=O)=O -> [N+](=O)O-]``"
+msgstr ""
+
+#: ../../RDKit_Book.rst:602
+msgid ""
+"Neutral 5 valent Ns with triple bonds to another N are converted to the "
+"zwitterionic form. Example: ``C-N=N#N -> C-N=[N+]=[N-]``"
+msgstr ""
+
+#: ../../RDKit_Book.rst:606
+msgid ""
+"Neutral 5 valent phosphorus with one double bond to an O and another to "
+"either a C or a P are converted to the zwitterionic form. Example: "
+"``C=P(=O)O -> C=[P+]([O-])O``"
+msgstr ""
+
+#: ../../RDKit_Book.rst:610
+msgid ""
+"Neutral Cl, Br, or I with exclusively O neighbors, and a valence of 3, 5,"
+" or 7, are converted to the zwitterionic form. This covers things like "
+"chlorous acid, chloric acid, and perchloric acid. Example: ``O=Cl(=O)O ->"
+" [O-][Cl+2][O-]O``"
+msgstr ""
+
+#: ../../RDKit_Book.rst:615
+msgid "This step should not generate execptions."
+msgstr ""
+
+#: ../../RDKit_Book.rst:617
+msgid ""
+"``updatePropertyCache``: calculates the explicit and implicit valences on"
+" all atoms. This generates exceptions for atoms in higher-than-allowed "
+"valence states. This step is always performed, but if it is \"skipped\" "
+"the test for non-standard valences will not be carried out."
+msgstr ""
+
+#: ../../RDKit_Book.rst:622
+msgid ""
+"``symmetrizeSSSR``: calls the symmetrized smallest set of smallest rings "
+"algorithm (discussed in the Getting Started document)."
+msgstr ""
+
+#: ../../RDKit_Book.rst:625
+msgid ""
+"``Kekulize``: converts aromatic rings to their Kekule form. Will raise an"
+" exception if a ring cannot be kekulized or if aromatic bonds are found "
+"outside of rings."
+msgstr ""
+
+#: ../../RDKit_Book.rst:629
+msgid ""
+"``assignRadicals``: determines the number of radical electrons (if any) "
+"on each atom."
+msgstr ""
+
+#: ../../RDKit_Book.rst:632
+msgid ""
+"``setAromaticity``: identifies the aromatic rings and ring systems (see "
+"above), sets the aromatic flag on atoms and bonds, sets bond orders to "
+"aromatic."
+msgstr ""
+
+#: ../../RDKit_Book.rst:636
+msgid "``setConjugation``: identifies which bonds are conjugated"
+msgstr ""
+
+#: ../../RDKit_Book.rst:638
+msgid "``setHybridization``: calculates the hybridization state of each atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:640
+msgid ""
+"``cleanupChirality``: removes chiral tags from atoms that are not sp3 "
+"hybridized."
+msgstr ""
+
+#: ../../RDKit_Book.rst:643
+msgid ""
+"``adjustHs``: adds explicit Hs where necessary to preserve the chemistry."
+" This is typically needed for heteroatoms in aromatic rings. The classic "
+"example is the nitrogen atom in pyrrole."
+msgstr ""
+
+#: ../../RDKit_Book.rst:647
+msgid ""
+"The individual steps can be toggled on or off when calling "
+"``MolOps::sanitizeMol`` or ``Chem.SanitizeMol``."
+msgstr ""
+
+#: ../../RDKit_Book.rst:651
+msgid "Implementation Details"
+msgstr ""
+
+#: ../../RDKit_Book.rst:654
+msgid "\"Magic\" Property Values"
+msgstr ""
+
+#: ../../RDKit_Book.rst:656
+msgid ""
+"The following property values are regularly used in the RDKit codebase "
+"and may be useful to client code."
+msgstr ""
+
+#: ../../RDKit_Book.rst:659
+msgid "ROMol  (Mol in Python)"
+msgstr ""
+
+#: ../../RDKit_Book.rst:662 ../../RDKit_Book.rst:679
+msgid "Property Name"
+msgstr ""
+
+#: ../../RDKit_Book.rst:662 ../../RDKit_Book.rst:679
+msgid "Use"
+msgstr ""
+
+#: ../../RDKit_Book.rst:664
+msgid "MolFileComments"
+msgstr ""
+
+#: ../../RDKit_Book.rst:664
+msgid "Read from/written to the comment line of CTABs."
+msgstr ""
+
+#: ../../RDKit_Book.rst:666
+msgid "MolFileInfo"
+msgstr ""
+
+#: ../../RDKit_Book.rst:666
+msgid "Read from/written to the info line of CTABs."
+msgstr ""
+
+#: ../../RDKit_Book.rst:668
+msgid "_MolFileChiralFlag"
+msgstr ""
+
+#: ../../RDKit_Book.rst:668
+msgid "Read from/written to the chiral flag of CTABs."
+msgstr ""
+
+#: ../../RDKit_Book.rst:670
+msgid "_Name"
+msgstr ""
+
+#: ../../RDKit_Book.rst:670
+msgid "Read from/written to the name line of CTABs."
+msgstr ""
+
+#: ../../RDKit_Book.rst:672
+msgid "_smilesAtomOutputOrder"
+msgstr ""
+
+#: ../../RDKit_Book.rst:672
+msgid "The order in which atoms were written to SMILES"
+msgstr ""
+
+#: ../../RDKit_Book.rst:676
+msgid "Atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:681
+msgid "_CIPCode"
+msgstr ""
+
+#: ../../RDKit_Book.rst:681
+msgid "the CIP code (R or S) of the atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:683
+msgid "_CIPRank"
+msgstr ""
+
+#: ../../RDKit_Book.rst:683
+msgid "the integer CIP rank of the atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:685
+msgid "_ChiralityPossible"
+msgstr ""
+
+#: ../../RDKit_Book.rst:685
+msgid "set if an atom is a possible chiral center"
+msgstr ""
+
+#: ../../RDKit_Book.rst:687
+msgid "_MolFileRLabel"
+msgstr ""
+
+#: ../../RDKit_Book.rst:687
+msgid "integer R group label for an atom, read from/written to CTABs."
+msgstr ""
+
+#: ../../RDKit_Book.rst:689
+msgid "_ReactionDegreeChanged"
+msgstr ""
+
+#: ../../RDKit_Book.rst:689
+msgid ""
+"set on an atom in a product template of a reaction if its degree changes "
+"in the reaction"
+msgstr ""
+
+#: ../../RDKit_Book.rst:691
+msgid "_protected"
+msgstr ""
+
+#: ../../RDKit_Book.rst:691
+msgid ""
+"atoms with this property set will not be considered as matching reactant "
+"queries in reactions"
+msgstr ""
+
+#: ../../RDKit_Book.rst:693
+msgid "dummyLabel"
+msgstr ""
+
+#: ../../RDKit_Book.rst:693
+msgid "(on dummy atoms) read from/written to CTABs as the atom symbol"
+msgstr ""
+
+#: ../../RDKit_Book.rst:695
+msgid "molAtomMapNumber"
+msgstr ""
+
+#: ../../RDKit_Book.rst:695
+msgid "the atom map number for an atom, read from/written to SMILES and CTABs"
+msgstr ""
+
+#: ../../RDKit_Book.rst:697
+msgid "molfileAlias"
+msgstr ""
+
+#: ../../RDKit_Book.rst:697
+msgid ""
+"the mol file alias for an atom (follows A tags), read from/written to "
+"CTABs"
+msgstr ""
+
+#: ../../RDKit_Book.rst:699
+msgid "molFileValue"
+msgstr ""
+
+#: ../../RDKit_Book.rst:699
+msgid ""
+"the mol file value for an atom (follows V tags), read from/written to "
+"CTABs"
+msgstr ""
+
+#: ../../RDKit_Book.rst:701
+msgid "molFileInversionFlag"
+msgstr ""
+
+#: ../../RDKit_Book.rst:701
+msgid ""
+"used to flag whether stereochemistry at an atom changes in a reaction, "
+"read from/written to CTABs, determined automatically from SMILES"
+msgstr ""
+
+#: ../../RDKit_Book.rst:704
+msgid "molRxnComponent"
+msgstr ""
+
+#: ../../RDKit_Book.rst:704
+msgid ""
+"which component of a reaction an atom belongs to, read from/written to "
+"CTABs"
+msgstr ""
+
+#: ../../RDKit_Book.rst:706
+msgid "molRxnRole"
+msgstr ""
+
+#: ../../RDKit_Book.rst:706
+msgid ""
+"which role an atom plays in a reaction (1=Reactant, 2=Product, 3=Agent), "
+"read from/written to CTABs"
+msgstr ""
+
+#: ../../RDKit_Book.rst:709
+msgid "smilesSymbol"
+msgstr ""
+
+#: ../../RDKit_Book.rst:709
+msgid "determines the symbol that will be written to a SMILES for the atom"
+msgstr ""
+
+#: ../../RDKit_Book.rst:713
+msgid "Thread safety and the RDKit"
+msgstr ""
+
+#: ../../RDKit_Book.rst:715
+msgid ""
+"While writing the RDKit, we did attempt to ensure that the code would "
+"work in a multi-threaded environment by avoiding use of global variables,"
+" etc. However, making code thread safe is not a completely trivial thing,"
+" so there are no doubt some gaps. This section describes which pieces of "
+"the code base have explicitly been tested for thread safety."
+msgstr ""
+
+#: ../../RDKit_Book.rst:726
+msgid "**Note:** With the exception of the small number of methods/functions"
+msgstr ""
+
+#: ../../RDKit_Book.rst:722
+msgid ""
+"that take a ``numThreads`` argument, this section does not apply to using"
+" the RDKit from Python threads. Boost.Python ensures that only one thread"
+" is calling into the C++ code at any point. To get concurrent execution "
+"in Python, use the multiprocessing module or one of the other standard "
+"python approaches for this ."
+msgstr ""
+
+#: ../../RDKit_Book.rst:729
+msgid "What has been tested"
+msgstr ""
+
+#: ../../RDKit_Book.rst:731
+msgid "Reading molecules from SMILES/SMARTS/Mol blocks"
+msgstr ""
+
+#: ../../RDKit_Book.rst:732
+msgid "Writing molecules to SMILES/SMARTS/Mol blocks"
+msgstr ""
+
+#: ../../RDKit_Book.rst:733
+msgid "Generating 2D coordinates"
+msgstr ""
+
+#: ../../RDKit_Book.rst:734
+msgid "Generating 3D conformations with the distance geometry code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:735
+msgid "Optimizing molecules with UFF or MMFF"
+msgstr ""
+
+#: ../../RDKit_Book.rst:736
+msgid "Generating fingerprints"
+msgstr ""
+
+#: ../../RDKit_Book.rst:737
+msgid "The descriptor calculators in $RDBASE/Code/GraphMol/Descriptors"
+msgstr ""
+
+#: ../../RDKit_Book.rst:738
+msgid ""
+"Substructure searching (Note: if a query molecule contains recursive "
+"queries, it may not be safe to use it concurrently on multiple threads, "
+"see below)"
+msgstr ""
+
+#: ../../RDKit_Book.rst:741
+msgid "The Subgraph code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:742
+msgid "The ChemTransforms code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:743
+msgid "The chemical reactions code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:744
+msgid "The Open3DAlign code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:745
+msgid "The MolDraw2D drawing code"
+msgstr ""
+
+#: ../../RDKit_Book.rst:748
+msgid "Known Problems"
+msgstr ""
+
+#: ../../RDKit_Book.rst:750
+msgid ""
+"InChI generation and (probably) parsing. This seems to be a limitation of"
+" the IUPAC InChI code. In order to allow the code to be used in a multi-"
+"threaded environment, a mutex is used to ensure that only one thread is "
+"using the IUPAC code at a time. This is only enabled if the RDKit is "
+"built with the ``RDK_TEST_MULTITHREADED`` option enabled."
+msgstr ""
+
+#: ../../RDKit_Book.rst:756
+msgid ""
+"The MolSuppliers (e.g. SDMolSupplier, SmilesMolSupplier?) change their "
+"internal state when a molecule is read. It is not safe to use one "
+"supplier on more than one thread."
+msgstr ""
+
+#: ../../RDKit_Book.rst:759
+msgid ""
+"Substructure searching using query molecules that include recursive "
+"queries. The recursive queries modify their internal state when a search "
+"is run, so it's not safe to use the same query concurrently on multiple "
+"threads. If the code is built using the ``RDK_BUILD_THREADSAFE_SSS`` "
+"argument (the default for the binaries we provide), a mutex is used to "
+"ensure that only one thread is using a given recursive query at a time."
+msgstr ""
+
+#: ../../RDKit_Book.rst:769
+msgid "Footnotes"
+msgstr ""
+
+#: ../../RDKit_Book.rst:770
+msgid "http://www.daylight.com/dayhtml/doc/theory/theory.smirks.html"
+msgstr ""
+
+#: ../../RDKit_Book.rst:771
+msgid "http://www.daylight.com/dayhtml/doc/theory/theory.smiles.html"
+msgstr ""
+
+#: ../../RDKit_Book.rst:772
+msgid "http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html"
+msgstr ""
+
+#: ../../RDKit_Book.rst:773
+msgid "Thanks to James Davidson for this example."
+msgstr ""
+
+#: ../../RDKit_Book.rst:774
+msgid "Thanks to JP Ebejer and Paul Finn for this example."
+msgstr ""
+
+#: ../../RDKit_Book.rst:777
+msgid "License"
+msgstr ""
+
+#: ../../RDKit_Book.rst:781
+msgid "This document is copyright (C) 2007-2016 by Greg Landrum"
+msgstr ""
+
+#: ../../RDKit_Book.rst:783
+msgid ""
+"This work is licensed under the Creative Commons Attribution-ShareAlike "
+"4.0 License. To view a copy of this license, visit "
+"http://creativecommons.org/licenses/by-sa/4.0/ or send a letter to "
+"Creative Commons, 543 Howard Street, 5th Floor, San Francisco, "
+"California, 94105, USA."
+msgstr ""
+
+#: ../../RDKit_Book.rst:787
+msgid ""
+"The intent of this license is similar to that of the RDKit itself. In "
+"simple words: “Do whatever you want with it, but please give us some "
+"credit.”"
+msgstr ""
+

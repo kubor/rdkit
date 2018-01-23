@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['dashpattern',['DashPattern',['../namespaceRDKit.html#a3699a02438593f9278ec419decba4594',1,'RDKit']]],
+  ['data_5fsptr',['DATA_SPTR',['../classRDKit_1_1DiscreteValueVect.html#a2fce4d88f28f56541d6648b786255f67',1,'RDKit::DiscreteValueVect::DATA_SPTR()'],['../classDistGeom_1_1BoundsMatrix.html#acb092c6dad4160d8f847ac32cfc53c2f',1,'DistGeom::BoundsMatrix::DATA_SPTR()'],['../classRDNumeric_1_1Matrix.html#aa8eb3dcdf65fc4614d4554a125ba4fe9',1,'RDNumeric::Matrix::DATA_SPTR()'],['../classRDNumeric_1_1SymmMatrix.html#ad71461cd0e89cbcf3fa170c1053543b5',1,'RDNumeric::SymmMatrix::DATA_SPTR()'],['../classRDNumeric_1_1Vector.html#ab25b4cc9f72f5f37cc661a3d7d82daff',1,'RDNumeric::Vector::DATA_SPTR()']]],
+  ['datatype',['DataType',['../classRDKit_1_1RingInfo.html#a6c4cdf021f62186702ee5bbdae3a1f1a',1,'RDKit::RingInfo::DataType()'],['../classRDKit_1_1Dict.html#aa9bd8a3824a8fe53468caa61439164da',1,'RDKit::Dict::DataType()']]],
+  ['discrimtuple',['DiscrimTuple',['../namespaceRDKit_1_1Subgraphs.html#a4d0449dcdb567e289afe9a429216293a',1,'RDKit::Subgraphs']]],
+  ['double_5fint_5fmap',['DOUBLE_INT_MAP',['../namespaceRDKit.html#a7a74050eb02256dea06c0af8297fb71b',1,'RDKit']]],
+  ['double_5fint_5fpair',['DOUBLE_INT_PAIR',['../namespaceRDDepict.html#a50b3bd01291bbc39a4201f9dc2e9eec6',1,'RDDepict']]],
+  ['double_5fsmart_5fptr',['DOUBLE_SMART_PTR',['../namespaceRDDepict.html#a088fe3ab5addf8762fd215d2e0aa0526',1,'RDDepict']]],
+  ['double_5fsource_5ftype',['double_source_type',['../namespaceRDKit.html#a2e4832a0892dc4f909f0ae1a3c3bdcf5',1,'RDKit']]],
+  ['double_5fvect',['DOUBLE_VECT',['../namespaceRDKit.html#add78b59aa5f1883a2ceefdaa8715dbc3',1,'RDKit']]],
+  ['double_5fvect_5fci',['DOUBLE_VECT_CI',['../namespaceRDKit.html#aa0c352189f9abc97bb33b77b31b5141f',1,'RDKit']]],
+  ['double_5fvect_5fi',['DOUBLE_VECT_I',['../namespaceRDKit.html#ae6801f1947e29e92eee4591ae0861b6b',1,'RDKit']]],
+  ['doublematrix',['DoubleMatrix',['../namespaceRDNumeric.html#ab78d3a00988aab3a5a30458e562781e8',1,'RDNumeric']]],
+  ['doublesquarematrix',['DoubleSquareMatrix',['../namespaceRDNumeric.html#ab06a7bbb34cde62a2cdf88277718fcd2',1,'RDNumeric']]],
+  ['doublesymmmatrix',['DoubleSymmMatrix',['../namespaceRDNumeric.html#a64f67a18b21129119830cf640b34040a',1,'RDNumeric']]],
+  ['doublevect',['DoubleVect',['../BitVect_8h.html#ae78d967631164d15be1e71459c79fa13',1,'BitVect.h']]],
+  ['doublevectiter',['DoubleVectIter',['../BitVect_8h.html#a21cfcf39f36e1b77234f60ac1b1178ab',1,'BitVect.h']]],
+  ['doublevector',['DoubleVector',['../namespaceRDNumeric.html#aa2da4bf39e45fed3149c5bee8cae57df',1,'RDNumeric']]],
+  ['down_5fent_5fiter',['DOWN_ENT_ITER',['../classRDCatalog_1_1HierarchCatalog.html#a368a0ffe44a9d08a0721c0d46bf67a64',1,'RDCatalog::HierarchCatalog']]],
+  ['down_5fent_5fiter_5fpair',['DOWN_ENT_ITER_PAIR',['../classRDCatalog_1_1HierarchCatalog.html#ac1593a7b8757c9a6175e9f9a16dfab50',1,'RDCatalog::HierarchCatalog']]],
+  ['drawcolour',['DrawColour',['../namespaceRDKit.html#a90f307b371e05ef1c24b5a72c52c9f29',1,'RDKit']]]
+];

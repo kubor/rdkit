@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.SATIS</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;SATIS
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.SATIS-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.SATIS-module.html">Module rdkit.Chem.SATIS</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2001-2006 greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">"""  Functionality for SATIS typing atoms</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">itertools</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-comment">#  These are SMARTS patterns for the special cases used in SATIS typing.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable rdkit.Chem.SATIS.aldehydePatt=rdkit.Chem.SATIS-module.html#aldehydePatt"><a title="rdkit.Chem.SATIS.aldehydePatt" class="py-name" href="#" onclick="return doclink('link-1', 'aldehydePatt', 'link-1');">aldehydePatt</a></tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-2', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[CD2]=[OD1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable rdkit.Chem.SATIS.ketonePatt=rdkit.Chem.SATIS-module.html#ketonePatt"><a title="rdkit.Chem.SATIS.ketonePatt" class="py-name" href="#" onclick="return doclink('link-3', 'ketonePatt', 'link-3');">ketonePatt</a></tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-4', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[CD3]=[OD1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable rdkit.Chem.SATIS.amidePatt=rdkit.Chem.SATIS-module.html#amidePatt"><a title="rdkit.Chem.SATIS.amidePatt" class="py-name" href="#" onclick="return doclink('link-5', 'amidePatt', 'link-5');">amidePatt</a></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-6', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'[CD3](=[OD1])-[#7]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable rdkit.Chem.SATIS.esterPatt=rdkit.Chem.SATIS-module.html#esterPatt"><a title="rdkit.Chem.SATIS.esterPatt" class="py-name" href="#" onclick="return doclink('link-7', 'esterPatt', 'link-7');">esterPatt</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-8', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'C(=[OD1])-O-[#6]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable rdkit.Chem.SATIS.carboxylatePatt=rdkit.Chem.SATIS-module.html#carboxylatePatt"><a title="rdkit.Chem.SATIS.carboxylatePatt" class="py-name" href="#" onclick="return doclink('link-9', 'carboxylatePatt', 'link-9');">carboxylatePatt</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-10', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'C(=[OD1])-[OX1]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable rdkit.Chem.SATIS.carboxylPatt=rdkit.Chem.SATIS-module.html#carboxylPatt"><a title="rdkit.Chem.SATIS.carboxylPatt" class="py-name" href="#" onclick="return doclink('link-11', 'carboxylPatt', 'link-11');">carboxylPatt</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-12', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmarts</tt><tt class="py-op">(</tt><tt class="py-string">'C(=[OD1])-[OX2]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable rdkit.Chem.SATIS.specialCases=rdkit.Chem.SATIS-module.html#specialCases"><a title="rdkit.Chem.SATIS.specialCases" class="py-name" href="#" onclick="return doclink('link-13', 'specialCases', 'link-13');">specialCases</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="rdkit.Chem.SATIS.carboxylatePatt" class="py-name" href="#" onclick="return doclink('link-14', 'carboxylatePatt', 'link-9');">carboxylatePatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">97</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="rdkit.Chem.SATIS.esterPatt" class="py-name" href="#" onclick="return doclink('link-15', 'esterPatt', 'link-7');">esterPatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">96</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="rdkit.Chem.SATIS.carboxylPatt" class="py-name" href="#" onclick="return doclink('link-16', 'carboxylPatt', 'link-11');">carboxylPatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">98</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="rdkit.Chem.SATIS.amidePatt" class="py-name" href="#" onclick="return doclink('link-17', 'amidePatt', 'link-5');">amidePatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">95</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="rdkit.Chem.SATIS.ketonePatt" class="py-name" href="#" onclick="return doclink('link-18', 'ketonePatt', 'link-3');">ketonePatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">94</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="rdkit.Chem.SATIS.aldehydePatt" class="py-name" href="#" onclick="return doclink('link-19', 'aldehydePatt', 'link-1');">aldehydePatt</a></tt><tt class="py-op">,</tt> <tt class="py-number">93</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="SATISTypes"></a><div id="SATISTypes-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="SATISTypes-toggle" onclick="return toggle('SATISTypes');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.SATIS-module.html#SATISTypes">SATISTypes</a><tt class="py-op">(</tt><tt class="py-param">mol</tt><tt class="py-op">,</tt> <tt class="py-param">neighborsToInclude</tt><tt class="py-op">=</tt><tt class="py-number">4</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SATISTypes-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SATISTypes-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">  <tt class="py-docstring">""" returns SATIS codes for all atoms in a molecule</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">   The SATIS definition used is from:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">   J. Chem. Inf. Comput. Sci. _39_ 751-757 (1999)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring">   each SATIS code is a string consisting of _neighborsToInclude_ + 1</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring">   2 digit numbers</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">   **Arguments**</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">     - mol: a molecule</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">     - neighborsToInclude (optional): the number of neighbors to include</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring">       in the SATIS codes</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">   **Returns**</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">     a list of strings nAtoms long</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">  <tt class="py-name">nAtoms</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name" targets="Variable rdkit.Chem.Recap.RecapHierarchyNode.mol=rdkit.Chem.Recap.RecapHierarchyNode-class.html#mol"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-20', 'mol', 'link-20');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">  <tt class="py-name">atoms</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-21', 'mol', 'link-20');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">  <tt class="py-name">atomicNums</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomicNum</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">atom</tt> <tt class="py-keyword">in</tt> <tt class="py-name">atoms</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">  <tt class="py-comment"># Collect all atom indices that match one of the special patterns</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">  <tt class="py-name">specialCaseMatches</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">patt</tt><tt class="py-op">,</tt> <tt class="py-name">specialCaseIdx</tt> <tt class="py-keyword">in</tt> <tt id="link-22" class="py-name"><a title="rdkit.Chem.SATIS.specialCases" class="py-name" href="#" onclick="return doclink('link-22', 'specialCases', 'link-13');">specialCases</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt class="py-name">matches</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="rdkit.Chem.Recap.RecapHierarchyNode.mol" class="py-name" href="#" onclick="return doclink('link-23', 'mol', 'link-20');">mol</a></tt><tt class="py-op">.</tt><tt class="py-name">GetSubstructMatches</tt><tt class="py-op">(</tt><tt class="py-name">patt</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">matches</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">      <tt class="py-name">matches</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">itertools</tt><tt class="py-op">.</tt><tt class="py-name">chain</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">matches</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">      <tt class="py-name">specialCaseMatches</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">specialCaseIdx</tt><tt class="py-op">,</tt> <tt class="py-name">matches</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">  <tt class="py-name">codes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">nAtoms</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">atom</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">atoms</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt class="py-name">code</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">99</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">neighborsToInclude</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt class="py-comment"># Atom</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-name">code</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">min</tt><tt class="py-op">(</tt><tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetAtomicNum</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">99</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-comment"># Get atomic numbers of connected neighbours and use for code</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-name">otherIndices</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">atom</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method rdkit.ML.KNN.KNNModel.KNNModel.GetNeighbors()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#GetNeighbors"><a title="rdkit.ML.KNN.KNNModel.KNNModel.GetNeighbors" class="py-name" href="#" onclick="return doclink('link-24', 'GetNeighbors', 'link-24');">GetNeighbors</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">    <tt class="py-name">otherNums</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">atomicNums</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">otherIndices</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetTotalNumHs</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">otherNums</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">neighborsToInclude</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">      <tt class="py-comment"># Get the last neighborsToInclude elements from otherNums</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">      <tt class="py-name">otherNums</tt> <tt class="py-op">=</tt> <tt class="py-name">otherNums</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-name">neighborsToInclude</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">j</tt><tt class="py-op">,</tt> <tt class="py-name">otherNum</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">otherNums</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">      <tt class="py-name">code</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">min</tt><tt class="py-op">(</tt><tt class="py-name">otherNum</tt><tt class="py-op">,</tt> <tt class="py-number">99</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">    <tt class="py-comment"># Handle special cases where we have less than neighborsToInclude neighbors</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">otherNums</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">neighborsToInclude</tt> <tt class="py-keyword">and</tt> <tt class="py-name">code</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-number">6</tt><tt class="py-op">,</tt> <tt class="py-number">8</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">      <tt class="py-name">atomIdx</tt> <tt class="py-op">=</tt> <tt class="py-name">atom</tt><tt class="py-op">.</tt><tt class="py-name">GetIdx</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">specialCaseIdx</tt><tt class="py-op">,</tt> <tt class="py-name">matches</tt> <tt class="py-keyword">in</tt> <tt class="py-name">specialCaseMatches</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">atomIdx</tt> <tt class="py-keyword">in</tt> <tt class="py-name">matches</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">          <tt class="py-name">code</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">specialCaseIdx</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">          <tt class="py-keyword">break</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">    <tt class="py-name">codes</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">'%02d'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">code</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">codes</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

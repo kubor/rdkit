@@ -1,0 +1,25 @@
+var namespaces =
+[
+    [ "BFGSOpt", "namespaceBFGSOpt.html", null ],
+    [ "boost", "namespaceboost.html", "namespaceboost" ],
+    [ "boost_adaptbx", "namespaceboost__adaptbx.html", "namespaceboost__adaptbx" ],
+    [ "ChemicalFeatures", "namespaceChemicalFeatures.html", null ],
+    [ "DistGeom", "namespaceDistGeom.html", null ],
+    [ "ForceFields", "namespaceForceFields.html", "namespaceForceFields" ],
+    [ "Invar", "namespaceInvar.html", null ],
+    [ "MolTransforms", "namespaceMolTransforms.html", null ],
+    [ "Queries", "namespaceQueries.html", null ],
+    [ "Rankers", "namespaceRankers.html", null ],
+    [ "RDCatalog", "namespaceRDCatalog.html", null ],
+    [ "RDDataManip", "namespaceRDDataManip.html", null ],
+    [ "RDDepict", "namespaceRDDepict.html", null ],
+    [ "RDFeatures", "namespaceRDFeatures.html", null ],
+    [ "RDGeom", "namespaceRDGeom.html", null ],
+    [ "RDInfoTheory", "namespaceRDInfoTheory.html", null ],
+    [ "RDKit", "namespaceRDKit.html", "namespaceRDKit" ],
+    [ "RDLog", "namespaceRDLog.html", null ],
+    [ "RDNumeric", "namespaceRDNumeric.html", "namespaceRDNumeric" ],
+    [ "RDPickers", "namespaceRDPickers.html", null ],
+    [ "RingUtils", "namespaceRingUtils.html", null ],
+    [ "SmilesParseOps", "namespaceSmilesParseOps.html", null ]
+];

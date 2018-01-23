@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.VLib.NodeLib.demo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.VLib-module.html">Package&nbsp;VLib</a> ::
+        <a href="rdkit.VLib.NodeLib-module.html">Package&nbsp;NodeLib</a> ::
+        Module&nbsp;demo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.VLib.NodeLib.demo-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.VLib.NodeLib.demo-module.html">Module rdkit.VLib.NodeLib.demo</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#  $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2003 Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#     All Rights Reserved</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt class="py-name">RDConfig</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-0', 'Chem', 'link-0');">Chem</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.VLib=rdkit.VLib-module.html"><a title="rdkit.VLib" class="py-name" href="#" onclick="return doclink('link-1', 'VLib', 'link-1');">VLib</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.VLib.NodeLib=rdkit.VLib.NodeLib-module.html"><a title="rdkit.VLib.NodeLib" class="py-name" href="#" onclick="return doclink('link-2', 'NodeLib', 'link-2');">NodeLib</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="rdkit.VLib" class="py-name" href="#" onclick="return doclink('link-3', 'VLib', 'link-1');">VLib</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Module rdkit.VLib.Supply=rdkit.VLib.Supply-module.html"><a title="rdkit.VLib.Supply" class="py-name" href="#" onclick="return doclink('link-4', 'Supply', 'link-4');">Supply</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Module rdkit.VLib.Filter=rdkit.VLib.Filter-module.html"><a title="rdkit.VLib.Filter" class="py-name" href="#" onclick="return doclink('link-5', 'Filter', 'link-5');">Filter</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-comment"># this would be a real input, from an sd file:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-comment">#fName = os.path.join(RDConfig.RDCodeDir,'VLib','NodeLib','test_data','NCI_aids.10.dupes.sdf')</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-comment">#supplier = SDSupply.SDSupplyNode(fName)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-comment"># instead though, we want a simpler input:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.smis=rdkit.VLib.NodeLib.demo-module.html#smis"><a title="rdkit.VLib.NodeLib.demo.smis" class="py-name" href="#" onclick="return doclink('link-6', 'smis', 'link-6');">smis</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'CCOC'</tt><tt class="py-op">,</tt> <tt class="py-string">'CCO.Cl'</tt><tt class="py-op">,</tt> <tt class="py-string">'CC(=O)[O-].[Na+]'</tt><tt class="py-op">,</tt> <tt class="py-string">'CC[Cu]CC'</tt><tt class="py-op">,</tt> <tt class="py-string">'OCC'</tt><tt class="py-op">,</tt> <tt class="py-string">'C[N+](C)(C)C.[Cl-]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-string">'[Na+].[Cl-]'</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.mols=rdkit.VLib.NodeLib.demo-module.html#mols"><a title="rdkit.VLib.NodeLib.demo.mols" class="py-name" href="#" onclick="return doclink('link-7', 'mols', 'link-7');">mols</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-8" class="py-name"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-8', 'Chem', 'link-0');">Chem</a></tt><tt class="py-op">.</tt><tt class="py-name">MolFromSmiles</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-9" class="py-name"><a title="rdkit.VLib.NodeLib.demo.smis" class="py-name" href="#" onclick="return doclink('link-9', 'smis', 'link-6');">smis</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-comment"># name the molecules (only needed because we built them from smiles):</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="rdkit.VLib.NodeLib.demo.mols" class="py-name" href="#" onclick="return doclink('link-10', 'mols', 'link-7');">mols</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">  <tt id="link-11" class="py-name"><a title="rdkit.VLib.NodeLib.demo.mols" class="py-name" href="#" onclick="return doclink('link-11', 'mols', 'link-7');">mols</a></tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method rdkit.Chem.PropertyMol.PropertyMol.SetProp()=rdkit.Chem.PropertyMol.PropertyMol-class.html#SetProp"><a title="rdkit.Chem.PropertyMol.PropertyMol.SetProp" class="py-name" href="#" onclick="return doclink('link-12', 'SetProp', 'link-12');">SetProp</a></tt><tt class="py-op">(</tt><tt class="py-string">'Name'</tt><tt class="py-op">,</tt> <tt class="py-string">'Mol-%d'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.supplier=rdkit.VLib.NodeLib.demo-module.html#supplier"><a title="rdkit.VLib.NodeLib.demo.supplier" class="py-name" href="#" onclick="return doclink('link-13', 'supplier', 'link-13');">supplier</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rdkit.VLib.Supply" class="py-name" href="#" onclick="return doclink('link-14', 'Supply', 'link-4');">Supply</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Class rdkit.VLib.Supply.SupplyNode=rdkit.VLib.Supply.SupplyNode-class.html"><a title="rdkit.VLib.Supply.SupplyNode" class="py-name" href="#" onclick="return doclink('link-15', 'SupplyNode', 'link-15');">SupplyNode</a></tt><tt class="py-op">(</tt><tt class="py-name">contents</tt><tt class="py-op">=</tt><tt id="link-16" class="py-name"><a title="rdkit.VLib.NodeLib.demo.mols" class="py-name" href="#" onclick="return doclink('link-16', 'mols', 'link-7');">mols</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"># should be 7 here</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'initial:'</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-17" class="py-name"><a title="rdkit.VLib.NodeLib.demo.supplier" class="py-name" href="#" onclick="return doclink('link-17', 'supplier', 'link-13');">supplier</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"># filter out anything with a transition metal or lanthanide:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.metals=rdkit.VLib.NodeLib.demo-module.html#metals"><a title="rdkit.VLib.NodeLib.demo.metals" class="py-name" href="#" onclick="return doclink('link-18', 'metals', 'link-18');">metals</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'[#21,#22,#23,#24,#25,#26,#27,#28,#29,#39,#40,#41,#42,#43,#44,#45,#46,#47,#57,#58,#59,#60,#61,#62,#63,#64,#65,#66,#67,#68,#69,#70,#71,#72,#73,#74,#75,#76,#77,#78,#79]'</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.smaFilter=rdkit.VLib.NodeLib.demo-module.html#smaFilter"><a title="rdkit.VLib.NodeLib.demo.smaFilter" class="py-name" href="#" onclick="return doclink('link-19', 'smaFilter', 'link-19');">smaFilter</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name" targets="Module rdkit.VLib.NodeLib.SmartsMolFilter=rdkit.VLib.NodeLib.SmartsMolFilter-module.html"><a title="rdkit.VLib.NodeLib.SmartsMolFilter" class="py-name" href="#" onclick="return doclink('link-20', 'SmartsMolFilter', 'link-20');">SmartsMolFilter</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Class rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter=rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter-class.html"><a title="rdkit.VLib.NodeLib.SmartsMolFilter.SmartsFilter" class="py-name" href="#" onclick="return doclink('link-21', 'SmartsFilter', 'link-21');">SmartsFilter</a></tt><tt class="py-op">(</tt><tt class="py-name">patterns</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt id="link-22" class="py-name"><a title="rdkit.VLib.NodeLib.demo.metals" class="py-name" href="#" onclick="return doclink('link-22', 'metals', 'link-18');">metals</a></tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">counts</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-23" class="py-name"><a title="rdkit.VLib.NodeLib.demo.smaFilter" class="py-name" href="#" onclick="return doclink('link-23', 'smaFilter', 'link-19');">smaFilter</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method rdkit.VLib.Filter.FilterNode.SetNegate()=rdkit.VLib.Filter.FilterNode-class.html#SetNegate"><a title="rdkit.VLib.Filter.FilterNode.SetNegate" class="py-name" href="#" onclick="return doclink('link-24', 'SetNegate', 'link-24');">SetNegate</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-25" class="py-name"><a title="rdkit.VLib.NodeLib.demo.smaFilter" class="py-name" href="#" onclick="return doclink('link-25', 'smaFilter', 'link-19');">smaFilter</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method rdkit.VLib.Node.VLibNode.AddParent()=rdkit.VLib.Node.VLibNode-class.html#AddParent,Method rdkit.VLib.Supply.SupplyNode.AddParent()=rdkit.VLib.Supply.SupplyNode-class.html#AddParent"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-26', 'AddParent', 'link-26');">AddParent</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="rdkit.VLib.NodeLib.demo.supplier" class="py-name" href="#" onclick="return doclink('link-27', 'supplier', 'link-13');">supplier</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-comment"># should be 6 here</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'post-smaFilter:'</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-28" class="py-name"><a title="rdkit.VLib.NodeLib.demo.smaFilter" class="py-name" href="#" onclick="return doclink('link-28', 'smaFilter', 'link-19');">smaFilter</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.salts=rdkit.VLib.NodeLib.demo-module.html#salts"><a title="rdkit.VLib.NodeLib.demo.salts" class="py-name" href="#" onclick="return doclink('link-29', 'salts', 'link-29');">salts</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'[Cl;H1&amp;X1,-]'</tt><tt class="py-op">,</tt> <tt class="py-string">'[Na+]'</tt><tt class="py-op">,</tt> <tt class="py-string">'[O;H2,H1&amp;-,X0&amp;-2]'</tt><tt class="py-op">]</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.remover=rdkit.VLib.NodeLib.demo-module.html#remover"><a title="rdkit.VLib.NodeLib.demo.remover" class="py-name" href="#" onclick="return doclink('link-30', 'remover', 'link-30');">remover</a></tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name" targets="Module rdkit.VLib.NodeLib.SmartsRemover=rdkit.VLib.NodeLib.SmartsRemover-module.html,Class rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover=rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover-class.html"><a title="rdkit.VLib.NodeLib.SmartsRemover
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover" class="py-name" href="#" onclick="return doclink('link-31', 'SmartsRemover', 'link-31');">SmartsRemover</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="rdkit.VLib.NodeLib.SmartsRemover
+rdkit.VLib.NodeLib.SmartsRemover.SmartsRemover" class="py-name" href="#" onclick="return doclink('link-32', 'SmartsRemover', 'link-31');">SmartsRemover</a></tt><tt class="py-op">(</tt><tt class="py-name">patterns</tt><tt class="py-op">=</tt><tt id="link-33" class="py-name"><a title="rdkit.VLib.NodeLib.demo.salts" class="py-name" href="#" onclick="return doclink('link-33', 'salts', 'link-29');">salts</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-34" class="py-name"><a title="rdkit.VLib.NodeLib.demo.remover" class="py-name" href="#" onclick="return doclink('link-34', 'remover', 'link-30');">remover</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-35', 'AddParent', 'link-26');">AddParent</a></tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="rdkit.VLib.NodeLib.demo.smaFilter" class="py-name" href="#" onclick="return doclink('link-36', 'smaFilter', 'link-19');">smaFilter</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-37" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.atsFilter=rdkit.VLib.NodeLib.demo-module.html#atsFilter"><a title="rdkit.VLib.NodeLib.demo.atsFilter" class="py-name" href="#" onclick="return doclink('link-37', 'atsFilter', 'link-37');">atsFilter</a></tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="rdkit.VLib.Filter" class="py-name" href="#" onclick="return doclink('link-38', 'Filter', 'link-5');">Filter</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Class rdkit.VLib.Filter.FilterNode=rdkit.VLib.Filter.FilterNode-class.html"><a title="rdkit.VLib.Filter.FilterNode" class="py-name" href="#" onclick="return doclink('link-39', 'FilterNode', 'link-39');">FilterNode</a></tt><tt class="py-op">(</tt><tt class="py-name">func</tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">GetNumAtoms</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-40" class="py-name"><a title="rdkit.VLib.NodeLib.demo.atsFilter" class="py-name" href="#" onclick="return doclink('link-40', 'atsFilter', 'link-37');">atsFilter</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-41', 'AddParent', 'link-26');">AddParent</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="rdkit.VLib.NodeLib.demo.remover" class="py-name" href="#" onclick="return doclink('link-42', 'remover', 'link-30');">remover</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-comment"># should be 5 here</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'post-remover:'</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-43" class="py-name"><a title="rdkit.VLib.NodeLib.demo.atsFilter" class="py-name" href="#" onclick="return doclink('link-43', 'atsFilter', 'link-37');">atsFilter</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt id="link-44" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.dupeFilter=rdkit.VLib.NodeLib.demo-module.html#dupeFilter"><a title="rdkit.VLib.NodeLib.demo.dupeFilter" class="py-name" href="#" onclick="return doclink('link-44', 'dupeFilter', 'link-44');">dupeFilter</a></tt> <tt class="py-op">=</tt> <tt id="link-45" class="py-name" targets="Module rdkit.VLib.NodeLib.SmilesDupeFilter=rdkit.VLib.NodeLib.SmilesDupeFilter-module.html"><a title="rdkit.VLib.NodeLib.SmilesDupeFilter" class="py-name" href="#" onclick="return doclink('link-45', 'SmilesDupeFilter', 'link-45');">SmilesDupeFilter</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Class rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter=rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter-class.html"><a title="rdkit.VLib.NodeLib.SmilesDupeFilter.DupeFilter" class="py-name" href="#" onclick="return doclink('link-46', 'DupeFilter', 'link-46');">DupeFilter</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt id="link-47" class="py-name"><a title="rdkit.VLib.NodeLib.demo.dupeFilter" class="py-name" href="#" onclick="return doclink('link-47', 'dupeFilter', 'link-44');">dupeFilter</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-48', 'AddParent', 'link-26');">AddParent</a></tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="rdkit.VLib.NodeLib.demo.atsFilter" class="py-name" href="#" onclick="return doclink('link-49', 'atsFilter', 'link-37');">atsFilter</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-comment"># should be 4 here</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'post-dupes:'</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-50" class="py-name"><a title="rdkit.VLib.NodeLib.demo.dupeFilter" class="py-name" href="#" onclick="return doclink('link-50', 'dupeFilter', 'link-44');">dupeFilter</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-comment"># a StringIO object acts like a file:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-51" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.io=rdkit.VLib.NodeLib.demo-module.html#io"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-51', 'io', 'link-51');">io</a></tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">.</tt><tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt id="link-52" class="py-name" targets="Variable rdkit.VLib.NodeLib.demo.output=rdkit.VLib.NodeLib.demo-module.html#output"><a title="rdkit.VLib.NodeLib.demo.output" class="py-name" href="#" onclick="return doclink('link-52', 'output', 'link-52');">output</a></tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name" targets="Module rdkit.VLib.NodeLib.SmilesOutput=rdkit.VLib.NodeLib.SmilesOutput-module.html"><a title="rdkit.VLib.NodeLib.SmilesOutput" class="py-name" href="#" onclick="return doclink('link-53', 'SmilesOutput', 'link-53');">SmilesOutput</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Class rdkit.VLib.NodeLib.SmilesOutput.OutputNode=rdkit.VLib.NodeLib.SmilesOutput.OutputNode-class.html,Class rdkit.VLib.Output.OutputNode=rdkit.VLib.Output.OutputNode-class.html"><a title="rdkit.VLib.NodeLib.SmilesOutput.OutputNode
+rdkit.VLib.Output.OutputNode" class="py-name" href="#" onclick="return doclink('link-54', 'OutputNode', 'link-54');">OutputNode</a></tt><tt class="py-op">(</tt><tt class="py-name">dest</tt><tt class="py-op">=</tt><tt id="link-55" class="py-name"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-55', 'io', 'link-51');">io</a></tt><tt class="py-op">,</tt> <tt id="link-56" class="py-name" targets="Variable rdkit.Chem.BuildFragmentCatalog.RunDetails.delim=rdkit.Chem.BuildFragmentCatalog.RunDetails-class.html#delim"><a title="rdkit.Chem.BuildFragmentCatalog.RunDetails.delim" class="py-name" href="#" onclick="return doclink('link-56', 'delim', 'link-56');">delim</a></tt><tt class="py-op">=</tt><tt class="py-string">', '</tt><tt class="py-op">,</tt> <tt class="py-name">idField</tt><tt class="py-op">=</tt><tt class="py-string">'Name'</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt id="link-57" class="py-name"><a title="rdkit.VLib.NodeLib.demo.output" class="py-name" href="#" onclick="return doclink('link-57', 'output', 'link-52');">output</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="rdkit.VLib.Node.VLibNode.AddParent
+rdkit.VLib.Supply.SupplyNode.AddParent" class="py-name" href="#" onclick="return doclink('link-58', 'AddParent', 'link-26');">AddParent</a></tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="rdkit.VLib.NodeLib.demo.dupeFilter" class="py-name" href="#" onclick="return doclink('link-59', 'dupeFilter', 'link-44');">dupeFilter</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'post-output:'</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-60" class="py-name"><a title="rdkit.VLib.NodeLib.demo.output" class="py-name" href="#" onclick="return doclink('link-60', 'output', 'link-52');">output</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'OUTPUT:'</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="rdkit.VLib.NodeLib.demo.io" class="py-name" href="#" onclick="return doclink('link-61', 'io', 'link-51');">io</a></tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

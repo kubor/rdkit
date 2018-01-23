@@ -1,0 +1,1288 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.ScreenComposite</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        Module&nbsp;ScreenComposite
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.ScreenComposite-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module ScreenComposite</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+command line utility for screening composite models
+
+**Usage**
+
+  _ScreenComposite [optional args] modelfile(s) datafile_
+
+Unless indicated otherwise (via command line arguments), _modelfile_ is
+a file containing a pickled composite model and _filename_ is a QDAT file.
+
+**Command Line Arguments**
+
+  - -t *threshold value(s)*: use high-confidence predictions for the final
+     analysis of the hold-out data.  The threshold value can be either a single
+     float or a list/tuple of floats.  All thresholds should be between
+     0.0 and 1.0
+
+  - -D: do a detailed screen.
+
+  - -d *database name*: instead of reading the data from a QDAT file,
+     pull it from a database.  In this case, the _datafile_ argument
+     provides the name of the database table containing the data set.
+
+  - -N *note*: use all models from the database which have this note.
+               The modelfile argument should contain the name of the table
+               with the models.
+
+  - -H: screen only the hold out set (works only if a version of
+        BuildComposite more recent than 1.2.2 was used).
+
+  - -T: screen only the training set (works only if a version of
+        BuildComposite more recent than 1.2.2 was used).
+
+  - -E: do a detailed Error analysis.  This shows each misclassified
+     point and the number of times it was missed across all screened
+     composites.  If the --enrich argument is also provided, only compounds
+     that have true activity value equal to the enrichment value will be
+     used.
+
+  - --enrich *enrichVal*: target &quot;active&quot; value to be used in calculating
+     enrichments.
+
+  - -A: show All predictions.
+
+  - -S: shuffle activity values before screening
+
+  - -R: randomize activity values before screening
+
+  - -F *filter frac*: filters the data before training to change the
+     distribution of activity values in the training set.  *filter frac*
+     is the fraction of the training set that should have the target value.
+     **See note in BuildComposite help about data filtering**
+
+  - -v *filter value*: filters the data before training to change the
+     distribution of activity values in the training set. *filter value*
+     is the target value to use in filtering.
+     **See note in BuildComposite help about data filtering**
+
+  - -V: be verbose when screening multiple models
+
+  - -h: show this message and exit
+
+  - --OOB: Do out an &quot;out-of-bag&quot; generalization error estimate.  This only
+      makes sense when applied to the original data set.
+
+  - --pickleCol *colId*: index of the column containing a pickled value
+      (used primarily for cases where fingerprints are used as descriptors)
+
+  *** Options for making Prediction (Hanneke) Plots ***
+
+  - --predPlot=&lt;fileName&gt;: triggers the generation of a Hanneke plot and
+      sets the name of the .txt file which will hold the output data.
+      A Gnuplot control file, &lt;fileName&gt;.gnu, will also be generated.
+
+  - --predActTable=&lt;name&gt; (optional):  name of the database table
+      containing activity values.  If this is not provided, activities
+      will be read from the same table containing the screening data
+
+  - --predActCol=&lt;name&gt; (optional):  name of the activity column. If not
+      provided, the name of the last column in the activity table will
+      be used.
+
+  - --predLogScale (optional):  If provided, the x axis of the
+      prediction plot (the activity axis) will be plotted using a log
+      scale
+
+  - --predShow: launch a gnuplot instance and display the prediction
+      plot (the plot will still be written to disk).
+
+  *** The following options are likely obsolete ***
+
+  - -P: read pickled data.  The datafile argument should contain
+     a pickled data set. *relevant only to qdat files*
+
+  - -q: data are not quantized (the composite should take care of
+     quantization itself if it requires quantized data). *relevant only to
+     qdat files*
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#message" class="summary-sig-name">message</a>(<span class="summary-sig-arg">msg</span>,
+        <span class="summary-sig-arg">noRet</span>=<span class="summary-sig-default">0</span>)</span><br />
+      emits messages to _sys.stdout_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#error" class="summary-sig-name">error</a>(<span class="summary-sig-arg">msg</span>)</span><br />
+      emits messages to _sys.stderr_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="CalcEnrichment"></a><span class="summary-sig-name">CalcEnrichment</span>(<span class="summary-sig-arg">mat</span>,
+        <span class="summary-sig-arg">tgt</span>=<span class="summary-sig-default">1</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#CalcEnrichment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#CollectResults" class="summary-sig-name">CollectResults</a>(<span class="summary-sig-arg">indices</span>,
+        <span class="summary-sig-arg">dataSet</span>,
+        <span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">appendExamples</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">errorEstimate</span>=<span class="summary-sig-default">0</span>)</span><br />
+      screens a set of examples through a composite and returns the
+  results
+#DOC</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#CollectResults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#DetailedScreen" class="summary-sig-name">DetailedScreen</a>(<span class="summary-sig-arg">indices</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">threshold</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">screenResults</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">goodVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">badVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">noVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">appendExamples</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">errorEstimate</span>=<span class="summary-sig-default">0</span>)</span><br />
+      screens a set of examples cross a composite and breaks the
+      predictions into *correct*,*incorrect* and *unclassified* sets.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#DetailedScreen">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#ShowVoteResults" class="summary-sig-name">ShowVoteResults</a>(<span class="summary-sig-arg">indices</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">nResultCodes</span>,
+        <span class="summary-sig-arg">threshold</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">screenResults</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">appendExamples</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">goodVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">badVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">noVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">errorEstimate</span>=<span class="summary-sig-default">0</span>)</span><br />
+      screens the results and shows a detailed workup</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ShowVoteResults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#ScreenIt" class="summary-sig-name">ScreenIt</a>(<span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">indices</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">partialVote</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">voteTol</span>=<span class="summary-sig-default">0.0</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">screenResults</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">goodVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">badVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">noVotes</span>=<span class="summary-sig-default">None</span>)</span><br />
+      screens a set of data using a composite model and prints out
+             statistics about the screen.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenIt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#_processVoteList" class="summary-sig-name" onclick="show_private();">_processVoteList</a>(<span class="summary-sig-arg">votes</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      *Internal Use Only*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#_processVoteList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="PrepareDataFromDetails"></a><span class="summary-sig-name">PrepareDataFromDetails</span>(<span class="summary-sig-arg">model</span>,
+        <span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">0</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#PrepareDataFromDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#ScreenFromDetails" class="summary-sig-name">ScreenFromDetails</a>(<span class="summary-sig-arg">models</span>,
+        <span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">setup</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">appendExamples</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">goodVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">badVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">noVotes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">enrichments</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Screens a set of data using a a _CompositeRun.CompositeRun_
+       instance to provide parameters</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenFromDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetScreenImage"></a><span class="summary-sig-name">GetScreenImage</span>(<span class="summary-sig-arg">nGood</span>,
+        <span class="summary-sig-arg">nBad</span>,
+        <span class="summary-sig-arg">nRej</span>,
+        <span class="summary-sig-arg">size</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#GetScreenImage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#ScreenToHtml" class="summary-sig-name">ScreenToHtml</a>(<span class="summary-sig-arg">nGood</span>,
+        <span class="summary-sig-arg">nBad</span>,
+        <span class="summary-sig-arg">nRej</span>,
+        <span class="summary-sig-arg">avgGood</span>,
+        <span class="summary-sig-arg">avgBad</span>,
+        <span class="summary-sig-arg">avgSkip</span>,
+        <span class="summary-sig-arg">voteTable</span>,
+        <span class="summary-sig-arg">imgDir</span>=<span class="summary-sig-default">'.'</span>,
+        <span class="summary-sig-arg">fullPage</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">skipImg</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">includeDefs</span>=<span class="summary-sig-default">1</span>)</span><br />
+      returns the text of a web page showing the screening details
+#DOC
+    **Arguments**</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenToHtml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#MakePredPlot" class="summary-sig-name">MakePredPlot</a>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">indices</span>,
+        <span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">goodVotes</span>,
+        <span class="summary-sig-arg">badVotes</span>,
+        <span class="summary-sig-arg">nRes</span>,
+        <span class="summary-sig-arg">idCol</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">0</span>)</span><br />
+      **Arguments**</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#MakePredPlot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Go"></a><span class="summary-sig-name">Go</span>(<span class="summary-sig-arg">details</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#Go">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SetDefaults"></a><span class="summary-sig-name">SetDefaults</span>(<span class="summary-sig-arg">details</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#SetDefaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.ScreenComposite-module.html#Usage" class="summary-sig-name">Usage</a>()</span><br />
+      prints a list of arguments for when this is used from the...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ShowVersion"></a><span class="summary-sig-name">ShowVersion</span>(<span class="summary-sig-arg">includeArgs</span>=<span class="summary-sig-default">0</span>)</span><br />
+      prints the version number of the program</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ShowVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ParseArgs"></a><span class="summary-sig-name">ParseArgs</span>(<span class="summary-sig-arg">details</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ParseArgs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="hasPil"></a><span class="summary-name">hasPil</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_details"></a><span class="summary-name">_details</span> = <code title="CompositeRun.CompositeRun()">CompositeRun.CompositeRun()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__VERSION_STRING"></a><span class="summary-name">__VERSION_STRING</span> = <code title="&quot;3.3.0&quot;">&quot;3.3.0&quot;</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="os">os</span>,
+  <span title="sys">sys</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <a href="rdkit.Dbase.DbModule-module.html" title="rdkit.Dbase.DbModule">DbModule</a>,
+  <a href="rdkit.Dbase.DbConnection.DbConnect-class.html" title="rdkit.Dbase.DbConnection.DbConnect">DbConnect</a>,
+  <a href="rdkit.ML.CompositeRun-module.html" title="rdkit.ML.CompositeRun">CompositeRun</a>,
+  <a href="rdkit.ML.Data.DataUtils-module.html" title="rdkit.ML.Data.DataUtils">DataUtils</a>,
+  <a href="rdkit.ML.Data.SplitData-module.html" title="rdkit.ML.Data.SplitData">SplitData</a>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>,
+  <span title="rdkit.six.moves.input">input</span>,
+  <span title="PIL.Image">Image</span>,
+  <span title="PIL.ImageDraw">ImageDraw</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="message"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">message</span>(<span class="sig-arg">msg</span>,
+        <span class="sig-arg">noRet</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#message">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stdout_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">error</span>(<span class="sig-arg">msg</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#error">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stderr_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CollectResults"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CollectResults</span>(<span class="sig-arg">indices</span>,
+        <span class="sig-arg">dataSet</span>,
+        <span class="sig-arg">composite</span>,
+        <span class="sig-arg">callback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">appendExamples</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">errorEstimate</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#CollectResults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+screens a set of examples through a composite and returns the
+  results
+#DOC
+
+  **Arguments**
+
+    - examples: the examples to be screened (a sequence of sequences)
+       it's assumed that the last element in each example is it's &quot;value&quot;
+
+    - composite:  the composite model to be used
+
+    - callback: (optional)  if provided, this should be a function
+      taking a single argument that is called after each example is
+      screened with the number of examples screened so far as the
+      argument.
+
+    - appendExamples: (optional)  this value is passed on to the
+      composite's _ClassifyExample()_ method.
+
+    - errorEstimate: (optional) calculate the &quot;out of bag&quot; error
+      estimate for the composite using Breiman's definition.  This
+      only makes sense when screening the original data set!
+      [L. Breiman &quot;Out-of-bag Estimation&quot;, UC Berkeley Dept of
+      Statistics Technical Report (1996)]
+
+  **Returns**
+
+    a list of 3-tuples _nExamples_ long:
+
+      1)  answer: the value from the example
+
+      2)  pred: the composite model's prediction
+
+      3)  conf: the confidence of the composite
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="DetailedScreen"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">DetailedScreen</span>(<span class="sig-arg">indices</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">composite</span>,
+        <span class="sig-arg">threshold</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">screenResults</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">goodVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">badVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">noVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">callback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">appendExamples</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">errorEstimate</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#DetailedScreen">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+screens a set of examples cross a composite and breaks the
+      predictions into *correct*,*incorrect* and *unclassified* sets.
+#DOC
+  **Arguments**
+
+    - examples: the examples to be screened (a sequence of sequences)
+       it's assumed that the last element in each example is its &quot;value&quot;
+
+    - composite:  the composite model to be used
+
+    - threshold: (optional) the threshold to be used to decide whether
+      or not a given prediction should be kept
+
+    - screenResults: (optional) the results of screening the results
+      (a sequence of 3-tuples in the format returned by
+      _CollectResults()_).  If this is provided, the examples will not
+      be screened again.
+
+    - goodVotes,badVotes,noVotes: (optional)  if provided these should
+      be lists (or anything supporting an _append()_ method) which
+      will be used to pass the screening results back.
+
+    - callback: (optional)  if provided, this should be a function
+      taking a single argument that is called after each example is
+      screened with the number of examples screened so far as the
+      argument.
+
+    - appendExamples: (optional)  this value is passed on to the
+      composite's _ClassifyExample()_ method.
+
+    - errorEstimate: (optional) calculate the &quot;out of bag&quot; error
+      estimate for the composite using Breiman's definition.  This
+      only makes sense when screening the original data set!
+      [L. Breiman &quot;Out-of-bag Estimation&quot;, UC Berkeley Dept of
+      Statistics Technical Report (1996)]
+
+  **Notes**
+
+    - since this function doesn't return anything, if one or more of
+      the arguments _goodVotes_, _badVotes_, and _noVotes_ is not
+      provided, there's not much reason to call it
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ShowVoteResults"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ShowVoteResults</span>(<span class="sig-arg">indices</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">composite</span>,
+        <span class="sig-arg">nResultCodes</span>,
+        <span class="sig-arg">threshold</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">screenResults</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">callback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">appendExamples</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">goodVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">badVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">noVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">errorEstimate</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ShowVoteResults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+screens the results and shows a detailed workup
+
+  The work of doing the screening and processing the results is
+  handled by _DetailedScreen()_
+#DOC
+
+  **Arguments**
+
+    - examples: the examples to be screened (a sequence of sequences)
+       it's assumed that the last element in each example is its &quot;value&quot;
+
+    - composite:  the composite model to be used
+
+    - nResultCodes: the number of possible results the composite can
+      return
+
+    - threshold: the threshold to be used to decide whether or not a
+      given prediction should be kept
+
+    - screenResults: (optional) the results of screening the results
+      (a sequence of 3-tuples in the format returned by
+      _CollectResults()_).  If this is provided, the examples will not
+      be screened again.
+
+    - callback: (optional)  if provided, this should be a function
+      taking a single argument that is called after each example is
+      screened with the number of examples screened so far as the
+      argument.
+
+    - appendExamples: (optional)  this value is passed on to the
+      composite's _ClassifyExample()_ method.
+
+    - goodVotes,badVotes,noVotes: (optional)  if provided these should
+      be lists (or anything supporting an _append()_ method) which
+      will be used to pass the screening results back.
+
+    - errorEstimate: (optional) calculate the &quot;out of bag&quot; error
+      estimate for the composite using Breiman's definition.  This
+      only makes sense when screening the original data set!
+      [L. Breiman &quot;Out-of-bag Estimation&quot;, UC Berkeley Dept of
+      Statistics Technical Report (1996)]
+
+  **Returns**
+
+    a 7-tuple:
+
+      1) the number of good (correct) predictions
+
+      2) the number of bad (incorrect) predictions
+
+      3) the number of predictions skipped due to the _threshold_
+
+      4) the average confidence in the good predictions
+
+      5) the average confidence in the bad predictions
+
+      6) the average confidence in the skipped predictions
+
+      7) the results table
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScreenIt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScreenIt</span>(<span class="sig-arg">composite</span>,
+        <span class="sig-arg">indices</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">partialVote</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">voteTol</span>=<span class="sig-default">0.0</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">screenResults</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">goodVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">badVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">noVotes</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenIt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+screens a set of data using a composite model and prints out
+             statistics about the screen.
+#DOC
+    The work of doing the screening and processing the results is
+    handled by _DetailedScreen()_
+
+  **Arguments**
+
+    - composite:  the composite model to be used
+
+    - data: the examples to be screened (a sequence of sequences)
+       it's assumed that the last element in each example is its &quot;value&quot;
+
+    - partialVote: (optional) toggles use of the threshold value in
+      the screnning.
+
+    - voteTol: (optional) the threshold to be used to decide whether or not a
+      given prediction should be kept
+
+    - verbose: (optional) sets degree of verbosity of the screening
+
+    - screenResults: (optional) the results of screening the results
+      (a sequence of 3-tuples in the format returned by
+      _CollectResults()_).  If this is provided, the examples will not
+      be screened again.
+
+    - goodVotes,badVotes,noVotes: (optional)  if provided these should
+      be lists (or anything supporting an _append()_ method) which
+      will be used to pass the screening results back.
+
+
+  **Returns**
+
+    a 7-tuple:
+
+      1) the number of good (correct) predictions
+
+      2) the number of bad (incorrect) predictions
+
+      3) the number of predictions skipped due to the _threshold_
+
+      4) the average confidence in the good predictions
+
+      5) the average confidence in the bad predictions
+
+      6) the average confidence in the skipped predictions
+
+      7) None
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="_processVoteList"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_processVoteList</span>(<span class="sig-arg">votes</span>,
+        <span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#_processVoteList">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Internal Use Only*
+
+converts a list of 4 tuples: (answer,prediction,confidence,idx) into
+an alternate list: (answer,prediction,confidence,data point)
+
+ **Arguments**
+
+   - votes: a list of 4 tuples: (answer, prediction, confidence,
+     index)
+
+   - data: a _DataUtils.MLData.MLDataSet_
+
+
+ **Note**: alterations are done in place in the _votes_ list
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScreenFromDetails"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScreenFromDetails</span>(<span class="sig-arg">models</span>,
+        <span class="sig-arg">details</span>,
+        <span class="sig-arg">callback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">setup</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">appendExamples</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">goodVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">badVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">noVotes</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">enrichments</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenFromDetails">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Screens a set of data using a a _CompositeRun.CompositeRun_
+       instance to provide parameters
+
+# DOC
+
+    The actual data to be used are extracted from the database and
+    table specified in _details_
+
+    Aside from dataset construction,  _ShowVoteResults()_ does most of
+    the heavy lifting here.
+
+  **Arguments**
+
+      - model: a composite model
+
+      - details:  a _CompositeRun.CompositeRun_ object containing details
+        (options, parameters, etc.) about the run
+
+      - callback: (optional)  if provided, this should be a function
+        taking a single argument that is called after each example is
+        screened with the number of examples screened so far as the
+        argument.
+
+      - setup: (optional) a function taking a single argument which is
+        called at the start of screening with the number of points to
+        be screened as the argument.
+
+      - appendExamples: (optional)  this value is passed on to the
+        composite's _ClassifyExample()_ method.
+
+      - goodVotes,badVotes,noVotes: (optional)  if provided these should
+        be lists (or anything supporting an _append()_ method) which
+        will be used to pass the screening results back.
+
+
+  **Returns**
+
+    a 7-tuple:
+
+      1) the number of good (correct) predictions
+
+      2) the number of bad (incorrect) predictions
+
+      3) the number of predictions skipped due to the _threshold_
+
+      4) the average confidence in the good predictions
+
+      5) the average confidence in the bad predictions
+
+      6) the average confidence in the skipped predictions
+
+      7) the results table
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScreenToHtml"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScreenToHtml</span>(<span class="sig-arg">nGood</span>,
+        <span class="sig-arg">nBad</span>,
+        <span class="sig-arg">nRej</span>,
+        <span class="sig-arg">avgGood</span>,
+        <span class="sig-arg">avgBad</span>,
+        <span class="sig-arg">avgSkip</span>,
+        <span class="sig-arg">voteTable</span>,
+        <span class="sig-arg">imgDir</span>=<span class="sig-default">'.'</span>,
+        <span class="sig-arg">fullPage</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">skipImg</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">includeDefs</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#ScreenToHtml">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns the text of a web page showing the screening details
+#DOC
+    **Arguments**
+
+     - nGood: number of correct predictions
+
+     - nBad:  number of incorrect predictions
+
+     - nRej:  number of rejected predictions
+
+     - avgGood: average correct confidence
+
+     - avgBad:  average incorrect confidence
+
+     - avgSkip: average rejected confidence
+
+     - voteTable: vote table
+
+     - imgDir: (optional) the directory to be used to hold the vote
+       image (if constructed)
+
+   **Returns**
+
+     a string containing HTML
+
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MakePredPlot"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MakePredPlot</span>(<span class="sig-arg">details</span>,
+        <span class="sig-arg">indices</span>,
+        <span class="sig-arg">data</span>,
+        <span class="sig-arg">goodVotes</span>,
+        <span class="sig-arg">badVotes</span>,
+        <span class="sig-arg">nRes</span>,
+        <span class="sig-arg">idCol</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">verbose</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#MakePredPlot">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+
+**Arguments**
+
+  - details:  a CompositeRun.RunDetails object
+
+  - indices: a sequence of integer indices into _data_
+
+  - data: the data set in question.  We assume that the ids for
+    the data points are in the _idCol_ column
+
+  - goodVotes/badVotes: predictions where the model was correct/incorrect.
+    These are sequences of 4-tuples:
+      (answer,prediction,confidence,index into _indices_)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Usage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Usage</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.ScreenComposite-pysrc.html#Usage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+prints a list of arguments for when this is used from the
+command line and then exits
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

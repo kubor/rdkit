@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Fingerprints.FingerprintMols</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Fingerprints-module.html">Package&nbsp;Fingerprints</a> ::
+        Module&nbsp;FingerprintMols
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module FingerprintMols</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+utility functionality for fingerprinting sets of molecules
+ includes a command line app for working with fingerprints
+ and databases
+
+
+Sample Usage:
+
+  python FingerprintMols.py  -d data.gdb         -t 'raw_dop_data' --smilesName=&quot;Structure&quot; --idName=&quot;Mol_ID&quot;          --outTable=&quot;daylight_sig&quot;
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Fingerprints.FingerprintMols.FingerprinterDetails-class.html" class="summary-name">FingerprinterDetails</a><br />
+      class for storing the details of a fingerprinting run,...
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="error"></a><span class="summary-sig-name">error</span>(<span class="summary-sig-arg">msg</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="message"></a><span class="summary-sig-name">message</span>(<span class="summary-sig-arg">msg</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetRDKFingerprint"></a><span class="summary-sig-name">GetRDKFingerprint</span>(<span class="summary-sig-arg">mol</span>)</span><br />
+      uses default parameters</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#GetRDKFingerprint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="FoldFingerprintToTargetDensity"></a><span class="summary-sig-name">FoldFingerprintToTargetDensity</span>(<span class="summary-sig-arg">fp</span>,
+        <span class="summary-sig-arg">**fpArgs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FoldFingerprintToTargetDensity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="FingerprintMol"></a><span class="summary-sig-name">FingerprintMol</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">fingerprinter</span>=<span class="summary-sig-default">Chem.RDKFingerprint</span>,
+        <span class="summary-sig-arg">**fpArgs</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintMol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html#FingerprintsFromSmiles" class="summary-sig-name">FingerprintsFromSmiles</a>(<span class="summary-sig-arg">dataSource</span>,
+        <span class="summary-sig-arg">idCol</span>,
+        <span class="summary-sig-arg">smiCol</span>,
+        <span class="summary-sig-arg">fingerprinter</span>=<span class="summary-sig-default">Chem.RDKFingerprint</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">maxMols</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**fpArgs</span>)</span><br />
+      fpArgs are passed as keyword arguments to the fingerprinter</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromSmiles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html#FingerprintsFromMols" class="summary-sig-name">FingerprintsFromMols</a>(<span class="summary-sig-arg">mols</span>,
+        <span class="summary-sig-arg">fingerprinter</span>=<span class="summary-sig-default">Chem.RDKFingerprint</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">maxMols</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**fpArgs</span>)</span><br />
+      fpArgs are passed as keyword arguments to the fingerprinter</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromMols">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html#FingerprintsFromPickles" class="summary-sig-name">FingerprintsFromPickles</a>(<span class="summary-sig-arg">dataSource</span>,
+        <span class="summary-sig-arg">idCol</span>,
+        <span class="summary-sig-arg">pklCol</span>,
+        <span class="summary-sig-arg">fingerprinter</span>=<span class="summary-sig-default">Chem.RDKFingerprint</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">maxMols</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">**fpArgs</span>)</span><br />
+      fpArgs are passed as keyword arguments to the fingerprinter</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromPickles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="FingerprintsFromDetails"></a><span class="summary-sig-name">FingerprintsFromDetails</span>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Usage"></a><span class="summary-sig-name">Usage</span>()</span><br />
+      prints a usage string and exits</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html#ParseArgs" class="summary-sig-name">ParseArgs</a>(<span class="summary-sig-arg">details</span>=<span class="summary-sig-default">None</span>)</span><br />
+      parses the command line arguments and returns a
+_FingerprinterDetails_ instance with the results.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#ParseArgs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Fingerprints.FingerprintMols-module.html#_usageDoc" class="summary-name" onclick="show_private();">_usageDoc</a> = <code title="&quot;&quot;&quot;
+Usage: FingerprintMols.py [args] &lt;fName&gt;
+
+  If &lt;fName&gt; is provided and no tableName is specified (see below),
+  data will be read from the text file &lt;fName&gt;.  Text files delimited
+  with either commas (extension .csv) or tabs (extension .txt) are
+  supported.
+
+..."><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="getopt">getopt</span>,
+  <span title="sys">sys</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <a href="rdkit.Chem.MACCSkeys-module.html" title="rdkit.Chem.MACCSkeys">MACCSkeys</a>,
+  <a href="rdkit.ML.Cluster.Murtagh-module.html" title="rdkit.ML.Cluster.Murtagh">Murtagh</a>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="FingerprintsFromSmiles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FingerprintsFromSmiles</span>(<span class="sig-arg">dataSource</span>,
+        <span class="sig-arg">idCol</span>,
+        <span class="sig-arg">smiCol</span>,
+        <span class="sig-arg">fingerprinter</span>=<span class="sig-default">Chem.RDKFingerprint</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">maxMols</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**fpArgs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromSmiles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+fpArgs are passed as keyword arguments to the fingerprinter
+
+Returns a list of 2-tuples: (ID,fp)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="FingerprintsFromMols"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FingerprintsFromMols</span>(<span class="sig-arg">mols</span>,
+        <span class="sig-arg">fingerprinter</span>=<span class="sig-default">Chem.RDKFingerprint</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">maxMols</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**fpArgs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromMols">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+fpArgs are passed as keyword arguments to the fingerprinter
+
+Returns a list of 2-tuples: (ID,fp)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="FingerprintsFromPickles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FingerprintsFromPickles</span>(<span class="sig-arg">dataSource</span>,
+        <span class="sig-arg">idCol</span>,
+        <span class="sig-arg">pklCol</span>,
+        <span class="sig-arg">fingerprinter</span>=<span class="sig-default">Chem.RDKFingerprint</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">maxMols</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">**fpArgs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#FingerprintsFromPickles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+fpArgs are passed as keyword arguments to the fingerprinter
+
+Returns a list of 2-tuples: (ID,fp)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseArgs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseArgs</span>(<span class="sig-arg">details</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.Fingerprints.FingerprintMols-pysrc.html#ParseArgs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+parses the command line arguments and returns a
+_FingerprinterDetails_ instance with the results.
+
+**Note**:
+
+  - If you make modifications here, please update the global
+    _usageDoc string so the Usage message is up to date.
+
+  - This routine is used by both the fingerprinter, the clusterer and the
+    screener; not all arguments make sense for all applications.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_usageDoc"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_usageDoc</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&quot;&quot;&quot;
+Usage: FingerprintMols.py [args] &lt;fName&gt;
+
+  If &lt;fName&gt; is provided and no tableName is specified (see below),
+  data will be read from the text file &lt;fName&gt;.  Text files delimited
+  with either commas (extension .csv) or tabs (extension .txt) are
+  supported.
+
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

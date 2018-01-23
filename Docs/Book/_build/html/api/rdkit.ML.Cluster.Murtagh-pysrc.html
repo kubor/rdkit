@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Cluster.Murtagh</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Cluster-module.html">Package&nbsp;Cluster</a> ::
+        Module&nbsp;Murtagh
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Cluster.Murtagh-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.Cluster.Murtagh-module.html">Module rdkit.ML.Cluster.Murtagh</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2001-2008  greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">""" Interface to the C++ Murtagh hierarchic clustering code</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-0', 'ML', 'link-0');">ML</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.ML.Cluster=rdkit.ML.Cluster-module.html,Class rdkit.ML.Cluster.Clusters.Cluster=rdkit.ML.Cluster.Clusters.Cluster-class.html"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-1', 'Cluster', 'link-1');">Cluster</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module rdkit.ML.Cluster.Clusters=rdkit.ML.Cluster.Clusters-module.html"><a title="rdkit.ML.Cluster.Clusters" class="py-name" href="#" onclick="return doclink('link-2', 'Clusters', 'link-2');">Clusters</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-3', 'ML', 'link-0');">ML</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-4', 'Cluster', 'link-1');">Cluster</a></tt><tt class="py-op">.</tt><tt class="py-name">Clustering</tt> <tt class="py-keyword">import</tt> <tt class="py-name">MurtaghCluster</tt><tt class="py-op">,</tt> <tt class="py-name">MurtaghDistCluster</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># constants to select the clustering algorithm</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.WARDS=rdkit.ML.Cluster.Murtagh-module.html#WARDS"><a title="rdkit.ML.Cluster.Murtagh.WARDS" class="py-name" href="#" onclick="return doclink('link-5', 'WARDS', 'link-5');">WARDS</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.SLINK=rdkit.ML.Cluster.Murtagh-module.html#SLINK"><a title="rdkit.ML.Cluster.Murtagh.SLINK" class="py-name" href="#" onclick="return doclink('link-6', 'SLINK', 'link-6');">SLINK</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.CLINK=rdkit.ML.Cluster.Murtagh-module.html#CLINK"><a title="rdkit.ML.Cluster.Murtagh.CLINK" class="py-name" href="#" onclick="return doclink('link-7', 'CLINK', 'link-7');">CLINK</a></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.UPGMA=rdkit.ML.Cluster.Murtagh-module.html#UPGMA"><a title="rdkit.ML.Cluster.Murtagh.UPGMA" class="py-name" href="#" onclick="return doclink('link-8', 'UPGMA', 'link-8');">UPGMA</a></tt> <tt class="py-op">=</tt> <tt class="py-number">4</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.MCQUITTY=rdkit.ML.Cluster.Murtagh-module.html#MCQUITTY"><a title="rdkit.ML.Cluster.Murtagh.MCQUITTY" class="py-name" href="#" onclick="return doclink('link-9', 'MCQUITTY', 'link-9');">MCQUITTY</a></tt> <tt class="py-op">=</tt> <tt class="py-number">5</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.GOWER=rdkit.ML.Cluster.Murtagh-module.html#GOWER"><a title="rdkit.ML.Cluster.Murtagh.GOWER" class="py-name" href="#" onclick="return doclink('link-10', 'GOWER', 'link-10');">GOWER</a></tt> <tt class="py-op">=</tt> <tt class="py-number">6</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.CENTROID=rdkit.ML.Cluster.Murtagh-module.html#CENTROID"><a title="rdkit.ML.Cluster.Murtagh.CENTROID" class="py-name" href="#" onclick="return doclink('link-11', 'CENTROID', 'link-11');">CENTROID</a></tt> <tt class="py-op">=</tt> <tt class="py-number">7</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># descriptions of the methods:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable rdkit.ML.Cluster.Murtagh.methods=rdkit.ML.Cluster.Murtagh-module.html#methods,Variable rdkit.ML.Cluster.Resemblance.methods=rdkit.ML.Cluster.Resemblance-module.html#methods,Variable rdkit.ML.Cluster.Standardize.methods=rdkit.ML.Cluster.Standardize-module.html#methods"><a title="rdkit.ML.Cluster.Murtagh.methods
+rdkit.ML.Cluster.Resemblance.methods
+rdkit.ML.Cluster.Standardize.methods" class="py-name" href="#" onclick="return doclink('link-12', 'methods', 'link-12');">methods</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">  <tt class="py-op">(</tt><tt class="py-string">"Ward's Minimum Variance"</tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="rdkit.ML.Cluster.Murtagh.WARDS" class="py-name" href="#" onclick="return doclink('link-13', 'WARDS', 'link-5');">WARDS</a></tt><tt class="py-op">,</tt> <tt class="py-string">"Ward's Minimum Variance"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">  <tt class="py-op">(</tt><tt class="py-string">'Average Linkage'</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="rdkit.ML.Cluster.Murtagh.UPGMA" class="py-name" href="#" onclick="return doclink('link-14', 'UPGMA', 'link-8');">UPGMA</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Group Average Linkage (UPGMA)'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">  <tt class="py-op">(</tt><tt class="py-string">'Single Linkage'</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name"><a title="rdkit.ML.Cluster.Murtagh.SLINK" class="py-name" href="#" onclick="return doclink('link-15', 'SLINK', 'link-6');">SLINK</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Single Linkage (SLINK)'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">  <tt class="py-op">(</tt><tt class="py-string">'Complete Linkage'</tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name"><a title="rdkit.ML.Cluster.Murtagh.CLINK" class="py-name" href="#" onclick="return doclink('link-16', 'CLINK', 'link-7');">CLINK</a></tt><tt class="py-op">,</tt> <tt class="py-string">'Complete Linkage (CLINK)'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-comment">#  ("McQuitty",MCQUITTY,"McQuitty's method"),</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">  <tt class="py-comment">#  ("Gower",GOWER,"Gower's median method"),</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">  <tt class="py-op">(</tt><tt class="py-string">"Centroid"</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="rdkit.ML.Cluster.Murtagh.CENTROID" class="py-name" href="#" onclick="return doclink('link-17', 'CENTROID', 'link-11');">CENTROID</a></tt><tt class="py-op">,</tt> <tt class="py-string">"Centroid method"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-op">]</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="_LookupDist"></a><div id="_LookupDist-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="_LookupDist-toggle" onclick="return toggle('_LookupDist');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Murtagh-module.html#_LookupDist">_LookupDist</a><tt class="py-op">(</tt><tt class="py-param">dists</tt><tt class="py-op">,</tt> <tt class="py-param">i</tt><tt class="py-op">,</tt> <tt class="py-param">j</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_LookupDist-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_LookupDist-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-docstring">""" *Internal Use Only*</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">   returns the distance between points i and j in the symmetric</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">   distance matrix _dists_</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">i</tt> <tt class="py-op">==</tt> <tt class="py-name">j</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">i</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">j</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">j</tt> <tt class="py-op">=</tt> <tt class="py-name">j</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">dists</tt><tt class="py-op">[</tt><tt class="py-name">j</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">j</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt> <tt class="py-op">+</tt> <tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="_ToClusters"></a><div id="_ToClusters-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="_ToClusters-toggle" onclick="return toggle('_ToClusters');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Murtagh-module.html#_ToClusters">_ToClusters</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">nPts</tt><tt class="py-op">,</tt> <tt class="py-param">ia</tt><tt class="py-op">,</tt> <tt class="py-param">ib</tt><tt class="py-op">,</tt> <tt class="py-param">crit</tt><tt class="py-op">,</tt> <tt class="py-param">isDistData</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_ToClusters-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_ToClusters-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">  <tt class="py-docstring">""" *Internal Use Only*</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    Converts the results of the Murtagh clustering code into</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    a cluster tree, which is returned in a single-entry list</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">  <tt class="py-name">cs</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">nPts</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">nPts</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">cs</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="rdkit.ML.Cluster.Clusters" class="py-name" href="#" onclick="return doclink('link-18', 'Clusters', 'link-2');">Clusters</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-19', 'Cluster', 'link-1');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-20', 'data', 'link-20');">data</a></tt><tt class="py-op">=</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-name">nClus</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">ia</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">nClus</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-name">idx1</tt> <tt class="py-op">=</tt> <tt class="py-name">ia</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-name">idx2</tt> <tt class="py-op">=</tt> <tt class="py-name">ib</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">c1</tt> <tt class="py-op">=</tt> <tt class="py-name">cs</tt><tt class="py-op">[</tt><tt class="py-name">idx1</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">c2</tt> <tt class="py-op">=</tt> <tt class="py-name">cs</tt><tt class="py-op">[</tt><tt class="py-name">idx2</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">newClust</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="rdkit.ML.Cluster.Clusters" class="py-name" href="#" onclick="return doclink('link-21', 'Clusters', 'link-2');">Clusters</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-22', 'Cluster', 'link-1');">Cluster</a></tt><tt class="py-op">(</tt><tt class="py-name">metric</tt><tt class="py-op">=</tt><tt class="py-name">crit</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.children=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#children,Variable rdkit.Chem.Recap.RecapHierarchyNode.children=rdkit.Chem.Recap.RecapHierarchyNode-class.html#children"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.children
+rdkit.Chem.Recap.RecapHierarchyNode.children" class="py-name" href="#" onclick="return doclink('link-23', 'children', 'link-23');">children</a></tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">c1</tt><tt class="py-op">,</tt> <tt class="py-name">c2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">index</tt><tt class="py-op">=</tt><tt class="py-name">nPts</tt> <tt class="py-op">+</tt> <tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-name">cs</tt><tt class="py-op">[</tt><tt class="py-name">idx1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">newClust</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">newClust</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="ClusterData"></a><div id="ClusterData-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="ClusterData-toggle" onclick="return toggle('ClusterData');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.Cluster.Murtagh-module.html#ClusterData">ClusterData</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">nPts</tt><tt class="py-op">,</tt> <tt class="py-param">method</tt><tt class="py-op">,</tt> <tt class="py-param">isDistData</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ClusterData-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ClusterData-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">  <tt class="py-docstring">"""  clusters the data points passed in and returns the cluster tree</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">    **Arguments**</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">      - data: a list of lists (or array, or whatever) with the input</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        data (see discussion of _isDistData_ argument for the exception)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">      - nPts: the number of points to be used</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">      - method: determines which clustering algorithm should be used.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">          The defined constants for these are:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">          'WARDS, SLINK, CLINK, UPGMA'</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">      - isDistData: set this toggle when the data passed in is a</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">          distance matrix.  The distance matrix should be stored</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">          symmetrically so that _LookupDist (above) can retrieve</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">          the results:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">            for i&lt;j: d_ij = dists[j*(j-1)/2 + i]</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">    **Returns**</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">      - a single entry list with the cluster tree</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt id="link-24" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-24', 'data', 'link-20');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-25', 'data', 'link-20');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isDistData</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">sz</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-26', 'data', 'link-20');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">shape</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-name">ia</tt><tt class="py-op">,</tt> <tt class="py-name">ib</tt><tt class="py-op">,</tt> <tt class="py-name">crit</tt> <tt class="py-op">=</tt> <tt class="py-name">MurtaghCluster</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-27', 'data', 'link-20');">data</a></tt><tt class="py-op">,</tt> <tt class="py-name">nPts</tt><tt class="py-op">,</tt> <tt class="py-name">sz</tt><tt class="py-op">,</tt> <tt class="py-name">method</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">ia</tt><tt class="py-op">,</tt> <tt class="py-name">ib</tt><tt class="py-op">,</tt> <tt class="py-name">crit</tt> <tt class="py-op">=</tt> <tt class="py-name">MurtaghDistCluster</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-28', 'data', 'link-20');">data</a></tt><tt class="py-op">,</tt> <tt class="py-name">nPts</tt><tt class="py-op">,</tt> <tt class="py-name">method</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">  <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name" targets="Function rdkit.ML.Cluster.Murtagh._ToClusters()=rdkit.ML.Cluster.Murtagh-module.html#_ToClusters"><a title="rdkit.ML.Cluster.Murtagh._ToClusters" class="py-name" href="#" onclick="return doclink('link-29', '_ToClusters', 'link-29');">_ToClusters</a></tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-30', 'data', 'link-20');">data</a></tt><tt class="py-op">,</tt> <tt class="py-name">nPts</tt><tt class="py-op">,</tt> <tt class="py-name">ia</tt><tt class="py-op">,</tt> <tt class="py-name">ib</tt><tt class="py-op">,</tt> <tt class="py-name">crit</tt><tt class="py-op">,</tt> <tt class="py-name">isDistData</tt><tt class="py-op">=</tt><tt class="py-name">isDistData</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">c</tt> </tt>
+</div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

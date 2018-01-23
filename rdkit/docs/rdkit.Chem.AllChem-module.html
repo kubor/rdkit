@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.AllChem</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;AllChem
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.AllChem-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module AllChem</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Import all RDKit chemistry modules
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#TransformMol" class="summary-sig-name">TransformMol</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">tform</span>,
+        <span class="summary-sig-arg">confId</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">keepConfs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Applies the transformation (usually a 4x4 double matrix) to a molecule...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#TransformMol">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#ComputeMolShape" class="summary-sig-name">ComputeMolShape</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">confId</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">boxDim</span>=<span class="summary-sig-default">(20,20,20)</span>,
+        <span class="summary-sig-arg">spacing</span>=<span class="summary-sig-default">0.5</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      returns a grid representation of the molecule's shape...</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#ComputeMolShape">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ComputeMolVolume"></a><span class="summary-sig-name">ComputeMolVolume</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">confId</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">gridSpacing</span>=<span class="summary-sig-default">0.2</span>,
+        <span class="summary-sig-arg">boxMargin</span>=<span class="summary-sig-default">2.0</span>)</span><br />
+      Calculates the volume of a particular conformer of a molecule
+based on a grid-encoding of the molecular shape.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#ComputeMolVolume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#GetConformerRMS" class="summary-sig-name">GetConformerRMS</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">confId1</span>,
+        <span class="summary-sig-arg">confId2</span>,
+        <span class="summary-sig-arg">atomIds</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">prealigned</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Returns the RMS between two conformations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#GetConformerRMS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#GetConformerRMSMatrix" class="summary-sig-name">GetConformerRMSMatrix</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">atomIds</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">prealigned</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Returns the RMS matrix of the conformers of a molecule.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#GetConformerRMSMatrix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#EnumerateLibraryFromReaction" class="summary-sig-name">EnumerateLibraryFromReaction</a>(<span class="summary-sig-arg">reaction</span>,
+        <span class="summary-sig-arg">sidechainSets</span>,
+        <span class="summary-sig-arg">returnReactants</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Returns a generator for the virtual library defined by
+ a reaction and a sequence of sidechain sets</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#EnumerateLibraryFromReaction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#ConstrainedEmbed" class="summary-sig-name">ConstrainedEmbed</a>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">core</span>,
+        <span class="summary-sig-arg">useTethers</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">coreConfId</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">randomseed</span>=<span class="summary-sig-default">2342</span>,
+        <span class="summary-sig-arg">getForceField</span>=<span class="summary-sig-default">UFFGetMoleculeForceField</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      generates an embedding of a molecule where part of the molecule
+is constrained to have particular coordinates</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#ConstrainedEmbed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.AllChem-module.html#AssignBondOrdersFromTemplate" class="summary-sig-name">AssignBondOrdersFromTemplate</a>(<span class="summary-sig-arg">refmol</span>,
+        <span class="summary-sig-arg">mol</span>)</span><br />
+      assigns bond orders to a molecule based on the
+    bond orders in a template molecule</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#AssignBondOrdersFromTemplate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_runDoctests"></a><span class="summary-sig-name">_runDoctests</span>(<span class="summary-sig-arg">verbose</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#_runDoctests">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="logger()">logger()</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="warnings">warnings</span>,
+  <span title="collections.namedtuple">namedtuple</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.DataStructs-module.html" title="rdkit.DataStructs">DataStructs</a>,
+  <a href="rdkit.ForceField-module.html" title="rdkit.ForceField">ForceField</a>,
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <span title="rdkit.rdBase">rdBase</span>,
+  <span title="rdkit.Geometry.rdGeometry">rdGeometry</span>,
+  <a href="rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions-class.html" title="rdkit.Chem.EnumerateStereoisomers.StereoEnumerationOptions">StereoEnumerationOptions</a>,
+  <a href="rdkit.Chem.EnumerateStereoisomers-module.html#EnumerateStereoisomers" title="rdkit.Chem.EnumerateStereoisomers.EnumerateStereoisomers">EnumerateStereoisomers</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="TransformMol"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">TransformMol</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">tform</span>,
+        <span class="sig-arg">confId</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">keepConfs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#TransformMol">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Applies the transformation (usually a 4x4 double matrix) to a molecule
+if keepConfs is False then all but that conformer are removed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ComputeMolShape"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ComputeMolShape</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">confId</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">boxDim</span>=<span class="sig-default">(20,20,20)</span>,
+        <span class="sig-arg">spacing</span>=<span class="sig-default">0.5</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#ComputeMolShape">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns a grid representation of the molecule's shape
+  
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetConformerRMS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetConformerRMS</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">confId1</span>,
+        <span class="sig-arg">confId2</span>,
+        <span class="sig-arg">atomIds</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">prealigned</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#GetConformerRMS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns the RMS between two conformations.
+By default, the conformers will be aligned to the first conformer
+before the RMS calculation and, as a side-effect, the second will be left
+in the aligned state.
+
+Arguments:
+  - mol:        the molecule
+  - confId1:    the id of the first conformer
+  - confId2:    the id of the second conformer
+  - atomIds:    (optional) list of atom ids to use a points for
+                alingment - defaults to all atoms
+  - prealigned: (optional) by default the conformers are assumed
+                be unaligned and the second conformer be aligned
+                to the first
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetConformerRMSMatrix"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetConformerRMSMatrix</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">atomIds</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">prealigned</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#GetConformerRMSMatrix">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns the RMS matrix of the conformers of a molecule.
+As a side-effect, the conformers will be aligned to the first
+conformer (i.e. the reference) and will left in the aligned state.
+
+Arguments:
+  - mol:     the molecule
+  - atomIds: (optional) list of atom ids to use a points for
+             alingment - defaults to all atoms
+  - prealigned: (optional) by default the conformers are assumed
+                be unaligned and will therefore be aligned to the
+                first conformer
+
+Note that the returned RMS matrix is symmetrical, i.e. it is the
+lower half of the matrix, e.g. for 5 conformers:
+rmsmatrix = [ a,
+              b, c,
+              d, e, f,
+              g, h, i, j]
+where a is the RMS between conformers 0 and 1, b is the RMS between
+conformers 0 and 2, etc.
+This way it can be directly used as distance matrix in e.g. Butina
+clustering.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="EnumerateLibraryFromReaction"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EnumerateLibraryFromReaction</span>(<span class="sig-arg">reaction</span>,
+        <span class="sig-arg">sidechainSets</span>,
+        <span class="sig-arg">returnReactants</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#EnumerateLibraryFromReaction">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns a generator for the virtual library defined by
+ a reaction and a sequence of sidechain sets
+
+&gt;&gt;&gt; from rdkit import Chem
+&gt;&gt;&gt; from rdkit.Chem import AllChem
+&gt;&gt;&gt; s1=[Chem.MolFromSmiles(x) for x in ('NC','NCC')]
+&gt;&gt;&gt; s2=[Chem.MolFromSmiles(x) for x in ('OC=O','OC(=O)C')]
+&gt;&gt;&gt; rxn = AllChem.ReactionFromSmarts('[O:2]=[C:1][OH].[N:3]&gt;&gt;[O:2]=[C:1][N:3]')
+&gt;&gt;&gt; r = AllChem.EnumerateLibraryFromReaction(rxn,[s2,s1])
+&gt;&gt;&gt; [Chem.MolToSmiles(x[0]) for x in list(r)]
+['CNC=O', 'CCNC=O', 'CNC(C)=O', 'CCNC(C)=O']
+
+Note that this is all done in a lazy manner, so &quot;infinitely&quot; large libraries can
+be done without worrying about running out of memory. Your patience will run out first:
+
+Define a set of 10000 amines:
+&gt;&gt;&gt; amines = (Chem.MolFromSmiles('N'+'C'*x) for x in range(10000))
+
+... a set of 10000 acids
+&gt;&gt;&gt; acids = (Chem.MolFromSmiles('OC(=O)'+'C'*x) for x in range(10000))
+
+... now the virtual library (1e8 compounds in principle):
+&gt;&gt;&gt; r = AllChem.EnumerateLibraryFromReaction(rxn,[acids,amines])
+
+... look at the first 4 compounds:
+&gt;&gt;&gt; [Chem.MolToSmiles(next(r)[0]) for x in range(4)]
+['NC=O', 'CNC=O', 'CCNC=O', 'CCCNC=O']
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ConstrainedEmbed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ConstrainedEmbed</span>(<span class="sig-arg">mol</span>,
+        <span class="sig-arg">core</span>,
+        <span class="sig-arg">useTethers</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">coreConfId</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">randomseed</span>=<span class="sig-default">2342</span>,
+        <span class="sig-arg">getForceField</span>=<span class="sig-default">UFFGetMoleculeForceField</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#ConstrainedEmbed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+generates an embedding of a molecule where part of the molecule
+is constrained to have particular coordinates
+
+Arguments
+  - mol: the molecule to embed
+  - core: the molecule to use as a source of constraints
+  - useTethers: (optional) if True, the final conformation will be
+      optimized subject to a series of extra forces that pull the
+      matching atoms to the positions of the core atoms. Otherwise
+      simple distance constraints based on the core atoms will be
+      used in the optimization.
+  - coreConfId: (optional) id of the core conformation to use
+  - randomSeed: (optional) seed for the random number generator
+
+
+  An example, start by generating a template with a 3D structure:
+  &gt;&gt;&gt; from rdkit.Chem import AllChem
+  &gt;&gt;&gt; template = AllChem.MolFromSmiles(&quot;c1nn(Cc2ccccc2)cc1&quot;)
+  &gt;&gt;&gt; AllChem.EmbedMolecule(template)
+  0
+  &gt;&gt;&gt; AllChem.UFFOptimizeMolecule(template)
+  0
+
+  Here's a molecule:
+  &gt;&gt;&gt; mol = AllChem.MolFromSmiles(&quot;c1nn(Cc2ccccc2)cc1-c3ccccc3&quot;)
+
+  Now do the constrained embedding
+  &gt;&gt;&gt; newmol=AllChem.ConstrainedEmbed(mol, template)
+
+  Demonstrate that the positions are the same:
+  &gt;&gt;&gt; newp=newmol.GetConformer().GetAtomPosition(0)
+  &gt;&gt;&gt; molp=mol.GetConformer().GetAtomPosition(0)
+  &gt;&gt;&gt; list(newp-molp)==[0.0,0.0,0.0]
+  True
+  &gt;&gt;&gt; newp=newmol.GetConformer().GetAtomPosition(1)
+  &gt;&gt;&gt; molp=mol.GetConformer().GetAtomPosition(1)
+  &gt;&gt;&gt; list(newp-molp)==[0.0,0.0,0.0]
+  True
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AssignBondOrdersFromTemplate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AssignBondOrdersFromTemplate</span>(<span class="sig-arg">refmol</span>,
+        <span class="sig-arg">mol</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.AllChem-pysrc.html#AssignBondOrdersFromTemplate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+assigns bond orders to a molecule based on the
+    bond orders in a template molecule
+
+Arguments
+  - refmol: the template molecule
+  - mol: the molecule to assign bond orders to
+
+  An example, start by generating a template from a SMILES
+  and read in the PDB structure of the molecule
+  &gt;&gt;&gt; import os
+  &gt;&gt;&gt; from rdkit.Chem import AllChem
+  &gt;&gt;&gt; template = AllChem.MolFromSmiles(&quot;CN1C(=NC(C1=O)(c2ccccc2)c3ccccc3)N&quot;)
+  &gt;&gt;&gt; mol = AllChem.MolFromPDBFile(os.path.join(RDConfig.RDCodeDir, 'Chem', 'test_data', '4DJU_lig.pdb'))
+  &gt;&gt;&gt; len([1 for b in template.GetBonds() if b.GetBondTypeAsDouble() == 1.0])
+  8
+  &gt;&gt;&gt; len([1 for b in mol.GetBonds() if b.GetBondTypeAsDouble() == 1.0])
+  22
+
+  Now assign the bond orders based on the template molecule
+  &gt;&gt;&gt; newMol = AllChem.AssignBondOrdersFromTemplate(template, mol)
+  &gt;&gt;&gt; len([1 for b in newMol.GetBonds() if b.GetBondTypeAsDouble() == 1.0])
+  8
+
+  Note that the template molecule should have no explicit hydrogens
+  else the algorithm will fail.
+
+  It also works if there are different formal charges (this was github issue 235):
+  &gt;&gt;&gt; template=AllChem.MolFromSmiles('CN(C)C(=O)Cc1ccc2c(c1)NC(=O)c3ccc(cc3N2)c4ccc(c(c4)OC)[N+](=O)[O-]')
+  &gt;&gt;&gt; mol = AllChem.MolFromMolFile(os.path.join(RDConfig.RDCodeDir, 'Chem', 'test_data', '4FTR_lig.mol'))
+  &gt;&gt;&gt; AllChem.MolToSmiles(mol)
+  'COC1CC(C2CCC3C(O)NC4CC(CC(O)N(C)C)CCC4NC3C2)CCC1N(O)O'
+  &gt;&gt;&gt; newMol = AllChem.AssignBondOrdersFromTemplate(template, mol)
+  &gt;&gt;&gt; AllChem.MolToSmiles(newMol)
+  'COc1cc(-c2ccc3c(c2)Nc2ccc(CC(=O)N(C)C)cc2NC3=O)ccc1[N+](=O)[O-]'
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

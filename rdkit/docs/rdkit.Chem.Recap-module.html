@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Recap</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;Recap
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Recap-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module Recap</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.Recap-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Implementation of the RECAP algorithm from Lewell et al. JCICS *38* 511-522 (1998)
+
+The published algorithm is implemented more or less without
+modification. The results are returned as a hierarchy of nodes instead
+of just as a set of fragments. The hope is that this will allow a bit
+more flexibility in working with the results.
+
+For example:
+&gt;&gt;&gt; from rdkit import Chem
+&gt;&gt;&gt; from rdkit.Chem import Recap
+&gt;&gt;&gt; m = Chem.MolFromSmiles('C1CC1Oc1ccccc1-c1ncc(OC)cc1')
+&gt;&gt;&gt; res = Recap.RecapDecompose(m)
+&gt;&gt;&gt; res
+&lt;...Chem.Recap.RecapHierarchyNode object at ...&gt;
+&gt;&gt;&gt; sorted(res.children.keys())
+['[*]C1CC1', '[*]c1ccc(OC)cn1', '[*]c1ccccc1-c1...cc(OC)c...1', '[*]c1ccccc1OC1CC1']
+&gt;&gt;&gt; sorted(res.GetAllChildren().keys())
+['[*]C1CC1', '[*]c1ccc(OC)cn1', '[*]c1ccccc1-c1...cc(OC)c...1', '[*]c1ccccc1OC1CC1', '[*]c1ccccc1[*]']
+
+
+To get the standard set of RECAP results, use GetLeaves():
+&gt;&gt;&gt; leaves=res.GetLeaves()
+&gt;&gt;&gt; sorted(leaves.keys())
+['[*]C1CC1', '[*]c1ccc(OC)cn1', '[*]c1ccccc1[*]']
+&gt;&gt;&gt; leaf = leaves['[*]C1CC1']
+&gt;&gt;&gt; leaf.mol
+&lt;...Chem.rdchem.Mol object at ...&gt;
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Recap.RecapHierarchyNode-class.html" class="summary-name">RecapHierarchyNode</a><br />
+      This class is used to hold the Recap hiearchy...
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RecapDecompose"></a><span class="summary-sig-name">RecapDecompose</span>(<span class="summary-sig-arg">mol</span>,
+        <span class="summary-sig-arg">allNodes</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">minFragmentSize</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">onlyUseReactions</span>=<span class="summary-sig-default">None</span>)</span><br />
+      returns the recap decomposition for a molecule</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.Recap-pysrc.html#RecapDecompose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Recap-module.html#reactionDefs" class="summary-name">reactionDefs</a> = <code title="&quot;[#7;+0;D2,D3:1]!@C(!@=O)!@[#7;+0;D2,D3:2]&gt;&gt;[*][#7:1].[#7:2][*]&quot;, &quot;[C;\
+!$(C([#7])[#7]):1](=!@[O:2])!@[#7;+0;!D1:3]&gt;&gt;[*][C:1]=[O:2].[*][#7:3]&quot;\
+, &quot;[C:1](=!@[O:2])!@[O;+0:3]&gt;&gt;[*][C:1]=[O:2].[O:3][*]&quot;, &quot;[N;!D1;+0;!$(\
+N-C=[#7,#8,#15,#16])](-!@[*:1])-!@[*:2]&gt;&gt;[*][*:1].[*:2][*]&quot;, &quot;[#7;R;D3\
+;+0:1]-!@[*:2]&gt;&gt;[*][#7:1].[*:2][*]&quot;, &quot;[#6:1]-!@[O;+0]-!@[#6:2]&gt;&gt;[#6:1]\
+[*].[*][#6:2]&quot;, &quot;[C:1]=!@[C:2]&gt;&gt;[C:1][*].[*][C:2]&quot;, &quot;[n;+0:1]-!@[C:2]&gt;\
+&gt;[n:1][*].[C:2][*]&quot;, &quot;[O:3]=[C:4]-@[N;+0:1]-!@[C:2]&gt;&gt;[O:3]=[C:4]-[N:1]\
+[*].[C:2][*]&quot;, &quot;[c:1]-!@[c:2]&gt;&gt;[c:1][*].[*][c:2]&quot;, &quot;[n;+0:1]-!@[c:2]&gt;&gt;\
+...">&quot;[#7;+0;D2,D3:1]!@C(!@=O)!@[#7;+0;D2,D3:2]&gt;&gt;[*]<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.Recap-module.html#reactions" class="summary-name">reactions</a> = <code title="tuple([Reactions.ReactionFromSmarts(x) for x in reactionDefs])">tuple([Reactions.ReactionFromSmarts(x) for x in re<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="weakref">weakref</span>,
+  <a href="rdkit.Chem-module.html" title="rdkit.Chem">Chem</a>,
+  <span title="rdkit.Chem.rdChemReactions">Reactions</span>,
+  <span title="rdkit.six.iterkeys">iterkeys</span>,
+  <span title="rdkit.six.iteritems">iteritems</span>,
+  <span title="rdkit.six.next">next</span>
+</p><br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="reactionDefs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reactionDefs</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&quot;[#7;+0;D2,D3:1]!@C(!@=O)!@[#7;+0;D2,D3:2]&gt;&gt;[*][#7:1].[#7:2][*]&quot;, &quot;[C;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+!$(C([#7])[#7]):1](=!@[O:2])!@[#7;+0;!D1:3]&gt;&gt;[*][C:1]=[O:2].[*][#7:3]&quot;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, &quot;[C:1](=!@[O:2])!@[O;+0:3]&gt;&gt;[*][C:1]=[O:2].[O:3][*]&quot;, &quot;[N;!D1;+0;!$(<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+N-C=[#7,#8,#15,#16])](-!@[*:1])-!@[*:2]&gt;&gt;[*][*:1].[*:2][*]&quot;, &quot;[#7;R;D3<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+;+0:1]-!@[*:2]&gt;&gt;[*][#7:1].[*:2][*]&quot;, &quot;[#6:1]-!@[O;+0]-!@[#6:2]&gt;&gt;[#6:1]<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+[*].[*][#6:2]&quot;, &quot;[C:1]=!@[C:2]&gt;&gt;[C:1][*].[*][C:2]&quot;, &quot;[n;+0:1]-!@[C:2]&gt;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+&gt;[n:1][*].[C:2][*]&quot;, &quot;[O:3]=[C:4]-@[N;+0:1]-!@[C:2]&gt;&gt;[O:3]=[C:4]-[N:1]<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+[*].[C:2][*]&quot;, &quot;[c:1]-!@[c:2]&gt;&gt;[c:1][*].[*][c:2]&quot;, &quot;[n;+0:1]-!@[c:2]&gt;&gt;<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reactions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reactions</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+tuple([Reactions.ReactionFromSmarts(x) for x in reactionDefs])
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

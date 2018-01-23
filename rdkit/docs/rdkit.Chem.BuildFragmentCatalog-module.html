@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.BuildFragmentCatalog</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        Module&nbsp;BuildFragmentCatalog
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.BuildFragmentCatalog-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module BuildFragmentCatalog</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+command line utility for working with FragmentCatalogs (CASE-type analysis)
+
+**Usage**
+
+  BuildFragmentCatalog [optional args] &lt;filename&gt;
+
+ filename, the name of a delimited text file containing InData, is required
+ for some modes of operation (see below)
+
+**Command Line Arguments**
+
+ - -n *maxNumMols*:  specify the maximum number of molecules to be processed
+
+ - -b: build the catalog and OnBitLists
+    *requires InData*
+
+ - -s: score compounds
+    *requires InData and a Catalog, can use OnBitLists*
+
+ - -g: calculate info gains
+    *requires Scores*
+
+ - -d: show details about high-ranking fragments
+    *requires a Catalog and Gains*
+
+ - --catalog=*filename*: filename with the pickled catalog.
+    If -b is provided, this file will be overwritten.
+
+ - --onbits=*filename*: filename to hold the pickled OnBitLists.
+   If -b is provided, this file will be overwritten
+
+ - --scores=*filename*: filename to hold the text score data.
+   If -s is provided, this file will be overwritten
+
+ - --gains=*filename*: filename to hold the text gains data.
+   If -g is provided, this file will be overwritten
+
+ - --details=*filename*: filename to hold the text details data.
+   If -d is provided, this file will be overwritten.
+
+ - --minPath=2: specify the minimum length for a path
+
+ - --maxPath=6: specify the maximum length for a path
+
+ - --smiCol=1: specify which column in the input data file contains
+     SMILES
+
+ - --actCol=-1: specify which column in the input data file contains
+     activities
+
+ - --nActs=2: specify the number of possible activity values
+
+ - --nBits=-1: specify the maximum number of bits to show details for
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="rdkit.Chem.BuildFragmentCatalog.RunDetails-class.html" class="summary-name">RunDetails</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="message"></a><span class="summary-sig-name">message</span>(<span class="summary-sig-arg">msg</span>,
+        <span class="summary-sig-arg">dest</span>=<span class="summary-sig-default">sys.stdout</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#BuildCatalog" class="summary-sig-name">BuildCatalog</a>(<span class="summary-sig-arg">suppl</span>,
+        <span class="summary-sig-arg">maxPts</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">groupFileName</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">minPath</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">maxPath</span>=<span class="summary-sig-default">6</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>)</span><br />
+      builds a fragment catalog from a set of molecules in a delimited text block</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#BuildCatalog">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#ScoreMolecules" class="summary-sig-name">ScoreMolecules</a>(<span class="summary-sig-arg">suppl</span>,
+        <span class="summary-sig-arg">catalog</span>,
+        <span class="summary-sig-arg">maxPts</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">actName</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">acts</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nActs</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>)</span><br />
+      scores the compounds in a supplier using a catalog</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ScoreMolecules">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#ScoreFromLists" class="summary-sig-name">ScoreFromLists</a>(<span class="summary-sig-arg">bitLists</span>,
+        <span class="summary-sig-arg">suppl</span>,
+        <span class="summary-sig-arg">catalog</span>,
+        <span class="summary-sig-arg">maxPts</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">actName</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">acts</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nActs</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>)</span><br />
+      similar to _ScoreMolecules()_, but uses pre-calculated bit lists
+for the molecules (this speeds things up a lot)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ScoreFromLists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#CalcGains" class="summary-sig-name">CalcGains</a>(<span class="summary-sig-arg">suppl</span>,
+        <span class="summary-sig-arg">catalog</span>,
+        <span class="summary-sig-arg">topN</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">actName</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">acts</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nActs</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">biasList</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">collectFps</span>=<span class="summary-sig-default">0</span>)</span><br />
+      calculates info gains by constructing fingerprints
+*DOC*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#CalcGains">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#CalcGainsFromFps" class="summary-sig-name">CalcGainsFromFps</a>(<span class="summary-sig-arg">suppl</span>,
+        <span class="summary-sig-arg">fps</span>,
+        <span class="summary-sig-arg">topN</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">actName</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">acts</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">nActs</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">reportFreq</span>=<span class="summary-sig-default">10</span>,
+        <span class="summary-sig-arg">biasList</span>=<span class="summary-sig-default">None</span>)</span><br />
+      calculates info gains from a set of fingerprints</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#CalcGainsFromFps">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OutputGainsData"></a><span class="summary-sig-name">OutputGainsData</span>(<span class="summary-sig-arg">outF</span>,
+        <span class="summary-sig-arg">gains</span>,
+        <span class="summary-sig-arg">cat</span>,
+        <span class="summary-sig-arg">nActs</span>=<span class="summary-sig-default">2</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#OutputGainsData">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ProcessGainsData"></a><span class="summary-sig-name">ProcessGainsData</span>(<span class="summary-sig-arg">inF</span>,
+        <span class="summary-sig-arg">delim</span>=<span class="summary-sig-default">','</span>,
+        <span class="summary-sig-arg">idCol</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">gainCol</span>=<span class="summary-sig-default">1</span>)</span><br />
+      reads a list of ids and info gains out of an input file</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ProcessGainsData">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.Chem.BuildFragmentCatalog-module.html#ShowDetails" class="summary-sig-name">ShowDetails</a>(<span class="summary-sig-arg">catalog</span>,
+        <span class="summary-sig-arg">gains</span>,
+        <span class="summary-sig-arg">nToDo</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">outF</span>=<span class="summary-sig-default">sys.stdout</span>,
+        <span class="summary-sig-arg">idCol</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">gainCol</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">outDelim</span>=<span class="summary-sig-default">','</span>)</span><br />
+      gains should be a sequence of sequences.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ShowDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SupplierFromDetails"></a><span class="summary-sig-name">SupplierFromDetails</span>(<span class="summary-sig-arg">details</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#SupplierFromDetails">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Usage"></a><span class="summary-sig-name">Usage</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ParseArgs"></a><span class="summary-sig-name">ParseArgs</span>(<span class="summary-sig-arg">details</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ParseArgs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="os">os</span>,
+  <span title="sys">sys</span>,
+  <span title="numpy">numpy</span>,
+  <span title="rdkit.RDConfig">RDConfig</span>,
+  <a href="rdkit.Chem.FragmentCatalog-module.html" title="rdkit.Chem.FragmentCatalog">FragmentCatalog</a>,
+  <a href="rdkit.Dbase.DbConnection.DbConnect-class.html" title="rdkit.Dbase.DbConnection.DbConnect">DbConnect</a>,
+  <a href="rdkit.ML.InfoTheory-module.html" title="rdkit.ML.InfoTheory">InfoTheory</a>,
+  <span title="rdkit.six.next">next</span>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="BuildCatalog"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BuildCatalog</span>(<span class="sig-arg">suppl</span>,
+        <span class="sig-arg">maxPts</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">groupFileName</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">minPath</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">maxPath</span>=<span class="sig-default">6</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#BuildCatalog">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+builds a fragment catalog from a set of molecules in a delimited text block
+
+**Arguments**
+
+  - suppl: a mol supplier
+
+  - maxPts: (optional) if provided, this will set an upper bound on the
+    number of points to be considered
+
+  - groupFileName: (optional) name of the file containing functional group
+    information
+
+  - minPath, maxPath: (optional) names of the minimum and maximum path lengths
+    to be considered
+
+  - reportFreq: (optional) how often to display status information
+
+**Returns**
+
+  a FragmentCatalog
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScoreMolecules"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScoreMolecules</span>(<span class="sig-arg">suppl</span>,
+        <span class="sig-arg">catalog</span>,
+        <span class="sig-arg">maxPts</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">actName</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">acts</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nActs</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ScoreMolecules">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+scores the compounds in a supplier using a catalog
+
+**Arguments**
+
+  - suppl: a mol supplier
+
+  - catalog: the FragmentCatalog
+
+  - maxPts: (optional) the maximum number of molecules to be
+    considered
+
+  - actName: (optional) the name of the molecule's activity property.
+    If this is not provided, the molecule's last property will be used.
+
+  - acts: (optional) a sequence of activity values (integers).
+    If not provided, the activities will be read from the molecules.
+
+  - nActs: (optional) number of possible activity values
+
+  - reportFreq: (optional) how often to display status information
+
+**Returns**
+
+  a 2-tuple:
+
+    1) the results table (a 3D array of ints nBits x 2 x nActs)
+
+    2) a list containing the on bit lists for each molecule
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ScoreFromLists"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ScoreFromLists</span>(<span class="sig-arg">bitLists</span>,
+        <span class="sig-arg">suppl</span>,
+        <span class="sig-arg">catalog</span>,
+        <span class="sig-arg">maxPts</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">actName</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">acts</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nActs</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ScoreFromLists">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+similar to _ScoreMolecules()_, but uses pre-calculated bit lists
+for the molecules (this speeds things up a lot)
+
+
+**Arguments**
+
+  - bitLists: sequence of on bit sequences for the input molecules
+
+  - suppl: the input supplier (we read activities from here)
+
+  - catalog: the FragmentCatalog
+
+  - maxPts: (optional) the maximum number of molecules to be
+    considered
+
+  - actName: (optional) the name of the molecule's activity property.
+    If this is not provided, the molecule's last property will be used.
+
+  - nActs: (optional) number of possible activity values
+
+  - reportFreq: (optional) how often to display status information
+
+**Returns**
+
+   the results table (a 3D array of ints nBits x 2 x nActs)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcGains"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcGains</span>(<span class="sig-arg">suppl</span>,
+        <span class="sig-arg">catalog</span>,
+        <span class="sig-arg">topN</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">actName</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">acts</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nActs</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">biasList</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">collectFps</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#CalcGains">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates info gains by constructing fingerprints
+*DOC*
+
+Returns a 2-tuple:
+   1) gains matrix
+   2) list of fingerprints
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcGainsFromFps"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcGainsFromFps</span>(<span class="sig-arg">suppl</span>,
+        <span class="sig-arg">fps</span>,
+        <span class="sig-arg">topN</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">actName</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">acts</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">nActs</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">reportFreq</span>=<span class="sig-default">10</span>,
+        <span class="sig-arg">biasList</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#CalcGainsFromFps">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates info gains from a set of fingerprints
+
+*DOC*
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ShowDetails"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ShowDetails</span>(<span class="sig-arg">catalog</span>,
+        <span class="sig-arg">gains</span>,
+        <span class="sig-arg">nToDo</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">outF</span>=<span class="sig-default">sys.stdout</span>,
+        <span class="sig-arg">idCol</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">gainCol</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">outDelim</span>=<span class="sig-default">','</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.Chem.BuildFragmentCatalog-pysrc.html#ShowDetails">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+gains should be a sequence of sequences.  The idCol entry of each
+sub-sequence should be a catalog ID.  _ProcessGainsData()_ provides
+suitable input.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.InfoTheory.BitRank</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.InfoTheory-module.html">Package&nbsp;InfoTheory</a> ::
+        Module&nbsp;BitRank
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.InfoTheory.BitRank-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module BitRank</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+Functionality for ranking bits using info gains
+
+**Definitions used in this module**
+
+   - *sequence*: an object capable of containing other objects which supports
+     __getitem__() and __len__().  Examples of these include lists, tuples, and
+     Numeric arrays.
+
+   - *IntVector*: an object containing integers which supports __getitem__() and
+      __len__(). Examples include lists, tuples, Numeric Arrays, and BitVects.
+
+
+**NOTE**: Neither *sequences* nor *IntVectors* need to support item assignment.
+  It is perfectly acceptable for them to be read-only, so long as they are
+  random-access.
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.InfoTheory.BitRank-module.html#FormCounts" class="summary-sig-name">FormCounts</a>(<span class="summary-sig-arg">bitVects</span>,
+        <span class="summary-sig-arg">actVals</span>,
+        <span class="summary-sig-arg">whichBit</span>,
+        <span class="summary-sig-arg">nPossibleActs</span>,
+        <span class="summary-sig-arg">nPossibleBitVals</span>=<span class="summary-sig-default">2</span>)</span><br />
+      generates the counts matrix for a particular bit</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#FormCounts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.InfoTheory.BitRank-module.html#CalcInfoGains" class="summary-sig-name">CalcInfoGains</a>(<span class="summary-sig-arg">bitVects</span>,
+        <span class="summary-sig-arg">actVals</span>,
+        <span class="summary-sig-arg">nPossibleActs</span>,
+        <span class="summary-sig-arg">nPossibleBitVals</span>=<span class="summary-sig-default">2</span>)</span><br />
+      Calculates the information gain for a set of points and activity values</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#CalcInfoGains">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.InfoTheory.BitRank-module.html#RankBits" class="summary-sig-name">RankBits</a>(<span class="summary-sig-arg">bitVects</span>,
+        <span class="summary-sig-arg">actVals</span>,
+        <span class="summary-sig-arg">nPossibleBitVals</span>=<span class="summary-sig-default">2</span>,
+        <span class="summary-sig-arg">metricFunc</span>=<span class="summary-sig-default">CalcInfoGains</span>)</span><br />
+      Rank a set of bits according to a metric function</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#RankBits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.InfoTheory.BitRank-module.html#AnalyzeSparseVects" class="summary-sig-name">AnalyzeSparseVects</a>(<span class="summary-sig-arg">bitVects</span>,
+        <span class="summary-sig-arg">actVals</span>)</span><br />
+      #DOC</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#AnalyzeSparseVects">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.InfoTheory.BitRank-module.html#SparseRankBits" class="summary-sig-name">SparseRankBits</a>(<span class="summary-sig-arg">bitVects</span>,
+        <span class="summary-sig-arg">actVals</span>,
+        <span class="summary-sig-arg">metricFunc</span>=<span class="summary-sig-default">AnalyzeSparseVects</span>)</span><br />
+      Rank a set of bits according to a metric function</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#SparseRankBits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.ML.InfoTheory.entropy-module.html" title="rdkit.ML.InfoTheory.entropy">entropy</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="FormCounts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FormCounts</span>(<span class="sig-arg">bitVects</span>,
+        <span class="sig-arg">actVals</span>,
+        <span class="sig-arg">whichBit</span>,
+        <span class="sig-arg">nPossibleActs</span>,
+        <span class="sig-arg">nPossibleBitVals</span>=<span class="sig-default">2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#FormCounts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+generates the counts matrix for a particular bit
+
+**Arguments**
+
+  - bitVects: a *sequence* containing *IntVectors*
+
+  - actVals: a *sequence*
+
+  - whichBit: an integer, the bit number to use.
+
+  - nPossibleActs: the (integer) number of possible activity values.
+
+  - nPossibleBitVals: (optional) if specified, this integer provides the maximum
+    value attainable by the (increasingly inaccurately named) bits in _bitVects_.
+
+**Returns**
+
+  a Numeric array with the counts
+
+**Notes**
+
+  This is really intended for internal use.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcInfoGains"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcInfoGains</span>(<span class="sig-arg">bitVects</span>,
+        <span class="sig-arg">actVals</span>,
+        <span class="sig-arg">nPossibleActs</span>,
+        <span class="sig-arg">nPossibleBitVals</span>=<span class="sig-default">2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#CalcInfoGains">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Calculates the information gain for a set of points and activity values
+
+**Arguments**
+
+  - bitVects: a *sequence* containing *IntVectors*
+
+  - actVals: a *sequence*
+
+  - nPossibleActs: the (integer) number of possible activity values.
+
+  - nPossibleBitVals: (optional) if specified, this integer provides the maximum
+    value attainable by the (increasingly inaccurately named) bits in _bitVects_.
+
+ **Returns**
+
+   a list of floats
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RankBits"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RankBits</span>(<span class="sig-arg">bitVects</span>,
+        <span class="sig-arg">actVals</span>,
+        <span class="sig-arg">nPossibleBitVals</span>=<span class="sig-default">2</span>,
+        <span class="sig-arg">metricFunc</span>=<span class="sig-default">CalcInfoGains</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#RankBits">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Rank a set of bits according to a metric function
+
+**Arguments**
+
+  - bitVects: a *sequence* containing *IntVectors*
+
+  - actVals: a *sequence*
+
+  - nPossibleBitVals: (optional) if specified, this integer provides the maximum
+    value attainable by the (increasingly inaccurately named) bits in _bitVects_.
+
+  - metricFunc: (optional) the metric function to be used.  See _CalcInfoGains()_
+    for a description of the signature of this function.
+
+ **Returns**
+
+   A 2-tuple containing:
+
+     - the relative order of the bits (a list of ints)
+
+     - the metric calculated for each bit (a list of floats)
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AnalyzeSparseVects"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AnalyzeSparseVects</span>(<span class="sig-arg">bitVects</span>,
+        <span class="sig-arg">actVals</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#AnalyzeSparseVects">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+#DOC
+
+**Arguments**
+
+  - bitVects: a *sequence* containing SBVs
+
+  - actVals: a *sequence*
+
+ **Returns**
+
+   a list of floats
+
+ **Notes**
+
+    - these need to be bit vects and binary activities
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SparseRankBits"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SparseRankBits</span>(<span class="sig-arg">bitVects</span>,
+        <span class="sig-arg">actVals</span>,
+        <span class="sig-arg">metricFunc</span>=<span class="sig-default">AnalyzeSparseVects</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.InfoTheory.BitRank-pysrc.html#SparseRankBits">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Rank a set of bits according to a metric function
+
+**Arguments**
+
+  - bitVects: a *sequence* containing SBVs
+
+  - actVals: a *sequence*
+
+  - metricFunc: (optional) the metric function to be used.  See _SparseCalcInfoGains()_
+    for a description of the signature of this function.
+
+ **Returns**
+
+   A 2-tuple containing:
+
+     - the relative order of the bits (a list of ints)
+
+     - the metric calculated for each bit (a list of floats)
+
+  **Notes**
+
+    - these need to be bit vects and binary activities
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

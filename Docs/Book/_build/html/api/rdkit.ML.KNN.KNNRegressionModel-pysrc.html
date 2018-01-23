@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.KNN.KNNRegressionModel</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.KNN-module.html">Package&nbsp;KNN</a> ::
+        Module&nbsp;KNNRegressionModel
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.KNN.KNNRegressionModel-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.KNN.KNNRegressionModel-module.html">Module rdkit.ML.KNN.KNNRegressionModel</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># $Id$</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (C) 2003 Rational Discovery LLC</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment">#      All Rights Reserved</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">""" Define the class _KNNRegressionModel_, used to represent a k-nearest neighbhors</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">regression model</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    Inherits from _KNNModel_</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-0', 'ML', 'link-0');">ML</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.ML.KNN=rdkit.ML.KNN-module.html"><a title="rdkit.ML.KNN" class="py-name" href="#" onclick="return doclink('link-1', 'KNN', 'link-1');">KNN</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module rdkit.ML.KNN.KNNModel=rdkit.ML.KNN.KNNModel-module.html,Class rdkit.ML.KNN.KNNModel.KNNModel=rdkit.ML.KNN.KNNModel.KNNModel-class.html"><a title="rdkit.ML.KNN.KNNModel
+rdkit.ML.KNN.KNNModel.KNNModel" class="py-name" href="#" onclick="return doclink('link-2', 'KNNModel', 'link-2');">KNNModel</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel"></a><div id="KNNRegressionModel-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="KNNRegressionModel-toggle" onclick="return toggle('KNNRegressionModel');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html">KNNRegressionModel</a><tt class="py-op">(</tt><tt class="py-base-class">KNNModel</tt><tt class="py-op">.</tt><tt class="py-base-class">KNNModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="KNNRegressionModel-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">  <tt class="py-docstring">""" This is used to represent a k-nearest neighbor classifier</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.__init__"></a><div id="KNNRegressionModel.__init__-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.__init__-toggle" onclick="return toggle('KNNRegressionModel.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">k</tt><tt class="py-op">,</tt> <tt class="py-param">attrs</tt><tt class="py-op">,</tt> <tt class="py-param">dfunc</tt><tt class="py-op">,</tt> <tt class="py-param">radius</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.__init__-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.__init__-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method rdkit.ML.KNN.KNNModel.KNNModel._setup()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#_setup"><a title="rdkit.ML.KNN.KNNModel.KNNModel._setup" class="py-name" href="#" onclick="return doclink('link-3', '_setup', 'link-3');">_setup</a></tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">attrs</tt><tt class="py-op">,</tt> <tt class="py-name">dfunc</tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMaps.FeatMapParams.radius=rdkit.Chem.FeatMaps.FeatMaps.FeatMapParams-class.html#radius"><a title="rdkit.Chem.FeatMaps.FeatMaps.FeatMapParams.radius" class="py-name" href="#" onclick="return doclink('link-4', 'radius', 'link-4');">radius</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_badExamples</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt>  <tt class="py-comment"># list of examples incorrectly classified</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.type"></a><div id="KNNRegressionModel.type-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.type-toggle" onclick="return toggle('KNNRegressionModel.type');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#type">type</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.type-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.type-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">"Regression Model"</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.SetBadExamples"></a><div id="KNNRegressionModel.SetBadExamples-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.SetBadExamples-toggle" onclick="return toggle('KNNRegressionModel.SetBadExamples');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#SetBadExamples">SetBadExamples</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">examples</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.SetBadExamples-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.SetBadExamples-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_badExamples</tt> <tt class="py-op">=</tt> <tt class="py-name">examples</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.GetBadExamples"></a><div id="KNNRegressionModel.GetBadExamples-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.GetBadExamples-toggle" onclick="return toggle('KNNRegressionModel.GetBadExamples');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#GetBadExamples">GetBadExamples</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.GetBadExamples-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.GetBadExamples-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_badExamples</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.NameModel"></a><div id="KNNRegressionModel.NameModel-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.NameModel-toggle" onclick="return toggle('KNNRegressionModel.NameModel');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#NameModel">NameModel</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">varNames</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.NameModel-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.NameModel-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.SetName()=rdkit.ML.Cluster.Clusters.Cluster-class.html#SetName,Method rdkit.ML.DecTree.Tree.TreeNode.SetName()=rdkit.ML.DecTree.Tree.TreeNode-class.html#SetName,Method rdkit.ML.KNN.KNNModel.KNNModel.SetName()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#SetName,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.SetName()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#SetName"><a title="rdkit.ML.Cluster.Clusters.Cluster.SetName
+rdkit.ML.DecTree.Tree.TreeNode.SetName
+rdkit.ML.KNN.KNNModel.KNNModel.SetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.SetName" class="py-name" href="#" onclick="return doclink('link-5', 'SetName', 'link-5');">SetName</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#type,Method rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type()=rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#type"><a title="rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.type
+rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel.type" class="py-name" href="#" onclick="return doclink('link-6', 'type', 'link-6');">type</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="KNNRegressionModel.PredictExample"></a><div id="KNNRegressionModel.PredictExample-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="KNNRegressionModel.PredictExample-toggle" onclick="return toggle('KNNRegressionModel.PredictExample');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.KNN.KNNRegressionModel.KNNRegressionModel-class.html#PredictExample">PredictExample</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">example</tt><tt class="py-op">,</tt> <tt class="py-param">appendExamples</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">weightedAverage</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">neighborList</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="KNNRegressionModel.PredictExample-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="KNNRegressionModel.PredictExample-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-docstring">""" Generates a prediction for an example by looking at its closest neighbors</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">    **Arguments**</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">      - examples: the example to be classified</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">      - appendExamples: if this is nonzero then the example will be stored on this model</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt class="py-docstring">      - weightedAverage: if provided, the neighbors' contributions to the value will be</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">                         weighed by their reciprocal square distance</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">      - neighborList: if provided, will be used to return the list of neighbors</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">    **Returns**</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-docstring">      - the classification of _example_</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">appendExamples</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_examples</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">example</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt class="py-comment"># first find the k-closest examples in the training set</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-name">knnLst</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rdkit.ML.KNN.KNNModel.KNNModel.GetNeighbors()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#GetNeighbors"><a title="rdkit.ML.KNN.KNNModel.KNNModel.GetNeighbors" class="py-name" href="#" onclick="return doclink('link-7', 'GetNeighbors', 'link-7');">GetNeighbors</a></tt><tt class="py-op">(</tt><tt class="py-name">example</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-name">accum</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">denom</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">knn</tt> <tt class="py-keyword">in</tt> <tt class="py-name">knnLst</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">knn</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">weightedAverage</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-name">dist</tt> <tt class="py-op">=</tt> <tt class="py-name">knn</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">dist</tt> <tt class="py-op">==</tt> <tt class="py-number">0.0</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">          <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-number">1.</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">          <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-number">1.</tt> <tt class="py-op">/</tt> <tt class="py-name">dist</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-name">w</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">      <tt class="py-name">accum</tt> <tt class="py-op">+=</tt> <tt class="py-name">w</tt> <tt class="py-op">*</tt> <tt class="py-name">knn</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">      <tt class="py-name">denom</tt> <tt class="py-op">+=</tt> <tt class="py-name">w</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">denom</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">      <tt class="py-name">accum</tt> <tt class="py-op">/=</tt> <tt class="py-name">denom</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">neighborList</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">      <tt class="py-name">neighborList</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-name">knnLst</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">accum</tt> </tt>
+</div></div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

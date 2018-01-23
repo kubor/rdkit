@@ -1,0 +1,26 @@
+var classRDKit_1_1MolCatalogEntry =
+[
+    [ "MolCatalogEntry", "classRDKit_1_1MolCatalogEntry.html#ae76cfd89c4c5c87a2068668bfef30585", null ],
+    [ "MolCatalogEntry", "classRDKit_1_1MolCatalogEntry.html#a5f90855b299d13ddd7515f3c017f333b", null ],
+    [ "MolCatalogEntry", "classRDKit_1_1MolCatalogEntry.html#ad47c43720266fa256d283f28a9b6b656", null ],
+    [ "MolCatalogEntry", "classRDKit_1_1MolCatalogEntry.html#a33aab24309ccb9ed65924e4e2f00d886", null ],
+    [ "~MolCatalogEntry", "classRDKit_1_1MolCatalogEntry.html#acf6733077d433f49388c56a0992a863b", null ],
+    [ "clearProp", "classRDKit_1_1MolCatalogEntry.html#a117adfec6a624e91458953f6abef89ab", null ],
+    [ "clearProp", "classRDKit_1_1MolCatalogEntry.html#a48cd857762e44ecb53bc60b4c68d6387", null ],
+    [ "getDescription", "classRDKit_1_1MolCatalogEntry.html#a03a22c06a64dcb16aa8b720ec7a33379", null ],
+    [ "getMol", "classRDKit_1_1MolCatalogEntry.html#a520fcc7c5de38b12ff3fceb5f7deb6da", null ],
+    [ "getOrder", "classRDKit_1_1MolCatalogEntry.html#ac6263eb01f04d6e25eab43780bce22de", null ],
+    [ "getProp", "classRDKit_1_1MolCatalogEntry.html#a007046a8d9ac31adc175aa26e5e38175", null ],
+    [ "getProp", "classRDKit_1_1MolCatalogEntry.html#a5431d2b67ab268d1f61c999a1f8702ad", null ],
+    [ "hasProp", "classRDKit_1_1MolCatalogEntry.html#a9fcb9b85977312df88cdca5d4a486e2d", null ],
+    [ "hasProp", "classRDKit_1_1MolCatalogEntry.html#a594bbbea78300d0ad1af7f915e3de50c", null ],
+    [ "initFromStream", "classRDKit_1_1MolCatalogEntry.html#a177af76e3671fdf803b7f87a254ca41d", null ],
+    [ "initFromString", "classRDKit_1_1MolCatalogEntry.html#a930f8ee491b99d267991b8602701a55f", null ],
+    [ "Serialize", "classRDKit_1_1MolCatalogEntry.html#a53895c6ec85856db121ce4b6bfcd6937", null ],
+    [ "setDescription", "classRDKit_1_1MolCatalogEntry.html#a7a9f995f532b1727d3c0e83d9de2cd59", null ],
+    [ "setMol", "classRDKit_1_1MolCatalogEntry.html#a15a6245afc120f82310b7456855cac8c", null ],
+    [ "setOrder", "classRDKit_1_1MolCatalogEntry.html#a3f7f3b0abf5a0d67f3c5c0b583119b9a", null ],
+    [ "setProp", "classRDKit_1_1MolCatalogEntry.html#ad63a174bc228d6eedd653d09530bd4d4", null ],
+    [ "setProp", "classRDKit_1_1MolCatalogEntry.html#aaa96d9fbaa13b68025a046e88424e213", null ],
+    [ "toStream", "classRDKit_1_1MolCatalogEntry.html#af3c8e89a9f8ef7052242be647fc14cbc", null ]
+];

@@ -1,0 +1,394 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>The RDKit Documentation &#8212; The RDKit 2017.09.2 ドキュメント</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2017.09.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="An overview of the RDKit" href="Overview.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="Overview.html" title="An overview of the RDKit"
+             accesskey="N">次へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h3><a href="#">目次</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">An overview of the RDKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RDKit_Book.html">The RDKit Book</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cookbook.html">RDKit Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a></li>
+</ul>
+
+  <h4>次のトピックへ</h4>
+  <p class="topless"><a href="Overview.html"
+                        title="次の章へ">An overview of the RDKit</a></p>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-rdkit-documentation">
+<h1>The RDKit Documentation<a class="headerlink" href="#the-rdkit-documentation" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">An overview of the RDKit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#what-is-it">What is it?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#open-source-toolkit-for-cheminformatics">Open source toolkit for cheminformatics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#operational">Operational:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#history">History:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#functionality-overview">Functionality overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#basics">Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#d">2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#d">3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#integration-with-other-open-source-projects">Integration with other open-source projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#usage-by-other-open-source-projects">Usage by other open-source projects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#the-contrib-directory">The Contrib Directory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#lef-local-environment-fingerprints">LEF: Local Environment Fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#m-kossner">M_Kossner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#pbf-plane-of-best-fit">PBF: Plane of best fit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#mmpa-matched-molecular-pairs">mmpa: Matched molecular pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#sa-score-synthetic-assessibility-score">SA_Score: Synthetic assessibility score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#fraggle-a-fragment-based-molecular-similarity-algorithm">fraggle: A fragment-based molecular similarity algorithm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#pzc-tools-for-building-and-validating-classifiers">pzc: Tools for building and validating classifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#conformerparser-parser-for-amber-trajectory-files">ConformerParser: parser for Amber trajectory files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#np-score-natural-product-likeness-score">NP_Score: Natural-product likeness score</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Overview.html#atomatomsimilarity-atom-atom-path-method-for-fragment-similarity">AtomAtomSimilarity: atom-atom-path method for fragment similarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#footnotes">Footnotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Overview.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#cross-platform-under-anaconda-python-fastest-install">Cross-platform under anaconda python (fastest install)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#introduction-to-anaconda">Introduction to anaconda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#how-to-get-conda">How to get conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#how-to-install-rdkit-with-conda">How to install RDKit with Conda</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#how-to-build-from-source-with-conda">How to build from source with Conda</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#macos-10-12-sierra-python-3-environment">macOS 10.12 (Sierra): Python 3 environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#installing-and-using-postgresql-and-the-rdkit-postgresql-cartridge-from-a-conda-environment">Installing and using PostgreSQL and the RDKit PostgreSQL cartridge from a conda environment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#linux-and-os-x">Linux and OS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#installation-from-repositories">Installation from repositories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#ubuntu-12-04-and-later">Ubuntu 12.04 and later</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#fedora-centos-and-rhel">Fedora, CentOS, and RHEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#os-x">OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#building-from-source">Building from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#building-the-rdkit">Building the RDKit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#testing-the-build-optional-but-recommended">Testing the build (optional, but recommended)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#advanced">Advanced</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#frequently-encountered-problems">Frequently Encountered Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#windows">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#recommended-extras">Recommended extras</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#installation-of-rdkit-binaries">Installation of RDKit binaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Install.html#installation-from-source">Installation from source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#extra-software-to-install">Extra software to install</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#setup-and-preparation">Setup and Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#building-from-the-command-line-recommended">Building from the command line (recommended)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Install.html#testing-the-build-optional-but-recommended">Testing the Build (optional, but recommended)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Install.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStartedInPython.html">Getting Started with the RDKit in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#what-is-this">What is this?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#reading-and-writing-molecules">Reading and Writing Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#reading-single-molecules">Reading single molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#reading-sets-of-molecules">Reading sets of molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#writing-molecules">Writing molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#writing-sets-of-molecules">Writing sets of molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#working-with-molecules">Working with Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#looping-over-atoms-and-bonds">Looping over Atoms and Bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#ring-information">Ring Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#modifying-molecules">Modifying molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#working-with-2d-molecules-generating-depictions">Working with 2D molecules: Generating Depictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#working-with-3d-molecules">Working with 3D Molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#preserving-molecules">Preserving Molecules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#drawing-molecules">Drawing Molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#substructure-searching">Substructure Searching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#stereochemistry-in-substructure-matches">Stereochemistry in substructure matches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#atom-map-indices-in-smarts">Atom Map Indices in SMARTS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#chemical-transformations">Chemical Transformations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#substructure-based-transformations">Substructure-based transformations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#murcko-decomposition">Murcko Decomposition</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#maximum-common-substructure">Maximum Common Substructure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#fingerprinting-and-molecular-similarity">Fingerprinting and Molecular Similarity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#topological-fingerprints">Topological Fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#maccs-keys">MACCS Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#atom-pairs-and-topological-torsions">Atom Pairs and Topological Torsions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#morgan-fingerprints-circular-fingerprints">Morgan Fingerprints (Circular Fingerprints)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GettingStartedInPython.html#explaining-bits-from-morgan-fingerprints">Explaining bits from Morgan Fingerprints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#picking-diverse-molecules-using-fingerprints">Picking Diverse Molecules Using Fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#generating-similarity-maps-using-fingerprints">Generating Similarity Maps Using Fingerprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#descriptor-calculation">Descriptor Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#visualization-of-descriptors">Visualization of Descriptors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#chemical-reactions">Chemical Reactions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#advanced-reaction-functionality">Advanced Reaction Functionality</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="GettingStartedInPython.html#protecting-atoms">Protecting Atoms</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#recap-implementation">Recap Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#brics-implementation">BRICS Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#other-fragmentation-approaches">Other fragmentation approaches</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#chemical-features-and-pharmacophores">Chemical Features and Pharmacophores</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#chemical-features">Chemical Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#d-pharmacophore-fingerprints">2D Pharmacophore Fingerprints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#molecular-fragments">Molecular Fragments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#non-chemical-functionality">Non-Chemical Functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#bit-vectors">Bit vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#discrete-value-vectors">Discrete value vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#d-grids">3D grids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#points">Points</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#advanced-topics-warnings">Advanced Topics/Warnings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#editing-molecules">Editing Molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#miscellaneous-tips-and-hints">Miscellaneous Tips and Hints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#chem-vs-allchem">Chem vs AllChem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GettingStartedInPython.html#the-sssr-problem">The SSSR Problem</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#list-of-available-descriptors">List of Available Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#list-of-available-3d-descriptors">List of Available 3D Descriptors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#list-of-available-fingerprints">List of Available Fingerprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#feature-definitions-used-in-the-morgan-fingerprints">Feature Definitions Used in the Morgan Fingerprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStartedInPython.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RDKit_Book.html">The RDKit Book</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#misc-cheminformatics-topics">Misc Cheminformatics Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#aromaticity">Aromaticity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#ring-finding-and-sssr">Ring Finding and SSSR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#chemical-reaction-handling">Chemical Reaction Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#reaction-smarts">Reaction SMARTS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#some-features">Some features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#chirality">Chirality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#rules-and-caveats">Rules and caveats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#the-feature-definition-file-format">The Feature Definition File Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#chemical-features">Chemical Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#syntax-of-the-fdef-file">Syntax of the FDef file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#atomtype-definitions">AtomType definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#feature-definitions">Feature definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#additional-syntax-notes">Additional syntax notes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#atom-weights-and-feature-locations">Atom weights and feature locations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#frequently-asked-question-s">Frequently Asked Question(s)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#representation-of-pharmacophore-fingerprints">Representation of Pharmacophore Fingerprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#atom-atom-matching-in-substructure-queries">Atom-Atom Matching in Substructure Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#molecular-sanitization">Molecular Sanitization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#implementation-details">Implementation Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#magic-property-values">「Magic」 Property Values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#romol-mol-in-python">ROMol  (Mol in Python)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#atom">Atom</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="RDKit_Book.html#thread-safety-and-the-rdkit">Thread safety and the RDKit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#what-has-been-tested">What has been tested</a></li>
+<li class="toctree-l4"><a class="reference internal" href="RDKit_Book.html#known-problems">Known Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="RDKit_Book.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cookbook.html">RDKit Cookbook</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#what-is-this">What is this?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#miscellaneous-topics">Miscellaneous Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#using-a-different-aromaticity-model">Using a different aromaticity model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#manipulating-molecules">Manipulating Molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#cleaning-up-heterocycles">Cleaning up heterocycles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#parallel-conformation-generation">Parallel conformation generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#neutralizing-charged-molecules">Neutralizing Charged Molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#d-functionality-in-the-rdkit">3D functionality in the RDKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#using-scikit-learn-with-rdkit">Using scikit-learn with RDKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#using-custom-mcs-atom-types">Using custom MCS atom types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#clustering-molecules">Clustering molecules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#rmsd-calculation-between-n-molecules">RMSD Calculation between N molecules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cookbook.html#details">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Cookbook.html#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Cartridge.html">The RDKit database cartridge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Cartridge.html#what-is-this">What is this?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cartridge.html#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#creating-databases">Creating databases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#creating-a-database-from-a-file">Creating a database from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#loading-chembl">Loading ChEMBL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#substructure-searches">Substructure searches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#smarts-based-queries">SMARTS-based queries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#using-stereochemistry">Using Stereochemistry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#tuning-queries">Tuning queries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#similarity-searches">Similarity searches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#adjusting-the-similarity-cutoff">Adjusting the similarity cutoff</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#using-the-mcs-code">Using the MCS code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Cartridge.html#reference-guide">Reference Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#new-types">New Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#operators">Operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#similarity-search">Similarity search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#substructure-and-exact-structure-search">Substructure and exact structure search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#molecule-comparison">Molecule comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Cartridge.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#fingerprint-related">Fingerprint Related</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#molecule-related">Molecule Related</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Cartridge.html#other">Other</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Cartridge.html#using-the-cartridge-from-python">Using the Cartridge from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cartridge.html#license">License</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="additional-information">
+<h1>Additional Information<a class="headerlink" href="#additional-information" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="api/index.html">Python API Documentation</a></li>
+<li><a class="reference external" href="cppapi/index.html">C++ API Documentation</a></li>
+</ul>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>ナビゲーション</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="総合索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="Overview.html" title="An overview of the RDKit"
+             >次へ</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">The RDKit 2017.09.2 ドキュメント</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Greg Landrum.
+      このドキュメントは <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6 で生成しました。
+    </div>
+  </body>
+</html>

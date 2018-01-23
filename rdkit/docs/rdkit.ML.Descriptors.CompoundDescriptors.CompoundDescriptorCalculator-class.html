@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.Descriptors-module.html">Package&nbsp;Descriptors</a> ::
+        <a href="rdkit.ML.Descriptors.CompoundDescriptors-module.html">Module&nbsp;CompoundDescriptors</a> ::
+        Class&nbsp;CompoundDescriptorCalculator
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class CompoundDescriptorCalculator</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+<a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html">Descriptors.DescriptorCalculator</a> --+
+                                   |
+                                  <strong class="uidshort">CompoundDescriptorCalculator</strong>
+</pre>
+
+<hr />
+<pre class="literalblock">
+used for calculating descriptors
+
+This is the central point for descriptor calculation
+
+**Notes**
+
+- There are two kinds of descriptors this cares about:
+
+   1) *Simple Descriptors* can be calculated solely using atomic descriptor
+      values and the composition of the compound.  The full list of possible
+      simple descriptors is determined by the types of *Calculator Methods*
+      (see below) and the contents of an atomic database.
+
+      Simple Descriptors can be marked as *nonZeroDescriptors*.  These are used
+      to winnow out atom types where particular atomic descriptors are zero
+      (usually indicating that the value is unknown)
+
+      Simple Descriptors are maintained locally in the _simpleList_
+
+   2) *Compound Descriptors* may rely upon more complicated computation schemes
+      and descriptors for the compound as a whole (e.g. structural variables, etc.).
+      The full list of compound descriptors is limitless.  They are calculated using
+      the _ML.Descriptors.Parser_ module.
+
+      Compound Descriptors are maintained locally in the _compoundList_
+
+- This class has a some special methods which are labelled as *Calculator Method*
+  These are used internally to take atomic descriptors and reduce them to a single
+  simple descriptor value for a composition.  They are primarily intended for internal use.
+
+- a *composition vector* is a list of 2-tuples: '[(atom1name,atom1Num),...]'
+  where atom1Num is the contribution of the atom to the stoichiometry of the
+  compound. No assumption is made about the stoichiometries (i.e. they don't
+  have to be either integral or all sum to one).
+
+</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#SUM" class="summary-sig-name">SUM</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">desc</span>,
+        <span class="summary-sig-arg">compos</span>)</span><br />
+      *Calculator Method*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.SUM">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#MEAN" class="summary-sig-name">MEAN</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">desc</span>,
+        <span class="summary-sig-arg">compos</span>)</span><br />
+      *Calculator Method*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MEAN">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#DEV" class="summary-sig-name">DEV</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">desc</span>,
+        <span class="summary-sig-arg">compos</span>)</span><br />
+      *Calculator Method*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.DEV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#MIN" class="summary-sig-name">MIN</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">desc</span>,
+        <span class="summary-sig-arg">compos</span>)</span><br />
+      *Calculator Method*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MIN">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#MAX" class="summary-sig-name">MAX</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">desc</span>,
+        <span class="summary-sig-arg">compos</span>)</span><br />
+      *Calculator Method*</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MAX">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#ProcessSimpleList" class="summary-sig-name">ProcessSimpleList</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Handles the list of simple descriptors</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.ProcessSimpleList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#ProcessCompoundList" class="summary-sig-name">ProcessCompoundList</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Adds entries from the _compoundList_ to the list of _requiredDescriptors_</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.ProcessCompoundList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#BuildAtomDict" class="summary-sig-name">BuildAtomDict</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      builds the local atomic dict</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.BuildAtomDict">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#CalcSimpleDescriptorsForComposition" class="summary-sig-name">CalcSimpleDescriptorsForComposition</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">compos</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">composList</span>=<span class="summary-sig-default">None</span>)</span><br />
+      calculates all simple descriptors for a given composition</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcSimpleDescriptorsForComposition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#CalcCompoundDescriptorsForComposition" class="summary-sig-name">CalcCompoundDescriptorsForComposition</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">compos</span>=<span class="summary-sig-default">''</span>,
+        <span class="summary-sig-arg">composList</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">propDict</span>=<span class="summary-sig-default">{}</span>)</span><br />
+      calculates all simple descriptors for a given composition</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcCompoundDescriptorsForComposition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#CalcDescriptorsForComposition" class="summary-sig-name">CalcDescriptorsForComposition</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">composVect</span>,
+        <span class="summary-sig-arg">propDict</span>)</span><br />
+      calculates all descriptors for a given composition</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcDescriptorsForComposition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#CalcDescriptors" class="summary-sig-name">CalcDescriptors</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">composVect</span>,
+        <span class="summary-sig-arg">propDict</span>)</span><br />
+      calculates all descriptors for a given composition</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcDescriptorsForComposition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#GetDescriptorNames" class="summary-sig-name">GetDescriptorNames</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns a list of the names of the descriptors this calculator generates</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.GetDescriptorNames">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simpleList</span>,
+        <span class="summary-sig-arg">compoundList</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">dbName</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">dbTable</span>=<span class="summary-sig-default">'atomic_data'</span>,
+        <span class="summary-sig-arg">dbUser</span>=<span class="summary-sig-default">'sysdba'</span>,
+        <span class="summary-sig-arg">dbPassword</span>=<span class="summary-sig-default">'masterkey'</span>)</span><br />
+      Constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html">Descriptors.DescriptorCalculator</a></code></b>:
+      <code><a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#SaveState">SaveState</a></code>,
+      <code><a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#ShowDescriptors">ShowDescriptors</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="SUM"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SUM</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">desc</span>,
+        <span class="sig-arg">compos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.SUM">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Calculator Method*
+
+sums the descriptor values across the composition
+
+**Arguments**
+
+  - desc: the name of the descriptor
+
+  - compos: the composition vector
+
+**Returns**
+
+  a float
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MEAN"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MEAN</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">desc</span>,
+        <span class="sig-arg">compos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MEAN">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Calculator Method*
+
+averages the descriptor values across the composition
+
+**Arguments**
+
+  - desc: the name of the descriptor
+
+  - compos: the composition vector
+
+**Returns**
+
+  a float
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="DEV"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">DEV</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">desc</span>,
+        <span class="sig-arg">compos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.DEV">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Calculator Method*
+
+average deviation of the descriptor values across the composition
+
+**Arguments**
+
+  - desc: the name of the descriptor
+
+  - compos: the composition vector
+
+**Returns**
+
+  a float
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MIN"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MIN</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">desc</span>,
+        <span class="sig-arg">compos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MIN">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Calculator Method*
+
+minimum of the descriptor values across the composition
+
+**Arguments**
+
+  - desc: the name of the descriptor
+
+  - compos: the composition vector
+
+**Returns**
+
+  a float
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MAX"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MAX</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">desc</span>,
+        <span class="sig-arg">compos</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.MAX">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+*Calculator Method*
+
+maximum of the descriptor values across the composition
+
+**Arguments**
+
+  - desc: the name of the descriptor
+
+  - compos: the composition vector
+
+**Returns**
+
+  a float
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ProcessSimpleList"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ProcessSimpleList</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.ProcessSimpleList">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Handles the list of simple descriptors
+
+This constructs the list of _nonZeroDescriptors_ and _requiredDescriptors_.
+
+There's some other magic going on that I can't decipher at the moment.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ProcessCompoundList"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ProcessCompoundList</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.ProcessCompoundList">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Adds entries from the _compoundList_ to the list of _requiredDescriptors_
+
+Each compound descriptor is surveyed.  Any atomic descriptors it requires
+are added to the list of _requiredDescriptors_ to be pulled from the database.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BuildAtomDict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BuildAtomDict</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.BuildAtomDict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+builds the local atomic dict
+
+We don't want to keep around all descriptor values for all atoms, so this
+method takes care of only pulling out the descriptors in which we are
+interested.
+
+**Notes**
+
+  - this uses _chemutils.GetAtomicData_ to actually pull the data
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcSimpleDescriptorsForComposition"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcSimpleDescriptorsForComposition</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">compos</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">composList</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcSimpleDescriptorsForComposition">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates all simple descriptors for a given composition
+
+**Arguments**
+
+  - compos: a string representation of the composition
+
+  - composList: a *composVect*
+
+  The client must provide either _compos_ or _composList_.  If both are
+  provided, _composList_ takes priority.
+
+**Returns**
+  the list of descriptor values
+
+**Notes**
+
+  - when _compos_ is provided, this uses _chemutils.SplitComposition_
+    to split the composition into its individual pieces
+
+  - if problems are encountered because of either an unknown descriptor or
+    atom type, a _KeyError_ will be raised.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcCompoundDescriptorsForComposition"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcCompoundDescriptorsForComposition</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">compos</span>=<span class="sig-default">''</span>,
+        <span class="sig-arg">composList</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">propDict</span>=<span class="sig-default">{}</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcCompoundDescriptorsForComposition">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates all simple descriptors for a given composition
+
+**Arguments**
+
+  - compos: a string representation of the composition
+
+  - composList: a *composVect*
+
+  - propDict: a dictionary containing the properties of the composition
+    as a whole (e.g. structural variables, etc.)
+
+  The client must provide either _compos_ or _composList_.  If both are
+  provided, _composList_ takes priority.
+
+**Returns**
+  the list of descriptor values
+
+**Notes**
+
+  - when _compos_ is provided, this uses _chemutils.SplitComposition_
+    to split the composition into its individual pieces
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcDescriptorsForComposition"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcDescriptorsForComposition</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">composVect</span>,
+        <span class="sig-arg">propDict</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcDescriptorsForComposition">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates all descriptors for a given composition
+
+**Arguments**
+
+  - compos: a string representation of the composition
+
+  - propDict: a dictionary containing the properties of the composition
+    as a whole (e.g. structural variables, etc.). These are used to
+    generate Compound Descriptors
+
+**Returns**
+  the list of all descriptor values
+
+**Notes**
+
+  - this uses _chemutils.SplitComposition_
+    to split the composition into its individual pieces
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CalcDescriptors"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CalcDescriptors</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">composVect</span>,
+        <span class="sig-arg">propDict</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.CalcDescriptorsForComposition">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+calculates all descriptors for a given composition
+
+**Arguments**
+
+  - compos: a string representation of the composition
+
+  - propDict: a dictionary containing the properties of the composition
+    as a whole (e.g. structural variables, etc.). These are used to
+    generate Compound Descriptors
+
+**Returns**
+  the list of all descriptor values
+
+**Notes**
+
+  - this uses _chemutils.SplitComposition_
+    to split the composition into its individual pieces
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#CalcDescriptors">Descriptors.DescriptorCalculator.CalcDescriptors</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetDescriptorNames"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetDescriptorNames</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.GetDescriptorNames">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+returns a list of the names of the descriptors this calculator generates
+
+    
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#GetDescriptorNames">Descriptors.DescriptorCalculator.GetDescriptorNames</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simpleList</span>,
+        <span class="sig-arg">compoundList</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">dbName</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">dbTable</span>=<span class="sig-default">'atomic_data'</span>,
+        <span class="sig-arg">dbUser</span>=<span class="sig-default">'sysdba'</span>,
+        <span class="sig-arg">dbPassword</span>=<span class="sig-default">'masterkey'</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.Descriptors.CompoundDescriptors-pysrc.html#CompoundDescriptorCalculator.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Constructor
+
+**Arguments**
+
+  - simpleList: list of simple descriptors to be calculated
+        (see below for format)
+
+  - compoundList: list of compound descriptors to be calculated
+        (see below for format)
+
+  - dbName: name of the atomic database to be used
+
+  - dbTable: name the table in _dbName_ which has atomic data
+
+  - dbUser: user name for DB access
+
+  - dbPassword: password for DB access
+
+**Note**
+
+  - format of simpleList:
+     a list of 2-tuples containing:
+
+        1) name of the atomic descriptor
+
+        2) a list of operations on that descriptor (e.g. NonZero, Max, etc.)
+           These must correspond to the *Calculator Method* names above.
+
+  - format of compoundList:
+     a list of 2-tuples containing:
+
+        1) name of the descriptor to be calculated
+
+        2) list of selected atomic descriptor names (define $1, $2, etc.)
+
+        3) list of selected compound descriptor names (define $a, $b, etc.)
+
+        4) text formula defining the calculation (see _Parser_)
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#__init__">Descriptors.DescriptorCalculator.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

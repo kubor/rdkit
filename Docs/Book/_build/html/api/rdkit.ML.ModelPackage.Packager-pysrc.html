@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.ModelPackage.Packager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        <a href="rdkit.ML.ModelPackage-module.html">Package&nbsp;ModelPackage</a> ::
+        Module&nbsp;Packager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.ModelPackage.Packager-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.ML.ModelPackage.Packager-module.html">Module rdkit.ML.ModelPackage.Packager</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2002-2008 Greg Landrum and Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># All rights are reserved.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="DescriptorCalculationError"></a><div id="DescriptorCalculationError-def"><a name="L7"></a><tt class="py-lineno">  7</tt> <a class="py-toggle" href="#" id="DescriptorCalculationError-toggle" onclick="return toggle('DescriptorCalculationError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.DescriptorCalculationError-class.html">DescriptorCalculationError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DescriptorCalculationError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="DescriptorCalculationError-expanded"><a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">  <tt class="py-docstring">""" used to signal problems generating descriptor values """</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">  <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="ClassificationError"></a><div id="ClassificationError-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="ClassificationError-toggle" onclick="return toggle('ClassificationError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ClassificationError-class.html">ClassificationError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ClassificationError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ClassificationError-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">  <tt class="py-docstring">""" used to signal problems generating predictions """</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">  <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage"></a><div id="ModelPackage-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="ModelPackage-toggle" onclick="return toggle('ModelPackage');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html">ModelPackage</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ModelPackage-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">  <tt class="py-docstring">""" a container class to package a composite model with a descriptor</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">  calculator so that objects needing predictions (compounds, molecules, etc.)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">  can be passed directly in without worrying about generating descriptors</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.__init__"></a><div id="ModelPackage.__init__-def"><a name="L24"></a><tt class="py-lineno"> 24</tt> <a class="py-toggle" href="#" id="ModelPackage.__init__-toggle" onclick="return toggle('ModelPackage.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">descCalc</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">model</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">dataSet</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">notes</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.__init__-expanded"><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt> <tt class="py-op">=</tt> <tt class="py-name">descCalc</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt> <tt class="py-op">=</tt> <tt class="py-name">model</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_notes</tt> <tt class="py-op">=</tt> <tt class="py-name">notes</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dataSet</tt> <tt class="py-op">=</tt> <tt class="py-name">dataSet</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_initialized</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_supplementalData</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.SetCalculator"></a><div id="ModelPackage.SetCalculator-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="ModelPackage.SetCalculator-toggle" onclick="return toggle('ModelPackage.SetCalculator');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetCalculator">SetCalculator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">calc</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.SetCalculator-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.SetCalculator-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt> <tt class="py-op">=</tt> <tt class="py-name">calc</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.GetCalculator"></a><div id="ModelPackage.GetCalculator-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="ModelPackage.GetCalculator-toggle" onclick="return toggle('ModelPackage.GetCalculator');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetCalculator">GetCalculator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.GetCalculator-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.GetCalculator-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.SetModel"></a><div id="ModelPackage.SetModel-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="ModelPackage.SetModel-toggle" onclick="return toggle('ModelPackage.SetModel');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetModel">SetModel</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">model</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.SetModel-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.SetModel-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt> <tt class="py-op">=</tt> <tt class="py-name">model</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.GetModel"></a><div id="ModelPackage.GetModel-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="ModelPackage.GetModel-toggle" onclick="return toggle('ModelPackage.GetModel');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetModel">GetModel</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.GetModel-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.GetModel-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.SetDataset"></a><div id="ModelPackage.SetDataset-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="ModelPackage.SetDataset-toggle" onclick="return toggle('ModelPackage.SetDataset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetDataset">SetDataset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.SetDataset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.SetDataset-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dataSet</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-0', 'data', 'link-0');">data</a></tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.GetDataset"></a><div id="ModelPackage.GetDataset-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="ModelPackage.GetDataset-toggle" onclick="return toggle('ModelPackage.GetDataset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetDataset">GetDataset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.GetDataset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.GetDataset-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dataSet</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.SetNotes"></a><div id="ModelPackage.SetNotes-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="ModelPackage.SetNotes-toggle" onclick="return toggle('ModelPackage.SetNotes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetNotes">SetNotes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">notes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.SetNotes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.SetNotes-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_notes</tt> <tt class="py-op">=</tt> <tt class="py-name">notes</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.GetNotes"></a><div id="ModelPackage.GetNotes-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="ModelPackage.GetNotes-toggle" onclick="return toggle('ModelPackage.GetNotes');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetNotes">GetNotes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.GetNotes-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.GetNotes-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_notes</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.SetSupplementalData"></a><div id="ModelPackage.SetSupplementalData-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="ModelPackage.SetSupplementalData-toggle" onclick="return toggle('ModelPackage.SetSupplementalData');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetSupplementalData">SetSupplementalData</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">suppD</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.SetSupplementalData-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.SetSupplementalData-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_supplementalData</tt> <tt class="py-op">=</tt> <tt class="py-name">suppD</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.GetSupplementalData"></a><div id="ModelPackage.GetSupplementalData-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="ModelPackage.GetSupplementalData-toggle" onclick="return toggle('ModelPackage.GetSupplementalData');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#GetSupplementalData">GetSupplementalData</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.GetSupplementalData-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.GetSupplementalData-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'_supplementalData'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Method rdkit.ML.ModelPackage.Packager.ModelPackage.SetSupplementalData()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#SetSupplementalData"><a title="rdkit.ML.ModelPackage.Packager.ModelPackage.SetSupplementalData" class="py-name" href="#" onclick="return doclink('link-1', 'SetSupplementalData', 'link-1');">SetSupplementalData</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_supplementalData</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.AddSupplementalData"></a><div id="ModelPackage.AddSupplementalData-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="ModelPackage.AddSupplementalData-toggle" onclick="return toggle('ModelPackage.AddSupplementalData');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#AddSupplementalData">AddSupplementalData</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.AddSupplementalData-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.AddSupplementalData-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'_supplementalData'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="rdkit.ML.ModelPackage.Packager.ModelPackage.SetSupplementalData" class="py-name" href="#" onclick="return doclink('link-2', 'SetSupplementalData', 'link-1');">SetSupplementalData</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_supplementalData</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-3', 'data', 'link-0');">data</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.Classify"></a><div id="ModelPackage.Classify-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="ModelPackage.Classify-toggle" onclick="return toggle('ModelPackage.Classify');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#Classify">Classify</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">obj</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-param">threshold</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.Classify-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.Classify-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_initialized</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method rdkit.Chem.FragmentMatcher.FragmentMatcher.Init()=rdkit.Chem.FragmentMatcher.FragmentMatcher-class.html#Init,Method rdkit.Chem.Pharm2D.SigFactory.SigFactory.Init()=rdkit.Chem.Pharm2D.SigFactory.SigFactory-class.html#Init,Method rdkit.ML.ModelPackage.Packager.ModelPackage.Init()=rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#Init"><a title="rdkit.Chem.FragmentMatcher.FragmentMatcher.Init
+rdkit.Chem.Pharm2D.SigFactory.SigFactory.Init
+rdkit.ML.ModelPackage.Packager.ModelPackage.Init" class="py-name" href="#" onclick="return doclink('link-4', 'Init', 'link-4');">Init</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">      <tt class="py-name">descs</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.CalcDescriptors()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#CalcDescriptors,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.CalcDescriptors()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#CalcDescriptors"><a title="rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.CalcDescriptors
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.CalcDescriptors" class="py-name" href="#" onclick="return doclink('link-5', 'CalcDescriptors', 'link-5');">CalcDescriptors</a></tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt id="link-6" class="py-name" targets="Class rdkit.ML.ModelPackage.Packager.DescriptorCalculationError=rdkit.ML.ModelPackage.Packager.DescriptorCalculationError-class.html"><a title="rdkit.ML.ModelPackage.Packager.DescriptorCalculationError" class="py-name" href="#" onclick="return doclink('link-6', 'DescriptorCalculationError', 'link-6');">DescriptorCalculationError</a></tt><tt class="py-op">(</tt><tt class="py-string">'problems encountered generating descriptors'</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">argVect</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-7" class="py-name" targets="Variable rdkit.Chem.FunctionalGroups.FGHierarchyNode.label=rdkit.Chem.FunctionalGroups.FGHierarchyNode-class.html#label"><a title="rdkit.Chem.FunctionalGroups.FGHierarchyNode.label" class="py-name" href="#" onclick="return doclink('link-7', 'label', 'link-7');">label</a></tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">descs</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">      <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample()=rdkit.ML.Composite.BayesComposite.BayesComposite-class.html#ClassifyExample,Method rdkit.ML.Composite.Composite.Composite.ClassifyExample()=rdkit.ML.Composite.Composite.Composite-class.html#ClassifyExample,Method rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample()=rdkit.ML.DecTree.DecTree.DecTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.Forest.Forest.ClassifyExample()=rdkit.ML.DecTree.Forest.Forest-class.html#ClassifyExample,Method rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample()=rdkit.ML.DecTree.QuantTree.QuantTreeNode-class.html#ClassifyExample,Method rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample()=rdkit.ML.DecTree.SigTree.SigTreeNode-class.html#ClassifyExample,Method rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample()=rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel-class.html#ClassifyExample,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#ClassifyExample,Method rdkit.ML.Neural.Network.Network.ClassifyExample()=rdkit.ML.Neural.Network.Network-class.html#ClassifyExample"><a title="rdkit.ML.Composite.BayesComposite.BayesComposite.ClassifyExample
+rdkit.ML.Composite.Composite.Composite.ClassifyExample
+rdkit.ML.DecTree.DecTree.DecTreeNode.ClassifyExample
+rdkit.ML.DecTree.Forest.Forest.ClassifyExample
+rdkit.ML.DecTree.QuantTree.QuantTreeNode.ClassifyExample
+rdkit.ML.DecTree.SigTree.SigTreeNode.ClassifyExample
+rdkit.ML.KNN.KNNClassificationModel.KNNClassificationModel.ClassifyExample
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.ClassifyExample
+rdkit.ML.Neural.Network.Network.ClassifyExample" class="py-name" href="#" onclick="return doclink('link-8', 'ClassifyExample', 'link-8');">ClassifyExample</a></tt><tt class="py-op">(</tt><tt class="py-name">argVect</tt><tt class="py-op">,</tt> <tt class="py-name">threshold</tt><tt class="py-op">=</tt><tt class="py-name">threshold</tt><tt class="py-op">,</tt> <tt class="py-name">appendExample</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">      <tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">      <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt id="link-9" class="py-name" targets="Class rdkit.ML.ModelPackage.Packager.ClassificationError=rdkit.ML.ModelPackage.Packager.ClassificationError-class.html"><a title="rdkit.ML.ModelPackage.Packager.ClassificationError" class="py-name" href="#" onclick="return doclink('link-9', 'ClassificationError', 'link-9');">ClassificationError</a></tt><tt class="py-op">(</tt><tt class="py-string">'problems encountered generating prediction'</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="ModelPackage.Init"></a><div id="ModelPackage.Init-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="ModelPackage.Init-toggle" onclick="return toggle('ModelPackage.Init');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.ML.ModelPackage.Packager.ModelPackage-class.html#Init">Init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ModelPackage.Init-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="ModelPackage.Init-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">nms</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method rdkit.ML.Composite.Composite.Composite.GetDescriptorNames()=rdkit.ML.Composite.Composite.Composite-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.Descriptors.DescriptorCalculator-class.html#GetDescriptorNames,Method rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorNames()=rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator-class.html#GetDescriptorNames"><a title="rdkit.ML.Composite.Composite.Composite.GetDescriptorNames
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorNames" class="py-name" href="#" onclick="return doclink('link-10', 'GetDescriptorNames', 'link-10');">GetDescriptorNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">lbl</tt> <tt class="py-op">=</tt> <tt class="py-name">nms</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">act</tt> <tt class="py-op">=</tt> <tt class="py-name">nms</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-name">descs</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_descCalc</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rdkit.ML.Composite.Composite.Composite.GetDescriptorNames
+rdkit.ML.Descriptors.CompoundDescriptors.CompoundDescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.Descriptors.DescriptorCalculator.GetDescriptorNames
+rdkit.ML.Descriptors.MoleculeDescriptors.MolecularDescriptorCalculator.GetDescriptorNames" class="py-name" href="#" onclick="return doclink('link-11', 'GetDescriptorNames', 'link-10');">GetDescriptorNames</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-name">order</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">lbl</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">descs</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-op">[</tt><tt class="py-name">act</tt><tt class="py-op">]</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_model</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method rdkit.ML.Composite.Composite.Composite.SetInputOrder()=rdkit.ML.Composite.Composite.Composite-class.html#SetInputOrder"><a title="rdkit.ML.Composite.Composite.Composite.SetInputOrder" class="py-name" href="#" onclick="return doclink('link-12', 'SetInputOrder', 'link-12');">SetInputOrder</a></tt><tt class="py-op">(</tt><tt class="py-name">order</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_initialized</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+</div></div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

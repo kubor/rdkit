@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.ML.GrowComposite</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.ML-module.html">Package&nbsp;ML</a> ::
+        Module&nbsp;GrowComposite
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.ML.GrowComposite-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module GrowComposite</h1><p class="nomargin-top"><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+command line utility for growing composite models
+
+**Usage**
+
+  _GrowComposite [optional args] filename_
+
+**Command Line Arguments**
+
+  - -n *count*: number of new models to build
+
+  - -C *pickle file name*:  name of file containing composite upon which to build.
+
+  - --inNote *note*: note to be used in loading composite models from the database
+      for growing
+
+  - --balTable *table name*:  table from which to take the original data set
+     (for balancing)
+
+  - --balWeight *weight*: (between 0 and 1) weighting factor for the new data
+     (for balancing). OR, *weight* can be a list of weights
+
+  - --balCnt *count*: number of individual models in the balanced composite
+     (for balancing)
+
+  - --balH: use only the holdout set from the original data set in the balancing
+     (for balancing)
+
+  - --balT: use only the training set from the original data set in the balancing
+     (for balancing)
+
+  - -S: shuffle the original data set
+     (for balancing)
+
+  - -r: randomize the activities of the original data set
+     (for balancing)
+
+  - -N *note*: note to be attached to the grown composite when it's saved in the
+     database
+
+  - --outNote *note*: equivalent to -N
+
+  - -o *filename*: name of an output file to hold the pickled composite after
+     it has been grown.
+     If multiple balance weights are used, the weights will be added to
+     the filenames.
+
+  - -L *limit*: provide an (integer) limit on individual model complexity
+
+  - -d *database name*: instead of reading the data from a QDAT file,
+     pull it from a database.  In this case, the _filename_ argument
+     provides the name of the database table containing the data set.
+
+  - -p *tablename*: store persistence data in the database
+     in table *tablename*
+
+  - -l: locks the random number generator to give consistent sets
+     of training and hold-out data.  This is primarily intended
+     for testing purposes.
+
+  - -g: be less greedy when training the models.
+
+  - -G *number*: force trees to be rooted at descriptor *number*.
+
+  - -D: show a detailed breakdown of the composite model performance
+     across the training and, when appropriate, hold-out sets.
+
+  - -t *threshold value*: use high-confidence predictions for the final
+     analysis of the hold-out data.
+
+  - -q *list string*:  Add QuantTrees to the composite and use the list
+     specified in *list string* as the number of target quantization
+     bounds for each descriptor.  Don't forget to include 0's at the
+     beginning and end of *list string* for the name and value fields.
+     For example, if there are 4 descriptors and you want 2 quant bounds
+     apiece, you would use _-q &quot;[0,2,2,2,2,0]&quot;_.
+     Two special cases:
+       1) If you would like to ignore a descriptor in the model building,
+          use '-1' for its number of quant bounds.
+       2) If you have integer valued data that should not be quantized
+          further, enter 0 for that descriptor.
+
+  - -V: print the version number and exit
+
+</pre>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.GrowComposite-module.html#message" class="summary-sig-name">message</a>(<span class="summary-sig-arg">msg</span>)</span><br />
+      emits messages to _sys.stdout_
+override this in modules which import this one to redirect output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#message">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.GrowComposite-module.html#GrowIt" class="summary-sig-name">GrowIt</a>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">progressCallback</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">saveIt</span>=<span class="summary-sig-default">1</span>,
+        <span class="summary-sig-arg">setDescNames</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>)</span><br />
+      does the actual work of building a composite model</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#GrowIt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="GetComposites"></a><span class="summary-sig-name">GetComposites</span>(<span class="summary-sig-arg">details</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#GetComposites">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.GrowComposite-module.html#BalanceComposite" class="summary-sig-name">BalanceComposite</a>(<span class="summary-sig-arg">details</span>,
+        <span class="summary-sig-arg">composite</span>,
+        <span class="summary-sig-arg">data1</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">data2</span>=<span class="summary-sig-default">None</span>)</span><br />
+      balances the composite using the parameters provided in details</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#BalanceComposite">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ShowVersion"></a><span class="summary-sig-name">ShowVersion</span>(<span class="summary-sig-arg">includeArgs</span>=<span class="summary-sig-default">0</span>)</span><br />
+      prints the version number</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#ShowVersion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Usage"></a><span class="summary-sig-name">Usage</span>()</span><br />
+      provides a list of arguments for when this is used from the command line</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#Usage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.GrowComposite-module.html#SetDefaults" class="summary-sig-name">SetDefaults</a>(<span class="summary-sig-arg">runDetails</span>=<span class="summary-sig-default">None</span>)</span><br />
+      initializes a details object with default values</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#SetDefaults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="rdkit.ML.GrowComposite-module.html#ParseArgs" class="summary-sig-name">ParseArgs</a>(<span class="summary-sig-arg">runDetails</span>)</span><br />
+      parses command line arguments and updates _runDetails_</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#ParseArgs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_runDetails"></a><span class="summary-name">_runDetails</span> = <code title="CompositeRun.CompositeRun()">CompositeRun.CompositeRun()</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__VERSION_STRING"></a><span class="summary-name">__VERSION_STRING</span> = <code title="&quot;0.5.0&quot;">&quot;0.5.0&quot;</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_verbose"></a><span class="summary-name">_verbose</span> = <code title="1">1</code>
+    </td>
+  </tr>
+</table>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="sys">sys</span>,
+  <span title="time">time</span>,
+  <span title="numpy">numpy</span>,
+  <a href="rdkit.Dbase.DbConnection.DbConnect-class.html" title="rdkit.Dbase.DbConnection.DbConnect">DbConnect</a>,
+  <a href="rdkit.ML.CompositeRun-module.html" title="rdkit.ML.CompositeRun">CompositeRun</a>,
+  <a href="rdkit.ML.ScreenComposite-module.html" title="rdkit.ML.ScreenComposite">ScreenComposite</a>,
+  <a href="rdkit.ML.BuildComposite-module.html" title="rdkit.ML.BuildComposite">BuildComposite</a>,
+  <a href="rdkit.ML.Composite.AdjustComposite-module.html" title="rdkit.ML.Composite.AdjustComposite">AdjustComposite</a>,
+  <a href="rdkit.ML.Data.DataUtils-module.html" title="rdkit.ML.Data.DataUtils">DataUtils</a>,
+  <a href="rdkit.ML.Data.SplitData-module.html" title="rdkit.ML.Data.SplitData">SplitData</a>,
+  <span title="rdkit.six.moves.cPickle">cPickle</span>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="message"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">message</span>(<span class="sig-arg">msg</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#message">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+emits messages to _sys.stdout_
+override this in modules which import this one to redirect output
+
+**Arguments**
+
+  - msg: the string to be displayed
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GrowIt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GrowIt</span>(<span class="sig-arg">details</span>,
+        <span class="sig-arg">composite</span>,
+        <span class="sig-arg">progressCallback</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">saveIt</span>=<span class="sig-default">1</span>,
+        <span class="sig-arg">setDescNames</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#GrowIt">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+does the actual work of building a composite model
+
+**Arguments**
+
+  - details:  a _CompositeRun.CompositeRun_ object containing details
+    (options, parameters, etc.) about the run
+
+  - composite: the composite model to grow
+
+  - progressCallback: (optional) a function which is called with a single
+    argument (the number of models built so far) after each model is built.
+
+  - saveIt: (optional) if this is nonzero, the resulting model will be pickled
+    and dumped to the filename specified in _details.outName_
+
+  - setDescNames: (optional) if nonzero, the composite's _SetInputOrder()_ method
+    will be called using the results of the data set's _GetVarNames()_ method;
+    it is assumed that the details object has a _descNames attribute which
+    is passed to the composites _SetDescriptorNames()_ method.  Otherwise
+    (the default), _SetDescriptorNames()_ gets the results of _GetVarNames()_.
+
+  - data: (optional) the data set to be used.  If this is not provided, the
+    data set described in details will be used.
+
+**Returns**
+
+  the enlarged composite model
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="BalanceComposite"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">BalanceComposite</span>(<span class="sig-arg">details</span>,
+        <span class="sig-arg">composite</span>,
+        <span class="sig-arg">data1</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">data2</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#BalanceComposite">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+balances the composite using the parameters provided in details
+
+**Arguments**
+
+  - details a _CompositeRun.RunDetails_ object
+
+  - composite: the composite model to be balanced
+
+  - data1: (optional) if provided, this should be the
+    data set used to construct the original models
+
+  - data2: (optional) if provided, this should be the
+    data set used to construct the new individual models
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetDefaults"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetDefaults</span>(<span class="sig-arg">runDetails</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#SetDefaults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+initializes a details object with default values
+
+**Arguments**
+
+  - details:  (optional) a _CompositeRun.CompositeRun_ object.
+    If this is not provided, the global _runDetails will be used.
+
+**Returns**
+
+  the initialized _CompositeRun_ object.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ParseArgs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ParseArgs</span>(<span class="sig-arg">runDetails</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rdkit.ML.GrowComposite-pysrc.html#ParseArgs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+parses command line arguments and updates _runDetails_
+
+**Arguments**
+
+  - runDetails:  a _CompositeRun.CompositeRun_ object.
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

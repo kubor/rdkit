@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rdkit.Chem.Fingerprints.ClusterMols</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;rdkit ::
+        <a href="rdkit.Chem-module.html">Package&nbsp;Chem</a> ::
+        <a href="rdkit.Chem.Fingerprints-module.html">Package&nbsp;Fingerprints</a> ::
+        Module&nbsp;ClusterMols
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rdkit.Chem.Fingerprints.ClusterMols-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rdkit.Chem.Fingerprints.ClusterMols-module.html">Module rdkit.Chem.Fingerprints.ClusterMols</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#  Copyright (c) 2003-2006 Rational Discovery LLC</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#   @@ All Rights Reserved @@</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment">#  This file is part of the RDKit.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#  The contents are covered by the terms of the BSD license</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#  which is included in the file license.txt, found at the root</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#  of the RDKit source tree.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">""" utility functionality for clustering molecules using fingerprints</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"> includes a command line app for clustering</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">Sample Usage:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">  python ClusterMols.py  -d data.gdb -t daylight_sig \</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    --idName="CAS_TF" -o clust1.pkl \</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">    --actTable="dop_test" --actName="moa_quant"</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">__future__</tt> <tt class="py-keyword">import</tt> <tt class="py-name">print_function</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package rdkit.DataStructs=rdkit.DataStructs-module.html"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-0', 'DataStructs', 'link-0');">DataStructs</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rdkit.Chem=rdkit.Chem-module.html"><a title="rdkit.Chem" class="py-name" href="#" onclick="return doclink('link-1', 'Chem', 'link-1');">Chem</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rdkit.Chem.Fingerprints=rdkit.Chem.Fingerprints-module.html"><a title="rdkit.Chem.Fingerprints" class="py-name" href="#" onclick="return doclink('link-2', 'Fingerprints', 'link-2');">Fingerprints</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module rdkit.Chem.Fingerprints.FingerprintMols=rdkit.Chem.Fingerprints.FingerprintMols-module.html"><a title="rdkit.Chem.Fingerprints.FingerprintMols" class="py-name" href="#" onclick="return doclink('link-3', 'FingerprintMols', 'link-3');">FingerprintMols</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Module rdkit.Chem.Fingerprints.MolSimilarity=rdkit.Chem.Fingerprints.MolSimilarity-module.html"><a title="rdkit.Chem.Fingerprints.MolSimilarity" class="py-name" href="#" onclick="return doclink('link-4', 'MolSimilarity', 'link-4');">MolSimilarity</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package rdkit.ML=rdkit.ML-module.html"><a title="rdkit.ML" class="py-name" href="#" onclick="return doclink('link-5', 'ML', 'link-5');">ML</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Package rdkit.ML.Cluster=rdkit.ML.Cluster-module.html,Class rdkit.ML.Cluster.Clusters.Cluster=rdkit.ML.Cluster.Clusters.Cluster-class.html"><a title="rdkit.ML.Cluster
+rdkit.ML.Cluster.Clusters.Cluster" class="py-name" href="#" onclick="return doclink('link-6', 'Cluster', 'link-6');">Cluster</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Module rdkit.ML.Cluster.Murtagh=rdkit.ML.Cluster.Murtagh-module.html"><a title="rdkit.ML.Cluster.Murtagh" class="py-name" href="#" onclick="return doclink('link-7', 'Murtagh', 'link-7');">Murtagh</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">rdkit</tt><tt class="py-op">.</tt><tt class="py-name">six</tt><tt class="py-op">.</tt><tt class="py-name">moves</tt> <tt class="py-keyword">import</tt> <tt class="py-name">cPickle</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Function rdkit.Chem.BuildFragmentCatalog.message()=rdkit.Chem.BuildFragmentCatalog-module.html#message,Function rdkit.Chem.Fingerprints.FingerprintMols.message()=rdkit.Chem.Fingerprints.FingerprintMols-module.html#message,Function rdkit.Chem.FragmentCatalog.message()=rdkit.Chem.FragmentCatalog-module.html#message,Function rdkit.ML.BuildComposite.message()=rdkit.ML.BuildComposite-module.html#message,Function rdkit.ML.EnrichPlot.message()=rdkit.ML.EnrichPlot-module.html#message,Function rdkit.ML.GrowComposite.message()=rdkit.ML.GrowComposite-module.html#message,Function rdkit.ML.ScreenComposite.message()=rdkit.ML.ScreenComposite-module.html#message"><a title="rdkit.Chem.BuildFragmentCatalog.message
+rdkit.Chem.Fingerprints.FingerprintMols.message
+rdkit.Chem.FragmentCatalog.message
+rdkit.ML.BuildComposite.message
+rdkit.ML.EnrichPlot.message
+rdkit.ML.GrowComposite.message
+rdkit.ML.ScreenComposite.message" class="py-name" href="#" onclick="return doclink('link-8', 'message', 'link-8');">message</a></tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols" class="py-name" href="#" onclick="return doclink('link-9', 'FingerprintMols', 'link-3');">FingerprintMols</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.message
+rdkit.Chem.Fingerprints.FingerprintMols.message
+rdkit.Chem.FragmentCatalog.message
+rdkit.ML.BuildComposite.message
+rdkit.ML.EnrichPlot.message
+rdkit.ML.GrowComposite.message
+rdkit.ML.ScreenComposite.message" class="py-name" href="#" onclick="return doclink('link-10', 'message', 'link-8');">message</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Function rdkit.Chem.Fingerprints.FingerprintMols.error()=rdkit.Chem.Fingerprints.FingerprintMols-module.html#error,Function rdkit.ML.EnrichPlot.error()=rdkit.ML.EnrichPlot-module.html#error,Function rdkit.ML.ScreenComposite.error()=rdkit.ML.ScreenComposite-module.html#error"><a title="rdkit.Chem.Fingerprints.FingerprintMols.error
+rdkit.ML.EnrichPlot.error
+rdkit.ML.ScreenComposite.error" class="py-name" href="#" onclick="return doclink('link-11', 'error', 'link-11');">error</a></tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols" class="py-name" href="#" onclick="return doclink('link-12', 'FingerprintMols', 'link-3');">FingerprintMols</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols.error
+rdkit.ML.EnrichPlot.error
+rdkit.ML.ScreenComposite.error" class="py-name" href="#" onclick="return doclink('link-13', 'error', 'link-11');">error</a></tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="GetDistanceMatrix"></a><div id="GetDistanceMatrix-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="GetDistanceMatrix-toggle" onclick="return toggle('GetDistanceMatrix');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fingerprints.ClusterMols-module.html#GetDistanceMatrix">GetDistanceMatrix</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">metric</tt><tt class="py-op">,</tt> <tt class="py-param">isSimilarity</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="GetDistanceMatrix-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="GetDistanceMatrix-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">  <tt class="py-docstring">""" data should be a list of tuples with fingerprints in position 1</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">   (the rest of the elements of the tuple are not important)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">    Returns the symmetric distance matrix</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    (see ML.Cluster.Resemblance for layout documentation)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  <tt class="py-name">nPts</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name" targets="Variable rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#data"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-14', 'data', 'link-14');">data</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">nPts</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">nPts</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">float</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">  <tt class="py-name">nSoFar</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">col</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">nPts</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">row</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">col</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">      <tt class="py-name">fp1</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-15', 'data', 'link-14');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">col</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">      <tt class="py-name">fp2</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-16', 'data', 'link-14');">data</a></tt><tt class="py-op">[</tt><tt class="py-name">row</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">fp1</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits()=rdkit.DataStructs.BitEnsemble.BitEnsemble-class.html#GetNumBits"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-17', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">fp2</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-18', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">fp1</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-19', 'DataStructs', 'link-0');">DataStructs</a></tt><tt class="py-op">.</tt><tt class="py-name">FoldFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">fp1</tt><tt class="py-op">,</tt> <tt class="py-name">fp1</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-20', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">fp2</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-21', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">      <tt class="py-keyword">elif</tt> <tt class="py-name">fp2</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-22', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">fp1</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-23', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">fp2</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="rdkit.DataStructs" class="py-name" href="#" onclick="return doclink('link-24', 'DataStructs', 'link-0');">DataStructs</a></tt><tt class="py-op">.</tt><tt class="py-name">FoldFingerprint</tt><tt class="py-op">(</tt><tt class="py-name">fp2</tt><tt class="py-op">,</tt> <tt class="py-name">fp2</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-25', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">fp1</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="rdkit.DataStructs.BitEnsemble.BitEnsemble.GetNumBits" class="py-name" href="#" onclick="return doclink('link-26', 'GetNumBits', 'link-17');">GetNumBits</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">      <tt class="py-name">sim</tt> <tt class="py-op">=</tt> <tt class="py-name">metric</tt><tt class="py-op">(</tt><tt class="py-name">fp1</tt><tt class="py-op">,</tt> <tt class="py-name">fp2</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">isSimilarity</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">sim</tt> <tt class="py-op">=</tt> <tt class="py-number">1.</tt> <tt class="py-op">-</tt> <tt class="py-name">sim</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">      <tt class="py-name">res</tt><tt class="py-op">[</tt><tt class="py-name">nSoFar</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">sim</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">      <tt class="py-name">nSoFar</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="ClusterPoints"></a><div id="ClusterPoints-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="ClusterPoints-toggle" onclick="return toggle('ClusterPoints');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fingerprints.ClusterMols-module.html#ClusterPoints">ClusterPoints</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">metric</tt><tt class="py-op">,</tt> <tt class="py-param">algorithmId</tt><tt class="py-op">,</tt> <tt class="py-param">haveLabels</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">haveActs</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                  <tt class="py-param">returnDistances</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ClusterPoints-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ClusterPoints-expanded"><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">  <tt id="link-27" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.message
+rdkit.Chem.Fingerprints.FingerprintMols.message
+rdkit.Chem.FragmentCatalog.message
+rdkit.ML.BuildComposite.message
+rdkit.ML.EnrichPlot.message
+rdkit.ML.GrowComposite.message
+rdkit.ML.ScreenComposite.message" class="py-name" href="#" onclick="return doclink('link-27', 'message', 'link-8');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'Generating distance matrix.\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">  <tt class="py-name">dMat</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name" targets="Function rdkit.Chem.Fingerprints.ClusterMols.GetDistanceMatrix()=rdkit.Chem.Fingerprints.ClusterMols-module.html#GetDistanceMatrix"><a title="rdkit.Chem.Fingerprints.ClusterMols.GetDistanceMatrix" class="py-name" href="#" onclick="return doclink('link-28', 'GetDistanceMatrix', 'link-28');">GetDistanceMatrix</a></tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-29', 'data', 'link-14');">data</a></tt><tt class="py-op">,</tt> <tt class="py-name">metric</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">  <tt id="link-30" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.message
+rdkit.Chem.Fingerprints.FingerprintMols.message
+rdkit.Chem.FragmentCatalog.message
+rdkit.ML.BuildComposite.message
+rdkit.ML.EnrichPlot.message
+rdkit.ML.GrowComposite.message
+rdkit.ML.ScreenComposite.message" class="py-name" href="#" onclick="return doclink('link-30', 'message', 'link-8');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">'Clustering\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-name">clustTree</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="rdkit.ML.Cluster.Murtagh" class="py-name" href="#" onclick="return doclink('link-31', 'Murtagh', 'link-7');">Murtagh</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Function rdkit.ML.Cluster.Butina.ClusterData()=rdkit.ML.Cluster.Butina-module.html#ClusterData,Function rdkit.ML.Cluster.Murtagh.ClusterData()=rdkit.ML.Cluster.Murtagh-module.html#ClusterData"><a title="rdkit.ML.Cluster.Butina.ClusterData
+rdkit.ML.Cluster.Murtagh.ClusterData" class="py-name" href="#" onclick="return doclink('link-32', 'ClusterData', 'link-32');">ClusterData</a></tt><tt class="py-op">(</tt><tt class="py-name">dMat</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-33', 'data', 'link-14');">data</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">algorithmId</tt><tt class="py-op">,</tt> <tt class="py-name">isDistData</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-name">acts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">haveActs</tt> <tt class="py-keyword">and</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-34', 'data', 'link-14');">data</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-comment"># we've got activities... use them:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">acts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-35" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-35', 'data', 'link-14');">data</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">haveLabels</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-name">labels</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'Mol: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-36" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-36', 'data', 'link-14');">data</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">labels</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-37" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-37', 'data', 'link-14');">data</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">  <tt class="py-name">clustTree</tt><tt class="py-op">.</tt><tt class="py-name">_ptLabels</tt> <tt class="py-op">=</tt> <tt class="py-name">labels</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">acts</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">clustTree</tt><tt class="py-op">.</tt><tt class="py-name">_ptValues</tt> <tt class="py-op">=</tt> <tt class="py-name">acts</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">pt</tt> <tt class="py-keyword">in</tt> <tt class="py-name">clustTree</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetPoints()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetPoints"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetPoints" class="py-name" href="#" onclick="return doclink('link-38', 'GetPoints', 'link-38');">GetPoints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-name">idx</tt> <tt class="py-op">=</tt> <tt class="py-name">pt</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.GetIndex()=rdkit.ML.Cluster.Clusters.Cluster-class.html#GetIndex"><a title="rdkit.ML.Cluster.Clusters.Cluster.GetIndex" class="py-name" href="#" onclick="return doclink('link-39', 'GetIndex', 'link-39');">GetIndex</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-name">pt</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method rdkit.ML.Cluster.Clusters.Cluster.SetName()=rdkit.ML.Cluster.Clusters.Cluster-class.html#SetName,Method rdkit.ML.DecTree.Tree.TreeNode.SetName()=rdkit.ML.DecTree.Tree.TreeNode-class.html#SetName,Method rdkit.ML.KNN.KNNModel.KNNModel.SetName()=rdkit.ML.KNN.KNNModel.KNNModel-class.html#SetName,Method rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.SetName()=rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier-class.html#SetName"><a title="rdkit.ML.Cluster.Clusters.Cluster.SetName
+rdkit.ML.DecTree.Tree.TreeNode.SetName
+rdkit.ML.KNN.KNNModel.KNNModel.SetName
+rdkit.ML.NaiveBayes.ClassificationModel.NaiveBayesClassifier.SetName" class="py-name" href="#" onclick="return doclink('link-40', 'SetName', 'link-40');">SetName</a></tt><tt class="py-op">(</tt><tt class="py-name">labels</tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">acts</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">pt</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.SetData()=rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser-class.html#SetData,Method rdkit.ML.Cluster.Clusters.Cluster.SetData()=rdkit.ML.Cluster.Clusters.Cluster-class.html#SetData,Method rdkit.ML.DecTree.Tree.TreeNode.SetData()=rdkit.ML.DecTree.Tree.TreeNode-class.html#SetData"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.SetData
+rdkit.ML.Cluster.Clusters.Cluster.SetData
+rdkit.ML.DecTree.Tree.TreeNode.SetData" class="py-name" href="#" onclick="return doclink('link-41', 'SetData', 'link-41');">SetData</a></tt><tt class="py-op">(</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">acts</tt><tt class="py-op">[</tt><tt class="py-name">idx</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">returnDistances</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">clustTree</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">clustTree</tt><tt class="py-op">,</tt> <tt class="py-name">dMat</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="ClusterFromDetails"></a><div id="ClusterFromDetails-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="ClusterFromDetails-toggle" onclick="return toggle('ClusterFromDetails');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rdkit.Chem.Fingerprints.ClusterMols-module.html#ClusterFromDetails">ClusterFromDetails</a><tt class="py-op">(</tt><tt class="py-param">details</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ClusterFromDetails-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ClusterFromDetails-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">  <tt class="py-docstring">""" Returns the cluster tree</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">  <tt id="link-42" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-42', 'data', 'link-14');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="rdkit.Chem.Fingerprints.MolSimilarity" class="py-name" href="#" onclick="return doclink('link-43', 'MolSimilarity', 'link-4');">MolSimilarity</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Function rdkit.Chem.Fingerprints.MolSimilarity.GetFingerprints()=rdkit.Chem.Fingerprints.MolSimilarity-module.html#GetFingerprints"><a title="rdkit.Chem.Fingerprints.MolSimilarity.GetFingerprints" class="py-name" href="#" onclick="return doclink('link-44', 'GetFingerprints', 'link-44');">GetFingerprints</a></tt><tt class="py-op">(</tt><tt class="py-name">details</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">maxMols</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt id="link-45" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-45', 'data', 'link-14');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-46', 'data', 'link-14');">data</a></tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">maxMols</tt><tt class="py-op">]</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">outFileName</tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">      <tt class="py-name">outF</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">outFileName</tt><tt class="py-op">,</tt> <tt class="py-string">'wb+'</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">IOError</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">      <tt id="link-47" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols.error
+rdkit.ML.EnrichPlot.error
+rdkit.ML.ScreenComposite.error" class="py-name" href="#" onclick="return doclink('link-47', 'error', 'link-11');">error</a></tt><tt class="py-op">(</tt><tt class="py-string">"Error: could not open output file %s for writing\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">outFileName</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">outF</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-48" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-48', 'data', 'link-14');">data</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">  <tt class="py-name">clustTree</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name" targets="Function rdkit.Chem.Fingerprints.ClusterMols.ClusterPoints()=rdkit.Chem.Fingerprints.ClusterMols-module.html#ClusterPoints"><a title="rdkit.Chem.Fingerprints.ClusterMols.ClusterPoints" class="py-name" href="#" onclick="return doclink('link-49', 'ClusterPoints', 'link-49');">ClusterPoints</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="rdkit.Chem.FeatMaps.FeatMapParser.FeatMapParser.data" class="py-name" href="#" onclick="return doclink('link-50', 'data', 'link-14');">data</a></tt><tt class="py-op">,</tt> <tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">metric</tt><tt class="py-op">,</tt> <tt class="py-name">details</tt><tt class="py-op">.</tt><tt class="py-name">clusterAlgo</tt><tt class="py-op">,</tt> <tt class="py-name">haveLabels</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">haveActs</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">outF</tt><tt class="py-op">:</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-name">cPickle</tt><tt class="py-op">.</tt><tt class="py-name">dump</tt><tt class="py-op">(</tt><tt class="py-name">clustTree</tt><tt class="py-op">,</tt> <tt class="py-name">outF</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">clustTree</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt id="link-51" class="py-name" targets="Variable rdkit.Chem.Fingerprints.ClusterMols._usageDoc=rdkit.Chem.Fingerprints.ClusterMols-module.html#_usageDoc,Variable rdkit.Chem.Fingerprints.FingerprintMols._usageDoc=rdkit.Chem.Fingerprints.FingerprintMols-module.html#_usageDoc,Variable rdkit.Chem.Fingerprints.MolSimilarity._usageDoc=rdkit.Chem.Fingerprints.MolSimilarity-module.html#_usageDoc"><a title="rdkit.Chem.Fingerprints.ClusterMols._usageDoc
+rdkit.Chem.Fingerprints.FingerprintMols._usageDoc
+rdkit.Chem.Fingerprints.MolSimilarity._usageDoc" class="py-name" href="#" onclick="return doclink('link-51', '_usageDoc', 'link-51');">_usageDoc</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-string">Usage: ClusterMols.py [args] &lt;fName&gt;</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-string">  If &lt;fName&gt; is provided and no tableName is specified (see below),</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-string">  data will be read from the text file &lt;fName&gt;.  Text files delimited</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-string">  with either commas (extension .csv) or tabs (extension .txt) are</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-string">  supported.</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-string">  Command line arguments are:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-string">    - -d _dbName_: set the name of the database from which</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-string">      to pull input fingerprint information.</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-string">    - -t _tableName_: set the name of the database table</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-string">      from which to pull input fingerprint information</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-string">    - --idName=val: sets the name of the id column in the input</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-string">      database.  Default is *ID*.</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-string">    - -o _outFileName_:  name of the output file (output will</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-string">      be a pickle (.pkl) file with the cluster tree)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-string">    - --actTable=val: name of table containing activity values</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-string">     (used to color points in the cluster tree).</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-string">    - --actName=val: name of column with activities in the activity</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-string">      table.  The values in this column should either be integers or</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-string">      convertible into integers.</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-string">    - --SLINK: use the single-linkage clustering algorithm</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-string">      (default is Ward's minimum variance)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-string">    - --CLINK: use the complete-linkage clustering algorithm</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-string">      (default is Ward's minimum variance)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-string">    - --UPGMA: use the group-average clustering algorithm</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-string">      (default is Ward's minimum variance)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-string">    - --dice: use the DICE similarity metric instead of Tanimoto</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-string">    - --cosine: use the cosine similarity metric instead of Tanimoto</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-string">    - --fpColName=val: name to use for the column which stores</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-string">      fingerprints (in pickled format) in the input db table.</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-string">      Default is *AutoFragmentFP*</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-string">    - --minPath=val:  minimum path length to be included in</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-string">      fragment-based fingerprints. Default is *2*.</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-string">    - --maxPath=val:  maximum path length to be included in</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-string">      fragment-based fingerprints. Default is *7*.</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-string">    - --nBitsPerHash: number of bits to be set in the output</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-string">      fingerprint for each fragment. Default is *4*.</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-string">    - --discrim: use of path-based discriminators to hash bits.</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-string">      Default is *false*.</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-string">    - -V: include valence information in the fingerprints</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-string">      Default is *false*.</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-string">    - -H: include Hs in the fingerprint</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-string">      Default is *false*.</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-string">    - --useMACCS: use the public MACCS keys to do the fingerprinting</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-string">      (instead of a daylight-type fingerprint)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">  <tt id="link-52" class="py-name"><a title="rdkit.Chem.BuildFragmentCatalog.message
+rdkit.Chem.Fingerprints.FingerprintMols.message
+rdkit.Chem.FragmentCatalog.message
+rdkit.ML.BuildComposite.message
+rdkit.ML.EnrichPlot.message
+rdkit.ML.GrowComposite.message
+rdkit.ML.ScreenComposite.message" class="py-name" href="#" onclick="return doclink('link-52', 'message', 'link-8');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">"This is ClusterMols\n\n"</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">  <tt id="link-53" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols" class="py-name" href="#" onclick="return doclink('link-53', 'FingerprintMols', 'link-3');">FingerprintMols</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="rdkit.Chem.Fingerprints.ClusterMols._usageDoc
+rdkit.Chem.Fingerprints.FingerprintMols._usageDoc
+rdkit.Chem.Fingerprints.MolSimilarity._usageDoc" class="py-name" href="#" onclick="return doclink('link-54', '_usageDoc', 'link-51');">_usageDoc</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="rdkit.Chem.Fingerprints.ClusterMols._usageDoc
+rdkit.Chem.Fingerprints.FingerprintMols._usageDoc
+rdkit.Chem.Fingerprints.MolSimilarity._usageDoc" class="py-name" href="#" onclick="return doclink('link-55', '_usageDoc', 'link-51');">_usageDoc</a></tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">  <tt class="py-name">details</tt> <tt class="py-op">=</tt> <tt id="link-56" class="py-name"><a title="rdkit.Chem.Fingerprints.FingerprintMols" class="py-name" href="#" onclick="return doclink('link-56', 'FingerprintMols', 'link-3');">FingerprintMols</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Function rdkit.Chem.BuildFragmentCatalog.ParseArgs()=rdkit.Chem.BuildFragmentCatalog-module.html#ParseArgs,Function rdkit.Chem.Fingerprints.FingerprintMols.ParseArgs()=rdkit.Chem.Fingerprints.FingerprintMols-module.html#ParseArgs,Function rdkit.ML.BuildComposite.ParseArgs()=rdkit.ML.BuildComposite-module.html#ParseArgs,Function rdkit.ML.GrowComposite.ParseArgs()=rdkit.ML.GrowComposite-module.html#ParseArgs,Function rdkit.ML.ScreenComposite.ParseArgs()=rdkit.ML.ScreenComposite-module.html#ParseArgs"><a title="rdkit.Chem.BuildFragmentCatalog.ParseArgs
+rdkit.Chem.Fingerprints.FingerprintMols.ParseArgs
+rdkit.ML.BuildComposite.ParseArgs
+rdkit.ML.GrowComposite.ParseArgs
+rdkit.ML.ScreenComposite.ParseArgs" class="py-name" href="#" onclick="return doclink('link-57', 'ParseArgs', 'link-57');">ParseArgs</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">  <tt id="link-58" class="py-name" targets="Function rdkit.Chem.Fingerprints.ClusterMols.ClusterFromDetails()=rdkit.Chem.Fingerprints.ClusterMols-module.html#ClusterFromDetails"><a title="rdkit.Chem.Fingerprints.ClusterMols.ClusterFromDetails" class="py-name" href="#" onclick="return doclink('link-58', 'ClusterFromDetails', 'link-58');">ClusterFromDetails</a></tt><tt class="py-op">(</tt><tt class="py-name">details</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a href="http://www.rdkit.org">RDKit</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Tue Jan 23 10:00:34 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
